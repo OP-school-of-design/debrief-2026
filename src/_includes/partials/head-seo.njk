@@ -1,0 +1,24 @@
+{#- Basic SEO for every page. Per-page title/description come from each entry's "SEO title" and
+    "Meta description" fields in the dashboard; anything else goes in Design > SEO & head code. -#}
+{%- set isHome = (page.url == "/") -%}
+{%- if isHome -%}
+  {%- set pageTitle = frontpage.seoTitle or (site.name ~ " - " ~ site.tagline) -%}
+  {%- set pageDesc = frontpage.metaDescription or site.description -%}
+{%- else -%}
+  {%- set pageTitle = (seoTitle or title) ~ " | " ~ site.name -%}
+  {%- set pageDesc = metaDescription or site.description -%}
+{%- endif -%}
+    <title>{{ pageTitle }}</title>
+    <meta name="description" content="{{ pageDesc }}">
+    {%- if site.url %}
+    <link rel="canonical" href="{{ site.url | trimSlash }}{{ page.url }}">
+    <meta property="og:url" content="{{ site.url | trimSlash }}{{ page.url }}">
+    {%- endif %}
+    <meta property="og:locale" content="{{ site.ogLocale or 'en_NZ' }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ pageTitle }}">
+    <meta property="og:description" content="{{ pageDesc }}">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ pageTitle }}">
+    <meta name="twitter:description" content="{{ pageDesc }}">

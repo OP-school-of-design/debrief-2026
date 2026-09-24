@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.disciplines
+  size: 1
+  alias: discipline
+permalink: "/graduates/{{ discipline.data.disciplineKey }}/"
+eleventyComputed:
+  title: "{{ discipline.data.title }} Graduates"
+  metaDescription: "{{ discipline.data.metaDescription }}"
+---
+{% set grads = collections.graduates | where("data.discipline", discipline.data.disciplineKey) %}
+<main id="main">
+    <h1 class="visually-hidden">{{ discipline.data.title }} Graduates</h1>
+    {% include "partials/student-grid.njk" %}
+</main>

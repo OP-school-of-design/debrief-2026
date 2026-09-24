@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang or 'en-NZ' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% include "partials/head-seo.njk" %}
+
+    {%- for href in fontface.preloads %}
+    <link rel="preload" href="{{ href }}" as="font" type="font/woff2" crossorigin>
+    {%- endfor %}
+
+    <!-- design.css is GENERATED from the dashboard (colours + fonts). stylesheet.css is the students' design. -->
+    <link rel="stylesheet" href="{{ '/css/design.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/stylesheet.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/additions.css' | url }}">
+
+    {# Extra head code from the dashboard: Design > SEO & head code #}
+    {{ seo.headCode | safe }}
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    {% include "partials/header.njk" %}
+
+    {{ content | safe }}
+
+    {% include "partials/footer.njk" %}
+
+    <script src="{{ '/js/main.js' | url }}" defer></script>
+    {% if hasCarousel %}<script src="{{ '/js/carousel.js' | url }}" defer></script>{% endif %}
+    {% if hasLightbox %}<script src="{{ '/js/lightbox.js' | url }}" defer></script>{% endif %}
+    {% if hasMasonry %}<script src="{{ '/js/masonry-grid-script.js' | url }}" defer></script>{% endif %}
+</body>
+</html>

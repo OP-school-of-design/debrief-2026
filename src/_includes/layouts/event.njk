@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+---
+<main id="main">
+    <article class="single-item">
+        <h2 class="single-item__h2">{{ heading or title }}</h2>
+        {{ content | pclass("single-item__introduction") | safe }}
+        {%- if image %}
+        <img src="{{ page | entryImg(image) }}" alt="{{ imageAlt }}" class="single-item__image" sizes="(min-width: 1171px) 60vw, 100vw">
+        {%- endif %}
+    </article>
+
+    {%- set embedSrc = videoUrl | embed %}
+    {%- if embedSrc %}
+    <section class="collections-OP-video">
+        <h2>{{ videoTitle }}</h2>
+        <div class="youtube-video">
+            <iframe id="walkthrough-video" src="{{ embedSrc }}" title="{{ videoTitle or title }} (video)" loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </section>
+    {%- endif %}
+</main>

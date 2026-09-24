@@ -1,0 +1,10 @@
+---
+layout: layouts/base.njk
+title: All Graduates
+permalink: /graduates/
+---
+{% set grads = collections.graduates %}
+<main id="main">
+    <h1 class="visually-hidden">All Graduates</h1>
+    {% include "partials/student-grid.njk" %}
+</main>

@@ -1,0 +1,384 @@
+# ================================================================
+#  DEBRIEF 2026 - Decap CMS dashboard configuration
+#  Visit  /admin/  on the site.  Local testing: run  npm run cms  (see README).
+# ================================================================
+
+backend:
+  name: github
+  repo: YOUR-GITHUB-ACCOUNT/YOUR-NEW-REPO      # <- change to the new repo when you create it
+  branch: main
+  # --- For going live on SiteGround (NOT needed for local testing) ---
+  # GitHub login needs an OAuth proxy when you are not on Netlify. Add its address here:
+  # base_url: https://your-oauth-proxy.example.workers.dev
+  # --- Draft > Review > Publish workflow (needs the GitHub login above; not available locally) ---
+  # publish_mode: editorial_workflow
+
+local_backend: true        # only used on localhost with "npm run cms"; ignored on the live site
+
+# Images for the one-off pages/settings go here. Graduates/disciplines/events keep their
+# images in their own folder (see media_folder: "" on each collection below).
+media_folder: src/images
+public_folder: /images
+
+slug:
+  encoding: ascii
+  clean_accents: true        # "Tāne" becomes "tane" in web addresses
+  sanitize_replacement: "-"
+
+# ---------------------------------------------------------------
+collections:
+
+  # ------------------------- GRADUATES -------------------------
+  - name: graduates
+    label: Graduates
+    label_singular: Graduate
+    folder: src/graduates
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    slug: "{{title}}"
+    summary: "{{title}} - {{discipline}}"
+    sortable_fields: ["title", "discipline"]
+    fields:
+      - { label: "Full name", name: "title", widget: "string" }
+      - label: "Discipline"
+        name: "discipline"
+        widget: "relation"
+        collection: "disciplines"
+        value_field: "disciplineKey"
+        search_fields: ["title"]
+        display_fields: ["title"]
+      - { label: "Published", name: "published", widget: "boolean", default: true, hint: "Untick to hide this graduate from the site without deleting them." }
+      - label: "Gallery layout"
+        name: "galleryStyle"
+        widget: "select"
+        default: "masonry"
+        options:
+          - { label: "Masonry (portfolio): suits a mix of portrait and landscape images", value: "masonry" }
+          - { label: "Stacked (project): full-width images, or two side by side", value: "stacked" }
+      - { label: "Project name", name: "projectName", widget: "string" }
+      - { label: "Project description", name: "projectDescription", widget: "text" }
+      - { label: "Card image (square, shown on the grid)", name: "cover", widget: "image", hint: "Project image. Square crop works best (shown 1:1)." }
+      - { label: "Card image description (alt text)", name: "coverAlt", widget: "string", required: false }
+      - { label: "Headshot", name: "headshot", widget: "image", hint: "Portrait taken by the photographer. Shown as a circle." }
+      - { label: "Headshot description (alt text)", name: "headshotAlt", widget: "string", required: false }
+      - { label: "Quote", name: "quote", widget: "text", required: false, hint: "No quote marks needed; they are added automatically." }
+      - label: "Links"
+        name: "links"
+        widget: "list"
+        required: false
+        summary: "{{type}}: {{url}}"
+        fields:
+          - label: "Type"
+            name: "type"
+            widget: "select"
+            options: ["website", "email", "instagram", "linkedin", "facebook", "youtube", "other"]
+          - { label: "Web address or email address", name: "url", widget: "string" }
+          - { label: "Label (optional)", name: "label", widget: "string", required: false, hint: "Leave blank to use the default, e.g. Website or Instagram." }
+      - label: "Gallery images"
+        name: "gallery"
+        widget: "list"
+        summary: "{{alt}}"
+        fields:
+          - { label: "Image", name: "image", widget: "image" }
+          - { label: "Description (alt text)", name: "alt", widget: "string", hint: "Describe the image for people using screen readers." }
+          - label: "Width (Stacked layout only)"
+            name: "size"
+            widget: "select"
+            default: "full"
+            options:
+              - { label: "Full width", value: "full" }
+              - { label: "Half width (pairs up with the next half-width image)", value: "half" }
+      - { label: "About the graduate", name: "body", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
+      - { label: "Meta description (optional, for search engines)", name: "metaDescription", widget: "text", required: false }
+
+  # ------------------------- DISCIPLINES -------------------------
+  - name: disciplines
+    label: Disciplines
+    label_singular: Discipline
+    folder: src/disciplines
+    create: true
+    delete: false
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    slug: "{{title}}"
+    fields:
+      - { label: "Discipline name", name: "title", widget: "string" }
+      - { label: "Web address key", name: "disciplineKey", widget: "string", pattern: ["^[a-z0-9-]+$", "Lowercase letters, numbers and hyphens only"], hint: "Used in web addresses, e.g. communication. Do NOT change once graduates are assigned." }
+      - { label: "Menu order", name: "order", widget: "number", value_type: "int", default: 1 }
+      - label: "Colour"
+        name: "colour"
+        widget: "select"
+        hint: "Pick from the colour palette (Design > Colour palette changes the actual colours)."
+        options:
+          - { label: "Yellow (header underline)", value: "yellow" }
+          - { label: "Pink (footer top border)", value: "pink" }
+          - { label: "Discipline: Communication green", value: "comms-green" }
+          - { label: "Discipline: Communication dark green", value: "comms-dark" }
+          - { label: "Discipline: Fashion blue", value: "fashion-blue" }
+          - { label: "Discipline: Product red", value: "product-red" }
+          - { label: "Discipline: Postgraduate purple", value: "postgrad-purple" }
+      - { label: "Symbol image (shape)", name: "symbol", widget: "image" }
+      - { label: "Banner image", name: "bannerImage", widget: "image" }
+      - { label: "Banner image description (alt text)", name: "bannerAlt", widget: "string", required: false }
+      - { label: "Introduction heading", name: "introHeading", widget: "string" }
+      - { label: "Introduction text", name: "intro", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
+      - { label: "Introduction image (square)", name: "image", widget: "image", required: false }
+      - { label: "Introduction image description (alt text)", name: "imageAlt", widget: "string", required: false }
+      - { label: "Show the carousel on this discipline's page", name: "showCarousel", widget: "boolean", default: true, hint: "Switch OFF to hide the carousel. Your slides are kept, so you can switch it back on any time." }
+      - { label: "Carousel: advance automatically", name: "carouselAutoplay", widget: "boolean", default: false, required: false }
+      - { label: "Carousel: seconds per slide (if automatic)", name: "carouselInterval", widget: "number", value_type: "int", min: 2, max: 20, default: 5, required: false }
+      - label: "Carousel slides"
+        name: "carousel"
+        widget: "list"
+        required: false
+        summary: "{{caption}}"
+        fields:
+          - { label: "Image (landscape, 16:9 works best)", name: "image", widget: "image" }
+          - { label: "Description (alt text)", name: "alt", widget: "string" }
+          - { label: "Caption / image credit (shown under the carousel)", name: "caption", widget: "string", required: false }
+      - { label: "More text (optional)", name: "moreText", widget: "markdown", required: false, buttons: ["bold", "italic", "link"], editor_components: [] }
+      - { label: "Video heading", name: "videoTitle", widget: "string", required: false }
+      - { label: "Video (YouTube or Vimeo web address)", name: "videoUrl", widget: "string", required: false, hint: "Paste the normal page address, e.g. https://www.youtube.com/watch?v=..." }
+      - { label: "Meta description (optional, for search engines)", name: "metaDescription", widget: "text", required: false }
+
+  # ------------------------- EVENTS -------------------------
+  - name: events
+    label: Events
+    label_singular: Event
+    folder: src/events
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    slug: "{{title}}"
+    fields:
+      - { label: "Event name", name: "title", widget: "string" }
+      - { label: "Subtitle (shown on the events grid)", name: "subtitle", widget: "string" }
+      - { label: "Menu / footer label", name: "navLabel", widget: "string", required: false }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 1 }
+      - { label: "Poster (square crop shown on the events grid)", name: "poster", widget: "image" }
+      - { label: "Poster description (alt text)", name: "posterAlt", widget: "string", required: false }
+      - { label: "Page heading", name: "heading", widget: "string", required: false }
+      - { label: "Description", name: "body", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
+      - { label: "Image (square)", name: "image", widget: "image", required: false }
+      - { label: "Image description (alt text)", name: "imageAlt", widget: "string", required: false }
+      - { label: "Video heading", name: "videoTitle", widget: "string", required: false }
+      - { label: "Video (YouTube or Vimeo web address)", name: "videoUrl", widget: "string", required: false }
+      - { label: "Meta description (optional, for search engines)", name: "metaDescription", widget: "text", required: false }
+
+  # ------------------------- ONE-OFF PAGES -------------------------
+  - name: pages
+    label: Pages
+    files:
+      - label: "Front page"
+        name: "frontpage"
+        file: "src/_data/frontpage.json"
+        format: json
+        fields:
+          - { label: "SEO title (optional)", name: "seoTitle", widget: "string", required: false }
+          - { label: "Meta description (optional)", name: "metaDescription", widget: "text", required: false }
+          - { label: "Looping hero video (MP4)", name: "heroVideo", widget: "file", media_folder: "src/videos", public_folder: "/videos", choose_url: false }
+          - { label: "Dates banner: title", name: "datesTitle", widget: "text", hint: "Press Enter for a line break." }
+          - { label: "Dates: opening", name: "datesOpening", widget: "string" }
+          - { label: "Dates: opening hours", name: "datesHours", widget: "string" }
+          - { label: "Dates: days open", name: "datesDays", widget: "string" }
+          - { label: "Dates: venue", name: "datesVenue", widget: "string" }
+          - { label: "Intro heading", name: "introHeading", widget: "string" }
+          - { label: "Intro text", name: "introText", widget: "text" }
+          - { label: "Intro image", name: "introImage", widget: "image", required: false }
+          - { label: "Intro image description (alt text)", name: "introImageAlt", widget: "string", required: false }
+          - { label: "Walkthrough video: heading", name: "walkthroughHeading", widget: "string", required: false }
+          - { label: "Walkthrough video: YouTube/Vimeo address (optional)", name: "walkthroughVideoUrl", widget: "string", required: false, hint: "If filled in, this is used instead of the MP4 below." }
+          - { label: "Walkthrough video: MP4 file", name: "walkthroughVideoFile", widget: "file", required: false, media_folder: "src/videos", public_folder: "/videos", choose_url: false }
+          - { label: "Walkthrough video: caption", name: "walkthroughCaption", widget: "text", required: false }
+          - { label: "Quote", name: "quote", widget: "text", required: false }
+          - { label: "Quote image", name: "quoteImage", widget: "image", required: false }
+          - { label: "Quote image description (alt text)", name: "quoteImageAlt", widget: "string", required: false }
+
+      - label: "About the School of Design"
+        name: "school"
+        file: "src/pages/school-of-design.md"
+        media_folder: ""
+        public_folder: ""
+        fields:
+          - { label: "Page title", name: "title", widget: "string" }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Meta description (optional)", name: "metaDescription", widget: "text", required: false }
+          - { label: "Banner image", name: "bannerImage", widget: "image" }
+          - { label: "Banner image description (alt text)", name: "bannerAlt", widget: "string", required: false }
+          - { label: "Disciplines toggle heading", name: "disciplinesHeading", widget: "string" }
+          - { label: "Description heading", name: "descHeading", widget: "string" }
+          - { label: "Description", name: "body", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
+          - { label: "Description image", name: "descImage", widget: "image", required: false }
+          - { label: "Description image description (alt text)", name: "descImageAlt", widget: "string", required: false }
+          - { label: "Layout (do not change)", name: "layout", widget: "hidden", default: "layouts/school-of-design.njk" }
+          - { label: "Permalink (do not change)", name: "permalink", widget: "hidden", default: "/school-of-design/" }
+
+      - label: "Events page (banner)"
+        name: "eventspage"
+        file: "src/_data/eventspage.json"
+        format: json
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Banner image", name: "bannerImage", widget: "image" }
+          - { label: "Banner image description (alt text)", name: "bannerAlt", widget: "string", required: false }
+
+      - label: "Archive"
+        name: "archive"
+        file: "src/_data/archive.json"
+        format: json
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Banner image", name: "bannerImage", widget: "image" }
+          - { label: "Banner image description (alt text)", name: "bannerAlt", widget: "string", required: false }
+          - { label: "Intro", name: "intro", widget: "text", required: false }
+          - label: "Links to previous years"
+            name: "links"
+            widget: "list"
+            summary: "{{label}}"
+            fields:
+              - { label: "Label (e.g. 2025)", name: "label", widget: "string" }
+              - { label: "Web address", name: "url", widget: "string" }
+
+  # ------------------------- DESIGN -------------------------
+  - name: design
+    label: Design
+    files:
+      - label: "Colour palette"
+        name: "colours"
+        file: "src/_data/colours.json"
+        format: json
+        fields:
+          - { label: "Accent / heading colour (orange)", name: "orange-text", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Black text", name: "black-text", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Body text", name: "body-text", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Page background (behind everything)", name: "page-background", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Main content background", name: "main-background", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Header / navigation background", name: "header-background", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Intro section background", name: "intro-background", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Portrait section background", name: "portrait-background", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Footer background", name: "footer-background", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Yellow (header underline)", name: "yellow", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Pink (footer top border)", name: "pink", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Discipline: Communication green", name: "comms-green", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Discipline: Communication dark green", name: "comms-dark", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Discipline: Fashion blue", name: "fashion-blue", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Discipline: Product red", name: "product-red", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Discipline: Postgraduate purple", name: "postgrad-purple", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Carousel caption background", name: "caption-background", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "Carousel caption text", name: "caption-text", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "(Advanced) Dark text", name: "dark-text", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "(Advanced) Cream text", name: "cream-text", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "(Advanced) Off-white", name: "off-white", widget: "color", enableAlpha: false, allowInput: true }
+          - { label: "(Advanced) Button colour", name: "button-colour", widget: "color", enableAlpha: false, allowInput: true }
+
+      - label: "Typography"
+        name: "typography"
+        file: "src/_data/typography.json"
+        format: json
+        fields:
+          - label: "Heading font"
+            name: "headingFont"
+            widget: "select"
+            hint: "Fonts are built into the site (self-hosted), so visitors never contact Google. Includes the macrons used in te reo Māori."
+            options:
+              - { label: "Google Sans", value: "google-sans" }
+              - { label: "Inter", value: "inter" }
+              - { label: "Space Grotesk", value: "space-grotesk" }
+              - { label: "Host Grotesk", value: "host-grotesk" }
+              - { label: "DM Sans", value: "dm-sans" }
+              - { label: "Manrope", value: "manrope" }
+              - { label: "Outfit", value: "outfit" }
+              - { label: "Plus Jakarta Sans", value: "plus-jakarta-sans" }
+              - { label: "Work Sans", value: "work-sans" }
+              - { label: "Figtree", value: "figtree" }
+              - { label: "Onest", value: "onest" }
+              - { label: "Bricolage Grotesque", value: "bricolage-grotesque" }
+              - { label: "Instrument Sans", value: "instrument-sans" }
+              - { label: "Red Hat Display", value: "red-hat-display" }
+              - { label: "Sora", value: "sora" }
+              - { label: "Fraunces", value: "fraunces" }
+              - { label: "Playfair Display", value: "playfair-display" }
+              - { label: "Lora", value: "lora" }
+              - { label: "Literata", value: "literata" }
+              - { label: "Source Serif 4", value: "source-serif-4" }
+              - { label: "EB Garamond", value: "eb-garamond" }
+              - { label: "Syne", value: "syne" }
+              - { label: "Unbounded", value: "unbounded" }
+          - label: "Body font"
+            name: "bodyFont"
+            widget: "select"
+            options:
+              - { label: "Google Sans", value: "google-sans" }
+              - { label: "Inter", value: "inter" }
+              - { label: "Space Grotesk", value: "space-grotesk" }
+              - { label: "Host Grotesk", value: "host-grotesk" }
+              - { label: "DM Sans", value: "dm-sans" }
+              - { label: "Manrope", value: "manrope" }
+              - { label: "Outfit", value: "outfit" }
+              - { label: "Plus Jakarta Sans", value: "plus-jakarta-sans" }
+              - { label: "Work Sans", value: "work-sans" }
+              - { label: "Figtree", value: "figtree" }
+              - { label: "Onest", value: "onest" }
+              - { label: "Bricolage Grotesque", value: "bricolage-grotesque" }
+              - { label: "Instrument Sans", value: "instrument-sans" }
+              - { label: "Red Hat Display", value: "red-hat-display" }
+              - { label: "Sora", value: "sora" }
+              - { label: "Fraunces", value: "fraunces" }
+              - { label: "Playfair Display", value: "playfair-display" }
+              - { label: "Lora", value: "lora" }
+              - { label: "Literata", value: "literata" }
+              - { label: "Source Serif 4", value: "source-serif-4" }
+              - { label: "EB Garamond", value: "eb-garamond" }
+              - { label: "Syne", value: "syne" }
+              - { label: "Unbounded", value: "unbounded" }
+
+      - label: "SEO & head code"
+        name: "seo"
+        file: "src/_data/seo.json"
+        format: json
+        fields:
+          - label: "Code for the <head> of every page"
+            name: "headCode"
+            widget: "code"
+            default_language: "html"
+            output_code_only: true
+            allow_language_selection: false
+            hint: "Paste extra SEO code here: JSON-LD structured data, og:image share picture, site verification tags, analytics. Page titles, descriptions and canonical links are already generated automatically."
+
+  # ------------------------- SITE SETTINGS -------------------------
+  - name: settings
+    label: Site settings
+    files:
+      - label: "Site settings"
+        name: "site"
+        file: "src/_data/site.json"
+        format: json
+        fields:
+          - { label: "Site name", name: "name", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Site web address", name: "url", widget: "string", required: false, hint: "Full address including any folder, no trailing slash, e.g. https://design.ac.nz/debrief/2026 - used for canonical links." }
+          - { label: "Default meta description", name: "description", widget: "text" }
+          - { label: "Header logo", name: "navLogo", widget: "image" }
+          - { label: "Header logo description (alt text)", name: "navLogoAlt", widget: "string" }
+          - { label: "Footer logo", name: "footerLogo", widget: "image" }
+          - { label: "Footer logo description (alt text)", name: "footerLogoAlt", widget: "string" }
+          - { label: "Footer copyright note", name: "footerNote", widget: "text" }
+          - { label: "Website credit (name)", name: "websiteCredit", widget: "string" }
+          - label: "Social links (footer)"
+            name: "socials"
+            widget: "list"
+            summary: "{{label}}"
+            fields:
+              - { label: "Icon", name: "icon", widget: "select", options: ["globe", "instagram", "facebook", "linkedin", "youtube", "link"] }
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Web address", name: "url", widget: "string" }

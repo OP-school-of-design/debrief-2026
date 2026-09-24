@@ -1,0 +1,89 @@
+---
+layout: layouts/base.njk
+hasLightbox: true
+---
+{#- One graduate page. "Gallery layout" chosen in the dashboard: masonry (portfolio) or stacked (project). -#}
+{% set disc = collections.disciplines | where("data.disciplineKey", discipline) | first %}
+
+{% set projectInfo %}
+        <section class="project-info">
+            <div class="project-info__title">
+                <h2>{{ projectName }}</h2>
+                <h3>{{ title }}</h3>
+            </div>
+            {{ projectDescription | md | safe }}
+        </section>
+{% endset %}
+
+<main id="main">
+{% if galleryStyle == "stacked" %}
+    <!-- STACKED LAYOUT (project): full-width images, or two half-width images side by side -->
+    <section class="project-content" data-lightbox>
+        {{ projectInfo | safe }}
+        {%- for row in gallery | groupGallery %}
+        {%- if row.type == "half" %}
+        <div class="image-half">
+            {%- for g in row.items %}
+            <img src="{{ page | entryImg(g.image) }}" alt="{{ g.alt }}" sizes="(min-width: 1171px) calc(50vw - 12rem), 50vw">
+            {%- endfor %}
+        </div>
+        {%- else %}
+        <div class="image-full">
+            {%- for g in row.items %}
+            <img src="{{ page | entryImg(g.image) }}" alt="{{ g.alt }}" sizes="(min-width: 1171px) calc(100vw - 20rem), 100vw">
+            {%- endfor %}
+        </div>
+        {%- endif %}
+        {%- endfor %}
+    </section>
+{% else %}
+    {{ projectInfo | safe }}
+
+    <!-- MASONRY LAYOUT (portfolio): suits a mix of portrait and landscape images -->
+    <section class="grid--masonry" data-lightbox>
+        {%- for g in gallery %}
+        <img src="{{ page | entryImg(g.image) }}" alt="{{ g.alt }}" sizes="(min-width: 1171px) calc((100vw - 24rem) / 2), (min-width: 601px) 45vw, 100vw">
+        {%- endfor %}
+    </section>
+{% endif %}
+
+    <!-- STUDENT INFO -->
+    {% set labels = { website: "Website", instagram: "Instagram", linkedin: "LinkedIn", facebook: "Facebook", youtube: "YouTube" } %}
+    <section class="student-info">
+        <article class="student-contact-info">
+            <img class="student-profile" src="{{ page | entryImg(headshot) }}" alt="{{ headshotAlt or (title ~ ' profile image') }}" eleventy:widths="400,800" sizes="240px">
+            {%- if links and links.length %}
+            <ul class="student-contacts">
+                {%- for l in links %}
+                <li>
+                    {%- if l.type == "email" -%}
+                    <a href="mailto:{{ l.url }}">{% icon "envelope" %} {{ l.label or l.url }}</a>
+                    {%- else -%}
+                    {%- set iconName = l.type or "link" %}
+                    <a href="{{ l.url }}" target="_blank" rel="noopener">{% icon iconName %} {{ l.label or labels[l.type] or l.url }}</a>
+                    {%- endif -%}
+                </li>
+                {%- endfor %}
+            </ul>
+            {%- endif %}
+        </article>
+
+        <article class="student-written-info">
+            <h2>{{ title }}</h2>
+            <h3>{{ disc.data.title }}</h3>
+            {{ content | pclass("student-description") | safe }}
+        </article>
+
+        {%- if quote %}
+        <p class="student-quote">&ldquo;{{ quote }}&rdquo;</p>
+        {%- endif %}
+    </section>
+
+    <!-- LIGHTBOX (opens when a gallery image is clicked) -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-arrow lightbox-prev" aria-label="Previous image">&#10094;</button>
+        <img class="lightbox-image" id="lightbox-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" eleventy:ignore>
+        <button class="lightbox-arrow lightbox-next" aria-label="Next image">&#10095;</button>
+    </div>
+</main>

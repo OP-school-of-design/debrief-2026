@@ -1,0 +1,23 @@
+{#- CAROUSEL (no Flickity). Needs a discipline entry called `discipline`.
+    Shown only if "Show the carousel" is switched on in the dashboard AND at least one slide exists. -#}
+{% set cd = discipline.data %}
+{% if cd.showCarousel !== false and cd.carousel and cd.carousel.length %}
+<section class="carousel-section" data-carousel
+    data-autoplay="{{ 'true' if cd.carouselAutoplay else 'false' }}"
+    data-interval="{{ cd.carouselInterval or 5 }}"
+    role="region" aria-roledescription="carousel" aria-label="{{ cd.title }} image gallery">
+    <div class="carousel-viewport">
+    <article class="main-carousel" tabindex="0" aria-label="Slides">
+        {%- for slide in cd.carousel %}
+        <div class="carousel-cell" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}" data-caption="{{ slide.caption }}">
+            <img src="{{ discipline | entryImg(slide.image) }}" alt="{{ slide.alt }}"
+                sizes="(min-width: 1171px) calc(100vw - 20rem), 100vw"
+                {% if loop.first %}loading="eager"{% endif %}>
+        </div>
+        {%- endfor %}
+    </article>
+    </div>
+    <p class="caption">&nbsp;</p>
+</section>
+<script src="{{ '/js/carousel.js' | url }}" defer></script>
+{% endif %}

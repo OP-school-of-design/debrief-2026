@@ -1,0 +1,14 @@
+---
+permalink: /css/design.css
+eleventyExcludeFromCollections: true
+---
+/* GENERATED from the dashboard (Design > Colour palette and Typography). Do not edit by hand. */
+{{ fontface.css | safe }}
+
+:root {
+{%- for name, value in colours %}
+    --{{ name }}: {{ value | safe }};
+{%- endfor %}
+    --font-heading: {{ fontface.headingStack | safe }};
+    --font-body: {{ fontface.bodyStack | safe }};
+}

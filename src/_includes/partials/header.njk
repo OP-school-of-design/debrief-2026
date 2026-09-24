@@ -1,0 +1,72 @@
+{#- HEADER AND NAVIGATION - written once, used on every page.
+    Discipline, event and archive menus are built automatically from the dashboard content. -#}
+<header>
+    <nav class="topnav" id="myTopnav" aria-label="Main">
+
+        <!-- Logo -->
+        <div>
+            <img src="{{ site.navLogo }}" alt="{{ site.navLogoAlt }}" class="navlogo" loading="eager" eleventy:widths="400,800" sizes="225px">
+        </div>
+
+        <a href="{{ '/' | url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a>
+
+        <!-- All Graduates -->
+        <div class="dropdown">
+            <div class="dropdown-title">
+                <a href="{{ '/graduates/' | url }}" class="dropbtn"{% if page.url.startsWith('/graduates/') %} aria-current="page"{% endif %}>All Graduates</a>
+                <button type="button" class="dropdown-toggle" aria-label="Toggle All Graduates submenu" aria-expanded="false">{% icon "chevron" %}</button>
+            </div>
+            <div class="dropdown-content">
+                {%- for d in collections.disciplines %}
+                <a href="{{ ('/graduates/' ~ d.data.disciplineKey ~ '/') | url }}">{{ d.data.title }}</a>
+                {%- endfor %}
+            </div>
+        </div>
+
+        <!-- School of Design -->
+        <div class="dropdown">
+            <div class="dropdown-title">
+                <a href="{{ '/school-of-design/' | url }}" class="dropbtn"{% if page.url.startsWith('/school-of-design/') or page.url.startsWith('/about/') %} aria-current="page"{% endif %}>School of Design</a>
+                <button type="button" class="dropdown-toggle" aria-label="Toggle School of Design submenu" aria-expanded="false">{% icon "chevron" %}</button>
+            </div>
+            <div class="dropdown-content">
+                {%- for d in collections.disciplines %}
+                <a href="{{ ('/about/' ~ d.data.disciplineKey ~ '/') | url }}">About {{ d.data.title }}</a>
+                {%- endfor %}
+            </div>
+        </div>
+
+        <!-- Events -->
+        <div class="dropdown">
+            <div class="dropdown-title">
+                <a href="{{ '/events/' | url }}" class="dropbtn"{% if page.url.startsWith('/events/') %} aria-current="page"{% endif %}>Events</a>
+                <button type="button" class="dropdown-toggle" aria-label="Toggle Events submenu" aria-expanded="false">{% icon "chevron" %}</button>
+            </div>
+            <div class="dropdown-content">
+                {%- for e in collections.events %}
+                <a href="{{ e.url | url }}">{{ e.data.navLabel or e.data.title }}</a>
+                {%- endfor %}
+            </div>
+        </div>
+
+        <!-- Archive -->
+        <div class="dropdown">
+            <div class="dropdown-title">
+                <a href="{{ '/archive/' | url }}" class="dropbtn"{% if page.url.startsWith('/archive/') %} aria-current="page"{% endif %}>Archive</a>
+                <button type="button" class="dropdown-toggle" aria-label="Toggle Archive submenu" aria-expanded="false">{% icon "chevron" %}</button>
+            </div>
+            <div class="dropdown-content">
+                {%- for link in archive.links %}
+                <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
+                {%- endfor %}
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Hamburger -->
+    <button type="button" class="icon" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="myTopnav">
+        <span data-icon-open>{% icon "menu" %}</span>
+        <span data-icon-close hidden>{% icon "close" %}</span>
+    </button>
+</header>
