@@ -1,7 +1,8 @@
-# DEBRIEF 2026 – School of Design graduate showcase
+# DEBRIEF 2026 – Otago Polytechnic School of Design graduate showcase
 
-The students' hand-coded site, converted to [Eleventy](https://www.11ty.dev) with a [Decap CMS](https://decapcms.org) dashboard.
+Maxis' hand-coded site, converted to [Eleventy](https://www.11ty.dev) with a [Decap CMS](https://decapcms.org) dashboard.
 No database and no server: content lives as small files in this repo, the site builds to plain HTML, and a dashboard at `/admin/` lets faculty staff edit it.
+The site will be hosted via Siteground to maintain consistency with the address https://design.ac.nz/debrief/2026
 
 Kia ora! Start with **Quick start**, then have a poke around the dashboard.
 
@@ -27,33 +28,31 @@ While `npm start` is running, images are processed on request, so it starts fast
 | Command | What it does |
 |---|---|
 | `npm start` | Dev server with live reload |
-| `npm run build` | Full build into `_site/` (this is what gets deployed) |
+| `npm run build` | Full build into `_site/` (this is what gets deployed, i.e. the files in the folder '_site' are all html/css/js ) |
 | `npm run cms` | Local dashboard server (Decap) |
 | `npm run check` | Lists any file names with capitals or spaces |
-| `npm run clean` | Deletes `_site/` and the image cache |
+| `npm run clean` | Deletes `_site/` and the image cache, a reset before attempting an new build (not necessary every time, just in case of build problems) |
 
 ---
 
 ## What's in the dashboard
 
-| Section | What staff can do |
+| Section | What staff/admin can do |
 |---|---|
 | **Graduates** | Add/edit graduates: discipline (dropdown), block order (**Project first** or **Profile first** — both show the same information, just in a different order), card image, hero image, headshot, gallery images, links, quote, bio. Untick **Published** to hide someone without deleting them. |
 | **Disciplines** | Name, colour, symbol, banner, intro, and the **carousel** (see below). |
 | **Events** | Poster, description, image, YouTube/Vimeo address. |
 | **Pages** | Front page, About the School of Design, Events banner, Archive links. |
 | **Design → Colour palette** | Colour pickers for every colour on the site. |
-| **Design → Typography** | Heading font and body font (23 choices). |
-| **Design → SEO & head code** | A code window whose contents go in the `<head>` of every page. |
+| **Design → Typography** | Heading font and body font (23 choices). From Google fonts. |
+| **Design → SEO & head code** | A code window whose contents go in the `<head>` of every page. To help with SEO and accessibility. |
 | **Site settings** | Site name, description, logos, footer note, social links. |
 
-**Carousel on/off:** Disciplines and Events both have **Show the carousel**. Off = hidden (the slides are kept). There's also an "advance automatically" option with a pause button; automatic advance is ignored for visitors who have "reduce motion" switched on.
-
-**Masonry gallery:** graduate gallery images are packed into balanced columns by their actual height (not just stacked top-to-bottom per column), so there's no gap when a tall image doesn't fit — see `js/masonry.js`.
+**Carousel on/off:** Disciplines → pick one → **Show the carousel on this discipline's page**. Off = hidden (the slides are kept). There's also an "advance automatically" option with a pause button; automatic advance is ignored for visitors who have "reduce motion" switched on.
 
 **SEO:** page titles, descriptions, canonical links and social-share tags are generated for every page. Set the **Site web address** in Site settings for canonical links, and use the code window for anything extra (JSON-LD, og:image, verification tags, analytics). Anything pasted there is added to every page exactly as written, so it's for trusted admins only.
 
-**Fonts:** chosen fonts are built into the site and served from your own server (nothing is requested from Google). Both `latin` and `latin-ext` are included, so macrons (ā ē ī ō ū) display correctly in every font on the list.
+**Fonts:** chosen fonts are built into the site and served from our own server (nothing is requested from Google). Both `latin` and `latin-ext` are included, so macrons (ā ē ī ō ū) display correctly in every font on the list.
 
 ### Images
 Editors upload normal images (any size). The build makes AVIF + WebP + original-format versions at **400, 800, 1200, 1600 and 2000 px wide** (never enlarged beyond the original), writes `width`/`height` so there is no layout jump, and the browser downloads only the size it needs. Keep originals **at least 2000 px wide** for full-width banners. Logos and symbols stay PNG (they need transparency).
@@ -89,7 +88,7 @@ lib/                             font + helper code
 
 ---
 
-## Going live (later; you don't need any of this to test)
+## Going live (later;)
 
 1. **New repo:** in this folder run `git init`, commit, create an *empty* repo on GitHub, then `git remote add origin <url>`, `git branch -M main`, `git push -u origin main`. Your students' original repo is never touched.
 2. **Point the dashboard at it:** in `src/admin/config.yml` set `backend.repo` to `your-account/your-new-repo`.
@@ -100,7 +99,7 @@ lib/                             font + helper code
 
 ---
 
-## What was changed from the students' site
+## What was changed from the Maxis' site
 See [docs/CHANGES-FROM-STUDENT-SITE.md](docs/CHANGES-FROM-STUDENT-SITE.md).
 
 ## Licences
