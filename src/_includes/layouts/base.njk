@@ -29,8 +29,7 @@
     {% include "partials/footer.njk" %}
 
     <script src="{{ '/js/main.js' | url }}" defer></script>
-    {% if hasCarousel %}<script src="{{ '/js/carousel.js' | url }}" defer></script>{% endif %}
+    {% if hasMasonry %}<script src="{{ '/js/masonry.js' | url }}" defer></script>{% endif %}
     {% if hasLightbox %}<script src="{{ '/js/lightbox.js' | url }}" defer></script>{% endif %}
-    {% if hasMasonry %}<script src="{{ '/js/masonry-grid-script.js' | url }}" defer></script>{% endif %}
 </body>
 </html>

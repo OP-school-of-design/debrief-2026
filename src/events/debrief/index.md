@@ -1,13 +1,28 @@
 ---
 title: "DEBRIEF"
 subtitle: "School of Design Graduate Exhibition 2026"
+gridDates: "Opening Night: Thursday 19th November | 5:30pm\nOpen Days: Friday 20th - Tuesday 23rd November | 10am - 4pm"
 navLabel: "DEBRIEF: Graduate Exhibition"
 order: 1
-poster: poster.jpg
-posterAlt: "DEBRIEF poster (sample)"
-heading: "School of Design Graduate Exhibition!"
-image: image.jpg
-imageAlt: "DEBRIEF exhibition image (sample)"
+poster: poster.png
+posterAlt: "DEBRIEF poster"
+heading: "DEBRIEF 2026"
+detailDatesLine: "Opening 5:30pm Thurs 19 Nov\nOpen daily 10am - 4pm"
+bannerTitle: "School of Design\nGraduate Exhibition 2026"
+bannerDetails: "Opening 5:30pm Thurs 19 Nov\nOpen daily 10am - 4pm\nFri 20 - Mon 23 Nov\nOtago Polytechnic, The Hub"
+showCarousel: true
+carouselAutoplay: false
+carouselInterval: 5
+carousel:
+  - image: carousel-1.jpg
+    alt: "Sample carousel image 1 for DEBRIEF"
+    caption: "Sample caption 1: replace with a real image credit or description."
+  - image: carousel-2.jpg
+    alt: "Sample carousel image 2 for DEBRIEF"
+    caption: "Sample caption 2: replace with a real image credit or description."
+  - image: carousel-3.jpg
+    alt: "Sample carousel image 3 for DEBRIEF"
+    caption: "Sample caption 3: replace with a real image credit or description."
 videoTitle: ""
 videoUrl: ""
 ---

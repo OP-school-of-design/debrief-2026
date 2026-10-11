@@ -7,16 +7,16 @@ layout: layouts/base.njk
         <h1>{{ heading or title }}</h1>
     </section>
 
-    <section class="coloured-block-section">
+    <section class="discipline-explore">
         <button class="standalone-h2 discipline-toggle" type="button" aria-expanded="false">
             <h2>{{ disciplinesHeading }}</h2>
             <span class="discipline-arrow" aria-hidden="true">⌄</span>
         </button>
-        <article class="discipline__grid__narrow">
+        <article class="discipline__grid">
             {%- for d in collections.disciplines %}
-            <a href="{{ ('/about/' ~ d.data.disciplineKey ~ '/') | url }}" class="discipline_narrow" style="--discipline-colour: var(--{{ d.data.colour }})">
-                <img src="{{ d | entryImg(d.data.symbol) }}" alt="" class="discipline__image_narrow" eleventy:widths="400" sizes="200px">
-                <h2 class="discipline__name_narrow">{{ d.data.title }}</h2>
+            <a href="{{ ('/about/' ~ d.data.disciplineKey ~ '/') | url }}" class="discipline" style="--discipline-colour: var(--{{ d.data.colour }})">
+                <img src="{{ d | entryImg(d.data.symbol) }}" alt="" class="discipline__image" eleventy:widths="400" sizes="200px">
+                <h2 class="discipline__name">{{ d.data.title }}</h2>
             </a>
             {%- endfor %}
         </article>

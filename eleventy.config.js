@@ -50,7 +50,7 @@ export default function (eleventyConfig) {
     "src/css/additions.css": "css/additions.css",
     "src/js": "js",
     "src/videos": "videos",
-    "src/admin/config.yml": "admin/config.yml",
+    "src/admin/config.txt": "admin/config.txt",
     "src/admin/index.html": "admin/index.html",
   });
 

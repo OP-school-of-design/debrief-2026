@@ -37,7 +37,7 @@
     // School of Design page: "Explore the Disciplines" toggle
     document.querySelectorAll(".discipline-toggle").forEach(function (toggle) {
         toggle.addEventListener("click", function () {
-            var grid = toggle.parentElement.querySelector(".discipline__grid__narrow");
+            var grid = toggle.parentElement.querySelector(".discipline__grid");
             var open = toggle.classList.toggle("open");
             toggle.setAttribute("aria-expanded", String(open));
             if (grid) grid.classList.toggle("open", open);

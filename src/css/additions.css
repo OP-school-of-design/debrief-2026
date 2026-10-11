@@ -157,3 +157,43 @@ img { height: auto; }              /* stops the width/height attributes from dis
     transition: background 0.2s ease, color 0.2s ease;
 }
 .archive-list a:hover, .archive-list a:focus-visible { background: var(--orange-text); color: #fff; }
+
+/* 6. EVENT GRID CARD DATES (students left this <p> unstyled) */
+.event-card p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* 7. MASONRY, height-balanced (replaces the CSS-columns layout; see js/masonry.js)
+   js/masonry.js adds "masonry-js" once it has packed the images into balanced columns.
+   Without JavaScript the students' original CSS-columns rule still applies, so the
+   gallery still works, just with the occasional column gap the script fixes. */
+.grid--masonry.masonry-js,
+.grid--masonry-sn.masonry-js {
+    columns: unset;
+    display: flex;
+    align-items: flex-start;
+    gap: 0 4rem;
+}
+.masonry-col {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+/* picture is display:contents (see section 1), so the gap between images is still the
+   img's own margin-bottom from the students' stylesheet - nothing extra needed here. */
+
+@media screen and (max-width: 1170px) {
+    .grid--masonry.masonry-js,
+    .grid--masonry-sn.masonry-js {
+        gap: 0 2rem;
+    }
+}
+@media screen and (max-width: 600px) {
+    .grid--masonry.masonry-js,
+    .grid--masonry-sn.masonry-js {
+        gap: 0;
+    }
+}

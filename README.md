@@ -38,7 +38,7 @@ While `npm start` is running, images are processed on request, so it starts fast
 
 | Section | What staff can do |
 |---|---|
-| **Graduates** | Add/edit graduates: discipline (dropdown), gallery layout (**Masonry** or **Stacked**), card image, headshot, gallery images, links, quote, bio. Untick **Published** to hide someone without deleting them. |
+| **Graduates** | Add/edit graduates: discipline (dropdown), block order (**Project first** or **Profile first** — both show the same information, just in a different order), card image, hero image, headshot, gallery images, links, quote, bio. Untick **Published** to hide someone without deleting them. |
 | **Disciplines** | Name, colour, symbol, banner, intro, and the **carousel** (see below). |
 | **Events** | Poster, description, image, YouTube/Vimeo address. |
 | **Pages** | Front page, About the School of Design, Events banner, Archive links. |
@@ -47,7 +47,9 @@ While `npm start` is running, images are processed on request, so it starts fast
 | **Design → SEO & head code** | A code window whose contents go in the `<head>` of every page. |
 | **Site settings** | Site name, description, logos, footer note, social links. |
 
-**Carousel on/off:** Disciplines → pick one → **Show the carousel on this discipline's page**. Off = hidden (the slides are kept). There's also an "advance automatically" option with a pause button; automatic advance is ignored for visitors who have "reduce motion" switched on.
+**Carousel on/off:** Disciplines and Events both have **Show the carousel**. Off = hidden (the slides are kept). There's also an "advance automatically" option with a pause button; automatic advance is ignored for visitors who have "reduce motion" switched on.
+
+**Masonry gallery:** graduate gallery images are packed into balanced columns by their actual height (not just stacked top-to-bottom per column), so there's no gap when a tall image doesn't fit — see `js/masonry.js`.
 
 **SEO:** page titles, descriptions, canonical links and social-share tags are generated for every page. Set the **Site web address** in Site settings for canonical links, and use the code window for anything extra (JSON-LD, og:image, verification tags, analytics). Anything pasted there is added to every page exactly as written, so it's for trusted admins only.
 

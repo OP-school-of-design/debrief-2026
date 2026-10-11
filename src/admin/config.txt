@@ -52,17 +52,20 @@ collections:
         search_fields: ["title"]
         display_fields: ["title"]
       - { label: "Published", name: "published", widget: "boolean", default: true, hint: "Untick to hide this graduate from the site without deleting them." }
-      - label: "Gallery layout"
-        name: "galleryStyle"
+      - label: "Block order"
+        name: "blockOrder"
         widget: "select"
-        default: "masonry"
+        default: "project"
+        hint: "Both orders show the same information (profile, project, hero image, gallery) - this just changes which comes first."
         options:
-          - { label: "Masonry (portfolio): suits a mix of portrait and landscape images", value: "masonry" }
-          - { label: "Stacked (project): full-width images, or two side by side", value: "stacked" }
+          - { label: "Project first: project info, hero image, gallery, then profile", value: "project" }
+          - { label: "Profile first: profile, hero image, project info, then gallery", value: "profile" }
       - { label: "Project name", name: "projectName", widget: "string" }
       - { label: "Project description", name: "projectDescription", widget: "text" }
       - { label: "Card image (square, shown on the grid)", name: "cover", widget: "image", hint: "Project image. Square crop works best (shown 1:1)." }
       - { label: "Card image description (alt text)", name: "coverAlt", widget: "string", required: false }
+      - { label: "Hero image (landscape, shown large near the top of the project)", name: "hero", widget: "image" }
+      - { label: "Hero image description (alt text)", name: "heroAlt", widget: "string", required: false }
       - { label: "Headshot", name: "headshot", widget: "image", hint: "Portrait taken by the photographer. Shown as a circle." }
       - { label: "Headshot description (alt text)", name: "headshotAlt", widget: "string", required: false }
       - { label: "Quote", name: "quote", widget: "text", required: false, hint: "No quote marks needed; they are added automatically." }
@@ -85,13 +88,6 @@ collections:
         fields:
           - { label: "Image", name: "image", widget: "image" }
           - { label: "Description (alt text)", name: "alt", widget: "string", hint: "Describe the image for people using screen readers." }
-          - label: "Width (Stacked layout only)"
-            name: "size"
-            widget: "select"
-            default: "full"
-            options:
-              - { label: "Full width", value: "full" }
-              - { label: "Half width (pairs up with the next half-width image)", value: "half" }
       - { label: "About the graduate", name: "body", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
       - { label: "Meta description (optional, for search engines)", name: "metaDescription", widget: "text", required: false }
 
@@ -163,14 +159,28 @@ collections:
     fields:
       - { label: "Event name", name: "title", widget: "string" }
       - { label: "Subtitle (shown on the events grid)", name: "subtitle", widget: "string" }
+      - { label: "Dates/time (shown on the events grid, optional)", name: "gridDates", widget: "text", required: false, hint: "Press Enter for a line break." }
       - { label: "Menu / footer label", name: "navLabel", widget: "string", required: false }
       - { label: "Order", name: "order", widget: "number", value_type: "int", default: 1 }
-      - { label: "Poster (square crop shown on the events grid)", name: "poster", widget: "image" }
+      - { label: "Poster", name: "poster", widget: "image", hint: "Shown on the events grid and on this event's own page." }
       - { label: "Poster description (alt text)", name: "posterAlt", widget: "string", required: false }
-      - { label: "Page heading", name: "heading", widget: "string", required: false }
+      - { label: "Page heading", name: "heading", widget: "string", required: false, hint: "Shown at the top of this event's own page. Leave blank to use the event name above." }
+      - { label: "Dates/time line (shown under the heading, optional)", name: "detailDatesLine", widget: "text", required: false, hint: "Press Enter for a line break." }
       - { label: "Description", name: "body", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
-      - { label: "Image (square)", name: "image", widget: "image", required: false }
-      - { label: "Image description (alt text)", name: "imageAlt", widget: "string", required: false }
+      - { label: "Dates banner: title", name: "bannerTitle", widget: "string", required: false, hint: "The full-width coloured banner further down the page, same style as the front page. Leave blank to hide the banner." }
+      - { label: "Dates banner: details (venue, times)", name: "bannerDetails", widget: "text", required: false, hint: "Press Enter for a line break." }
+      - { label: "Show the carousel on this event's page", name: "showCarousel", widget: "boolean", default: false, hint: "Switch ON once there are real photos to show. Your slides are kept, so you can switch it back off any time." }
+      - { label: "Carousel: advance automatically", name: "carouselAutoplay", widget: "boolean", default: false, required: false }
+      - { label: "Carousel: seconds per slide (if automatic)", name: "carouselInterval", widget: "number", value_type: "int", min: 2, max: 20, default: 5, required: false }
+      - label: "Carousel slides"
+        name: "carousel"
+        widget: "list"
+        required: false
+        summary: "{{caption}}"
+        fields:
+          - { label: "Image (landscape, 16:9 works best)", name: "image", widget: "image" }
+          - { label: "Description (alt text)", name: "alt", widget: "string" }
+          - { label: "Caption / image credit (shown under the carousel)", name: "caption", widget: "string", required: false }
       - { label: "Video heading", name: "videoTitle", widget: "string", required: false }
       - { label: "Video (YouTube or Vimeo web address)", name: "videoUrl", widget: "string", required: false }
       - { label: "Meta description (optional, for search engines)", name: "metaDescription", widget: "text", required: false }
@@ -196,6 +206,7 @@ collections:
           - { label: "Intro text", name: "introText", widget: "text" }
           - { label: "Intro image", name: "introImage", widget: "image", required: false }
           - { label: "Intro image description (alt text)", name: "introImageAlt", widget: "string", required: false }
+          - { label: "Show the walkthrough video section", name: "showWalkthrough", widget: "boolean", default: false, hint: "Switch ON once a real walkthrough video exists. The section stays hidden while this is off, whatever else below is filled in." }
           - { label: "Walkthrough video: heading", name: "walkthroughHeading", widget: "string", required: false }
           - { label: "Walkthrough video: YouTube/Vimeo address (optional)", name: "walkthroughVideoUrl", widget: "string", required: false, hint: "If filled in, this is used instead of the MP4 below." }
           - { label: "Walkthrough video: MP4 file", name: "walkthroughVideoFile", widget: "file", required: false, media_folder: "src/videos", public_folder: "/videos", choose_url: false }

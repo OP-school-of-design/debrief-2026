@@ -2,11 +2,13 @@
 title: "Hana Pārata"
 discipline: fashion
 published: true
-galleryStyle: stacked
+blockOrder: project
 projectName: "Whāriki: woven textiles"
 projectDescription: "For Tūhura Otago Museum Shop, I developed a collection of illustrated native New Zealand animals and natural elements designed for a range of merchandise. The illustrations were created with versatility in mind, allowing them to be applied across products such as pins, stickers, magnets, and other souvenirs. For children, I explored a playful and approachable style that encourages curiosity and introduces younger audiences to Aotearoa's unique native wildlife and environments. Alongside this, I developed a more refined and mature illustrative style for tourists, creating memorable souvenirs that celebrate New Zealand's natural identity while encouraging visitors to learn about and take a piece of Aotearoa home."
 cover: cover.jpg
 coverAlt: "Whāriki: woven textiles (sample image)"
+hero: hero.jpg
+heroAlt: "Whāriki: woven textiles, hero image (sample)"
 headshot: headshot.jpg
 headshotAlt: "Hana Pārata profile image"
 quote: "A large student quote before the project? Could be short or long, one to three lines of text possibly."
@@ -20,21 +22,15 @@ links:
 gallery:
   - image: gallery-1.jpg
     alt: "Whāriki: woven textiles, sample image 1"
-    size: full
   - image: gallery-2.jpg
     alt: "Whāriki: woven textiles, sample image 2"
-    size: half
   - image: gallery-3.jpg
     alt: "Whāriki: woven textiles, sample image 3"
-    size: half
   - image: gallery-4.jpg
     alt: "Whāriki: woven textiles, sample image 4"
-    size: full
   - image: gallery-5.jpg
     alt: "Whāriki: woven textiles, sample image 5"
-    size: half
   - image: gallery-6.jpg
     alt: "Whāriki: woven textiles, sample image 6"
-    size: half
 ---
 I am a creative and curious designer who enjoys exploring new ideas, solving problems, and creating meaningful experiences. I value collaboration, accessibility, and thoughtful design, while always looking for opportunities to learn and grow. My interests span graphic, web, and experiential design, with a passion for making ideas engaging and enjoyable.

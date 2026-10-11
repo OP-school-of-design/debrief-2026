@@ -16,6 +16,7 @@ permalink: /events/
                 <img src="{{ e | entryImg(e.data.poster) }}" alt="{{ e.data.posterAlt or (e.data.title ~ ' poster') }}" class="event-grid-poster" sizes="(min-width: 601px) 540px, 95vw">
                 <h2>{{ e.data.title }}</h2>
                 <h3>{{ e.data.subtitle }}</h3>
+                {%- if e.data.gridDates %}<p>{{ e.data.gridDates | nl2br | safe }}</p>{%- endif %}
             </article>
         </a>
         {%- endfor %}

@@ -31,9 +31,9 @@ permalink: /
         {%- endif %}
     </article>
 
-    <!-- WALKTHROUGH VIDEO -->
+    <!-- WALKTHROUGH VIDEO: switched on/off in the dashboard once a real video exists -->
     {%- set embedSrc = f.walkthroughVideoUrl | embed %}
-    {%- if embedSrc or f.walkthroughVideoFile %}
+    {%- if f.showWalkthrough and (embedSrc or f.walkthroughVideoFile) %}
     <section class="coloured-block-section">
         <h2>{{ f.walkthroughHeading }}</h2>
         {%- if embedSrc %}

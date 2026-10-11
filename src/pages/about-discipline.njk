@@ -29,6 +29,12 @@ eleventyComputed:
     </article>
 
     <!-- CAROUSEL: can be switched on/off per discipline in the dashboard -->
+    {% set carouselImgBase = discipline %}
+    {% set carouselShow = d.showCarousel %}
+    {% set carouselSlides = d.carousel %}
+    {% set carouselAutoplay = d.carouselAutoplay %}
+    {% set carouselInterval = d.carouselInterval %}
+    {% set carouselLabel = d.title %}
     {% include "partials/carousel.njk" %}
 
     {%- if d.moreText %}
