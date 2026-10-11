@@ -197,3 +197,16 @@ img { height: auto; }              /* stops the width/height attributes from dis
         gap: 0;
     }
 }
+
+/* Event pages: .event-description is the first element after the fixed header, same as
+   .image-block-title elsewhere. The students' own top padding (10rem, dropping to 6rem
+   under 1170px) isn't always enough to clear the 118px header, so this guarantees it. */
+.event-description {
+    margin-top: 118px;
+    padding-top: 4rem;
+}
+@media screen and (max-width: 1170px) {
+    .event-description {
+        padding-top: 2rem;
+    }
+}
