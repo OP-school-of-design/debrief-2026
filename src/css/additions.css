@@ -1,0 +1,55 @@
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+   ADDITIONS to Maxis' design (loaded after stylesheet.css)
+   New elements, plus the menu spacing needed for the longer "All Graduates and Postgraduates" label.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+/* Page heading without a banner image (All Graduates and Postgraduates page).
+   The top padding clears the fixed header (118px tall on desktop, as the banners allow for). */
+.page-heading-plain {
+    padding: calc(118px + 3rem) 0 0;
+    text-align: center;
+}
+
+.page-heading-plain h1 {
+    margin: 0;
+    line-height: 1.2;
+}
+
+@media screen and (max-width: 1170px) {
+    .page-heading-plain {
+        padding-top: calc(87px + 1rem);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .page-heading-plain h1 {
+        font-size: 2.25rem;
+    }
+}
+
+/* Top menu: the longer "All Graduates and Postgraduates" label needs about 1350px at Maxis'
+   spacing. Labels never wrap onto two lines, and between 1171px and 1365px (just above the
+   hamburger menu) the gaps and side padding are tightened so everything still fits.
+   Above 1365px the spacing is exactly Maxis'. */
+.topnav > a,
+.topnav .dropbtn {
+    white-space: nowrap;
+}
+
+@media screen and (min-width: 1171px) {
+    /* Long category names (e.g. Graduate Diploma in Design (Communication)) stay on one line. */
+    .dropdown-content a {
+        white-space: nowrap;
+    }
+}
+
+@media screen and (min-width: 1171px) and (max-width: 1365px) {
+    header {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+
+    .topnav {
+        column-gap: 2.5rem;
+    }
+}

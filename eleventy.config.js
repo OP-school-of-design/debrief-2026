@@ -2,7 +2,9 @@ import path from "node:path";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import { BASE } from "./lib/base.js";
 import { readDesign, copyFontFiles } from "./lib/fonts.js";
-import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes } from "./lib/helpers.js";
+import { writeFavicons } from "./lib/favicon.js";
+import fs from "node:fs";
+import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg } from "./lib/helpers.js";
 
 export default function (eleventyConfig) {
   // ---------- Images ----------
@@ -37,17 +39,36 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("bannerTitle", bannerTitle);
   eleventyConfig.addFilter("bannerDetails", bannerDetails);
   eleventyConfig.addFilter("naturalSizes", naturalSizes);
+  eleventyConfig.addFilter("siteImg", siteImg);
   eleventyConfig.addFilter("trimSlash", (s) => String(s || "").replace(/\/+$/, ""));
 
   // ---------- Collections ----------
   const byOrder = (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999) || a.data.title.localeCompare(b.data.title);
   eleventyConfig.addCollection("graduates", (api) =>
     api.getFilteredByTag("graduate").filter((g) => g.data.published !== false).sort(byOrder));
-  // All disciplines: used for the menus, footer and the School of Design grid (as in the students' design).
+  // Every discipline / graduate category (used to look up a graduate's discipline name).
   eleventyConfig.addCollection("disciplines", (api) => api.getFilteredByTag("discipline").sort(byOrder));
-  // Disciplines whose pages are switched on: these get a graduates grid page and an About page.
+  // Graduate categories shown in the "All Graduates" menu and footer, each with its own graduates page.
+  // A category set to "only show when it has graduates" appears only while at least one PUBLISHED
+  // graduate is in it, so it comes and goes on its own as graduates are added or removed.
+  eleventyConfig.addCollection("gradCategories", (api) => {
+    const counts = {};
+    for (const g of api.getFilteredByTag("graduate")) {
+      if (g.data.published === false) continue;
+      counts[g.data.discipline] = (counts[g.data.discipline] || 0) + 1;
+    }
+    return api.getFilteredByTag("discipline")
+      .filter((d) => d.data.inGraduatesMenu !== false)
+      .filter((d) => !d.data.hideWhenEmpty || counts[d.data.disciplineKey] > 0)
+      .sort(byOrder);
+  });
+  // Disciplines on the School of Design side: its coloured boxes and "About ..." menu.
+  eleventyConfig.addCollection("schoolDisciplines", (api) =>
+    api.getFilteredByTag("discipline").filter((d) => d.data.onSchoolPage !== false).sort(byOrder));
+  // School of Design disciplines whose About page is switched on.
   eleventyConfig.addCollection("disciplinePages", (api) =>
-    api.getFilteredByTag("discipline").filter((d) => d.data.pagesPublished !== false).sort(byOrder));
+    api.getFilteredByTag("discipline")
+      .filter((d) => d.data.onSchoolPage !== false && d.data.pagesPublished !== false).sort(byOrder));
   eleventyConfig.addCollection("events", (api) => api.getFilteredByTag("event").sort(byOrder));
 
   // ---------- Static files ----------
@@ -56,6 +77,7 @@ export default function (eleventyConfig) {
     "src/css/stylesheet.css": "css/stylesheet.css",
     "src/css/icons.css": "css/icons.css",
     "src/css/carousel.css": "css/carousel.css",
+    "src/css/additions.css": "css/additions.css",
     "src/js": "js",
     "src/fonts": "fonts",
     "src/videos": "videos",
@@ -63,16 +85,24 @@ export default function (eleventyConfig) {
     "src/images/**/*.svg": "images",
     "src/admin/config.txt": "admin/config.txt",
     "src/admin/index.html": "admin/index.html",
+    "src/admin/image-thumbnail-fix.js": "admin/image-thumbnail-fix.js",
     // Font Awesome Free (icons CC BY 4.0, fonts SIL OFL), the same version the students linked to
     "node_modules/@fortawesome/fontawesome-free/css/all.min.css": "fontawesome/css/all.min.css",
     "node_modules/@fortawesome/fontawesome-free/webfonts": "fontawesome/webfonts",
   });
 
   // ---------- Self-hosted text fonts: copy only the fonts chosen in the dashboard ----------
-  eleventyConfig.on("eleventy.after", ({ dir }) => {
-    copyFontFiles(readDesign(), dir.output);
+  eleventyConfig.on("eleventy.after", ({ directories, dir }) => {
+    copyFontFiles(readDesign(), directories?.output || dir.output);
   });
   eleventyConfig.addWatchTarget("src/_data/typography.json");
+
+  // ---------- Favicon: tab and home-screen icons made from Site settings → Favicon ----------
+  eleventyConfig.on("eleventy.after", async ({ directories, dir }) => {
+    const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
+    await writeFavicons(site, directories?.output || dir.output);
+  });
+  eleventyConfig.addWatchTarget("src/favicon/");
 
   eleventyConfig.setServerOptions({ showVersion: false });
 

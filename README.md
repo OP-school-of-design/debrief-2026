@@ -39,19 +39,24 @@ While `npm start` is running, images are processed on request, so it starts fast
 
 | Section | What staff/admin can do |
 |---|---|
-| **Graduates** | Add/edit graduates: discipline (dropdown), block order (**Project first** or **Profile first** — both show the same information, just in a different order), card image, hero image, headshot, gallery images, links, quote, bio. Untick **Published** to hide someone without deleting them. |
-| **Disciplines** | Name, short name, symbol, optional box colour for the School of Design page, **Pages live** switch (see below), banners, intro, video and the **carousel**. |
+| **Graduates** | Add/edit graduates: discipline (dropdown of the graduate categories, in menu order), block order (**Project first** or **Profile first** — both show the same information, just in a different order), card image, hero image, headshot, gallery images, links, quote, bio. Untick **Published** to hide someone without deleting them. |
+| **Disciplines** | The graduate categories and the School of Design disciplines: name, where it appears (switches, see below), graduates-page banner, and for the School of Design side the symbol, box colour, About page, video and **carousel**. |
 | **Events** | Poster, top-menu and footer labels, dates, description, dates banner, **carousel**, YouTube/Vimeo address. |
-| **Pages** | Front page (including the walkthrough video on/off switch), About the School of Design, All Graduates and Events banners, Archive menu links. |
+| **Pages** | Front page (including the walkthrough video on/off switch), About the School of Design, All Graduates page title (also the menu label), Events banner, Archive menu links. |
 | **Design → Colour palette** | Colour pickers for every colour on the site, plus four optional ones (carousel caption background/text, `dark-text`, `cream-text`) that stay unset unless you fill them in. |
 | **Design → Custom CSS** | A CSS code box loaded after everything else, for small style tweaks without touching code. Empty by default. |
 | **Design → Typography** | Heading font and body font (23 choices). From Google fonts. |
 | **Design → SEO & head code** | A code window whose contents go in the `<head>` of every page. To help with SEO and accessibility. |
-| **Site settings** | Site name, description, logos, footer note, social links. |
+| **Site settings** | Site name, description, logos, **favicon**, footer note, social links. |
 
 **Carousel on/off:** Disciplines or Events → pick one → **Show the carousel on this page**. Off = hidden (the slides are kept). There's also an "advance automatically" option with a pause button; automatic advance is ignored for visitors who have "reduce motion" switched on.
 
-**Pages live (disciplines):** every discipline appears in the menus, footer and the School of Design page, exactly as in Maxis' design. A discipline's own graduates page and About page are only built once its **Pages live** switch is on; until then those links lead nowhere, as they did on the original site. Communication Design is live; Fashion, Product and Postgraduate are waiting for content.
+**Graduate categories (Disciplines):** Communication, Fashion and Product Design, the three Graduate Diplomas, Bachelor of Design (Honours) and Masters, in that order (the **Order** number). Each has its own graduates page at `/graduates/<key>/` with its own banner (**Graduates page: banner image**; a placeholder is used until one is added). The switches on each one:
+* **Show in the All Graduates menu**: it's a graduate category (top menu, footer, its own page, and the graduate Discipline dropdown).
+* **Only show when it has graduates**: on for the Graduate Diplomas, Honours and Masters. The menu item, footer link and page exist only while at least one *published* graduate is in that category, and disappear again on the next build if they're all removed or unpublished.
+* **Show on the School of Design page**: Communication, Fashion, Product and Postgraduate (its coloured boxes and "About ..." menu). **About page live** switches on that discipline's About page; Communication's is live.
+
+Adding a new graduate category: add it in Disciplines, then add the same name and key to the graduate Discipline list in `src/admin/config.txt` (a fixed list, so the dropdown keeps your order).
 
 **Dates banners:** in the title, a new line is a line break on desktop only. In the details, a new line is a line break, and `//` is a line break on phones only (matching Maxis' markup).
 
@@ -67,6 +72,15 @@ The front-page logo animations are SVG files and are used as they are. Their emb
 
 ### Caching on SiteGround
 `src/.htaccess` (deployed next to `index.html`) tells browsers and SiteGround to check for a newer copy of every page on each visit, and every CSS/JS link carries a version stamp that changes on each build (`src/_data/build.js`). Together these mean a deploy should show up without purging caches. If pages still look stale after a deploy, SiteGround's **NGINX Direct Delivery** (Site Tools → Speed → Caching) may be ignoring `.htaccess` for static files. Turning it off routes those files through `.htaccess`, but it applies to the whole design.ac.nz site, so check with whoever manages that first.
+
+### Favicon
+Site settings → **Favicon**. Upload a square PNG or SVG (at least 512 × 512 px) that still reads at tab size. The build makes a 32 px tab icon, a 192 px icon and a 180 px phone home-screen icon from it (into `/favicon/`). A see-through icon is put on white for phones, because phones show transparent icons on black. Clear the field to have no favicon. Browsers hold on to favicons, so a new one can take a refresh or two to appear in the tab.
+
+### Image paths in the dashboard
+Site-wide files (logos, page banners, the favicon, the walkthrough video) are stored without a leading slash, e.g. `images/landscape_placeholder.jpeg`. That lets the dashboard show their thumbnails; the templates add the slash back (the `siteImg` filter). `src/admin/image-thumbnail-fix.js` works around a Decap bug that otherwise left those thumbnails blank.
+
+### Top menu spacing
+The "All Graduates and Postgraduates" label is longer than Maxis' "All Graduates". Labels never wrap, and between 1171px and 1365px wide (just above the hamburger menu) the gaps and side padding are tightened so the menu still fits (`css/additions.css`). Wider than that, the spacing is exactly Maxis'.
 
 ### File names
 Use **lowercase-with-hyphens** (`aroha-portrait.jpg`, not `Aroha Portrait.JPG`). Windows and Mac ignore capitals; the live server doesn't, and a mismatch means a broken image. `npm run build` warns about any offenders.
@@ -85,15 +99,18 @@ src/
   _includes/layouts/             page layouts (graduate, event, school of design, base)
   _includes/partials/            header, footer, carousel, dates banner, video, student grid, SEO head
   images/                        site-wide images (logos, logo animations, placeholders)
+  favicon/                       the favicon image chosen in Site settings (tab icons are made from it)
   css/stylesheet.css             Maxis' stylesheet (see docs/CHANGES-FROM-STUDENT-SITE.md)
   css/base.css                   one image rule, loaded before the stylesheet
   css/carousel.css               the carousel (styled to match Flickity)
+  css/additions.css              new elements: plain page heading, menu spacing for the longer label
   css/icons.css                  Material Symbols icon font (menu / close / dropdown arrows)
   css/design.css.njk             GENERATED from colours + typography (don't edit design.css)
   fonts/                         the cut-down Material Symbols font
   js/                            main.js (menus), carousel.js, lightbox.js
   admin/config.txt               the dashboard definition (.txt because SiteGround blocks .yml)
-lib/                             font + helper code
+  admin/image-thumbnail-fix.js   makes site-wide image thumbnails show in the dashboard
+lib/                             font, favicon + helper code
 ```
 
 **Adding a discipline:** Disciplines → New. Give it a *web address key* (lowercase, e.g. `textiles`); it appears in the menus, footer and School of Design page straight away, and its own pages once **Pages live** is on. (The School of Design grid colours come from Maxis' CSS, which colours the first four boxes.)

@@ -4,6 +4,9 @@ shortName: "Communications"
 disciplineKey: "communication"
 order: 1
 pagesPublished: true
+onSchoolPage: true
+hideWhenEmpty: false
+inGraduatesMenu: true
 symbol: "symbol.png"
 gradBannerImage: "banner.jpeg"
 gradBannerAlt: ""

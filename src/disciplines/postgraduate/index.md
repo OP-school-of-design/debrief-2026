@@ -2,7 +2,10 @@
 title: "Postgraduate Design"
 shortName: "Postgraduate"
 disciplineKey: "postgraduate"
-order: 4
+order: 9
 pagesPublished: false
+onSchoolPage: true
+hideWhenEmpty: false
+inGraduatesMenu: false
 symbol: "symbol.png"
 ---
