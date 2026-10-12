@@ -1,15 +1,6 @@
 {
-  "name": "DEBRIEF 2026",
-  "tagline": "School of Design Graduate Exhibition",
-  "lang": "en-nz",
-  "url": "",
-  "description": "DEBRIEF is the annual exhibition of final-year students from the School of Design at Otago Polytechnic. It showcases the creative talents and innovative...",
-  "navLogo": "/images/debrieflogo_nav.png",
-  "navLogoAlt": "DEBRIEF logo",
-  "footerLogo": "/images/debrieflogo_portrait.png",
   "footerLogoAlt": "DEBRIEF logo",
-  "footerNote": "All images are in the public domain.\nCopyright Maxis Angel © 2026.",
-  "websiteCredit": "Maxis Angel",
+  "footerLogo": "/images/debrieflogo_portrait.png",
   "socials": [
     {
       "icon": "globe",
@@ -41,5 +32,14 @@
       "label": "Product Design",
       "url": "https://www.instagram.com/otagopolyproduct/"
     }
-  ]
+  ],
+  "name": "DEBRIEF 2026",
+  "footerNote": "All images are in the public domain.\nCopyright Maxis Angel © 2026.",
+  "navLogo": "/images/debrieflogo_nav.png",
+  "lang": "en-nz",
+  "tagline": "School of Design Graduate Exhibition",
+  "url": "https://design.ac.nz/debrief/2026",
+  "websiteCredit": "Maxis Angel",
+  "navLogoAlt": "DEBRIEF logo",
+  "description": "DEBRIEF is the annual exhibition of final-year students from the School of Design at Otago Polytechnic. It showcases the creative talents and innovative..."
 }
