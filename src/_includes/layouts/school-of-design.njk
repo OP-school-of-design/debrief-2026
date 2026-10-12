@@ -10,7 +10,7 @@ layout: layouts/base.njk
         = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
     <section class="image-block-title">
-        <img src="{{ page | entryImg(bannerImage) }}" alt="{{ bannerAlt }}" sizes="100vw" loading="eager">
+        <img src="{{ bannerImage | siteImg }}" alt="{{ bannerAlt }}" sizes="100vw" loading="eager">
             <h1>
                 {{ heading or title }}
             </h1>
@@ -29,7 +29,7 @@ layout: layouts/base.njk
         </button>
 
         <article class="discipline__grid">
-            {%- for d in collections.disciplines %}
+            {%- for d in collections.schoolDisciplines %}
             <a href="{{ ('/about/' ~ d.data.disciplineKey ~ '/') | url }}" class="discipline"{% if d.data.boxColour %} style="background-color: {{ d.data.boxColour }}"{% endif %}>
                 {%- set symbolSrc = d | entryImg(d.data.symbol) %}
                 <img src="{{ symbolSrc }}" alt="{{ d.data.title }}" class="discipline__image" eleventy:widths="400,800" sizes="{{ symbolSrc | naturalSizes }}">
@@ -55,7 +55,7 @@ layout: layouts/base.njk
     {%- if descImage %}
     <div class="discipline-description__image-wrapper">
         <img
-            src="{{ page | entryImg(descImage) }}"
+            src="{{ descImage | siteImg }}"
             alt="{{ descImageAlt }}"
             class="discipline-description__image"
             sizes="(min-width: 1171px) 40vw, 90vw"

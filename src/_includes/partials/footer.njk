@@ -8,7 +8,7 @@
             <div class="footer-grid">
 
                 <article class="footer__image">
-                    <img src="{{ site.footerLogo }}" alt="{{ site.footerLogoAlt }}" class="footer__image__logo" eleventy:widths="400,800,1200" sizes="{{ site.footerLogo | naturalSizes }}">
+                    <img src="{{ site.footerLogo | siteImg }}" alt="{{ site.footerLogoAlt }}" class="footer__image__logo" eleventy:widths="400,800,1200" sizes="{{ site.footerLogo | siteImg | naturalSizes }}">
                 </article>
 
                 <article class="footer__menu">
@@ -36,7 +36,7 @@
                         <span class="footer__arrow"></span>
                     </button>
                     <ul class="footer__menu__list">
-                        {%- for d in collections.disciplines %}
+                        {%- for d in collections.gradCategories %}
                         <li><a href="{{ ('/graduates/' ~ d.data.disciplineKey ~ '/') | url }}">{{ d.data.title }}</a></li>
                         {%- endfor %}
                     </ul>

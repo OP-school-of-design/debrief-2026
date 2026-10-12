@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 pagination:
-  data: collections.disciplinePages
+  data: collections.gradCategories
   size: 1
   alias: discipline
 permalink: "/graduates/{{ discipline.data.disciplineKey }}/"
@@ -17,7 +17,7 @@ eleventyComputed:
     = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
     <section class="image-block-title">
-            <img src="{{ discipline | entryImg(d.gradBannerImage or d.bannerImage) }}" alt="{{ d.gradBannerAlt }}" sizes="100vw" loading="eager">
+            <img src="{% if d.gradBannerImage or d.bannerImage %}{{ discipline | entryImg(d.gradBannerImage or d.bannerImage) }}{% else %}/images/landscape_placeholder.jpeg{% endif %}" alt="{{ d.gradBannerAlt }}" sizes="100vw" loading="eager">
                 <h1>
                     {{ d.title }}
                 </h1>

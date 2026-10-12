@@ -9,6 +9,8 @@
 #
 #  local_backend is only used on localhost with "npm run cms"; the live site ignores it.
 #  Graduates, disciplines and events keep their images in their own folder (media_folder: "").
+#  Site-wide files are stored as "images/x.jpg" (no leading slash) so the dashboard can preview
+#  them; the templates add the slash back (the siteImg filter).
 # ================================================================
 
 backend:
@@ -19,7 +21,7 @@ backend:
 publish_mode: editorial_workflow
 local_backend: true
 media_folder: src/images
-public_folder: /images
+public_folder: images
 slug:
   encoding: ascii
   clean_accents: true
@@ -47,13 +49,25 @@ collections:
     widget: string
   - label: Discipline
     name: discipline
-    widget: relation
-    collection: disciplines
-    value_field: disciplineKey
-    search_fields:
-    - title
-    display_fields:
-    - title
+    widget: select
+    options:
+    - label: Communication Design
+      value: communication
+    - label: Fashion Design
+      value: fashion
+    - label: Product Design
+      value: product
+    - label: Graduate Diploma in Design (Communication)
+      value: graddip-communication
+    - label: Graduate Diploma in Design (Fashion)
+      value: graddip-fashion
+    - label: Graduate Diploma in Design (Product)
+      value: graddip-product
+    - label: Bachelor of Design (Honours)
+      value: honours
+    - label: Masters
+      value: masters
+    hint: The graduate's discipline or qualification. Graduate Diplomas, Honours and Masters only appear on the site (menus, footer and their own page) once at least one published graduate is in them.
   - label: Published
     name: published
     widget: boolean
@@ -131,7 +145,7 @@ collections:
     - label: Web address, or email address for Email
       name: url
       widget: string
-    - label: Label (optional)
+    - label: Label
       name: label
       widget: string
       required: false
@@ -158,7 +172,7 @@ collections:
     - link
     editor_components: &id002 []
   - &id003
-    label: Meta description (optional, for search engines)
+    label: Meta description (for search engines)
     name: metaDescription
     widget: text
     required: false
@@ -174,9 +188,11 @@ collections:
   media_folder: ''
   public_folder: ''
   slug: '{{disciplineKey}}'
-  summary: '{{title}}'
+  summary: '{{title}}{{hideWhenEmpty | ternary('' (only shown when it has published graduates)'', '''')}}'
   sortable_fields:
-  - order
+  - field: order
+    label: Order
+    default_sort: true
   - title
   fields:
   - label: Discipline name (menus, footer, page titles)
@@ -185,7 +201,8 @@ collections:
   - label: Short name (School of Design page grid)
     name: shortName
     widget: string
-    hint: e.g. Communications
+    required: false
+    hint: e.g. Communications. Only needed if it's shown on the School of Design page.
   - label: Web address key
     name: disciplineKey
     widget: string
@@ -198,20 +215,36 @@ collections:
     widget: number
     value_type: int
     default: 1
-  - label: Pages live
+  - label: Show in the All Graduates menu
+    name: inGraduatesMenu
+    widget: boolean
+    default: true
+    hint: ON for a graduate category (it appears in the top menu and footer, gets its own graduates page, and can be picked for a graduate).
+  - label: Only show when it has published graduates
+    name: hideWhenEmpty
+    widget: boolean
+    default: true
+    hint: 'ON (the default for Graduate Diplomas, Honours and Masters): this category is HIDDEN from the menus and footer, and has no page, until at least one PUBLISHED graduate is in it. It hides itself again if they are all removed or unpublished. OFF (Communication, Fashion and Product Design): always shown.'
+  - label: Show on the School of Design page
+    name: onSchoolPage
+    widget: boolean
+    default: false
+    hint: ON = a box on the School of Design page and an 'About ...' link in that menu.
+  - label: About page live
     name: pagesPublished
     widget: boolean
     default: false
-    hint: Switch ON when this discipline's graduates page and About page are ready. While OFF it still appears in the menus and on the School of Design page.
+    hint: 'School of Design side only: switch ON when this discipline''s About page is ready. While OFF it still appears in the School of Design menu and page.'
   - label: Symbol (shape) for the School of Design page
     name: symbol
     widget: image
-  - label: Box colour on the School of Design page (optional)
+    required: false
+  - label: Box colour on the School of Design page
     name: boxColour
     widget: color
     required: false
     allowInput: true
-    hint: 'Leave blank to keep the students'' colours, which go by position: 1st box Communication green, 2nd Fashion blue, 3rd Product red, 4th Postgraduate purple (changeable in Design > Colour palette). A colour here replaces that for this discipline only.'
+    hint: 'Leave blank to keep the students'' colours, which go by position: 1st box Communication green, 2nd Fashion blue, 3rd Product red (changeable in Design > Colour palette). A colour here replaces that for this discipline only.'
   - label: 'Graduates page: banner image'
     name: gradBannerImage
     widget: image
@@ -293,12 +326,12 @@ collections:
     - label: Description (alt text)
       name: alt
       widget: string
-    - label: Caption / image credit (shown under the carousel; optional)
+    - label: Caption / image credit (shown under the carousel)
       name: caption
       widget: string
       required: false
   - &id008
-    label: Text under the carousel (optional)
+    label: Text under the carousel
     name: moreText
     widget: markdown
     required: false
@@ -318,7 +351,9 @@ collections:
   slug: '{{title}}'
   summary: '{{title}}'
   sortable_fields:
-  - order
+  - field: order
+    label: Order
+    default_sort: true
   - title
   fields:
   - label: Event name
@@ -327,7 +362,7 @@ collections:
   - label: Subtitle (events grid)
     name: subtitle
     widget: string
-  - label: Dates/times (events grid; optional)
+  - label: Dates/times (events grid)
     name: gridDates
     widget: text
     required: false
@@ -359,7 +394,7 @@ collections:
     widget: string
     required: false
     hint: Leave blank to use the event name.
-  - label: Dates/times under the heading (optional)
+  - label: Dates/times under the heading
     name: detailDatesLine
     widget: text
     required: false
@@ -401,11 +436,11 @@ collections:
     file: src/_data/frontpage.json
     format: json
     fields:
-    - label: SEO title (optional)
+    - label: SEO title
       name: seoTitle
       widget: string
       required: false
-    - label: Meta description (optional)
+    - label: Meta description
       name: metaDescription
       widget: text
       required: false
@@ -461,14 +496,14 @@ collections:
       widget: file
       required: false
       media_folder: /src/videos
-      public_folder: /videos
+      public_folder: videos
       choose_url: false
     - label: 'Walkthrough: still image shown before the video plays'
       name: walkthroughPoster
       widget: image
       required: false
       media_folder: /src/videos
-      public_folder: /videos
+      public_folder: videos
     - label: 'Walkthrough: caption'
       name: walkthroughCaption
       widget: text
@@ -497,7 +532,7 @@ collections:
     - label: Heading
       name: heading
       widget: string
-    - label: Meta description (optional)
+    - label: Meta description
       name: metaDescription
       widget: text
       required: false
@@ -537,22 +572,15 @@ collections:
       name: permalink
       widget: hidden
       default: /school-of-design/
-  - label: All Graduates page (banner)
+  - label: All Graduates page
     name: graduatespage
     file: src/_data/graduatespage.json
     format: json
     fields:
-    - label: Title
+    - label: Title (also the top menu label)
       name: title
       widget: string
-    - label: Banner image
-      name: bannerImage
-      widget: image
-    - label: Banner description (alt text)
-      name: bannerAlt
-      widget: string
-      required: false
-      hint: Describe the image for people using screen readers.
+      hint: 'Each category''s banner is set in Disciplines > (pick one) > Graduates page: banner image.'
   - label: Events page (banner)
     name: eventspage
     file: src/_data/eventspage.json
@@ -662,25 +690,25 @@ collections:
       name: postgrad-purple
       widget: color
       allowInput: true
-    - label: Carousel caption background (optional)
+    - label: Carousel caption background
       name: slide-out-menu-background
       widget: color
       required: false
       allowInput: true
       hint: Optional. Leave blank to keep the students' design (their stylesheet uses this colour but never sets it).
-    - label: Carousel caption text (optional)
+    - label: Carousel caption text
       name: description-text-colour
       widget: color
       required: false
       allowInput: true
       hint: Optional. Leave blank to keep the students' design (their stylesheet uses this colour but never sets it).
-    - label: Small headings, .single-item__h3 (optional; not used on any page yet)
+    - label: Small headings, .single-item__h3 (not used on any page yet)
       name: dark-text
       widget: color
       required: false
       allowInput: true
       hint: Optional. Leave blank to keep the students' design (their stylesheet uses this colour but never sets it).
-    - label: External links, .external-link (optional; not used on any page yet)
+    - label: External links, .external-link (not used on any page yet)
       name: cream-text
       widget: color
       required: false
@@ -814,6 +842,14 @@ collections:
       widget: string
       required: false
       hint: Describe the image for people using screen readers.
+    - label: Favicon (browser tab icon)
+      name: favicon
+      widget: image
+      required: false
+      media_folder: /src/favicon
+      public_folder: favicon
+      choose_url: false
+      hint: The small icon in the browser tab and on phone home screens. Use a square PNG or SVG, at least 512 × 512 px, that still reads when tiny. To replace it, click the image and choose or upload another. Leave empty for no favicon.
     - label: Footer copyright note
       name: footerNote
       widget: text

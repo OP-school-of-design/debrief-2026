@@ -53,8 +53,8 @@ While `npm start` is running, images are processed on request, so it starts fast
 
 **Graduate categories (Disciplines):** Communication, Fashion and Product Design, the three Graduate Diplomas, Bachelor of Design (Honours) and Masters, in that order (the **Order** number). Each has its own graduates page at `/graduates/<key>/` with its own banner (**Graduates page: banner image**; a placeholder is used until one is added). The switches on each one:
 * **Show in the All Graduates menu**: it's a graduate category (top menu, footer, its own page, and the graduate Discipline dropdown).
-* **Only show when it has graduates**: on for the Graduate Diplomas, Honours and Masters. The menu item, footer link and page exist only while at least one *published* graduate is in that category, and disappear again on the next build if they're all removed or unpublished.
-* **Show on the School of Design page**: Communication, Fashion, Product and Postgraduate (its coloured boxes and "About ..." menu). **About page live** switches on that discipline's About page; Communication's is live.
+* **Only show when it has published graduates**: on (the default) for the Graduate Diplomas, Honours and Masters, and marked "(only shown when it has published graduates)" in the Disciplines list. The menu item, footer link and page exist only while at least one *published* graduate is in that category, and disappear again on the next build if they're all removed or unpublished.
+* **Show on the School of Design page**: Communication, Fashion and Product (its coloured boxes and "About ..." menu). **About page live** switches on that discipline's About page; Communication's is live.
 
 Adding a new graduate category: add it in Disciplines, then add the same name and key to the graduate Discipline list in `src/admin/config.txt` (a fixed list, so the dropdown keeps your order).
 
@@ -78,6 +78,9 @@ Site settings → **Favicon**. Upload a square PNG or SVG (at least 512 × 512 p
 
 ### Image paths in the dashboard
 Site-wide files (logos, page banners, the favicon, the walkthrough video) are stored without a leading slash, e.g. `images/landscape_placeholder.jpeg`. That lets the dashboard show their thumbnails; the templates add the slash back (the `siteImg` filter). `src/admin/image-thumbnail-fix.js` works around a Decap bug that otherwise left those thumbnails blank.
+
+### Phone menu
+When its sections are expanded, the phone/tablet menu can be taller than the screen; it scrolls on its own so everything (Events, Archive) can be reached, and the close button stays on top.
 
 ### Top menu spacing
 The "All Graduates and Postgraduates" label is longer than Maxis' "All Graduates". Labels never wrap, and between 1171px and 1365px wide (just above the hamburger menu) the gaps and side padding are tightened so the menu still fits (`css/additions.css`). Wider than that, the spacing is exactly Maxis'.

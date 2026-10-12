@@ -12,11 +12,11 @@ permalink: /
         = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
         <section class="logo-animation logo-animation--desktop">
-            <img src="{{ f.heroDesktop | url }}" alt="{{ f.heroAlt }}" loading="lazy" eleventy:ignore>
+            <img src="{{ f.heroDesktop | siteImg | url }}" alt="{{ f.heroAlt }}" loading="lazy" eleventy:ignore>
         </section>
 
         <section class="logo-animation logo-animation--mobile">
-            <img src="{{ f.heroMobile | url }}" alt="{{ f.heroAlt }}" loading="lazy" eleventy:ignore>
+            <img src="{{ f.heroMobile | siteImg | url }}" alt="{{ f.heroAlt }}" loading="lazy" eleventy:ignore>
         </section>
 
 
@@ -44,7 +44,7 @@ permalink: /
             {{ f.introText | md("single-item__introduction") | safe }}
 
             {%- if f.introImage %}
-            <img src="{{ f.introImage }}" alt="{{ f.introImageAlt }}" class="single-item__image" sizes="(min-width: 1171px) 40vw, 90vw">
+            <img src="{{ f.introImage | siteImg }}" alt="{{ f.introImageAlt }}" class="single-item__image" sizes="(min-width: 1171px) 40vw, 90vw">
             {%- endif %}
         </article>
 
@@ -65,8 +65,8 @@ permalink: /
             {%- set videoName = f.walkthroughHeading %}
             {% include "partials/video.njk" %}
             {%- else %}
-            <video controls{% if f.walkthroughPoster %} poster="{{ f.walkthroughPoster | url }}"{% endif %} playsinline id="walkthrough-video">
-                    <source src="{{ f.walkthroughVideoFile | url }}" type="video/mp4">
+            <video controls{% if f.walkthroughPoster %} poster="{{ f.walkthroughPoster | siteImg | url }}"{% endif %} playsinline id="walkthrough-video">
+                    <source src="{{ f.walkthroughVideoFile | siteImg | url }}" type="video/mp4">
                     Your browser does not support the video tag.
             </video>
             {%- endif %}
@@ -90,7 +90,7 @@ permalink: /
                 <h2 class="quote-half__h2">{{ f.quote }}
                 </h2>
                 {%- if f.quoteImage %}
-                <img src="{{ f.quoteImage }}" alt="{{ f.quoteImageAlt }}" class="quote-half__image" eleventy:widths="400,800,1200" sizes="(min-width: 1171px) 40vw, 90vw">
+                <img src="{{ f.quoteImage | siteImg }}" alt="{{ f.quoteImageAlt }}" class="quote-half__image" eleventy:widths="400,800,1200" sizes="(min-width: 1171px) 40vw, 90vw">
                 {%- endif %}
             </article>
 

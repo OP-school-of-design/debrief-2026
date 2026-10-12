@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 {% include "partials/head-seo.njk" %}
+{%- if site.favicon %}
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon/icon-32.png' | url }}?v={{ build.version }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ '/favicon/icon-192.png' | url }}?v={{ build.version }}">
+    <link rel="apple-touch-icon" href="{{ '/favicon/apple-touch-icon.png' | url }}?v={{ build.version }}">
+{%- endif %}
 
     {%- for href in fontface.preloads %}
     <link rel="preload" href="{{ href }}" as="font" type="font/woff2" crossorigin>
@@ -19,6 +24,7 @@
     <link rel="stylesheet" href="{{ '/css/icons.css' | url }}?v={{ build.version }}">
     <link rel="stylesheet" href="{{ '/fontawesome/css/all.min.css' | url }}?v={{ build.version }}">
     <link rel="stylesheet" href="{{ '/css/carousel.css' | url }}?v={{ build.version }}">
+    <link rel="stylesheet" href="{{ '/css/additions.css' | url }}?v={{ build.version }}">
     {%- if customcss and customcss.css and (customcss.css | trim) %}
     <!-- Custom CSS from the dashboard (Design > Custom CSS), loaded last -->
     <link rel="stylesheet" href="{{ '/css/custom.css' | url }}?v={{ build.version }}">

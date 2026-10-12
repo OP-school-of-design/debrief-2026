@@ -10,22 +10,22 @@
 
                 <!-- Logo -->
                 <div>
-                    <img src="{{ site.navLogo }}" alt="{{ site.navLogoAlt }}" class="navlogo" loading="eager" eleventy:widths="400,800" sizes="225px">
+                    <img src="{{ site.navLogo | siteImg }}" alt="{{ site.navLogoAlt }}" class="navlogo" loading="eager" eleventy:widths="400,800" sizes="225px">
                 </div>
 
                 <a href="{{ '/' | url }}">Home</a>
 
-                <!-- All Graduates -->
+                <!-- All Graduates (categories with no graduates can be set to hide themselves) -->
                 <div class="dropdown">
                     <div class="dropdown-title">
-                        <a href="{{ '/graduates/' | url }}" class="dropbtn">All Graduates</a>
-                        <button type="button" class="dropdown-toggle" onclick="toggleDropdown(this)" aria-label="Toggle All Graduates submenu">
+                        <a href="{{ '/graduates/' | url }}" class="dropbtn">{{ graduatespage.title }}</a>
+                        <button type="button" class="dropdown-toggle" onclick="toggleDropdown(this)" aria-label="Toggle {{ graduatespage.title }} submenu">
                             <span class="material-symbols-outlined">expand_more</span>
                         </button>
                     </div>
 
                     <div class="dropdown-content">
-                        {%- for d in collections.disciplines %}
+                        {%- for d in collections.gradCategories %}
                         <a href="{{ ('/graduates/' ~ d.data.disciplineKey ~ '/') | url }}">{{ d.data.title }}</a>
                         {%- endfor %}
                     </div>
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="dropdown-content">
-                        {%- for d in collections.disciplines %}
+                        {%- for d in collections.schoolDisciplines %}
                         <a href="{{ ('/about/' ~ d.data.disciplineKey ~ '/') | url }}">About {{ d.data.title }}</a>
                         {%- endfor %}
                     </div>

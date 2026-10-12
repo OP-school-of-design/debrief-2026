@@ -1,22 +1,20 @@
 ---
 layout: layouts/base.njk
-title: All Graduates
 permalink: /graduates/
+eleventyComputed:
+  title: "{{ graduatespage.title }}"
 ---
         <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-            PAGE BANNER
+            PAGE HEADING (no banner on this page; each category's own page has one)
 
         = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-    <section class="image-block-title">
-            <img src="{{ graduatespage.bannerImage }}" alt="{{ graduatespage.bannerAlt }}" sizes="100vw" loading="eager">
-                <h1>
-                    {{ graduatespage.title }}
-                </h1>
-    </section>
-
 <main>
+
+    <section class="page-heading-plain">
+        <h1>{{ graduatespage.title }}</h1>
+    </section>
 
         <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 

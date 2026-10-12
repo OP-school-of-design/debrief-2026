@@ -53,3 +53,24 @@
         column-gap: 2.5rem;
     }
 }
+
+/* Phone/tablet menu: when sections are expanded the menu can be taller than the screen, so it
+   scrolls on its own (finger or wheel) and Events and Archive can always be reached. */
+@media screen and (max-width: 1170px) {
+    .topnav.responsive {
+        max-height: 100vh;
+        max-height: 100dvh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* The close button stays put while the menu scrolls; a white circle behind it (same colour
+       as the menu, so invisible until something scrolls underneath) keeps it readable. */
+    #menuToggle {
+        z-index: 3;
+        border-radius: 50%;
+        background-color: var(--header-background);
+        box-shadow: 0 0 0 10px var(--header-background);
+    }
+}

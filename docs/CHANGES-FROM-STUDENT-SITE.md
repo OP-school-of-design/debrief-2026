@@ -42,9 +42,10 @@ stylesheet uses but never defines (`--dark-text`, `--cream-text`, `--slide-out-m
 Dashboard additions that are off by default (blank = Maxis' design, unchanged): a per-discipline box colour on the School of Design page (Maxis' CSS colours the boxes by position; a colour set here replaces that for one discipline), four optional palette colours for variables the stylesheet uses but never sets, and a Custom CSS box loaded last (`css/custom.css`, only linked when it has content).
 
 Changed at the school's request (October 2026):
-- Graduates are grouped into eight categories (Communication, Fashion and Product Design, three Graduate Diplomas, Honours, Masters), each with its own page and banner. The Graduate Diplomas, Honours and Masters appear in the menus only while they have published graduates. Postgraduate stays on the School of Design side only.
+- Graduates are grouped into eight categories (Communication, Fashion and Product Design, three Graduate Diplomas, Honours, Masters), each with its own page and banner. The Graduate Diplomas, Honours and Masters appear in the menus only while they have published graduates. Maxis' "Postgraduate Design" discipline was removed (those categories cover it), so the School of Design page has three boxes and its menu lists About Communication, Fashion and Product Design.
 - The menu label is now "All Graduates and Postgraduates", and that page has a plain heading instead of a banner (as on the 2025 site). Menu labels don't wrap, with tighter spacing between 1171px and 1365px (`css/additions.css`).
 - Fashion and Product now have graduates pages (previously their menu links led nowhere).
+- Desktop dropdowns are as wide as their longest item (no wrapping); the phone menu scrolls when it is taller than the screen.
 
 Added: a favicon (Maxis' site had none), set in Site settings. It only appears in the browser tab and on phone home screens, so the pages themselves are unchanged.
 
