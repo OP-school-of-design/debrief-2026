@@ -3,21 +3,20 @@
 #  SiteGround blocks .yml files). Visit /admin/ on the site.
 #  Local testing: npm run dev (see README).
 #
-#  For the live dashboard login (GitHub via your Cloudflare Worker), add under backend:
-#      base_url: https://YOUR-WORKER.workers.dev
-#  For the Draft > Review > Publish workflow (needs that login), add at the top level:
-#      publish_mode: editorial_workflow
+#  base_url = the Cloudflare Worker that handles "Login with GitHub" (sveltia-cms-auth).
+#  publish_mode: editorial_workflow = edits are saved as Drafts, moved to In review, and only
+#  go live when someone moves them to Ready and publishes.
 #
 #  local_backend is only used on localhost with "npm run cms"; the live site ignores it.
 #  Graduates, disciplines and events keep their images in their own folder (media_folder: "").
 # ================================================================
 
-publish_mode: editorial_workflow
 backend:
   name: github
   repo: OP-school-of-design/debrief-2026
   branch: main
   base_url: https://sveltia-cms-auth.design-bbf.workers.dev
+publish_mode: editorial_workflow
 local_backend: true
 media_folder: src/images
 public_folder: /images

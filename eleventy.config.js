@@ -59,6 +59,7 @@ export default function (eleventyConfig) {
     "src/js": "js",
     "src/fonts": "fonts",
     "src/videos": "videos",
+    "src/.htaccess": ".htaccess",
     "src/images/**/*.svg": "images",
     "src/admin/config.txt": "admin/config.txt",
     "src/admin/index.html": "admin/index.html",

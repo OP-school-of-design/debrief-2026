@@ -11,17 +11,17 @@
     <link rel="preload" href="{{ href }}" as="font" type="font/woff2" crossorigin>
     {%- endfor %}
 
-    <link rel="stylesheet" href="{{ '/css/base.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/base.css' | url }}?v={{ build.version }}">
     <!-- The students' stylesheet -->
-    <link rel="stylesheet" href="{{ '/css/stylesheet.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/stylesheet.css' | url }}?v={{ build.version }}">
     <!-- Colours and fonts from the dashboard (Design); defaults equal the students' values -->
-    <link rel="stylesheet" href="{{ '/css/design.css' | url }}">
-    <link rel="stylesheet" href="{{ '/css/icons.css' | url }}">
-    <link rel="stylesheet" href="{{ '/fontawesome/css/all.min.css' | url }}">
-    <link rel="stylesheet" href="{{ '/css/carousel.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/design.css' | url }}?v={{ build.version }}">
+    <link rel="stylesheet" href="{{ '/css/icons.css' | url }}?v={{ build.version }}">
+    <link rel="stylesheet" href="{{ '/fontawesome/css/all.min.css' | url }}?v={{ build.version }}">
+    <link rel="stylesheet" href="{{ '/css/carousel.css' | url }}?v={{ build.version }}">
     {%- if customcss and customcss.css and (customcss.css | trim) %}
     <!-- Custom CSS from the dashboard (Design > Custom CSS), loaded last -->
-    <link rel="stylesheet" href="{{ '/css/custom.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/custom.css' | url }}?v={{ build.version }}">
     {%- endif %}
 
     {# Extra head code from the dashboard: Design > SEO & head code #}
@@ -36,12 +36,12 @@
 
 {% include "partials/footer.njk" %}
 
-    <script src="{{ '/js/main.js' | url }}"></script>
+    <script src="{{ '/js/main.js' | url }}?v={{ build.version }}"></script>
     {%- if hasLightbox %}
-    <script src="{{ '/js/lightbox.js' | url }}"></script>
+    <script src="{{ '/js/lightbox.js' | url }}?v={{ build.version }}"></script>
     {%- endif %}
     {%- if hasCarousel %}
-    <script src="{{ '/js/carousel.js' | url }}"></script>
+    <script src="{{ '/js/carousel.js' | url }}?v={{ build.version }}"></script>
     {%- endif %}
 </body>
 </html>

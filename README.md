@@ -65,6 +65,9 @@ Add a description (alt text) for every image in the dashboard, for people using 
 
 The front-page logo animations are SVG files and are used as they are. Their embedded textures were converted from PNG to WebP (23 MB → 6 MB each), and each visitor downloads only the version for their screen size.
 
+### Caching on SiteGround
+`src/.htaccess` (deployed next to `index.html`) tells browsers and SiteGround to check for a newer copy of every page on each visit, and every CSS/JS link carries a version stamp that changes on each build (`src/_data/build.js`). Together these mean a deploy should show up without purging caches. If pages still look stale after a deploy, SiteGround's **NGINX Direct Delivery** (Site Tools → Speed → Caching) may be ignoring `.htaccess` for static files. Turning it off routes those files through `.htaccess`, but it applies to the whole design.ac.nz site, so check with whoever manages that first.
+
 ### File names
 Use **lowercase-with-hyphens** (`aroha-portrait.jpg`, not `Aroha Portrait.JPG`). Windows and Mac ignore capitals; the live server doesn't, and a mismatch means a broken image. `npm run build` warns about any offenders.
 
