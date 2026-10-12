@@ -16,6 +16,7 @@ backend:
   name: github
   repo: OP-school-of-design/debrief-2026
   branch: main
+  base_url: https://sveltia-cms-auth.design-bbf.workers.dev
 local_backend: true
 media_folder: src/images
 public_folder: /images
