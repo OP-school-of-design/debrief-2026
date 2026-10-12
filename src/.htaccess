@@ -1,0 +1,16 @@
+# Caching rules for this site's folder on SiteGround (deployed as .htaccess next to index.html).
+#
+# Pages, and the dashboard's settings file: browsers and SiteGround's caches must check for a newer
+# copy on every visit. If nothing changed the server replies "not modified", so this stays fast.
+# CSS and JavaScript: every page links to them with a version stamp (?v=...) that changes on each
+# deploy, so they can be kept for a long time without ever going stale.
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|txt)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=31536000"
+    </FilesMatch>
+</IfModule>
