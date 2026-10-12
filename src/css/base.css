@@ -1,0 +1,8 @@
+/* Loaded BEFORE the students' stylesheet.
+   The image optimiser adds width/height attributes to every <img> so the browser can reserve space
+   while it loads (no layout jump). Without this rule, an image the students' CSS gives a width but
+   no height would be stretched to the attribute height. Because this file loads first, any height
+   the students set still wins, so images render exactly as in their original. */
+img {
+    height: auto;
+}

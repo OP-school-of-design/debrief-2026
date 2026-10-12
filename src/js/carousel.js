@@ -1,137 +1,164 @@
-/* CAROUSEL - no libraries (replaces the third-party carousel library used in the students' original).
-   Built on native CSS scroll-snap, so it swipes/scrolls on touch with no JavaScript at all.
-   This script adds: previous/next buttons, dots, keyboard arrows, captions, wrap-around and
-   optional autoplay (pauses on hover/focus/touch, has a pause button, and is off if the visitor
-   has "reduce motion" switched on).
-
-   Markup it expects (see src/_includes/partials/carousel.njk):
-   <section class="carousel-section" data-carousel data-autoplay="true|false" data-interval="5">
-     <div class="carousel-viewport"><article class="main-carousel"> <div class="carousel-cell" data-caption="..."><img></div> ... </article></div>
-     <p class="caption"></p>
-   </section> */
+/* CAROUSEL - no libraries (replaces Flickity, which needs a paid licence for this use).
+   Works on the students' own markup:
+     <article class="main-carousel"> <div class="carousel-cell"><img ...></div> ... </article>
+     <p class="caption">&nbsp;</p>
+   Behaves like the students' Flickity setup (wrap-around, left-aligned, one slide in view),
+   with previous/next buttons, dots, keyboard arrows and swipe/drag.
+   Optional, from the dashboard: data-autoplay="true" and data-interval="5" (seconds) on .main-carousel.
+   Autoplay pauses on hover/focus/touch, has a pause button, and is off for visitors who
+   have "reduce motion" switched on. */
 (function () {
     "use strict";
-    var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var ARROW = '<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M 10,50 L 60,100 L 70,90 L 30,50 L 70,10 L 60,0 Z"></path></svg>';
 
-    document.querySelectorAll("[data-carousel]").forEach(init);
+    document.querySelectorAll(".main-carousel").forEach(init);
 
-    function init(root) {
-        var track = root.querySelector(".main-carousel");
-        var slides = Array.prototype.slice.call(track.querySelectorAll(".carousel-cell"));
-        var caption = root.querySelector(".caption");
-        var count = slides.length;
+    function init(carousel) {
+        var cells = Array.prototype.slice.call(carousel.querySelectorAll(".carousel-cell"));
+        if (!cells.length) return;
+        var section = carousel.closest(".carousel-section");
+        var caption = section ? section.querySelector(".caption") : null;
+        var count = cells.length;
         var index = 0;
-        var timer = null;
-        var paused = false;
 
-        function updateCaption() {
-            if (!caption) return;
-            caption.textContent = slides[index].dataset.caption || "\u00A0";
-        }
-        updateCaption();
-        if (count < 2) return; // nothing to navigate
+        // Build: .main-carousel > .carousel-viewport > .carousel-track > cells
+        var viewport = document.createElement("div");
+        viewport.className = "carousel-viewport";
+        var track = document.createElement("div");
+        track.className = "carousel-track";
+        cells.forEach(function (cell, i) {
+            cell.setAttribute("role", "group");
+            cell.setAttribute("aria-roledescription", "slide");
+            cell.setAttribute("aria-label", (i + 1) + " of " + count);
+            track.appendChild(cell);
+        });
+        viewport.appendChild(track);
+        carousel.appendChild(viewport);
+        carousel.classList.add("carousel-enabled");
+        carousel.setAttribute("tabindex", "0");
+        carousel.setAttribute("role", "region");
+        carousel.setAttribute("aria-roledescription", "carousel");
+        if (!carousel.hasAttribute("aria-label")) carousel.setAttribute("aria-label", "Image carousel");
 
-        root.classList.add("is-enhanced");
-
-        // ---- controls ----
-        function button(cls, label, html) {
+        function button(cls, label) {
             var b = document.createElement("button");
             b.type = "button";
-            b.className = cls;
+            b.className = "carousel-button " + cls;
             b.setAttribute("aria-label", label);
-            b.innerHTML = html;
+            b.innerHTML = ARROW;
+            if (cls === "next") b.querySelector("path").setAttribute("transform", "translate(100, 100) rotate(180)");
             return b;
         }
-        var prev = button("carousel-btn carousel-btn--prev", "Previous slide", "&#10094;");
-        var next = button("carousel-btn carousel-btn--next", "Next slide", "&#10095;");
-        var dotsWrap = document.createElement("div");
-        dotsWrap.className = "carousel-dots";
-        var dots = slides.map(function (_, i) {
-            var d = button("carousel-dot", "Go to slide " + (i + 1), "");
-            d.addEventListener("click", function () { goTo(i, true); });
-            dotsWrap.appendChild(d);
-            return d;
-        });
-        var toggle = null;
-        var autoplay = root.dataset.autoplay === "true" && !reducedMotion;
-        var interval = Math.max(2, parseFloat(root.dataset.interval) || 5) * 1000;
-        if (autoplay) {
-            toggle = button("carousel-toggle", "Pause automatic slide show", "&#10074;&#10074;");
-            dotsWrap.appendChild(toggle);
+
+        var dots = [];
+        if (count > 1) {
+            var prev = button("previous", "Previous slide");
+            var next = button("next", "Next slide");
+            carousel.appendChild(prev);
+            carousel.appendChild(next);
+            prev.addEventListener("click", function () { goTo(index - 1, true); });
+            next.addEventListener("click", function () { goTo(index + 1, true); });
+
+            var list = document.createElement("ol");
+            list.className = "carousel-dots";
+            cells.forEach(function (_, i) {
+                var dot = document.createElement("li");
+                dot.className = "dot";
+                dot.setAttribute("role", "button");
+                dot.setAttribute("tabindex", "0");
+                dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+                dot.addEventListener("click", function () { goTo(i, true); });
+                dot.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goTo(i, true); }
+                });
+                list.appendChild(dot);
+                dots.push(dot);
+            });
+            carousel.appendChild(list);
         }
-        var viewport = track.parentElement;          // .carousel-viewport (position: relative)
-        viewport.appendChild(prev);
-        viewport.appendChild(next);
-        viewport.insertAdjacentElement("afterend", dotsWrap);
 
         function render() {
-            slides.forEach(function (s, i) { s.setAttribute("aria-hidden", i === index ? "false" : "true"); });
-            dots.forEach(function (d, i) {
-                if (i === index) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current");
+            track.style.transform = "translateX(" + (-index * 100) + "%)";
+            cells.forEach(function (cell, i) {
+                cell.classList.toggle("is-selected", i === index);
+                cell.setAttribute("aria-hidden", i === index ? "false" : "true");
             });
-            updateCaption();
+            dots.forEach(function (dot, i) {
+                dot.classList.toggle("is-selected", i === index);
+                if (i === index) dot.setAttribute("aria-current", "true"); else dot.removeAttribute("aria-current");
+            });
+            if (caption) {
+                var text = cells[index].getAttribute("data-caption");
+                caption.textContent = text ? text : " ";
+            }
         }
 
-        function goTo(i, user) {
-            var wrapped = i < 0 || i >= count;
-            index = (i + count) % count;
-            track.scrollTo({ left: slides[index].offsetLeft, behavior: reducedMotion || wrapped ? "auto" : "smooth" });
+        function goTo(i, byVisitor) {
+            index = (i + count) % count; // wrap around, like the students' wrapAround: true
             render();
-            if (user) restart();
+            if (byVisitor) restart();
         }
 
-        prev.addEventListener("click", function () { goTo(index - 1, true); });
-        next.addEventListener("click", function () { goTo(index + 1, true); });
-
-        // Keep "index" in step when the visitor swipes or scrolls
-        var ticking = false;
-        track.addEventListener("scroll", function () {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(function () {
-                ticking = false;
-                var nearest = 0, best = Infinity;
-                slides.forEach(function (s, i) {
-                    var dist = Math.abs(s.offsetLeft - track.scrollLeft);
-                    if (dist < best) { best = dist; nearest = i; }
-                });
-                if (nearest !== index) { index = nearest; render(); }
-            });
-        }, { passive: true });
-
-        track.addEventListener("keydown", function (e) {
+        // Keyboard
+        carousel.addEventListener("keydown", function (e) {
+            if (e.target !== carousel) return;
             if (e.key === "ArrowLeft") { e.preventDefault(); goTo(index - 1, true); }
             if (e.key === "ArrowRight") { e.preventDefault(); goTo(index + 1, true); }
         });
 
-        var resizeTimer;
-        window.addEventListener("resize", function () {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function () { track.scrollTo({ left: slides[index].offsetLeft, behavior: "auto" }); }, 150);
+        // Swipe / drag
+        var startX = null, deltaX = 0;
+        viewport.addEventListener("pointerdown", function (e) {
+            if (count < 2) return;
+            startX = e.clientX; deltaX = 0;
+            viewport.classList.add("is-pointer-down");
+            track.style.transition = "none";
+            try { viewport.setPointerCapture(e.pointerId); } catch (err) {}
         });
-
-        // ---- autoplay ----
-        function stop() { clearInterval(timer); timer = null; }
-        function start() {
-            if (!autoplay || paused || timer) return;
-            timer = setInterval(function () { goTo(index + 1, false); }, interval);
+        viewport.addEventListener("pointermove", function (e) {
+            if (startX === null) return;
+            deltaX = e.clientX - startX;
+            track.style.transform = "translateX(calc(" + (-index * 100) + "% + " + deltaX + "px))";
+        });
+        function endDrag() {
+            if (startX === null) return;
+            viewport.classList.remove("is-pointer-down");
+            track.style.transition = "";
+            var threshold = Math.min(80, viewport.clientWidth * 0.15);
+            if (deltaX > threshold) goTo(index - 1, true);
+            else if (deltaX < -threshold) goTo(index + 1, true);
+            else render();
+            startX = null;
         }
-        function restart() { stop(); start(); }
+        viewport.addEventListener("pointerup", endDrag);
+        viewport.addEventListener("pointercancel", endDrag);
 
+        // Optional autoplay (dashboard setting)
+        var timer = null, paused = false;
+        var autoplay = carousel.getAttribute("data-autoplay") === "true" && !reducedMotion && count > 1;
+        var interval = Math.max(2, parseFloat(carousel.getAttribute("data-interval")) || 5) * 1000;
+        function stop() { clearInterval(timer); timer = null; }
+        function start() { if (autoplay && !paused && !timer) timer = setInterval(function () { goTo(index + 1, false); }, interval); }
+        function restart() { stop(); start(); }
         if (autoplay) {
-            caption && caption.setAttribute("aria-live", "off");
+            var toggle = document.createElement("button");
+            toggle.type = "button";
+            toggle.className = "carousel-toggle";
+            toggle.textContent = "Pause";
+            toggle.setAttribute("aria-label", "Pause automatic slide show");
             toggle.addEventListener("click", function () {
                 paused = !paused;
-                toggle.innerHTML = paused ? "&#9654;" : "&#10074;&#10074;";
+                toggle.textContent = paused ? "Play" : "Pause";
                 toggle.setAttribute("aria-label", paused ? "Start automatic slide show" : "Pause automatic slide show");
-                paused ? stop() : start();
+                if (paused) stop(); else start();
             });
-            ["mouseenter", "focusin", "touchstart"].forEach(function (ev) { root.addEventListener(ev, stop, { passive: true }); });
-            ["mouseleave", "focusout"].forEach(function (ev) { root.addEventListener(ev, start); });
-            document.addEventListener("visibilitychange", function () { document.hidden ? stop() : start(); });
+            var dotsList = carousel.querySelector(".carousel-dots");
+            if (dotsList) dotsList.appendChild(toggle);
+            ["mouseenter", "focusin", "touchstart"].forEach(function (ev) { carousel.addEventListener(ev, stop, { passive: true }); });
+            ["mouseleave", "focusout"].forEach(function (ev) { carousel.addEventListener(ev, start); });
+            document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); else start(); });
             start();
-        } else if (caption) {
-            caption.setAttribute("aria-live", "polite");
         }
 
         render();

@@ -8,6 +8,7 @@ const strict = process.argv.includes("--strict");
 const bad = [];
 (function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === ".DS_Store") continue; // created by macOS Finder; never published
     if (/[A-Z ]/.test(entry.name)) bad.push(path.join(dir, entry.name));
     if (entry.isDirectory()) walk(path.join(dir, entry.name));
   }

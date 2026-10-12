@@ -1,18 +1,17 @@
-{#- Grid of graduate cards. Set `grads` (a list of graduate entries) before including this file. -#}
-<section class="student-grid">
-    {%- for g in grads %}
-    <a href="{{ g.url | url }}" class="no-link-look">
+{#- STUDENT SELECTION GRID. Set `grads` (a list of graduate entries) before including. -#}
+    <section class="student-grid">
+        {%- for g in grads %}
+        <a href="{{ g.url | url }}" class="no-link-look">
         <article class="student-card">
-            <img class="student-card__image"
-                src="{{ g | entryImg(g.data.cover) }}"
-                alt="{{ g.data.coverAlt or g.data.projectName or g.data.title }}"
-                sizes="(min-width: 926px) 350px, (min-width: 601px) 46vw, 95vw">
+                <img class="student-card__image"
+                    src="{{ g | entryImg(g.data.cover) }}"
+                    alt="{{ g.data.coverAlt }}" sizes="(min-width: 1171px) 25vw, (min-width: 601px) 45vw, 95vw">
 
             <div class="student-card__info">
-                <img class="student-card__profile" src="{{ g | entryImg(g.data.headshot) }}" alt="" eleventy:widths="400,800" sizes="56px">
+                <img class="student-card__profile" src="{{ g | entryImg(g.data.headshot) }}" alt="{{ g.data.headshotAlt }}" eleventy:widths="400" sizes="100px">
                 <h3>{{ g.data.title }}</h3>
             </div>
         </article>
-    </a>
-    {%- endfor %}
-</section>
+        </a>
+        {%- endfor %}
+    </section>

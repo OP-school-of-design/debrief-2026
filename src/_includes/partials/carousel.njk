@@ -1,24 +1,21 @@
-{#- CAROUSEL (no Flickity). Before including, set:
-     carouselImgBase  - the entry to resolve relative image paths against (e.g. `discipline` or `page`)
-     carouselShow, carouselSlides, carouselAutoplay, carouselInterval, carouselLabel
-   Shown only if carouselShow is not false AND at least one slide exists. -#}
-{% if carouselShow !== false and carouselSlides and carouselSlides.length %}
-<section class="carousel-section" data-carousel
-    data-autoplay="{{ 'true' if carouselAutoplay else 'false' }}"
-    data-interval="{{ carouselInterval or 5 }}"
-    role="region" aria-roledescription="carousel" aria-label="{{ carouselLabel }} image gallery">
-    <div class="carousel-viewport">
-    <article class="main-carousel" tabindex="0" aria-label="Slides">
-        {%- for slide in carouselSlides %}
-        <div class="carousel-cell" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}" data-caption="{{ slide.caption }}">
-            <img src="{{ carouselImgBase | entryImg(slide.image) }}" alt="{{ slide.alt }}"
-                sizes="(min-width: 1171px) calc(100vw - 20rem), 100vw"
-                {% if loop.first %}loading="eager"{% endif %}>
-        </div>
-        {%- endfor %}
-    </article>
-    </div>
-    <p class="caption">&nbsp;</p>
-</section>
-<script src="{{ '/js/carousel.js' | url }}" defer></script>
-{% endif %}
+{#- CAROUSEL SECTION (the students' markup; Flickity replaced by js/carousel.js).
+    Set before including: carouselEntry (entry whose folder holds the images), carouselShow,
+    carouselSlides, carouselAutoplay, carouselInterval, carouselText, carouselLabel. -#}
+{%- set showSlides = carouselShow !== false and carouselSlides and carouselSlides.length %}
+{%- if showSlides or carouselText %}
+        <section class="carousel-section">
+            {%- if showSlides %}
+            <article class="main-carousel" aria-label="{{ carouselLabel }} image carousel"{% if carouselAutoplay %} data-autoplay="true" data-interval="{{ carouselInterval or 5 }}"{% endif %}>
+                {%- for slide in carouselSlides %}
+                <div class="carousel-cell"{% if slide.caption %} data-caption="{{ slide.caption }}"{% endif %}><img src="{{ carouselEntry | entryImg(slide.image) }}"
+                        alt="{{ slide.alt }}" sizes="(min-width: 1171px) 80vw, 100vw"{% if loop.first %} loading="eager"{% endif %}>
+                </div>
+                {%- endfor %}
+            </article>
+            <p class="caption">&nbsp;</p>
+            {%- endif %}
+            {%- if carouselText %}
+            {{ carouselText | md | safe }}
+            {%- endif %}
+        </section>
+{%- endif %}

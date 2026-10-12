@@ -1,120 +1,109 @@
 ---
 layout: layouts/base.njk
 hasLightbox: true
-hasMasonry: true
 ---
-{#- One graduate page. "Block order" chosen in the dashboard:
-    "profile" (portfolio-studentname pattern) - student info first, then hero image, project info, gallery
-    "project" (portfolio-projectname pattern) - project info, hero image, gallery, then student info
-    Both use the same components; only the order and the CSS class set (students' own "-sn" suffix
-    for the "profile" order) differ, matching the students' two original pages. -#}
-{% set disc = collections.disciplines | where("data.disciplineKey", discipline) | first %}
-{% set labels = { website: "Website", instagram: "Instagram", linkedin: "LinkedIn", facebook: "Facebook", youtube: "YouTube" } %}
+{#- One graduate page, matching the students' two page designs. "Block order" in the dashboard:
+      "profile" = portfolio-studentname.html (student info first; "-sn" classes)
+      "project" = portfolio-projectname.html (project first, student info at the end)  -#}
+{%- set disc = collections.disciplines | where("data.disciplineKey", discipline) | first %}
+{%- set labels = { website: "Website", instagram: "Instagram", linkedin: "LinkedIn", facebook: "Facebook", youtube: "YouTube", behance: "Behance" } %}
+{%- set sn = "-sn" if blockOrder == "profile" else "" %}
 
-{#- Pick the class set the students used for this ordering. Must happen BEFORE the capture
-    blocks below, since {% set x %}...{% endset %} renders its body immediately. -#}
-{% if blockOrder == "profile" %}
-    {% set sContactClass = "student-contact-info-sn" %}
-    {% set sProfileClass = "student-profile-sn" %}
-    {% set sContactsClass = "student-contacts-sn" %}
-    {% set sWrittenClass = "student-written-info-sn" %}
-    {% set sDescriptionClass = "student-description-sn" %}
-    {% set sQuoteClass = "student-quote-sn" %}
-    {% set projectInfoClass = "project-info-sn" %}
-    {% set projectTitleClass = "project-info__title-sn" %}
-    {% set heroClass = "portfolio-hero-image-sn" %}
-    {% set masonryClass = "grid--masonry-sn" %}
-{% else %}
-    {% set sContactClass = "student-contact-info" %}
-    {% set sProfileClass = "student-profile" %}
-    {% set sContactsClass = "student-contacts" %}
-    {% set sWrittenClass = "student-written-info" %}
-    {% set sDescriptionClass = "student-description" %}
-    {% set sQuoteClass = "student-quote" %}
-    {% set projectInfoClass = "project-info" %}
-    {% set projectTitleClass = "project-info__title" %}
-    {% set heroClass = "portfolio-hero-image" %}
-    {% set masonryClass = "grid--masonry" %}
-{% endif %}
+{%- set studentInfo %}
+            <article class="student-contact-info{{ sn }}">
+                <img class="student-profile{{ sn }}" src="{{ page | entryImg(headshot) }}" alt="{{ headshotAlt }}" eleventy:widths="400,800" sizes="300px">
+                {%- if links and links.length %}
+                <ul class="student-contacts{{ sn }}">
+                    {%- for l in links %}
+                    {%- if l.type == "email" %}
+                    <li><i class="{{ 'email' | faClass }}"></i> {{ l.label or l.url }}</li>
+                    {%- else %}
+                    <li><a href="{{ l.url }}" target="_blank"><i class="{{ l.type | faClass }}"></i> {{ l.label or labels[l.type] or l.url }}</a></li>
+                    {%- endif %}
+                    {%- endfor %}
+                </ul>
+                {%- endif %}
+            </article>
 
-{% set studentInfo %}
-        <article class="{{ sContactClass }}">
-            <img class="{{ sProfileClass }}" src="{{ page | entryImg(headshot) }}" alt="{{ headshotAlt or (title ~ ' profile image') }}" eleventy:widths="400,800" sizes="240px">
-            {%- if links and links.length %}
-            <ul class="{{ sContactsClass }}">
-                {%- for l in links %}
-                <li>
-                    {%- if l.type == "email" -%}
-                    <a href="mailto:{{ l.url }}">{% icon "envelope" %} {{ l.label or l.url }}</a>
-                    {%- else -%}
-                    {%- set iconName = l.type or "link" %}
-                    <a href="{{ l.url }}" target="_blank" rel="noopener">{% icon iconName %} {{ l.label or labels[l.type] or l.url }}</a>
-                    {%- endif -%}
-                </li>
-                {%- endfor %}
-            </ul>
+            <article class="student-written-info{{ sn }}">
+                <h2> {{ title }} </h2>
+                <h3> {{ disc.data.title }} </h3>
+                {{ content | pclass("student-description" ~ sn) | safe }}
+            </article>
+
+            {%- if quote %}
+            <p class="student-quote{{ sn }}"> {{ quote }} </p>
             {%- endif %}
-        </article>
+{%- endset %}
 
-        <article class="{{ sWrittenClass }}">
-            <h2>{{ title }}</h2>
-            <h3>{{ disc.data.title }}</h3>
-            {{ content | pclass(sDescriptionClass) | safe }}
-        </article>
-
-        {%- if quote %}
-        <p class="{{ sQuoteClass }}">&ldquo;{{ quote }}&rdquo;</p>
-        {%- endif %}
-{% endset %}
-
-{% set projectInfo %}
-        <article class="{{ projectInfoClass }}">
-            <div class="{{ projectTitleClass }}">
-                <h2>{{ projectName }}</h2>
-                <h3>{{ title }}</h3>
+{%- set projectInfo %}
+        <article class="project-info{{ sn }}">
+            <div class="project-info__title{{ sn }}">
+                <h2> {{ projectName }} </h2>
+                <h3> {{ title }} </h3>
             </div>
             {{ projectDescription | md | safe }}
         </article>
-{% endset %}
+{%- endset %}
 
-{% set heroImage %}
-        <article class="{{ heroClass }}">
-            <img src="{{ page | entryImg(hero) }}" alt="{{ heroAlt or projectName }}" sizes="(min-width: 1171px) calc(100vw - 20rem), 100vw">
+{%- set heroImage %}
+        <article class="portfolio-hero-image{{ sn }}">
+            <img src="{{ page | entryImg(hero) }}" alt="{{ heroAlt }}" sizes="(min-width: 1171px) 80vw, 100vw">
         </article>
-{% endset %}
+{%- endset %}
 
-{% set masonryGallery %}
-        <article class="{{ masonryClass }}" data-lightbox>
+{%- set gallerySection %}
+        <article class="grid--masonry{{ sn }}">
             {%- for g in gallery %}
-            <img src="{{ page | entryImg(g.image) }}" alt="{{ g.alt }}" sizes="(min-width: 1171px) calc((100vw - 24rem) / 2), (min-width: 601px) 45vw, 100vw">
+            <img src="{{ page | entryImg(g.image) }}" alt="{{ g.alt }}" sizes="(min-width: 1171px) 40vw, (min-width: 601px) 45vw, 100vw">
             {%- endfor %}
         </article>
-{% endset %}
+{%- endset %}
 
-<main id="main">
-{% if blockOrder == "profile" %}
-    <section class="student-info-sn">
-        {{ studentInfo | safe }}
-    </section>
-    {{ heroImage | safe }}
-    {{ projectInfo | safe }}
-    {{ masonryGallery | safe }}
-{% else %}
-    <section class="project-content">
-        {{ projectInfo | safe }}
-        {{ heroImage | safe }}
-        {{ masonryGallery | safe }}
-    </section>
-    <section class="student-info">
-        {{ studentInfo | safe }}
-    </section>
-{% endif %}
+<main>
+{%- if blockOrder == "profile" %}
 
-    <!-- LIGHTBOX (opens when a gallery image is clicked) -->
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-        <button class="lightbox-close" aria-label="Close">&times;</button>
-        <button class="lightbox-arrow lightbox-prev" aria-label="Previous image">&#10094;</button>
-        <img class="lightbox-image" id="lightbox-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" eleventy:ignore>
-        <button class="lightbox-arrow lightbox-next" aria-label="Next image">&#10095;</button>
+        <!-- STUDENT INFO DESCRIPTION & CONTACTS -->
+        <section class="student-info-sn">
+{{ studentInfo | safe }}
+        </section>
+
+        <!-- HERO IMAGE -->
+{{ heroImage | safe }}
+
+        <!-- PROJECT INFO DESCRIPTION -->
+{{ projectInfo | safe }}
+
+        <!-- MASONRY LAYOUT FOR PORTFOLIO WORK -->
+{{ gallerySection | safe }}
+
+{%- else %}
+
+        <!-- PROJECT INFO, HERO IMAGE, MASONRY LAYOUT -->
+<section class="project-content">
+{{ projectInfo | safe }}
+{{ heroImage | safe }}
+{{ gallerySection | safe }}
+</section>
+
+        <!-- STUDENT INFO DESCRIPTION & CONTACTS -->
+        <section class="student-info">
+{{ studentInfo | safe }}
+        </section>
+
+{%- endif %}
+
+        <!-- LIGHTBOX CONTENT -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">
+            &times;
+        </button>
+        <button class="lightbox-arrow lightbox-prev" aria-label="Previous image">
+            &#10094;
+        </button>
+        <img class="lightbox-image" id="lightbox-image" src="" alt="" eleventy:ignore>
+        <button class="lightbox-arrow lightbox-next" aria-label="Next image">
+            &#10095;
+        </button>
     </div>
 </main>

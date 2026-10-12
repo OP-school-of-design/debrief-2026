@@ -1,0 +1,152 @@
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+   CAROUSEL (replaces Flickity, which needs a paid licence for this use)
+   Sized and coloured to match Flickity's own styling, so the students' design looks the same:
+   44px buttons 10px in from each edge, 10px dots 25px below the images (outside the page flow).
+   The fade/blur between slides is the students' own .carousel-cell / .is-selected rule.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+.carousel-enabled {
+    position: relative;
+}
+
+.carousel-enabled:focus {
+    outline: none;
+}
+
+.carousel-enabled:focus-visible {
+    outline: 3px solid #19F;
+    outline-offset: 4px;
+}
+
+.carousel-viewport {
+    overflow: hidden;
+    position: relative;
+    touch-action: pan-y;
+    cursor: grab;
+}
+
+.carousel-viewport.is-pointer-down {
+    cursor: grabbing;
+}
+
+.carousel-track {
+    display: flex;
+    align-items: flex-start;
+    transition: transform 0.7s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.carousel-track > .carousel-cell {
+    flex: 0 0 100%;
+}
+
+/* Images stay inline (as in the students' markup), which keeps the same small gap below each
+   slide that Flickity included in the carousel height. */
+.carousel-track img {
+    -webkit-user-drag: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+        transition: none;
+    }
+}
+
+/* Previous / next buttons */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: hsla(0, 0%, 100%, 0.75);
+    color: #333;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.carousel-button:hover {
+    background: white;
+}
+
+.carousel-button:focus {
+    outline: none;
+}
+
+.carousel-button:focus-visible {
+    box-shadow: 0 0 0 5px #19F;
+}
+
+.carousel-button:active {
+    opacity: 0.6;
+}
+
+.carousel-button.previous {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+.carousel-button svg {
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    width: 60%;
+    height: 60%;
+    fill: currentColor;
+}
+
+/* Page dots */
+.carousel-dots {
+    position: absolute;
+    width: 100%;
+    bottom: -25px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+    line-height: 1;
+}
+
+.carousel-dots .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 8px;
+    background: #333;
+    border-radius: 50%;
+    opacity: 0.25;
+    cursor: pointer;
+}
+
+.carousel-dots .dot.is-selected {
+    opacity: 1;
+}
+
+.carousel-dots .dot:focus {
+    outline: none;
+}
+
+.carousel-dots .dot:focus-visible {
+    box-shadow: 0 0 0 3px #19F;
+}
+
+/* Pause/play, only shown when "advance automatically" is switched on in the dashboard */
+.carousel-toggle {
+    display: inline-block;
+    vertical-align: middle;
+    margin: -4px 0 0 12px;
+    padding: 2px 8px;
+    border: 1px solid #333;
+    border-radius: 999px;
+    background: transparent;
+    color: #333;
+    font-size: 10px;
+    line-height: 1.4;
+    cursor: pointer;
+}

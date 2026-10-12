@@ -1,24 +1,69 @@
 {
-  "title": "Archive",
-  "bannerImage": "/images/landscape_placeholder.jpeg",
-  "bannerAlt": "",
-  "intro": "Explore the graduate showcases from previous years.",
+  "pageUrl": "/archive/",
   "links": [
-    { "label": "2025", "url": "https://design.ac.nz/debrief/2025/" },
-    { "label": "2024", "url": "https://design.ac.nz/debrief/2024/" },
-    { "label": "2023", "url": "https://design.ac.nz/graduate/2023/" },
-    { "label": "2022", "url": "https://design.ac.nz/graduate/2022/" },
-    { "label": "2021", "url": "https://design.ac.nz/graduate/2021/" },
-    { "label": "2020", "url": "https://design.ac.nz/graduate/2020/" },
-    { "label": "2019", "url": "https://design.ac.nz/graduate/2019/" },
-    { "label": "2018", "url": "https://design.ac.nz/graduate/2018/" },
-    { "label": "2017", "url": "https://design.ac.nz/graduate/2017/" },
-    { "label": "2016", "url": "https://design.ac.nz/graduate/2016/" },
-    { "label": "2015", "url": "https://design.ac.nz/graduate/2015/" },
-    { "label": "2014", "url": "https://design.ac.nz/graduate/2014/" },
-    { "label": "2013", "url": "https://design.ac.nz/graduate/2013/" },
-    { "label": "2012", "url": "https://design.ac.nz/graduate/2012/" },
-    { "label": "2011", "url": "https://design.ac.nz/graduate/2011/" },
-    { "label": "2010", "url": "https://design.ac.nz/graduate/2010/" }
+    {
+      "label": "2025",
+      "url": "https://design.ac.nz/debrief/2025/"
+    },
+    {
+      "label": "2024",
+      "url": "https://design.ac.nz/debrief/2024/"
+    },
+    {
+      "label": "2023",
+      "url": "https://design.ac.nz/graduate/2023/"
+    },
+    {
+      "label": "2022",
+      "url": "https://design.ac.nz/graduate/2022/"
+    },
+    {
+      "label": "2021",
+      "url": "https://design.ac.nz/graduate/2021/"
+    },
+    {
+      "label": "2020",
+      "url": "https://design.ac.nz/graduate/2020/"
+    },
+    {
+      "label": "2019",
+      "url": "https://design.ac.nz/graduate/2019/"
+    },
+    {
+      "label": "2018",
+      "url": "https://design.ac.nz/graduate/2018/"
+    },
+    {
+      "label": "2017",
+      "url": "https://design.ac.nz/graduate/2017/"
+    },
+    {
+      "label": "2016",
+      "url": "https://design.ac.nz/graduate/2016/"
+    },
+    {
+      "label": "2015",
+      "url": "https://design.ac.nz/graduate/2015/"
+    },
+    {
+      "label": "2014",
+      "url": "https://design.ac.nz/graduate/2014/"
+    },
+    {
+      "label": "2013",
+      "url": "https://design.ac.nz/graduate/2013/"
+    },
+    {
+      "label": "2012",
+      "url": "https://design.ac.nz/graduate/2012/"
+    },
+    {
+      "label": "2011",
+      "url": "https://design.ac.nz/graduate/2011/"
+    },
+    {
+      "label": "2010",
+      "url": "https://design.ac.nz/graduate/2010/"
+    }
   ]
 }

@@ -4,63 +4,98 @@ title: Home
 permalink: /
 ---
 {%- set f = frontpage %}
-<!-- LOOPING ANIMATION -->
-<article class="looping-animation">
-    <div class="animation-container">
-        <video autoplay muted loop playsinline id="bg-video" aria-hidden="true">
-            <source src="{{ f.heroVideo | url }}" type="video/mp4">
-        </video>
-    </div>
-</article>
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-<!-- DATES BANNER -->
-<section class="debrief-dates">
-    <h2 class="debrief-dates-title">{{ f.datesTitle | nl2br("desktop-break") | safe }}</h2>
-    <p>
-        {{ f.datesOpening }} <br> {{ f.datesHours }} <span class="mobile-break"><br></span> {{ f.datesDays }} <br> {{ f.datesVenue }}
-    </p>
-</section>
+          LOOPING ANIMATION
+          Desktop and mobile versions; lazy-loading means each visitor only downloads the one shown.
 
-<main id="main">
-    <!-- DESCRIPTION OF DEBRIEF -->
-    <article class="single-item">
-        <h2 class="single-item__h2">{{ f.introHeading }}</h2>
-        {{ f.introText | md("single-item__introduction") | safe }}
-        {%- if f.introImage %}
-        <img src="{{ f.introImage }}" alt="{{ f.introImageAlt }}" class="single-item__image" sizes="(min-width: 1171px) 60vw, 100vw">
-        {%- endif %}
-    </article>
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-    <!-- WALKTHROUGH VIDEO: switched on/off in the dashboard once a real video exists -->
-    {%- set embedSrc = f.walkthroughVideoUrl | embed %}
-    {%- if f.showWalkthrough and (embedSrc or f.walkthroughVideoFile) %}
-    <section class="coloured-block-section">
-        <h2>{{ f.walkthroughHeading }}</h2>
-        {%- if embedSrc %}
-        <div class="youtube-video">
-            <iframe id="walkthrough-video" src="{{ embedSrc }}" title="{{ f.walkthroughHeading }}" loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-        {%- else %}
-        <video controls playsinline preload="metadata" id="walkthrough-video">
-            <source src="{{ f.walkthroughVideoFile | url }}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        {%- endif %}
-        {%- if f.walkthroughCaption %}<p>{{ f.walkthroughCaption }}</p>{%- endif %}
-    </section>
-    {%- endif %}
+        <section class="logo-animation logo-animation--desktop">
+            <img src="{{ f.heroDesktop | url }}" alt="{{ f.heroAlt }}" loading="lazy" eleventy:ignore>
+        </section>
 
-    <!-- QUOTE SECTION -->
-    {%- if f.quote %}
-    <section>
-        <article class="quote-half">
-            <h2 class="quote-half__h2">{{ f.quote }}</h2>
-            {%- if f.quoteImage %}
-            <img src="{{ f.quoteImage }}" alt="{{ f.quoteImageAlt }}" class="quote-half__image" eleventy:widths="400,800,1200" sizes="(min-width: 1171px) 40vw, 90vw">
+        <section class="logo-animation logo-animation--mobile">
+            <img src="{{ f.heroMobile | url }}" alt="{{ f.heroAlt }}" loading="lazy" eleventy:ignore>
+        </section>
+
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+          DATES BANNER
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+{%- set bannerTitleText = f.datesTitle %}
+{%- set bannerDetailsText = f.datesDetails %}
+{% include "partials/dates-banner.njk" %}
+
+    <main>
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+          DESCRIPTION OF DEBRIEF
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+        <article class="single-item">
+            <h2 class="single-item__h2">{{ f.introHeading }}</h2>
+
+            {{ f.introText | md("single-item__introduction") | safe }}
+
+            {%- if f.introImage %}
+            <img src="{{ f.introImage }}" alt="{{ f.introImageAlt }}" class="single-item__image" sizes="(min-width: 1171px) 40vw, 90vw">
             {%- endif %}
         </article>
-    </section>
-    {%- endif %}
-</main>
+
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+            WALKTHROUGH VIDEO - switched on/off in the dashboard (Pages > Front page)
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+        {%- if f.showWalkthrough and (f.walkthroughVideoUrl or f.walkthroughVideoFile) %}
+        <section class="coloured-block-section">
+            <h2>
+                {{ f.walkthroughHeading }}
+            </h2>
+            {%- if f.walkthroughVideoUrl %}
+            {%- set videoSrc = f.walkthroughVideoUrl %}
+            {%- set videoName = f.walkthroughHeading %}
+            {% include "partials/video.njk" %}
+            {%- else %}
+            <video controls{% if f.walkthroughPoster %} poster="{{ f.walkthroughPoster | url }}"{% endif %} playsinline id="walkthrough-video">
+                    <source src="{{ f.walkthroughVideoFile | url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+            </video>
+            {%- endif %}
+            {%- if f.walkthroughCaption %}
+            <p> {{ f.walkthroughCaption }}</p>
+            {%- endif %}
+        </section>
+        {%- endif %}
+
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+          QUOTE SECTION
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+        {%- if f.quote %}
+        <section>
+
+            <article class="quote-half">
+                <h2 class="quote-half__h2">{{ f.quote }}
+                </h2>
+                {%- if f.quoteImage %}
+                <img src="{{ f.quoteImage }}" alt="{{ f.quoteImageAlt }}" class="quote-half__image" eleventy:widths="400,800,1200" sizes="(min-width: 1171px) 40vw, 90vw">
+                {%- endif %}
+            </article>
+
+        </section>
+        {%- endif %}
+
+
+    </main>

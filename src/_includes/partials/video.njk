@@ -1,0 +1,13 @@
+{#- YOUTUBE / VIMEO EMBED (the students' markup). Set videoSrc (any YouTube/Vimeo address) and videoName. -#}
+                <div class="youtube-video">
+                    <iframe
+                        id="walkthrough-video"
+                        src="{{ videoSrc | embed }}"
+                        title="{{ videoName or 'Video' }}"
+                        frameborder="0"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>

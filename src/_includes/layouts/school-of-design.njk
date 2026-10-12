@@ -1,36 +1,67 @@
 ---
 layout: layouts/base.njk
 ---
-<main id="main">
+<main>
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+        PAGE BANNER
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
     <section class="image-block-title">
-        <img src="{{ page | entryImg(bannerImage) }}" alt="{{ bannerAlt }}" sizes="100vw" loading="eager" fetchpriority="high">
-        <h1>{{ heading or title }}</h1>
+        <img src="{{ page | entryImg(bannerImage) }}" alt="{{ bannerAlt }}" sizes="100vw" loading="eager">
+            <h1>
+                {{ heading or title }}
+            </h1>
     </section>
 
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+        DISCIPLINE SELECT - DROPDOWN MENU (built from the dashboard's Disciplines)
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
     <section class="discipline-explore">
-        <button class="standalone-h2 discipline-toggle" type="button" aria-expanded="false">
-            <h2>{{ disciplinesHeading }}</h2>
-            <span class="discipline-arrow" aria-hidden="true">⌄</span>
+        <button class="standalone-h2 discipline-toggle" type="button">
+           <h2> {{ disciplinesHeading }} </h2>
+            <span class="discipline-arrow"></span>
         </button>
+
         <article class="discipline__grid">
             {%- for d in collections.disciplines %}
-            <a href="{{ ('/about/' ~ d.data.disciplineKey ~ '/') | url }}" class="discipline" style="--discipline-colour: var(--{{ d.data.colour }})">
-                <img src="{{ d | entryImg(d.data.symbol) }}" alt="" class="discipline__image" eleventy:widths="400" sizes="200px">
-                <h2 class="discipline__name">{{ d.data.title }}</h2>
+            <a href="{{ ('/about/' ~ d.data.disciplineKey ~ '/') | url }}" class="discipline"{% if d.data.boxColour %} style="background-color: {{ d.data.boxColour }}"{% endif %}>
+                {%- set symbolSrc = d | entryImg(d.data.symbol) %}
+                <img src="{{ symbolSrc }}" alt="{{ d.data.title }}" class="discipline__image" eleventy:widths="400,800" sizes="{{ symbolSrc | naturalSizes }}">
+                <h2 class="discipline__name">{{ d.data.shortName or d.data.title }}</h2>
             </a>
             {%- endfor %}
         </article>
     </section>
 
-    <article class="discipline-description">
-        <div class="discipline-description__text">
-            <h2 class="discipline-description__h2">{{ descHeading }}</h2>
-            {{ content | pclass("discipline-description__introduction") | safe }}
-        </div>
-        {%- if descImage %}
-        <div class="discipline-description__image-wrapper">
-            <img src="{{ page | entryImg(descImage) }}" alt="{{ descImageAlt }}" class="discipline-description__image" sizes="(min-width: 1171px) 40vw, 100vw">
-        </div>
-        {%- endif %}
-    </article>
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+        DISCIPLINE DESCRIPTION
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+<article class="discipline-description">
+    <div class="discipline-description__text">
+        <h2 class="discipline-description__h2">
+            {{ descHeading }}
+        </h2>
+        {{ content | pclass("discipline-description__introduction") | safe }}
+    </div>
+    {%- if descImage %}
+    <div class="discipline-description__image-wrapper">
+        <img
+            src="{{ page | entryImg(descImage) }}"
+            alt="{{ descImageAlt }}"
+            class="discipline-description__image"
+            sizes="(min-width: 1171px) 40vw, 90vw"
+        >
+    </div>
+    {%- endif %}
+</article>
+
 </main>

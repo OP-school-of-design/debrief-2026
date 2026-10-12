@@ -1,8 +1,8 @@
 {
-  "orange-text": "#ff4200",
   "black-text": "#050505",
+  "orange-text": "#FF4200",
   "body-text": "#1d1d1b",
-  "page-background": "#0b37fa",
+  "page-background": "#ffffff",
   "main-background": "#ffffff",
   "header-background": "#ffffff",
   "intro-background": "#ffffff",
@@ -15,10 +15,8 @@
   "fashion-blue": "#60c8d6",
   "product-red": "#ef4237",
   "postgrad-purple": "#9c3e97",
-  "caption-background": "#ffffff",
-  "caption-text": "#1d1d1b",
-  "dark-text": "#050505",
-  "cream-text": "#fdf6ef",
-  "off-white": "#fdf6ef",
-  "button-colour": "#eb0936"
+  "slide-out-menu-background": "",
+  "description-text-colour": "",
+  "dark-text": "",
+  "cream-text": ""
 }

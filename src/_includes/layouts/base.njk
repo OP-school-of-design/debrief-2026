@@ -1,35 +1,47 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang or 'en-NZ' }}">
+<html lang="{{ site.lang or 'en-nz' }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% include "partials/head-seo.njk" %}
+{% include "partials/head-seo.njk" %}
 
     {%- for href in fontface.preloads %}
     <link rel="preload" href="{{ href }}" as="font" type="font/woff2" crossorigin>
     {%- endfor %}
 
-    <!-- design.css is GENERATED from the dashboard (colours + fonts). stylesheet.css is the students' design. -->
-    <link rel="stylesheet" href="{{ '/css/design.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/base.css' | url }}">
+    <!-- The students' stylesheet -->
     <link rel="stylesheet" href="{{ '/css/stylesheet.css' | url }}">
-    <link rel="stylesheet" href="{{ '/css/additions.css' | url }}">
+    <!-- Colours and fonts from the dashboard (Design); defaults equal the students' values -->
+    <link rel="stylesheet" href="{{ '/css/design.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/icons.css' | url }}">
+    <link rel="stylesheet" href="{{ '/fontawesome/css/all.min.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/carousel.css' | url }}">
+    {%- if customcss and customcss.css and (customcss.css | trim) %}
+    <!-- Custom CSS from the dashboard (Design > Custom CSS), loaded last -->
+    <link rel="stylesheet" href="{{ '/css/custom.css' | url }}">
+    {%- endif %}
 
     {# Extra head code from the dashboard: Design > SEO & head code #}
     {{ seo.headCode | safe }}
 </head>
 
 <body>
-    <a class="skip-link" href="#main">Skip to main content</a>
 
-    {% include "partials/header.njk" %}
+{% include "partials/header.njk" %}
 
-    {{ content | safe }}
+{{ content | safe }}
 
-    {% include "partials/footer.njk" %}
+{% include "partials/footer.njk" %}
 
-    <script src="{{ '/js/main.js' | url }}" defer></script>
-    {% if hasMasonry %}<script src="{{ '/js/masonry.js' | url }}" defer></script>{% endif %}
-    {% if hasLightbox %}<script src="{{ '/js/lightbox.js' | url }}" defer></script>{% endif %}
+    <script src="{{ '/js/main.js' | url }}"></script>
+    {%- if hasLightbox %}
+    <script src="{{ '/js/lightbox.js' | url }}"></script>
+    {%- endif %}
+    {%- if hasCarousel %}
+    <script src="{{ '/js/carousel.js' | url }}"></script>
+    {%- endif %}
 </body>
 </html>

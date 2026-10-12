@@ -1,16 +1,37 @@
 ---
 layout: layouts/base.njk
 pagination:
-  data: collections.disciplines
+  data: collections.disciplinePages
   size: 1
   alias: discipline
 permalink: "/graduates/{{ discipline.data.disciplineKey }}/"
 eleventyComputed:
-  title: "{{ discipline.data.title }} Graduates"
+  title: "{{ discipline.data.title }}"
   metaDescription: "{{ discipline.data.metaDescription }}"
 ---
-{% set grads = collections.graduates | where("data.discipline", discipline.data.disciplineKey) %}
-<main id="main">
-    <h1 class="visually-hidden">{{ discipline.data.title }} Graduates</h1>
-    {% include "partials/student-grid.njk" %}
+{%- set d = discipline.data %}
+    <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+        PAGE BANNER
+
+    = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+    <section class="image-block-title">
+            <img src="{{ discipline | entryImg(d.gradBannerImage or d.bannerImage) }}" alt="{{ d.gradBannerAlt }}" sizes="100vw" loading="eager">
+                <h1>
+                    {{ d.title }}
+                </h1>
+    </section>
+
+<main>
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+            STUDENT SELECTION GRID
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+{%- set grads = collections.graduates | where("data.discipline", d.disciplineKey) %}
+{% include "partials/student-grid.njk" %}
+
 </main>

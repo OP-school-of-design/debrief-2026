@@ -1,7 +1,8 @@
 ---
 layout: layouts/base.njk
+hasCarousel: true
 pagination:
-  data: collections.disciplines
+  data: collections.disciplinePages
   size: 1
   alias: discipline
 permalink: "/about/{{ discipline.data.disciplineKey }}/"
@@ -10,48 +11,78 @@ eleventyComputed:
   metaDescription: "{{ discipline.data.metaDescription }}"
 ---
 {%- set d = discipline.data %}
-<main id="main">
-    <section class="image-block-title">
-        <img src="{{ discipline | entryImg(d.bannerImage) }}" alt="{{ d.bannerAlt }}" sizes="100vw" loading="eager" fetchpriority="high">
-        <h1>About {{ d.title }}</h1>
-    </section>
+<main>
 
-    <article class="discipline-description">
-        <div class="discipline-description__text">
-            <h2 class="discipline-description__h2">{{ d.introHeading }}</h2>
-            {{ d.intro | md("discipline-description__introduction") | safe }}
-        </div>
-        {%- if d.image %}
-        <div class="discipline-description__image-wrapper">
-            <img src="{{ discipline | entryImg(d.image) }}" alt="{{ d.imageAlt }}" class="discipline-description__image" sizes="(min-width: 1171px) 40vw, 100vw">
-        </div>
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+            PAGE BANNER
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+<section class="image-block-title">
+        <img src="{{ discipline | entryImg(d.bannerImage) }}" alt="{{ d.bannerAlt }}" sizes="100vw" loading="eager">
+            <h1>
+                About {{ d.title }}
+            </h1>
+</section>
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+            DISCIPLINE DESCRIPTION
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+<article class="discipline-description">
+    <div class="discipline-description__text">
+        <h2 class="discipline-description__h2">
+            {{ d.introHeading }}
+        </h2>
+        {{ d.intro | md("discipline-description__introduction") | safe }}
+    </div>
+    {%- if d.image %}
+    <div class="discipline-description__image-wrapper">
+        <img
+            src="{{ discipline | entryImg(d.image) }}"
+            alt="{{ d.imageAlt }}"
+            class="discipline-description__image"
+            sizes="(min-width: 1171px) 40vw, 90vw"
+        >
+    </div>
+    {%- endif %}
+</article>
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+            COLOURED BLOCK VIDEO
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+        {%- if d.videoUrl | embed %}
+        <section class="coloured-block-section">
+            <article class="discipline-OP-video">
+                <h2>
+                        {{ d.videoTitle }}
+                </h2>
+{%- set videoSrc = d.videoUrl %}
+{%- set videoName = d.videoTitle %}
+{% include "partials/video.njk" %}
+            </article>
+        </section>
         {%- endif %}
-    </article>
 
-    <!-- CAROUSEL: can be switched on/off per discipline in the dashboard -->
-    {% set carouselImgBase = discipline %}
-    {% set carouselShow = d.showCarousel %}
-    {% set carouselSlides = d.carousel %}
-    {% set carouselAutoplay = d.carouselAutoplay %}
-    {% set carouselInterval = d.carouselInterval %}
-    {% set carouselLabel = d.title %}
-    {% include "partials/carousel.njk" %}
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-    {%- if d.moreText %}
-    <section>
-        {{ d.moreText | md | safe }}
-    </section>
-    {%- endif %}
+            CAROUSEL (switched on/off per discipline in the dashboard)
 
-    {%- set embedSrc = d.videoUrl | embed %}
-    {%- if embedSrc %}
-    <section class="discipline-OP-video">
-        <h2>{{ d.videoTitle }}</h2>
-        <div class="youtube-video">
-            <iframe id="walkthrough-video" src="{{ embedSrc }}" title="{{ d.videoTitle or d.title }} (video)" loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-    </section>
-    {%- endif %}
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+{%- set carouselEntry = discipline %}
+{%- set carouselShow = d.showCarousel %}
+{%- set carouselSlides = d.carousel %}
+{%- set carouselAutoplay = d.carouselAutoplay %}
+{%- set carouselInterval = d.carouselInterval %}
+{%- set carouselText = d.moreText %}
+{%- set carouselLabel = d.title %}
+{% include "partials/carousel.njk" %}
+
 </main>

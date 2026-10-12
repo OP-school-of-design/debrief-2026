@@ -1,27 +1,92 @@
 /*  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-  Author: Your name here
-  Date: creation date
+  Author: Maxis Angel
+  Date: 5/10/2026 (finished)
 
   CONTENTS:
   ________
 
-  001   COLOUR                          (line 24)
-  002.  GENERAL STYLES                  (line 34)
-  003.  HEADER                          (line 66)
-  004.  NAVIGATION MENU                 (line 87)
-  005.  INTRO BANNER AT TOP OF PAGE     (line 189)
-  006.  CAROUSEL
-  007.  PORTRAIT LAYOUT                 (line 258)
-  008.  LANDSCAPE LAYOUT                (line 306)
-  009.  MASONRY LAYOUT                  (line 354)
-  010.  SINGLE ITEM LAYOUT              (line 380)
-  011.  CONTACT FORM                    (line 507)
-  012.  WEBSITE FOOTER                  (line 648)
-  013.  DROPDOWN NAV                    (line 804)
-  014.  BACKGROUND VIDEO                (line 864)
+  001   COLOUR                                      (line 91)
+  002.  GENERAL STYLES                              (line 114)
+  003.  HEADER                                      (line 222)
+  004.  NAVIGATION MENU                             (line 249)
+  005.  ANIMATED LOGO                               (line 619)
+  006.  DEBRIEF DATES BANNER                        (line 664)
+  007.  VIDEOS                                      (line 753)
+  008.  QUOTE HALF SCREEN LAYOUT                    (line 877)
+  009.  FLICKITY CAROUSEL                           (line 973)
+  010.  IMAGE BANNER                                (line 1009)
+  011.  DISCIPLINE DESCRIPTION                      (line 1031)
+  012.  DISCIPLINE EXPLORE - Dropdown Menu          (line 1228)
+  013.  STUDENT SELECTOR GRID                       (line 1502)
+  014.  STUDENT INFO SECTION -projectname.html      (line 1607)
+  015.  PROJECT DESCRIPTION -projectname.html       (line 1746)
+  016.  MASONRY GRID LAYOUT -projectname.html       (line 1845)
+  017.  STUDENT INFO SECTION -studentname.html      (line 1914)
+  018.  PROJECT DESCRIPTION -studentname.html       (line 2085)
+  019.  MASONRY GRID -studentname.html              (line 2131)
+  020.  HERO IMAGE                                  (line 2197)
+  021.  LIGHTBOX                                    (line 2207)
+  022.  SINGLE ITEM LAYOUT                          (line 2240)
+  023.  EVENTS GRID                                 (line 2477)
+  024.  EVENT POSTER & DESCRIPTION                  (line 2560)
+  025.  WEBSITE FOOTER                              (line 2652)
+  026.  END OF CSS!!                                (line 2957)
 
   (to jump to any section of the Contents, use the section number (e.g. 002) in 'Find', Cmd-F) */
+
+
+/* *********************
+    CSS BREAKPOINTS - main
+********************* */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 400px) {}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 925px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 1170px) {}
+
+
+
+/* *********************
+    CSS BREAKPOINTS - extra
+********************* */
+
+/* Homescreen Animation */
+@media only screen and (max-width: 676px) {}
+
+/* Date Banners */
+@media only screen and (max-width: 707px) {}
+
+/* Discipline Explore Dropdown Menu & Student Contacts */
+@media only screen and (max-width: 1500px) {}
+
+/* Student Info & Project Info */
+@media only screen and (max-width: 767px) {}
+
+/* Student Quote  */
+@media only screen and (max-width: 900px) {}
+
+/* Event Grid */
+@media only screen and (max-width: 700px) {}
+
+/* Event Description */
+@media only screen and (max-width: 825px) {}
+
+/* Footer Grid */
+@media only screen and (max-width: 450px) {}
+
+/* Footer Grid */
+@media only screen and (max-width: 877px) {}
+
+/* Footer Grid */
+@media only screen and (max-width: 1120px) {}
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
   
@@ -29,8 +94,22 @@
   
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
-/* :root colour variables now live in the dashboard (Design > Colour palette)
-   and are generated into css/design.css - do not define them here. */
+:root {
+    --black-text: #050505;
+    --orange-text: #FF4200;
+    --main-background: #ffffff;
+    --header-background: #ffffff;
+    --intro-background: #ffffff;
+    --portrait-background: #ffe800;
+    --footer-background: #ffe800;
+    --yellow: #ffe800;
+    --pink: #ff48b0;
+    --comms-green: #8dc63f;
+    --comms-dark: #339c34;
+    --fashion-blue: #60c8d6;
+    --product-red: #ef4237;
+    --postgrad-purple: #9c3e97;
+}
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
   
@@ -46,35 +125,34 @@ body {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    color: var(--body-text);
+    color: var(--body-text, #1d1d1b);
     font-size: 1.2rem;
-    background-color: var(--page-background);
-    font-family: var(--font-body);
+    background-color: var(--page-background, white);
 }
 
 p {
     line-height: 1.5;
     font-weight: 400; /* 400 is normal, 500 is medium, 600 is semi-bold, 700 is bold, */
-    font-family: var(--font-body);
-    font-size: 1.2rem;
+    font-family: var(--font-body, "Google Sans", sans-serif);
+    font-size: 1rem;
 }
 
 h3 {
-    font-family: var(--font-heading);
+    font-family: var(--font-heading, "Google Sans", sans-serif);
     font-weight: 500;
     font-size: 1.25rem;
     line-height: 1.5;
 }
 
 h2 {
-    font-family: var(--font-heading);
+    font-family: var(--font-heading, "Google Sans", sans-serif);
     font-weight: 700;
     font-size: 2rem;
     line-height: 1.5;
 }
 
 h1 {
-    font-family: var(--font-heading);
+    font-family: var(--font-heading, "Google Sans", sans-serif);
     font-weight: 700;
     font-size: 3rem;
     line-height: 1.5;
@@ -104,7 +182,7 @@ main {
     background-color: var(--main-background);
     margin: 0 auto;
     /* The line above makes the container centred within the page */
-    font-family: var(--font-body);
+    font-family: var(--font-body, "Google Sans", sans-serif);
     padding: 0rem 10rem;
 }
 
@@ -112,7 +190,7 @@ main {
     main {
     background-color: var(--main-background);
     padding: 3rem;
-    font-family: var(--font-body);
+    font-family: var(--font-body, "Google Sans", sans-serif);
 }
 }
 
@@ -120,7 +198,7 @@ main {
     main {
     background-color: var(--main-background);
     padding: 1rem;
-    font-family: var(--font-body);
+    font-family: var(--font-body, "Google Sans", sans-serif);
 }
 }
 
@@ -155,7 +233,7 @@ header {
     background-color: var(--header-background);
     border-bottom: 10px solid var(--yellow);
     padding: 2rem 6rem;
-    font-family: var(--font-body);
+    font-family: var(--font-body, "Google Sans", sans-serif);
 }
 
 header h1 {
@@ -243,9 +321,7 @@ header h1 {
 
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-  
-    005.  RESPONSIVE NAVIGATION
-  
+    RESPONSIVE NAVIGATION
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
 
@@ -325,39 +401,148 @@ header h1 {
         color: #000;
     }
 
-    .topnav.responsive .dropdown-toggle .icon-svg {
+    .topnav.responsive .dropdown-toggle .material-symbols-outlined {
         display: block;
         font-size: 1.5rem;
+        transition: transform 0.5s ease;
     }
 
-    .topnav.responsive .dropdown-content {
-        display: none;
-        position: static;
-        min-width: 0;
-        max-height: none;
-        overflow: visible;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0.25rem 0 0.5rem 1rem;
-        background-color: transparent;
-    }
 
-    .topnav.responsive .dropdown:hover .dropdown-content {
-        display: none;
-    }
+/* ROTATE ARROW WHEN OPEN */
+
+.topnav.responsive .dropdown.open .dropdown-toggle .material-symbols-outlined {
+    transform: rotate(180deg);
+}
+
+.topnav.responsive .dropdown-content {
+    display: block;
+    position: static;
+    min-width: 0;
+
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
+    pointer-events: none;
+
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0 0 0 1rem;
+
+    background-color: transparent;
+
+    transition:
+        max-height 0.4s ease,
+        opacity 0.3s ease,
+        padding 0.4s ease;
+}
+
+
+    /* OPEN DROPDOWN */
 
     .topnav.responsive .dropdown.open .dropdown-content {
-        display: block;
+        max-height: 500px;
+
+        opacity: 1;
+        pointer-events: auto;
+
+        padding: 0.25rem 0 0.5rem 1rem;
     }
+
+
+    /* DROPDOWN LINKS */
 
     .topnav.responsive .dropdown-content a {
         display: block;
+
         padding: 0.4rem 0;
+
         font-size: 1rem;
         text-align: right;
+
+        opacity: 0;
+        transform: translateY(-8px);
+
+        transition:
+            opacity 0.5s ease,
+            transform 0.5s ease;
+    }
+
+
+    /* OPEN LINK ANIMATION */
+
+    .topnav.responsive .dropdown.open .dropdown-content a {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+    /* STAGGER LINKS */
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(2) {
+        transition-delay: 0.2s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(3) {
+        transition-delay: 0.3s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(4) {
+        transition-delay: 0.4s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(5) {
+        transition-delay: 0.5s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(6) {
+        transition-delay: 0.6s;
+    }
+
+        .topnav.responsive .dropdown.open .dropdown-content a:nth-child(7) {
+        transition-delay: 0.7s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(8) {
+        transition-delay: 0.8s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(9) {
+        transition-delay: 0.9s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(10) {
+        transition-delay: 1.0s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(11) {
+        transition-delay: 1.1s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(12) {
+        transition-delay: 1.2s;
+    }
+
+        .topnav.responsive .dropdown.open .dropdown-content a:nth-child(13) {
+        transition-delay: 1.3s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(14) {
+        transition-delay: 1.4s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(15) {
+        transition-delay: 1.5s;
+    }
+
+    .topnav.responsive .dropdown.open .dropdown-content a:nth-child(16) {
+        transition-delay: 1.6s;
     }
 }
-
 
 /* Second breakpoint */
 
@@ -368,293 +553,708 @@ header h1 {
         line-height: 100%;
     }
 }
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-  
-    005.  INTRO BANNER AT TOP OF PAGE
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
-.introduction {
-    background-color: var(--intro-background);
-    padding: 2rem;
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+         DROPDOWN NAV
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+/* *********************
+    COLOURS
+   ********************* */
+
+.dropbtn {
+    color: #fdf6ef;
 }
 
-.introduction h2 {
-    color: var(--orange-text);
-    font-weight: 400;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+.dropdown-content {
+    background-color: #ffffff;
 }
 
-.introduction p {
-    color: var(--orange-text);
-    font-weight: 300;
-    font-size: 1rem;
-    margin-bottom: 1rem;
+.dropdown-content a {
+    color: #eb0936;
 }
 
-.readmore-button {
-    background-color: var(--button-colour);
-    border: none;
-    color: var(--off-white);
-    padding: 7px 20px;
-    text-align: center;
-    text-decoration: none;
+.dropdown-content a:hover {
+    background-color: var(--pink);
+    color: #ffffff;
+}
+
+/* *********************
+    STYLES
+********************* */
+
+.dropdown {
+    position: relative;
     display: inline-block;
-    font-size: 1rem;
-    margin-top: 1rem;
+}
+
+.dropbtn {
+    text-decoration: none;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-    transition: all .3s;
-    border-radius: 5px;
 }
 
-.readmore-button:hover {
-    background-color: var(--button-colour);
-    color: var(--cream-text);
-    box-shadow: none;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 10px;
+    padding-top: 0.5rem;
 }
 
-.readmore-button:active {
-    box-shadow: inset 0 2px 15px rgba(0, 0, 0, .3);
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    005.    ANIMATED LOGO (.svg)
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+.logo-animation {
+    margin-top: 118px;
+    width: 100%;
+    height: calc(100vh - 118px);
+    overflow: hidden;
+    position: relative;
+}
+
+.logo-animation img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+.logo-animation--mobile {
+    display: none;
+}
+
+@media screen and (max-width: 1170px) {
+    .logo-animation {
+        margin-top: 85px;
+    }
+}
+
+@media screen and (max-width: 676px) {
+
+    .logo-animation--desktop {
+        display: none;
+    }
+
+    .logo-animation--mobile {
+        display: block;
+    }
+
+}
+
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+  
+      006.      DEBRIEF Dates
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+.debrief-dates {
+    background-color: var(--pink);
+    /* padding: 6rem; */
+    color: var(--black-text);
+    margin-left: calc(-50vw + 50%);
+    /* This makes the CONTENT line up with main's 4rem padding */
+    padding: 2rem 6rem;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+}
+
+.debrief-dates-title {
+    color: var(--black-text);
+    font-weight: 800;
+    text-align: left;
+    margin: 0;
+}
+
+.debrief-dates p {
+    text-align: right;
+    margin: 0;
+}
+
+.mobile-break {
+    display: none;
+}
+
+@media screen and (max-width: 1170px) {
+    .debrief-dates-title {
+        font-size: 1.5rem;
+    }
+
+    .debrief-dates p {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 925px) {
+    .debrief-dates {
+        padding-left: 4rem;
+        padding-right: 4rem;
+        gap: 4rem;
+    }
+    .mobile-break {
+        display: inline;
+    }
+}
+
+@media screen and (max-width: 707px) {
+    .debrief-dates {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .desktop-break {
+        display: none;
+    }
+
+    .mobile-break {
+        display: none;
+    }
+
+    .debrief-dates-title {
+        font-size: 1.5rem;
+    }
+
+    .debrief-dates p {
+        font-size: 1rem;
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .debrief-dates-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+  
+      007.      VIDEOS
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+.discipline-OP-video h2 {
+    color: var(--orange-text);
+    padding-bottom: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+    .discipline-OP-video {
+        padding: 4rem 0rem;
+    }
+}
+
+.event-video {
+    padding-bottom: 10rem;
+}
+
+.event-video h2 {
+    color: var(--orange-text);
+    padding-bottom: 2rem;
+    padding-top: 0rem;
+}
+
+.youtube-video {
+    aspect-ratio: 20 / 10;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#walkthrough-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.coloured-block-section {
+    background-color: var(--footer-background);
+    color: var(--black-text);
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    /* This makes the CONTENT line up with main's 4rem padding */
+    padding: 6rem 10rem;
+    box-sizing: border-box;
+}
+
+.coloured-block-section video {
+    padding: 2rem 0rem;
+}
+
+.coloured-block-section h2 {
+    color: var(--orange-text);
+    font-weight: 800;
+}
+
+@media screen and (max-width: 1170px) {
+    .coloured-block-section {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .coloured-block-section {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+/* *********************
+    Image title
+********************* */
+
+.image-block-title {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    height: 400px;
+    overflow: hidden;
+    margin-top: 118px;
+    position: relative;
+}
+
+.image-block-title img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-block-title h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+@media screen and (max-width: 1170px) {
+    .image-block-title {
+        margin-top: 37px;
+    }
+}
+
+@media screen and (max-width: 1170px) {
+    .image-block-title h1 {
+        line-height: 1.2;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .image-block-title h1 {
+        width: 95%;
+        max-width: none;
+        text-align: center;
+    }
+
+}
+
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    008.    QUOTE HALF SCREEN LAYOUT
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+@supports (display: grid) {
+
+    .quote-half {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 4rem;
+
+        width: min(95%, 70em);
+        margin-inline: auto;
+        padding: 10rem 0rem;
+
+        align-items: center;
+    }
+
+
+    /* HEADER / H2 */
+
+    .quote-half__h2 {
+        grid-column: 1;
+        grid-row: 1;
+
+        color: var(--orange-text);
+        font-weight: 800;
+        font-size: 2rem;
+
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+
+    /* IMAGE */
+
+    .quote-half__image {
+        grid-column: 2;
+        grid-row: 1;
+
+        max-height: 500px;
+        width: 100%;
+        height: auto;
+
+        object-fit: contain;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 1170px) {
+    .quote-half__h2 {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 925px) {
+    .quote-half {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 3rem;
+
+        width: min(95%, 70em);
+        margin-inline: auto;
+        padding: 5rem 0rem;
+
+        align-items: center;
+    }
+
+    .quote-half__image {
+        grid-column: 1;
+        grid-row: 1;
+        max-width: 300px;
+        height: auto;
+        justify-self: center;
+    }
+
+    .quote-half__h2 {
+        grid-column: 1;
+        grid-row: 2;
+
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .quote-half__image {
+        max-width: 200px;
+    }
+    .quote-half__h2 {
+        font-size: 1.5rem;
+    }
 }
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
   
-    006.  CAROUSEL (custom - see also css/additions.css)
+    009.  FLICKITY CAROUSEL
   
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+.carousel-section {
+    padding: 6rem 0rem;
+}
 
 .carousel-section .caption {
-    background: var(--caption-background);
+    background: var(--slide-out-menu-background);
     margin: 0;
-    padding: 10px;
+    padding: 2rem 0rem;
     text-align: center;
-    color: var(--caption-text);
+    color: var(--description-text-colour);
     font-size: .8rem;
     font-weight: 200;
-    font-family: var(--font-body);
+    font-family: var(--typeface-open-sans);
     font-style: italic;
 }
 
 .carousel-cell {
     width: 100%;
+    opacity: 0;
+    filter: blur(8px);
+    transition:
+        opacity 0.7s ease,
+        filter 0.7s ease;
+}
+
+.carousel-cell.is-selected {
+    opacity: 1;
+    filter: blur(0);
 }
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
   
-    007.  PORTRAIT LAYOUT - for a grid of portrait format images
+    010.    IMAGE BANNER
   
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
-/* This sets the grid layout for the page. */
-@supports (display: grid) {
-    .portrait__grid {
-        display: grid;
-        grid-template-columns: repeat(4,1fr);
-        gap: 2rem;
-        margin: 2rem;
-    }
+.title-header {
+    margin-top: 118px;
 }
 
-@media (max-width: 900px) {
-        .portrait__grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 2rem;
-            display: grid;
-        }
-    }
-
-/* This 'portrait' class is a container for the text and images */
-.portrait {
-    text-align: center;
-    background-color: var(--portrait-background);
-    border-radius: .4rem;
-    padding: 2rem 2rem 1.4rem 2rem;
-    transition: box-shadow .3s;
-    text-decoration: none;
-    color: var(--dark-text);
-}
-
-.portrait:hover {
-    box-shadow: rgba(50, 50, 93, 0.5) 0px 13px 27px -5px, rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
-}
-
-.portrait__image {
+.title-image {
+    display: block;
     width: 100%;
+    max-height: 620px;
 }
 
-.portrait__name {
-    color: var(--dark-text);
-    font-weight: 400;
-    margin-top: .8rem;
-    margin-bottom: .4rem;
-}
-
-.portrait__description {
-    color: var(--dark-text);
-    font-weight: 400;
-    font-size: .7rem;
-    margin-bottom: 1rem;
-}
-
-/* *********************
-    Discipline Grid - REGULAR
-********************* */
-
-/* This sets the grid layout for the page. */
-@supports (display: grid) {
-    .discipline__grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 2rem;
-        margin: 2rem;
+@media screen and (max-width: 1170px) {
+    .title-header {
+        margin-top: 85px;
     }
 }
 
-
-/* Tablet / mobile */
-@media (max-width: 1170px) {
-    .discipline__grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        margin: 2rem;
-    }
-
-    .discipline {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        align-items: center;
-        gap: 1.5rem;
-        text-align: left;
-    }
-
-    .discipline__image {
-        max-height: 150px;
-        width: auto;
-    }
-
-    .discipline__name {
-        margin: 0;
-    }
-}
-
-@media (max-width: 520px) {
-    .discipline__grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        margin: 2rem;
-    }
-
-    .discipline {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .discipline__image {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto;
-    }
-
-    .discipline__name {
-        margin-top: .8rem;
-        margin-bottom: .4rem;
-    }
-}
-
-
-/* This 'discipline' class is a container for the text and images */
-.discipline {
-    text-align: center;
-    border-radius: .4rem;
-    padding: 2rem 2rem 1.4rem 2rem;
-    transition: box-shadow .3s;
-    text-decoration: none;
-    color: var(--dark-text);
-    min-width: 0;
-    box-sizing: border-box;
-}
-
-
-/* Each discipline box gets its colour from --discipline-colour, set per discipline in the dashboard */
-.discipline,
-.discipline_narrow {
-    background-color: var(--discipline-colour, var(--yellow));
-}
-
-.discipline:hover {
-    box-shadow: rgba(50, 50, 93, 0.5) 0px 13px 27px -5px,
-                rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
-}
-
-
-.discipline__name {
-    color: var(--dark-text);
-    font-weight: 400;
-    margin-top: .8rem;
-    margin-bottom: .4rem;
-}
-
-
-.discipline__description {
-    color: var(--dark-text);
-    font-weight: 400;
-    font-size: .7rem;
-    margin-bottom: 1rem;
-}
-
-/**********************
-    Discipline Grid - NARROW
-**********************/
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    011.    DISCIPLINE DESCRIPTION
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
 @supports (display: grid) {
 
     /* =================================
-       DESKTOP — 4 boxes in one row
+       MAIN GRID
     ================================= */
 
-    .discipline__grid__narrow {
-        display: none;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 2rem;
-        margin: 2rem;
-    }
-
-    /* Show grid when opened */
-    .discipline__grid__narrow.open {
+    .discipline-description {
         display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 4rem;
+
+        width: min(95%, 70em);
+        margin-inline: auto;
+        padding: 10rem 0;
     }
 
-    /* Image + name side-by-side inside each box */
-    .discipline_narrow {
+
+    /* =================================
+       TEXT COLUMN
+    ================================= */
+
+    .discipline-description__text {
+        grid-column: 1;
+        grid-row: 1;
+
+        min-width: 0;
+    }
+
+
+    /* =================================
+       H2
+    ================================= */
+
+    .discipline-description__h2 {
+        color: var(--orange-text);
+        font-weight: 800;
+        font-size: 2rem;
+
+        margin: 0;
+        padding: 0;
+    }
+
+
+    /* =================================
+       INTRODUCTION
+    ================================= */
+
+    .discipline-description__introduction {
+        font-weight: 400;
+        font-size: 1.2rem;
+
+        margin: 2rem 0 0;
+        padding: 0;
+    }
+
+
+    /* =================================
+       IMAGE WRAPPER
+    ================================= */
+
+    .discipline-description__image-wrapper {
+        grid-column: 2;
+        grid-row: 1;
+
+        /*
+         * The wrapper fills the height
+         * created by the text.
+         */
+        position: relative;
+
+        min-width: 0;
+        min-height: 0;
+
+        overflow: hidden;
+    }
+
+
+    /* =================================
+       IMAGE
+    ================================= */
+
+    .discipline-description__image {
+        position: absolute;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        object-position: center;
+
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+}
+
+
+/* =================================
+   MOBILE — 925px AND BELOW
+================================= */
+
+@media screen and (max-width: 925px) {
+
+    .discipline-description {
         display: grid;
-        grid-template-columns: 1fr 2fr;
-        align-items: center;
-        gap: 1rem;
-        border-radius: .4rem;
-        color: var(--black-text);
-        padding: 1rem 2rem;
+        grid-template-columns: 1fr;
+        column-gap: 0;
+
+        width: min(95%, 70em);
+        margin-inline: auto;
+        padding: 5rem 0;
     }
 
-    .discipline__image_narrow {
+
+    /* ================================
+       TEXT COLUMN
+    ================================ */
+
+    .discipline-description__text {
+        grid-column: 1;
+        grid-row: 1;
+
+        min-width: 0;
+    }
+
+
+    /* ================================
+       H2
+    ================================ */
+
+    .discipline-description__h2 {
+        margin: 0;
+    }
+
+
+    /* ================================
+       INTRODUCTION
+    ================================ */
+
+    .discipline-description__introduction {
+        margin: 2rem 0 0;
+    }
+
+
+    /* ================================
+       IMAGE WRAPPER
+    ================================ */
+
+    .discipline-description__image-wrapper {
+        grid-column: 1;
+        grid-row: 2;
+
+        position: relative;
+
         width: 100%;
         height: auto;
-        display: block;
+
+        min-height: 0;
+
+        overflow: hidden;
+
+        margin-top: 2rem;
     }
 
-    .discipline_narrow .discipline__name_narrow {
-        color: var(--black-text);
-        font-weight: 500;
-        font-size: 1.5rem;
-        margin-top: .8rem;
-        margin-bottom: .4rem;
+
+    /* ================================
+       IMAGE
+    ================================ */
+
+    .discipline-description__image {
+        position: static;
+
+        display: block;
+
+        width: 100%;
+        height: auto;
+
+        max-height: 500px;
+
+        object-fit: cover;
+
+        margin: 0;
+        padding: 0;
+    }
+
+}
+
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    012.    DISCIPLINE EXPLORE - Dropdown Menu
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+
+.discipline-explore {
+    background-color: var(--footer-background);
+    color: var(--black-text);
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    /* This makes the CONTENT line up with main's 4rem padding */
+    padding: 6rem 10rem;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 1500px) {
+    .discipline-explore {
+        padding-left: 4rem;
+        padding-right: 4rem;
     }
 }
 
+@media screen and (max-width: 600px) {
+    .discipline-explore {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
 
 /* =================================
    DISCIPLINE TITLE + ARROW
@@ -664,79 +1264,181 @@ header h1 {
 .discipline-toggle {
     display: inline-flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: .6rem;
+    gap: 2rem;
 
+    padding: 0;
     border: none;
     background: none;
-    padding: 0;
 
-    font-family: inherit;
-    font-size: inherit;
     text-align: left;
-
     cursor: pointer;
 }
 
+/* Explore the Disciplines title — never underlined */
 
-/* Title */
-.discipline-toggle__title {
-    display: block;
+.discipline-toggle h2 {
+    text-decoration: none;
 }
 
+
+/* Discipline names — underline on hover */
+
+.discipline,
+.discipline .discipline__name {
+    text-decoration: none !important;
+    font-weight: 400 !important;
+    font-size: 1.2rem !important;
+}
+
+.discipline .discipline__name:hover {
+    text-decoration: underline !important;
+}
 
 /* Arrow */
+
 .discipline-arrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    flex-shrink: 0;
 
-    font-family: Arial, sans-serif;
-    font-size: 2rem;
-    font-weight: 900;
-    line-height: 1;
+    display: block;
+    width: 20px;
+    height: 20px;
 
-    height: 1em;
-    width: 1em;
+    border-right: 5px solid var(--orange-text);
+    border-bottom: 5px solid var(--orange-text);
 
-    transform: translateY(-0.05em);
-
-    transition: transform .2s ease;
+    transform: rotate(45deg);
+    transition: transform 0.5s ease;
 }
 
-
-/* Open state */
 .discipline-toggle.open .discipline-arrow {
-    transform: translateY(-0.05em) rotate(180deg);
+    transform: rotate(225deg);
+}
+
+/* =================================
+       DESKTOP — 4 boxes in one row
+    ================================= */
+
+@supports (display: grid) {
+
+/* =================================
+   DISCIPLINE DROPDOWN ANIMATION
+================================= */
+
+.discipline__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem;
+
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+        max-height 0.4s ease,
+        opacity 0.3s ease,
+        margin 0.4s ease;
+}
+
+.discipline__grid.open {
+    max-height: 1000px;
+    margin: 2rem 0;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 
+
+/* INDIVIDUAL DISCIPLINE ANIMATION */
+
+.discipline__grid.open .discipline {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+    /* Image + name side-by-side inside each box */
+    .discipline {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+        gap: 1rem;
+        border-radius: .4rem;
+        color: var(--black-text);
+        padding: 1rem 2rem;
+
+         opacity: 0;
+        transform: translateY(-8px);
+
+        transition:
+            opacity 0.5s ease,
+            transform 0.5s ease;
+    }
+
+    .discipline__image {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        display: block;
+    }
+
+    .discipline .discipline__name {
+        color: var(--black-text);
+        font-weight: 500;
+        font-size: 1.5rem;
+        margin-top: .8rem;
+        margin-bottom: .4rem;
+    }
+}
+
+
+.discipline__grid.open .discipline:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.discipline__grid.open .discipline:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.discipline__grid.open .discipline:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.discipline__grid.open .discipline:nth-child(4) {
+    transition-delay: 0.4s;
+}
 
 /* =================================
    BELOW 1600px
    Single-column dropdown
 ================================= */
 
-@media (max-width: 1600px) {
+@media (max-width: 1300px) {
 
-    .discipline__grid__narrow.open {
-        grid-template-columns: 1fr;
+    .discipline__grid.open {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 1rem;
-        margin: 1rem 2rem 2rem;
+        margin: 1rem 0 2rem;
+        width: 100%;
     }
 
-    .discipline_narrow {
-        grid-template-columns: 1fr 2fr;
+    .discipline {
+        min-width: 0;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
         text-align: left;
+        box-sizing: border-box;
     }
 
-    .discipline__image_narrow {
-        max-height: 150px;
+    .discipline__image {
+        max-width: 50px;
+        max-height: 50px;
         width: auto;
+        height: auto;
     }
 
-    .discipline__name_narrow {
+    .discipline__name {
         margin: 0;
+        min-width: 0;
     }
 }
 
@@ -745,30 +1447,33 @@ header h1 {
    MOBILE — 520px AND BELOW
 ================================= */
 
-@media (max-width: 520px) {
+@media (max-width: 745px) {
 
-    .discipline__grid__narrow.open {
+    .discipline__grid.open {
         grid-template-columns: 1fr;
         gap: 1rem;
-        margin: 2rem;
-    }
-
-    .discipline_narrow {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .discipline__image_narrow {
+        margin: 2rem 0;
         width: 100%;
-        height: auto;
+    }
+
+    .discipline {
+        grid-template-columns: 1fr 2fr;
+        text-align: center;
+        min-width: 0;
+    }
+
+    .discipline__image {
+        width: 50px;
+        height: 50px;
+        max-width: 100%;
         object-fit: contain;
-        display: block;
         margin: 0 auto;
     }
 
-    .discipline__name_narrow {
+    .discipline__name {
         margin-top: .8rem;
         margin-bottom: .4rem;
+        overflow-wrap: break-word;
     }
 }
 
@@ -777,57 +1482,335 @@ header h1 {
    DISCIPLINE COLOURS
 ================================= */
 
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+.discipline:nth-child(1) {
+    background-color: var(--comms-green);
+}
+
+.discipline:nth-child(2) {
+    background-color: var(--fashion-blue);
+}
+
+.discipline:nth-child(3) {
+    background-color: var(--product-red);
+}
+
+.discipline:nth-child(4) {
+    background-color: var(--postgrad-purple);
+}
+
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
   
-    009.  MASONRY LAYOUT - for a mix of landscape and portrait format images
+      013.      STUDENT SELECTOR GRID
   
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
-.grid--masonry {
-    columns: 2;
-    column-gap: 4rem;
+@supports (display: grid) {
+
+    .student-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4rem 4rem;
+
+        width: min(95%, 70em);
+        margin-inline: auto;
+        padding: 10rem 0rem;
+    }
+
+
+    /* CARD */
+
+    .student-card {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        row-gap: 1rem;
+        transition: transform 0.5s ease;
+    }
+
+    .student-card:hover {
+        transform: scale(1.1);
+    }
+
+
+    /* SQUARE IMAGE */
+
+    .student-card__image {
+        grid-column: 1 / -1;
+
+        width: 100%;
+        aspect-ratio: 1 / 1;
+
+        object-fit: cover;
+        display: block;
+        transition: filter 0.5s ease;
+        }
+
+
+    /* PROFILE + NAME */
+
+    .student-card__info {
+        grid-column: 1 / -1;
+
+        display: grid;
+        grid-template-columns: 3.5rem 1fr;
+        column-gap: 1rem;
+
+        align-items: center;
+    }
+
+
+    /* CIRCLE PROFILE IMAGE */
+
+    .student-card__profile {
+        width: 3.5rem;
+        height: 3.5rem;
+
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        transition: filter 0.5s ease;
+    }
+
+    .student-card:hover .student-card__image {
+        filter: grayscale(100%);
+    }
+
+    .student-card:hover .student-card__profile {
+        filter: grayscale(100%);
+    }
+
+
+    /* H3 */
+
+    .student-card h3 {
+        margin: 0;
+
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
 }
 
-.grid--masonry > * {
-    width: 100%;
-}
 
-.grid--masonry img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 4px;
-    margin-bottom: 4rem;
-    break-inside: avoid;
-    cursor: pointer;
-}
-
-@media screen and (max-width: 1170px) {
-
-    .grid--masonry {
-        columns: 2;
-        column-gap: 2rem;
+@media screen and (max-width: 925px) {
+    .student-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 5rem 0rem;
     }
 }
 
 @media screen and (max-width: 600px) {
-
-    .grid--masonry {
-        columns: 1;
-        column-gap: 2rem;
+    .student-grid {
+        grid-template-columns: 1fr;
     }
 }
 
-
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
   
-    Different image layout (Individual Project page)
+    014.    STUDENT INFORMATION SECTION (portfolio-projectname.html)
   
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
+.student-info {
+    padding: 10rem 0rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+    row-gap: 0rem;
+}
+
+.student-contact-info {
+    grid-column: 1;
+    grid-row: 1 / 3;
+}
+
+.student-written-info {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.student-quote {
+    grid-column: 2;
+    grid-row: 2;
+
+    color: var(--orange-text);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.student-profile {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.student-contacts {
+    padding: 4rem 0rem 0rem 0rem;
+    padding-right: 4rem;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+}
+
+.student-contacts a {
+    text-decoration: none;
+    color: var(--black-text);
+}
+
+.student-contacts a:hover {
+    text-decoration: underline;
+}
+
+.student-description {
+    padding: 2rem 0rem;
+}
+
+@media screen and (max-width: 1500px) {
+    .student-contacts {
+        grid-template-columns: 1fr;
+        padding: 2rem 0rem 0rem 0rem;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .student-quote {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+    .student-profile {
+        width: 10rem;
+        height: 10rem;
+    }
+    .student-written-info {
+        padding-bottom: 2rem;
+    }
+}
+@media screen and (max-width: 765px) {
+
+    .student-info {
+        grid-template-columns: 1fr 1fr;
+        padding: 4rem 0rem;
+        column-gap: 2rem;
+        row-gap: 3rem;
+    }
+
+    .student-contact-info {
+        display: contents;
+    }
+
+    .student-written-info {
+        display: contents;
+    }
+
+
+    /* PROFILE — LEFT */
+
+    .student-profile {
+        grid-column: 1;
+        grid-row: 1 / 3;
+    }
+
+
+    /* NAME — RIGHT */
+
+    .student-written-info h2 {
+        grid-column: 2;
+        grid-row: 1;
+
+        margin: 0;
+    }
+
+
+    /* DISCIPLINE — RIGHT */
+
+    .student-written-info h3 {
+        grid-column: 2;
+        grid-row: 2;
+
+        margin: 0;
+        margin-top: -3rem;
+    }
+
+
+    /* DESCRIPTION — FULL WIDTH */
+
+    .student-description {
+        grid-column: 1 / -1;
+        grid-row: 3;
+
+        padding: 0;
+        margin: 0;
+    }
+
+
+    /* QUOTE — FULL WIDTH */
+
+    .student-quote {
+        grid-column: 1 / -1;
+        grid-row: 4;
+
+        padding: 0;
+    }
+
+
+    /* CONTACTS — FULL WIDTH */
+
+    .student-contacts {
+        grid-column: 1 / -1;
+        grid-row: 5;
+
+        padding: 0;
+    }
+
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+    
+        015.    PROJECT INFO DESCRIPTION (portfolio-projectname.html)
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+.project-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding-bottom: 4rem;
+    padding-top: 15rem;
+    order: 1;
+}
+
+.project-info__title {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.project-info h2,
+.project-info h3,
+.project-info p {
+    margin: 0;
+}
+
 .project-content {
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
+
+/* DESKTOP — project info first, hero image underneath */
+
+.project-info {
+    order: 1;
+}
+
+.portfolio-hero-image {
+    order: 2;
+    padding: 4rem 0rem;
+}
+
 
 /* FULL WIDTH IMAGE */
 
@@ -859,7 +1842,53 @@ header h1 {
     height: auto;
 }
 
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    016.  MASONRY LAYOUT - for a mix of landscape and portrait format images
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+.grid--masonry {
+    columns: 2;
+    column-gap: 4rem;
+    order: 3;
+}
+
+.grid--masonry > * {
+    width: 100%;
+}
+
+.grid--masonry img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    margin-bottom: 4rem;
+    break-inside: avoid;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1170px) {
+
+    .grid--masonry {
+        columns: 2;
+        column-gap: 2rem;
+    }
+
+    .project-info {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 0;
+        padding-top: 6rem;
+    }
+}
+
 @media screen and (max-width: 600px) {
+
+    .grid--masonry {
+        columns: 1;
+        column-gap: 2rem;
+    }
 
     .image-half {
         grid-template-columns: 1fr;
@@ -869,18 +1898,317 @@ header h1 {
         padding: 4rem 2rem;
     }
 
+    .portfolio-hero-image {
+        order: 1;
+        margin-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .project-info {
+        order: 2;
+        padding-top: 0rem;
+    }
 }
 
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
   
-    Lightbox
+    017.    STUDENT INFORMATION SECTION (portflio-studentname.html)
   
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
-/* =========================================
-   LIGHTBOX
-========================================= */
+.student-info-sn {
+    padding: 6rem 0rem 8rem 0rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+    row-gap: 0rem;
+    margin-top: 118px;
+}
+
+.student-contact-info-sn {
+    grid-column: 1;
+    grid-row: 1 / 3;
+}
+
+.student-written-info-sn {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.student-quote-sn {
+    grid-column: 2;
+    grid-row: 2;
+
+    color: var(--orange-text);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.student-profile-sn {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.student-contacts-sn {
+    padding: 4rem 0rem 0rem 0rem;
+    padding-right: 4rem;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+}
+
+.student-contacts-sn a {
+    text-decoration: none;
+    color: var(--black-text);
+}
+
+.student-contacts-sn a:hover {
+    text-decoration: underline;
+}
+
+.student-description-sn {
+    padding: 2rem 0rem;
+}
+
+@media screen and (max-width: 1500px) {
+    .student-contacts-sn {
+        grid-template-columns: 1fr;
+        padding: 2rem 0rem 0rem 0rem;
+    }
+}
+
+@media screen and (max-width: 1170px) {
+    .student-info-sn {
+        margin-top: 81px;
+        padding: 4rem 0rem 6rem 0rem;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .student-quote-sn {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+    .student-profile-sn {
+        width: 10rem;
+        height: 10rem;
+    }
+    .student-written-info-sn {
+        padding-bottom: 2rem;
+    }
+}
+@media screen and (max-width: 765px) {
+
+    .student-info-sn {
+        grid-template-columns: 1fr 1fr;
+        padding: 4rem 0rem;
+        column-gap: 2rem;
+        row-gap: 3rem;
+    }
+
+    .student-contact-info-sn {
+        display: contents;
+    }
+
+    .student-written-info-sn {
+        display: contents;
+    }
+
+
+    /* PROFILE — LEFT */
+
+    .student-profile-sn {
+        grid-column: 1;
+        grid-row: 1 / 3;
+    }
+
+
+    /* NAME — RIGHT */
+
+    .student-written-info-sn h2 {
+        grid-column: 2;
+        grid-row: 1;
+
+        margin: 0;
+    }
+
+
+    /* DISCIPLINE — RIGHT */
+
+    .student-written-info-sn h3 {
+        grid-column: 2;
+        grid-row: 2;
+
+        margin: 0;
+        margin-top: -3rem;
+    }
+
+
+    /* DESCRIPTION — FULL WIDTH */
+
+    .student-description-sn {
+        grid-column: 1 / -1;
+        grid-row: 3;
+
+        padding: 0;
+        margin: 0;
+    }
+
+
+    /* QUOTE — FULL WIDTH */
+
+    .student-quote-sn {
+        grid-column: 1 / -1;
+        grid-row: 4;
+
+        padding: 0;
+    }
+
+
+    /* CONTACTS — FULL WIDTH */
+
+    .student-contacts-sn {
+        grid-column: 1 / -1;
+        grid-row: 5;
+
+        padding: 0;
+    }
+
+}
+
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    018.    PROJECT INFO DESCRIPTION (portfolio-studentname.html)
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+.project-content-sn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* DESKTOP — project info first, hero image underneath */
+
+.project-info-sn {
+    order: 1;
+    padding: 4rem 0rem;
+}
+
+.portfolio-hero-image-sn {
+    order: 2;
+}
+
+.project-info__title-sn h2 {
+    padding-bottom: 1rem;
+}
+
+.project-info__title-sn h3 {
+    padding-bottom: 1rem;
+}
+
+@media screen and (max-width: 765px) {
+    .project-info-sn {
+        padding: 4rem 0rem;
+    }
+
+    .project-info__title-sn h2 {
+        padding-bottom: 1rem;
+        padding-top: 2rem;
+    }
+
+    .project-info__title-sn h3 {
+        padding-bottom: 1rem;
+    }
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    019.  MASONRY LAYOUT (portfolio.studentname.html)
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+.grid--masonry-sn {
+    columns: 2;
+    column-gap: 4rem;
+    order: 3;
+    padding-bottom: 4rem;
+}
+
+.grid--masonry-sn > * {
+    width: 100%;
+}
+
+.grid--masonry-sn img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    margin-bottom: 4rem;
+    break-inside: avoid;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1170px) {
+
+    .grid--masonry-sn {
+        columns: 2;
+        column-gap: 2rem;
+    }
+
+    .project-info-sn {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 0;
+        padding-top: 6rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .grid--masonry-sn {
+        columns: 1;
+        column-gap: 2rem;
+    }
+
+    .image-half-sn {
+        grid-template-columns: 1fr;
+    }
+
+    .project-text-sn {
+        padding: 4rem 2rem;
+    }
+
+    .portfolio-hero-image-sn {
+        margin-top: 4rem;
+    }
+
+    .project-info-sn {
+        padding-top: 0rem;
+    }
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    020.    HERO IMAGE (portfolio-projectname.html)
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+    .portfolio-hero-image {
+        padding: 4rem 0rem;
+    }
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    021.    LIGHTBOX
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
 .lightbox {
     position: fixed;
@@ -1009,173 +2337,9 @@ header h1 {
 
 }
 
-
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
   
-    Project description (above masonry)
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-.project-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    padding-bottom: 4rem;
-    padding-top: 15rem;
-}
-
-.project-info__title {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.project-info h2,
-.project-info h3,
-.project-info p {
-    margin: 0;
-}
-
-@media screen and (max-width: 1170px) {
-
-    .project-info {
-        display: grid;
-        grid-template-columns: 1fr;
-        column-gap: 0;
-        padding-top: 6rem;
-    }
-}
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-  
-    STUDENT INFORMATION SECTION (Individual Portfolio page)
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-.student-info {
-    padding: 10rem 0rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 4rem;
-    row-gap: 0rem;
-}
-
-.student-contact-info {
-    grid-column: 1;
-    grid-row: 1 / 3;
-}
-
-.student-written-info {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.student-quote {
-    grid-column: 2;
-    grid-row: 2;
-
-    color: var(--orange-text);
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-
-.student-profile {
-    width: 15rem;
-    height: 15rem;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-}
-
-.student-contacts {
-    padding: 4rem 0rem 0rem 0rem;
-    padding-right: 4rem;
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem 3rem;
-}
-
-.student-description {
-    padding: 2rem 0rem;
-}
-
-@media screen and (max-width: 1495px) {
-    .student-contacts {
-        grid-template-columns: 1fr;
-        padding: 2rem 0rem 0rem 0rem;
-    }
-}
-
-@media screen and (max-width: 900px) {
-    .student-quote {
-        grid-column: 1 / -1;
-        grid-row: 2;
-    }
-    .student-profile {
-        width: 10rem;
-        height: 10rem;
-    }
-    .student-written-info {
-        padding-bottom: 2rem;
-    }
-}
-
-@media screen and (max-width: 765px) {
-    .student-info {
-        grid-template-columns: 1fr;
-    }
-
-    .student-contact-info {
-        grid-column: 1;
-        grid-row: auto;
-    }
-
-    .student-written-info {
-        grid-column: 1;
-        grid-row: auto;
-    }
-
-    .student-quote {
-        grid-column: 1;
-        grid-row: auto;
-    }
-
-    .student-info {
-        grid-template-columns: 1fr;
-        padding: 4rem 0rem;
-    }
-
-    .student-contact-info {
-        display: contents;
-    }
-
-    .student-profile {
-        order: 1;
-        justify-self: center;
-        width: 15rem;
-        height: 15rem;
-    }
-
-    .student-written-info {
-        order: 2;
-        padding: 2rem 0rem 0rem 0rem;
-    }
-
-    .student-quote {
-        order: 3;
-        padding: 0;
-    }
-
-    .student-contacts {
-        order: 4;
-    }
-}
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-  
-    010.  SINGLE ITEM LAYOUT
+    022.  SINGLE ITEM LAYOUT
   
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
@@ -1261,9 +2425,7 @@ header h1 {
 }
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-  
     SINGLE ITEM MEDIA QUERIES
-  
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
 
@@ -1312,1087 +2474,9 @@ header h1 {
 }
 
 
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-  
-    Discipline Description
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-@supports (display: grid) {
-
-    /* =================================
-       MAIN GRID
-    ================================= */
-
-    .discipline-description {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: 4rem;
-
-        width: min(95%, 70em);
-        margin-inline: auto;
-        padding: 10rem 0;
-    }
-
-
-    /* =================================
-       TEXT COLUMN
-    ================================= */
-
-    .discipline-description__text {
-        grid-column: 1;
-        grid-row: 1;
-
-        min-width: 0;
-    }
-
-
-    /* =================================
-       H2
-    ================================= */
-
-    .discipline-description__h2 {
-        color: var(--orange-text);
-        font-weight: 800;
-        font-size: 2rem;
-
-        margin: 0;
-        padding: 0;
-    }
-
-
-    /* =================================
-       INTRODUCTION
-    ================================= */
-
-    .discipline-description__introduction {
-        font-weight: 400;
-        font-size: 1.2rem;
-
-        margin: 2rem 0 0;
-        padding: 0;
-    }
-
-
-    /* =================================
-       IMAGE WRAPPER
-    ================================= */
-
-    .discipline-description__image-wrapper {
-        grid-column: 2;
-        grid-row: 1;
-
-        /*
-         * The wrapper fills the height
-         * created by the text.
-         */
-        position: relative;
-
-        min-width: 0;
-        min-height: 0;
-
-        overflow: hidden;
-    }
-
-
-    /* =================================
-       IMAGE
-    ================================= */
-
-    .discipline-description__image {
-        position: absolute;
-
-        inset: 0;
-
-        width: 100%;
-        height: 100%;
-
-        object-fit: cover;
-        object-position: center;
-
-        display: block;
-        margin: 0;
-        padding: 0;
-    }
-
-}
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-  
-    SINGLE ITEM MEDIA QUERIES
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-
-/* =================================
-   MOBILE — 925px AND BELOW
-================================= */
-
-@media screen and (max-width: 925px) {
-
-    .discipline-description {
-        display: grid;
-        grid-template-columns: 1fr;
-        column-gap: 0;
-
-        width: min(95%, 70em);
-        margin-inline: auto;
-        padding: 5rem 0;
-    }
-
-
-    /* ================================
-       TEXT COLUMN
-    ================================ */
-
-    .discipline-description__text {
-        grid-column: 1;
-        grid-row: 1;
-
-        min-width: 0;
-    }
-
-
-    /* ================================
-       H2
-    ================================ */
-
-    .discipline-description__h2 {
-        margin: 0;
-    }
-
-
-    /* ================================
-       INTRODUCTION
-    ================================ */
-
-    .discipline-description__introduction {
-        margin: 2rem 0 0;
-    }
-
-
-    /* ================================
-       IMAGE WRAPPER
-    ================================ */
-
-    .discipline-description__image-wrapper {
-        grid-column: 1;
-        grid-row: 2;
-
-        position: relative;
-
-        width: 100%;
-        height: auto;
-
-        min-height: 0;
-
-        overflow: hidden;
-
-        margin-top: 2rem;
-    }
-
-
-    /* ================================
-       IMAGE
-    ================================ */
-
-    .discipline-description__image {
-        position: static;
-
-        display: block;
-
-        width: 100%;
-        height: auto;
-
-        max-height: 500px;
-
-        object-fit: cover;
-
-        margin: 0;
-        padding: 0;
-    }
-
-}
-
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-  
-    QUOTE HALF LAYOUT
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-@supports (display: grid) {
-
-    .quote-half {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: 4rem;
-
-        width: min(95%, 70em);
-        margin-inline: auto;
-        padding: 10rem 0rem;
-
-        align-items: center;
-    }
-
-
-    /* HEADER / H2 */
-
-    .quote-half__h2 {
-        grid-column: 1;
-        grid-row: 1;
-
-        color: var(--orange-text);
-        font-weight: 800;
-        font-size: 2rem;
-
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-
-
-    /* IMAGE */
-
-    .quote-half__image {
-        grid-column: 2;
-        grid-row: 1;
-
-        max-height: 500px;
-        width: 100%;
-        height: auto;
-
-        object-fit: contain;
-        display: block;
-    }
-}
-
-@media screen and (max-width: 1170px) {
-    .quote-half__h2 {
-        font-size: 2rem;
-    }
-}
-
-@media screen and (max-width: 925px) {
-    .quote-half {
-        display: grid;
-        grid-template-columns: 1fr;
-        row-gap: 3rem;
-
-        width: min(95%, 70em);
-        margin-inline: auto;
-        padding: 5rem 0rem;
-
-        align-items: center;
-    }
-
-    .quote-half__image {
-        grid-column: 1;
-        grid-row: 1;
-        max-width: 300px;
-        height: auto;
-        justify-self: center;
-    }
-
-    .quote-half__h2 {
-        grid-column: 1;
-        grid-row: 2;
-
-        text-align: center;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .quote-half__image {
-        max-width: 200px;
-    }
-    .quote-half__h2 {
-        font-size: 1.5rem;
-    }
-}
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-  
-    012.  WEBSITE FOOTER
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-footer {
-    background-color: var(--footer-background);
-    padding: 2rem;
-    border-top: 10px solid var(--pink);
-    font-family: var(--font-body);
-}
-
-footer p {
-    font-size: .8rem;
-    font-weight: 500;
-}
-
-footer h2 {
-    margin-bottom: 2rem;
-    color: var(--orange-text);
-    font-weight: 700px;
-}
-
-@supports (display: grid) {
-    .footer-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        grid-gap: 2rem;
-    }
-}
-
-.footer__image__logo {
-    max-height: 300px;
-    width: auto;
-}
-
-ul.footer__menu__list {
-    list-style-type: none;
-    padding: 0 0 2rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; /* controls spacing between items */
-}
-
-.footer__menu {
-    display: flex;
-    flex-direction: column;
-}
-/* 
-.footer__menu__heading {
-    font-weight: 600;
-    font-size: 1.25rem;
-} */
-
-ul.footer__menu__list {
-    list-style-type: none;
-}
-
-ul.footer__menu__list li a {
-    text-decoration: none;
-    color: var(--black-text);
-}
-
-ul.footer__menu__list li a:hover {
-    text-decoration: underline;
-}
-
-.footer__copyright-details p {
-    font-size: .8rem;
-    font-weight: 200;
-    font-style: italic;
-}
-
-.footer__copyright-details {
-    margin-top: auto;
-    padding-bottom: 1rem;
-}
-
-
-/* *********************
-    FOOTER MEDIA QUERIES
-   ********************* */
-
-/* Max width 1120px or 70rem */
-@media screen and (max-width: 1120px) {
-    .footer-grid {
-        grid-template-columns: repeat(auto-fit, minmax(6.25rem, 1fr));
-    }
-
-    .footer__menu {
-        padding: 0;
-    }
-
-    footer p {
-        font-size: 1rem;
-    }
-}
-
-@media screen and (max-width: 877px) {
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-            "logo social"
-            "events graduates";
-        margin-bottom: 2rem;
-    }
-
-    .footer-grid article:nth-child(1) {
-        grid-area: logo;
-    }
-
-    .footer-grid article:nth-child(2) {
-        grid-area: events;
-    }
-
-    .footer-grid article:nth-child(4) {
-        grid-area: social;
-    }
-
-    .footer-grid article:nth-child(3) {
-        grid-area: graduates;
-    }
-
-    .footer__menu {
-        padding: 0;
-    }
-
-    footer p {
-        font-size: 1rem;
-        margin-bottom: 2rem;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .footer-grid {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "logo"
-            "social"
-            "graduates"
-            "events";
-    }
-}
-
-/* *********************
-    FOOTER DROPDOWN
-   ********************* */
-
-/* *********************
-    FOOTER DROPDOWN
-   ********************* */
-
-.footer__dropdown {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    width: 100%;
-
-    padding: 0;
-    border: none;
-    background: none;
-
-    text-align: left;
-}
-
-.footer__dropdown h2 {
-    margin-bottom: 2rem;
-}
-
-.footer__arrow {
-    display: none;
-}
-
-
-@media screen and (max-width: 450px) {
-
-    .footer__dropdown {
-        cursor: pointer;
-    }
-
-    .footer__dropdown h2 {
-        margin-bottom: 0rem;
-    }
-
-    /* ARROW */
-
-    .footer__arrow {
-        display: block;
-
-        width: 12px;
-        height: 12px;
-
-        border-right: 3px solid var(--orange-text);
-        border-bottom: 3px solid var(--orange-text);
-
-        transform: rotate(45deg);
-        transition: transform 0.5s ease;
-    }
-
-    /* LINKS */
-
-    .footer__menu__list {
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-
-        pointer-events: none;
-
-        transition: max-height 0.4s ease;
-    }
-
-    .footer__menu.open .footer__menu__list {
-        max-height: 500px;
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    /* INDIVIDUAL LINK ANIMATION */
-
-    .footer__menu__list li {
-        opacity: 0;
-        transform: translateY(-8px);
-
-        transition:
-            opacity 0.25s ease,
-            transform 0.25s ease;
-    }
-
-    .footer__menu.open .footer__menu__list li {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* STAGGER EACH LINK */
-
-    .footer__menu.open .footer__menu__list li:nth-child(1) {
-        transition-delay: 0.05s;
-    }
-
-    .footer__menu.open .footer__menu__list li:nth-child(2) {
-        transition-delay: 0.1s;
-    }
-
-    .footer__menu.open .footer__menu__list li:nth-child(3) {
-        transition-delay: 0.15s;
-    }
-
-    .footer__menu.open .footer__menu__list li:nth-child(4) {
-        transition-delay: 0.2s;
-    }
-
-    .footer__menu.open .footer__menu__list li:nth-child(5) {
-        transition-delay: 0.25s;
-    }
-
-    .footer__menu.open .footer__menu__list li:nth-child(6) {
-        transition-delay: 0.3s;
-    }
-
-    /* ARROW ROTATION */
-
-    .footer__menu.open .footer__arrow {
-        transform: rotate(225deg);
-    }
-}
-
-/* = = =   E N D   O F   T H E   C S S  = = = */
-
-/* *********************
-    CSS BREAKPOINTS
-   ********************* */
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
-
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
   
-      013.  DROPDOWN NAV
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-/* *********************
-    COLOURS
-   ********************* */
-
-.dropbtn {
-    color: #fdf6ef;
-}
-
-.dropdown-content {
-    background-color: #ffffff;
-}
-
-.dropdown-content a {
-    color: #eb0936;
-}
-
-.dropdown-content a:hover {
-    background-color: var(--pink);
-    color: #ffffff;
-}
-
-/* *********************
-    STYLES
-********************* */
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropbtn {
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    min-width: 160px;
-    max-height: 70vh;
-    overflow-y: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    border-radius: 10px;
-    padding-top: 0.5rem;
-}
-
-.dropdown-content a {
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-  
-      014.      VIDEOS
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-.discipline-OP-video {
-    padding: 10rem 0rem;
-}
-
-.discipline-OP-video h2 {
-    color: var(--orange-text);
-    padding-bottom: 2rem;
-}
-
-@media screen and (max-width: 600px) {
-    .discipline-OP-video {
-        padding: 4rem 0rem;
-    }
-}
-
-.collections-OP-video {
-    padding-bottom: 10rem;
-}
-
-.collections-OP-video h2 {
-    color: var(--orange-text);
-    padding-bottom: 2rem;
-}
-
-.youtube-video {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-}
-
-#walkthrough-video {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.coloured-block-section {
-    background-color: var(--footer-background);
-    /* padding: 6rem; */
-    color: var(--black-text);
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    /* This makes the CONTENT line up with main's 4rem padding */
-    padding: 5rem 10rem;
-    box-sizing: border-box;
-}
-
-.coloured-block-section video {
-    padding: 2rem 0rem;
-}
-
-.coloured-block-section h2 {
-    color: var(--orange-text);
-    font-weight: 800;
-}
-
-@media screen and (max-width: 1170px) {
-    .coloured-block-section {
-        padding-left: 4rem;
-        padding-right: 4rem;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .coloured-block-section {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
-}
-
-/* *********************
-    Image title
-********************* */
-
-.image-block-title {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    height: 400px;
-    overflow: hidden;
-    margin-top: 118px;
-    position: relative;
-}
-
-.image-block-title img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.image-block-title h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-}
-
-@media screen and (max-width: 1170px) {
-    .image-block-title {
-        margin-top: 37px;
-    }
-}
-
-@media screen and (max-width: 1170px) {
-    .image-block-title h1 {
-        line-height: 1.2;
-    }
-}
-
-/* *********************
-    Homescreen Looping Animation
-********************* */
-
-.looping-animation {
-    width: 100%;
-    height: calc(100vh - 118px);
-    margin-top: 118px;
-    overflow: hidden;
-}
-
-.animation-container {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-#bg-video {
-    display: block;
-    height: 100%;
-    width: auto;
-    max-width: none;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-@media screen and (max-width: 1170px) {
-    .looping-animation {
-        height: calc(100vh - 85px);
-        margin-top: 85px;
-    }
-}
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-  
-                Event header image
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-.event-header-image {
-    width: 100%;
-    height: calc(100vh - 118px);
-    margin-top: 118px;
-    overflow: hidden;
-}
-
-.event-header-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-}
-
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-  
-      015.      TITLE HEADER
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-.coloured-block-title {
-    background-color: var(--footer-background);
-    /* padding: 6rem; */
-    color: var(--black-text);
-    width: 100vw;
-    margin-top: 118px;
-    margin-left: calc(-50vw + 50%);
-    /* This makes the CONTENT line up with main's 4rem padding */
-    padding: 10rem 10rem;
-    box-sizing: border-box;
-}
-
-.coloured-block-title-communication {
-    background-color: var(--comms-green);
-    /* padding: 6rem; */
-    color: var(--black-text);
-    width: 100vw;
-    margin-top: 118px;
-    margin-left: calc(-50vw + 50%);
-    /* This makes the CONTENT line up with main's 4rem padding */
-    padding: 10rem 10rem;
-    box-sizing: border-box;
-}
-
-.coloured-block-title h2 {
-    color: var(--orange-text);
-    font-weight: 800;
-}
-
-@media screen and (max-width: 925px) {
-    .coloured-block-title {
-        padding-left: 4rem;
-        padding-right: 4rem;
-    }
-}
-
-/* *********************
-    Image
-********************* */
-
-.title-header {
-    margin-top: 118px;
-}
-
-.title-image {
-    display: block;
-    width: 100%;
-    max-height: 620px;
-}
-
-@media screen and (max-width: 1170px) {
-    .title-header {
-        margin-top: 85px;
-    }
-}
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-  
-      015.      DEBRIEF Dates
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-.debrief-dates {
-    background-color: var(--pink);
-    /* padding: 6rem; */
-    color: var(--black-text);
-    margin-left: calc(-50vw + 50%);
-    /* This makes the CONTENT line up with main's 4rem padding */
-    padding: 2rem 6rem;
-    box-sizing: border-box;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100vw;
-}
-
-.debrief-dates-title {
-    color: var(--black-text);
-    font-weight: 800;
-    text-align: left;
-    margin: 0;
-}
-
-.debrief-dates p {
-    text-align: right;
-    margin: 0;
-}
-
-.mobile-break {
-    display: none;
-}
-
-@media screen and (max-width: 1170px) {
-    .debrief-dates-title {
-        font-size: 1.5rem;
-    }
-
-    .debrief-dates p {
-        font-size: 1rem;
-    }
-}
-
-@media screen and (max-width: 925px) {
-    .debrief-dates {
-        padding-left: 4rem;
-        padding-right: 4rem;
-        gap: 4rem;
-    }
-    .mobile-break {
-        display: inline;
-    }
-}
-
-@media screen and (max-width: 707px) {
-    .debrief-dates {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5rem;
-    }
-
-    .desktop-break {
-        display: none;
-    }
-
-    .mobile-break {
-        display: none;
-    }
-
-    .debrief-dates-title {
-        font-size: 1.5rem;
-    }
-
-    .debrief-dates p {
-        font-size: 1rem;
-        text-align: left;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .debrief-dates-title {
-        font-size: 1.2rem;
-    }
-}
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-  
-      016.      STUDENT SELECTOR GRID
-  
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-@supports (display: grid) {
-
-    .student-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 4rem 4rem;
-
-        width: min(95%, 70em);
-        margin-inline: auto;
-        padding: 10rem 0rem;
-    }
-
-
-    /* CARD */
-
-    .student-card {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        row-gap: 1rem;
-        transition: transform 0.5s ease;
-    }
-
-    .student-card:hover {
-        transform: scale(1.1);
-    }
-
-
-    /* SQUARE IMAGE */
-
-    .student-card__image {
-        grid-column: 1 / -1;
-
-        width: 100%;
-        aspect-ratio: 1 / 1;
-
-        object-fit: cover;
-        display: block;
-        transition: filter 0.5s ease;
-        }
-
-
-    /* PROFILE + NAME */
-
-    .student-card__info {
-        grid-column: 1 / -1;
-
-        display: grid;
-        grid-template-columns: 3.5rem 1fr;
-        column-gap: 1rem;
-
-        align-items: center;
-    }
-
-
-    /* CIRCLE PROFILE IMAGE */
-
-    .student-card__profile {
-        width: 3.5rem;
-        height: 3.5rem;
-
-        border-radius: 50%;
-        object-fit: cover;
-        display: block;
-        transition: filter 0.5s ease;
-    }
-
-    .student-card:hover .student-card__image {
-        filter: grayscale(100%);
-    }
-
-    .student-card:hover .student-card__profile {
-        filter: grayscale(100%);
-    }
-
-
-    /* H3 */
-
-    .student-card h3 {
-        margin: 0;
-
-        font-size: 1.2rem;
-        font-weight: 600;
-    }
-}
-
-
-@media screen and (max-width: 925px) {
-    .student-grid {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 5rem 0rem;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .student-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-  
-      016.      EVENTS GRID
+      023.      EVENTS GRID
   
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
@@ -2401,7 +2485,7 @@ ul.footer__menu__list li a:hover {
     .event-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 3rem 4rem;
+        gap: 2rem 10rem;
 
         width: min(95%, 70em);
         margin-inline: auto;
@@ -2434,7 +2518,7 @@ ul.footer__menu__list li a:hover {
         grid-column: 1 / -1;
 
         width: 100%;
-        aspect-ratio: 1 / 1;
+        height: 100%;
 
         object-fit: cover;
         display: block;
@@ -2458,15 +2542,416 @@ ul.footer__menu__list li a:hover {
     }
 }
 
-@media screen and (max-width: 925px) {
+@media screen and (max-width: 1170px) {
     .event-grid {
         grid-template-columns: repeat(2, 1fr);
         padding: 5rem 0rem;
+        gap: 2rem 4rem;
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     .event-grid {
         grid-template-columns: 1fr;
+        gap: 6rem 0rem;
     }
 }
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    024.    EVENT POSTER & DESCRIPTION
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+.event-header-image {
+    width: 100%;
+    height: calc(100vh - 118px);
+    margin-top: 118px;
+    overflow: hidden;
+}
+
+.event-header-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.event-description {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: stretch;
+    min-height: calc(100vh - 118px);
+    padding: 10rem 0rem 4rem 0rem;
+}
+
+/* TEXT */
+
+.event-poster-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-self: center;
+}
+
+.event-poster-text h2,
+.event-poster-text h3,
+.event-poster-text p {
+    margin: 0;
+}
+
+.event-poster-text h2 {
+    color: var(--orange-text);
+}
+
+/* POSTER */
+
+.event-poster-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: calc(100vh - 118px);
+}
+
+.event-poster-image img {
+    max-width: 100%;
+    max-height: calc(100vh - 118px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 1170px) {
+    .event-description {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: stretch;
+        min-height: calc(100vh - 118px);
+        padding: 6rem 0rem 4rem 0rem;
+    }  
+}
+
+@media screen and (max-width: 825px) {
+    .event-description {
+        grid-template-columns: 1fr;
+    }
+
+    .event-poster-image {
+        order: 1;
+    }
+
+    .event-poster-text {
+        order: 2;
+    }
+}
+
+
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+  
+    025.  WEBSITE FOOTER
+  
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
+
+footer {
+    background-color: var(--footer-background);
+    padding: 2rem;
+    border-top: 10px solid var(--pink);
+    font-family: var(--font-body, "Google Sans", sans-serif);
+}
+
+footer p {
+    font-size: .8rem;
+    font-weight: 500;
+}
+
+footer h2 {
+    margin-bottom: 2rem;
+    color: var(--orange-text);
+    font-weight: 700px;
+}
+
+@supports (display: grid) {
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-gap: 2rem;
+    }
+}
+
+.footer__image__logo {
+    max-width: 100%;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+.footer-grid article:first-child {
+    min-width: 0;
+    padding-right: 2rem;
+    box-sizing: border-box;
+}
+
+ul.footer__menu__list {
+    list-style-type: none;
+    padding: 0 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* controls spacing between items */
+}
+
+.footer__menu {
+    display: flex;
+    flex-direction: column;
+}
+
+ul.footer__menu__list {
+    list-style-type: none;
+}
+
+ul.footer__menu__list li a {
+    text-decoration: none;
+    color: var(--black-text);
+}
+
+ul.footer__menu__list li a:hover {
+    text-decoration: underline;
+}
+
+.footer__copyright-details p {
+    font-size: .8rem;
+    font-weight: 200;
+    font-style: italic;
+}
+
+.footer__copyright-details {
+    margin-top: auto;
+    padding-bottom: 1rem;
+}
+
+
+/* *********************
+    FOOTER MEDIA QUERIES
+   ********************* */
+
+@media screen and (max-width: 1120px) {
+    .footer-grid {
+        grid-template-columns: repeat(auto-fit, minmax(6.25rem, 1fr));
+    }
+
+    .footer__menu {
+        padding: 0;
+    }
+
+    footer p {
+        font-size: 1rem;
+    }
+}
+
+
+/* *********************
+    FOOTER DROPDOWN BASE
+   ********************* */
+
+.footer__dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding: 0;
+    border: none;
+    background: none;
+
+    text-align: left;
+}
+
+.footer__dropdown h2 {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+.footer__arrow {
+    display: none;
+}
+
+
+/* *********************
+    FOOTER — 877px
+   ********************* */
+
+@media screen and (max-width: 877px) {
+
+    /* FOOTER GRID */
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+
+        grid-template-areas:
+            "logo social"
+            "logo graduates"
+            "logo events";
+
+        gap: 0rem;
+    }
+
+    .footer__image__logo {
+        max-height: 300px;
+    }
+
+    .footer-grid article:nth-child(1) {
+        grid-area: logo;
+    }
+
+    .footer-grid article:nth-child(2) {
+        grid-area: events;
+    }
+
+    .footer-grid article:nth-child(3) {
+        grid-area: graduates;
+    }
+
+    .footer-grid article:nth-child(4) {
+        grid-area: social;
+    }
+
+
+    /* DROPDOWN */
+
+    .footer__dropdown {
+        cursor: pointer;
+    }
+
+    .footer__dropdown h2 {
+        margin-bottom: 0;
+    }
+
+
+    /* ARROW */
+
+    .footer__arrow {
+        display: block;
+
+        width: 15px;
+        height: 15px;
+
+        border-right: 5px solid var(--orange-text);
+        border-bottom: 5px solid var(--orange-text);
+
+        transform: rotate(45deg);
+        transition: transform 0.5s ease;
+    }
+
+
+    /* LINKS */
+
+    .footer__menu__list {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+
+        transition:
+            max-height 0.4s ease,
+            opacity 0.3s ease;
+    }
+
+    .footer__menu.open .footer__menu__list {
+        max-height: 500px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+
+    /* INDIVIDUAL LINK ANIMATION */
+
+    .footer__menu__list li {
+        opacity: 0;
+        transform: translateY(-8px);
+
+        transition:
+            opacity 0.5s ease,
+            transform 0.5s ease;
+    }
+
+    .footer__menu.open .footer__menu__list li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+    /* STAGGER */
+
+    .footer__menu.open .footer__menu__list li:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    .footer__menu.open .footer__menu__list li:nth-child(2) {
+        transition-delay: 0.2s;
+    }
+
+    .footer__menu.open .footer__menu__list li:nth-child(3) {
+        transition-delay: 0.3s;
+    }
+
+    .footer__menu.open .footer__menu__list li:nth-child(4) {
+        transition-delay: 0.4s;
+    }
+
+    .footer__menu.open .footer__menu__list li:nth-child(5) {
+        transition-delay: 0.5s;
+    }
+
+    .footer__menu.open .footer__menu__list li:nth-child(6) {
+        transition-delay: 0.6s;
+    }
+
+
+    /* ARROW ROTATION */
+
+    .footer__menu.open .footer__arrow {
+        transform: rotate(225deg);
+    }
+}
+
+
+/* *********************
+    FOOTER — 450px
+   ********************* */
+
+@media screen and (max-width: 450px) {
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "logo"
+            "social"
+            "graduates"
+            "events";
+
+        gap: 0;
+    }
+
+    .footer-grid article:nth-child(1) {
+        grid-area: logo;
+    }
+
+    .footer-grid article:nth-child(2) {
+        grid-area: events;
+    }
+
+    .footer-grid article:nth-child(3) {
+        grid-area: graduates;
+    }
+
+    .footer-grid article:nth-child(4) {
+        grid-area: social;
+    }
+}
+
+/* = = =   E N D   O F   T H E   C S S  = = = */

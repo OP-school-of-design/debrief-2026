@@ -1,0 +1,11 @@
+{#- DATES BANNER. Set bannerTitleText and bannerDetailsText before including.
+    In the dashboard: a new line in the title = line break on desktop only; in the details,
+    a new line = line break, and "//" = line break on phones only. -#}
+        <section class="debrief-dates">
+            <h2 class="debrief-dates-title">
+                {{ bannerTitleText | bannerTitle | safe }}
+            </h2>
+            <p>
+                {{ bannerDetailsText | bannerDetails | safe }}
+            </p>
+        </section>

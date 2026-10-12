@@ -1,48 +1,72 @@
 ---
 layout: layouts/base.njk
+hasCarousel: true
 ---
-<main id="main">
-    <!-- DESCRIPTION & POSTER -->
+<main>
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+          DESCRIPTION & POSTER
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
     <section class="event-description">
         <div class="event-poster-text">
-            <h2>{{ heading or title }}</h2>
-            {%- if detailDatesLine %}<h3>{{ detailDatesLine | nl2br | safe }}</h3>{%- endif %}
+            <h2> {{ heading or title }} </h2>
+            {%- if detailDatesLine %}
+            <h3> {{ detailDatesLine | nl2br | safe }} </h3>
+            {%- endif %}
             {{ content | safe }}
         </div>
         {%- if poster %}
         <div class="event-poster-image">
-            <img src="{{ page | entryImg(poster) }}" alt="{{ posterAlt or (title ~ ' poster') }}" class="event-poster" sizes="(min-width: 601px) 50vw, 90vw">
+            {%- set posterSrc = page | entryImg(poster) %}
+            <img src="{{ posterSrc }}" alt="{{ posterAlt }}" class="event-poster" sizes="{{ posterSrc | naturalSizes }}">
         </div>
         {%- endif %}
     </section>
 
-    <!-- DATES BANNER (same look as the front page banner) -->
-    {%- if bannerTitle %}
-    <section class="debrief-dates">
-        <h2 class="debrief-dates-title">{{ bannerTitle | nl2br("desktop-break") | safe }}</h2>
-        {%- if bannerDetails %}<p>{{ bannerDetails | nl2br | safe }}</p>{%- endif %}
-    </section>
-    {%- endif %}
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-    <!-- CAROUSEL: can be switched on/off per event in the dashboard -->
-    {% set carouselImgBase = page %}
-    {% set carouselShow = showCarousel %}
-    {% set carouselSlides = carousel %}
-    {% set carouselAutoplay = carouselAutoplay %}
-    {% set carouselInterval = carouselInterval %}
-    {% set carouselLabel = title %}
-    {% include "partials/carousel.njk" %}
+            DATES BANNER
 
-    <!-- EVENT VIDEO -->
-    {%- set embedSrc = videoUrl | embed %}
-    {%- if embedSrc %}
-    <section class="event-video">
-        <h2>{{ videoTitle or title }}</h2>
-        <div class="youtube-video">
-            <iframe id="walkthrough-video" src="{{ embedSrc }}" title="{{ videoTitle or title }} (video)" loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-    </section>
-    {%- endif %}
-</main>
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+{%- if bannerTitle %}
+{%- set bannerTitleText = bannerTitle %}
+{%- set bannerDetailsText = bannerDetails %}
+{% include "partials/dates-banner.njk" %}
+{%- endif %}
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+            CAROUSEL (switched on/off per event in the dashboard)
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+{%- set carouselEntry = page %}
+{%- set carouselShow = showCarousel %}
+{%- set carouselSlides = carousel %}
+{%- set carouselAutoplay = carouselAutoplay %}
+{%- set carouselInterval = carouselInterval %}
+{%- set carouselText = moreText %}
+{%- set carouselLabel = title %}
+{% include "partials/carousel.njk" %}
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+            EVENT VIDEO
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+        {%- if videoUrl | embed %}
+        <section class="event-video">
+            <h2>
+                {{ videoTitle }}
+            </h2>
+{%- set videoSrc = videoUrl %}
+{%- set videoName = videoTitle %}
+{% include "partials/video.njk" %}
+        </section>
+        {%- endif %}
+    </main>

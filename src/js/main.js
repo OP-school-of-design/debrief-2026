@@ -1,46 +1,48 @@
-/* Site-wide behaviour: mobile menu, dropdowns, footer accordions, School of Design discipline toggle.
-   (Moved out of the inline <script> blocks that were repeated on every page.) */
-(function () {
-    "use strict";
+/* The students' own page scripts, written once here instead of repeated inline on every page.
+   toggleMenu() and toggleDropdown() stay global because the header buttons call them via onclick. */
 
-    // Mobile hamburger menu
+/* MOBILE MENU */
+function toggleMenu() {
     var nav = document.getElementById("myTopnav");
-    var menuButton = document.getElementById("menuToggle");
-    if (nav && menuButton) {
-        var iconOpen = menuButton.querySelector("[data-icon-open]");
-        var iconClose = menuButton.querySelector("[data-icon-close]");
-        menuButton.addEventListener("click", function () {
-            var open = nav.classList.toggle("responsive");
-            menuButton.setAttribute("aria-expanded", String(open));
-            if (iconOpen) iconOpen.hidden = open;
-            if (iconClose) iconClose.hidden = !open;
-        });
+    var button = document.getElementById("menuToggle");
+    var icon = document.getElementById("menuIcon");
+
+    if (nav.className === "topnav") {
+        nav.className += " responsive";
+        icon.textContent = "close";
+        button.setAttribute("aria-expanded", "true");
+    } else {
+        nav.className = "topnav";
+        icon.textContent = "menu";
+        button.setAttribute("aria-expanded", "false");
     }
+}
 
-    // Dropdown sub-menus in the mobile menu
-    document.querySelectorAll(".dropdown-toggle").forEach(function (toggle) {
-        toggle.addEventListener("click", function () {
-            if (window.innerWidth <= 1170) {
-                var open = toggle.closest(".dropdown").classList.toggle("open");
-                toggle.setAttribute("aria-expanded", String(open));
-            }
-        });
-    });
+/* NAVIGATION DROPDOWN */
+function toggleDropdown(button) {
+    if (window.innerWidth <= 1170) {
+        var dropdown = button.closest(".dropdown");
+        if (dropdown) {
+            dropdown.classList.toggle("open");
+        }
+    }
+}
 
-    // Footer accordions
-    document.querySelectorAll(".footer__dropdown").forEach(function (button) {
-        button.addEventListener("click", function () {
-            button.closest(".footer__menu").classList.toggle("open");
-        });
+/* FOOTER DROPDOWNS */
+document.querySelectorAll(".footer__dropdown").forEach(function (dropdown) {
+    dropdown.addEventListener("click", function () {
+        var menu = dropdown.closest(".footer__menu");
+        menu.classList.toggle("open");
     });
+});
 
-    // School of Design page: "Explore the Disciplines" toggle
-    document.querySelectorAll(".discipline-toggle").forEach(function (toggle) {
-        toggle.addEventListener("click", function () {
-            var grid = toggle.parentElement.querySelector(".discipline__grid");
-            var open = toggle.classList.toggle("open");
-            toggle.setAttribute("aria-expanded", String(open));
-            if (grid) grid.classList.toggle("open", open);
-        });
+/* DISCIPLINE GRID TOGGLE (School of Design page) - works at all screen sizes */
+document.querySelectorAll(".discipline-toggle").forEach(function (toggle) {
+    toggle.addEventListener("click", function () {
+        var grid = toggle.parentElement.querySelector(".discipline__grid");
+        toggle.classList.toggle("open");
+        if (grid) {
+            grid.classList.toggle("open");
+        }
     });
-})();
+});

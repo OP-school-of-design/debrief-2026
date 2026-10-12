@@ -3,8 +3,28 @@ layout: layouts/base.njk
 title: All Graduates
 permalink: /graduates/
 ---
-{% set grads = collections.graduates %}
-<main id="main">
-    <h1 class="visually-hidden">All Graduates</h1>
-    {% include "partials/student-grid.njk" %}
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+            PAGE BANNER
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+    <section class="image-block-title">
+            <img src="{{ graduatespage.bannerImage }}" alt="{{ graduatespage.bannerAlt }}" sizes="100vw" loading="eager">
+                <h1>
+                    {{ graduatespage.title }}
+                </h1>
+    </section>
+
+<main>
+
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+            STUDENT SELECTOR GRID
+
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+{%- set grads = collections.graduates %}
+{% include "partials/student-grid.njk" %}
+
 </main>

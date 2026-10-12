@@ -1,52 +1,59 @@
-<footer>
-    <div class="footer-grid">
+        <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-        <article class="footer__image">
-            <img src="{{ site.footerLogo }}" alt="{{ site.footerLogoAlt }}" class="footer__image__logo" eleventy:widths="400,800" sizes="(min-width: 926px) 25vw, 60vw">
-        </article>
+          FOOTER (written once, used on every page)
 
-        <article class="footer__menu">
-            <button class="footer__dropdown" type="button">
-                <h2>Events</h2>
-                <span class="footer__arrow"></span>
-            </button>
-            <ul class="footer__menu__list">
-                {%- for e in collections.events %}
-                <li><a href="{{ e.url | url }}">{{ e.data.navLabel or e.data.title }}</a></li>
-                {%- endfor %}
-            </ul>
+        = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-            <div class="footer__copyright-details">
-                <p>{{ site.footerNote | nl2br | safe }}</p>
-                <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span
-                    property="dct:title">This website</span> by <span property="cc:attributionName">{{ site.websiteCredit }}</span></p>
+        <footer>
+            <div class="footer-grid">
+
+                <article class="footer__image">
+                    <img src="{{ site.footerLogo }}" alt="{{ site.footerLogoAlt }}" class="footer__image__logo" eleventy:widths="400,800,1200" sizes="{{ site.footerLogo | naturalSizes }}">
+                </article>
+
+                <article class="footer__menu">
+                    <button class="footer__dropdown" type="button">
+                        <h2>Events</h2>
+                        <span class="footer__arrow"></span>
+                    </button>
+                    <ul class="footer__menu__list">
+                        {%- for e in collections.events %}
+                        <li><a href="{{ e.url | url }}">{{ e.data.footerLabel or e.data.navLabel or e.data.title }}</a></li>
+                        {%- endfor %}
+                    </ul>
+
+                    <div class="footer__copyright-details">
+                        <p>{{ site.footerNote | nl2br | safe }}</p>
+                        <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span
+                        property="dct:title">This website</span> by <span property="cc:attributionName">{{ site.websiteCredit }}</span></p>
+                    </div>
+
+                </article>
+
+                <article class="footer__menu">
+                    <button class="footer__dropdown" type="button">
+                        <h2>Graduates</h2>
+                        <span class="footer__arrow"></span>
+                    </button>
+                    <ul class="footer__menu__list">
+                        {%- for d in collections.disciplines %}
+                        <li><a href="{{ ('/graduates/' ~ d.data.disciplineKey ~ '/') | url }}">{{ d.data.title }}</a></li>
+                        {%- endfor %}
+                    </ul>
+                </article>
+
+                <article class="footer__menu">
+                    <button class="footer__dropdown" type="button">
+                        <h2>Social links</h2>
+                        <span class="footer__arrow"></span>
+                    </button>
+                    <ul class="footer__menu__list">
+                        {%- for s in site.socials %}
+                        <li><a href="{{ s.url }}" target="_blank"><i class="{{ s.icon | faClass }}"></i> {{ s.label }}</a></li>
+                        {%- endfor %}
+                    </ul>
+                </article>
+
             </div>
-        </article>
 
-        <article class="footer__menu">
-            <button class="footer__dropdown" type="button">
-                <h2>Graduates</h2>
-                <span class="footer__arrow"></span>
-            </button>
-            <ul class="footer__menu__list">
-                {%- for d in collections.disciplines %}
-                <li><a href="{{ ('/graduates/' ~ d.data.disciplineKey ~ '/') | url }}">{{ d.data.title }}</a></li>
-                {%- endfor %}
-            </ul>
-        </article>
-
-        <article class="footer__menu">
-            <button class="footer__dropdown" type="button">
-                <h2>Social links</h2>
-                <span class="footer__arrow"></span>
-            </button>
-            <ul class="footer__menu__list">
-                {%- for s in site.socials %}
-                <li><a href="{{ s.url }}" target="_blank" rel="noopener">{% icon s.icon %} {{ s.label }}</a></li>
-                {%- endfor %}
-            </ul>
-        </article>
-
-    </div>
-    <!-- Icons: Font Awesome Free 6 (https://fontawesome.com), icons licensed CC BY 4.0 -->
-</footer>
+        </footer>

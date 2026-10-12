@@ -7,14 +7,14 @@
 {%- else -%}
   {%- set pageTitle = (seoTitle or title) ~ " | " ~ site.name -%}
   {%- set pageDesc = metaDescription or site.description -%}
-{%- endif -%}
+{%- endif %}
     <title>{{ pageTitle }}</title>
     <meta name="description" content="{{ pageDesc }}">
     {%- if site.url %}
     <link rel="canonical" href="{{ site.url | trimSlash }}{{ page.url }}">
     <meta property="og:url" content="{{ site.url | trimSlash }}{{ page.url }}">
     {%- endif %}
-    <meta property="og:locale" content="{{ site.ogLocale or 'en_NZ' }}">
+    <meta property="og:locale" content="en_NZ">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ pageTitle }}">
     <meta property="og:description" content="{{ pageDesc }}">
