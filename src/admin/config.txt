@@ -12,6 +12,7 @@
 #  Graduates, disciplines and events keep their images in their own folder (media_folder: "").
 # ================================================================
 
+publish_mode: editorial_workflow
 backend:
   name: github
   repo: OP-school-of-design/debrief-2026
