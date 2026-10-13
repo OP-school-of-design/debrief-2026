@@ -10,7 +10,8 @@
 <body>
   <!-- Decap CMS 3.16.3, served from this site (see decap-3.16.3/VERSION.txt), not from a public CDN. -->
   <script src="decap-3.16.3/decap-cms.js"></script>
-  <!-- Makes image thumbnails appear once their picture has loaded (works around a Decap bug). -->
-  <script src="image-thumbnail-fix.js"></script>
+  <!-- Makes image thumbnails appear once their picture has loaded (works around a Decap bug).
+       The ?v= stamp changes on every deploy, so browsers always load the current version. -->
+  <script src="image-thumbnail-fix.js?v={{ build.version }}"></script>
 </body>
 </html>

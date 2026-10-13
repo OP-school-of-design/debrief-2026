@@ -93,7 +93,6 @@ export default function (eleventyConfig) {
     "src/.htaccess": ".htaccess",
     "src/images/**/*.svg": "images",
     "src/admin/config.txt": "admin/config.txt",
-    "src/admin/index.html": "admin/index.html",
     "src/admin/image-thumbnail-fix.js": "admin/image-thumbnail-fix.js",
     "src/admin/decap-3.16.3": "admin/decap-3.16.3",
     "src/admin/.htaccess": "admin/.htaccess",

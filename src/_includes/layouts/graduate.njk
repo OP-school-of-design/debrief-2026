@@ -47,9 +47,11 @@ hasLightbox: true
 {%- endset %}
 
 {%- set heroImage %}
+{%- if hero %}
         <article class="portfolio-hero-image{{ sn }}">
-            <img src="{{ page | gradImg(hero, 'hero') }}" alt="{{ heroAlt }}" sizes="(min-width: 1171px) 80vw, 100vw">
+            <img src="{{ page | entryImg(hero) }}" alt="{{ heroAlt }}" sizes="(min-width: 1171px) 80vw, 100vw">
         </article>
+{%- endif %}
 {%- endset %}
 
 {%- set gallerySection %}

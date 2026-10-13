@@ -94,7 +94,10 @@ collections:
     name: cover
     widget: image
     required: false
-    hint: 'Optional until supplied: a placeholder shows until you add one.'
+    hint: 'Optional until supplied: the graduate grids show a plain grey placeholder card until you add one.'
+    media_library:
+      config:
+        max_file_size: 10000000
   - label: Card image description (alt text)
     name: coverAlt
     widget: string
@@ -104,7 +107,10 @@ collections:
     name: hero
     widget: image
     required: false
-    hint: 'Optional until supplied: a placeholder shows until you add one.'
+    hint: 'Optional: until you add one, the page simply has no hero image.'
+    media_library:
+      config:
+        max_file_size: 10000000
   - label: Hero image description (alt text)
     name: heroAlt
     widget: string
@@ -115,6 +121,9 @@ collections:
     widget: image
     required: false
     hint: 'Optional until supplied: a grey head-and-shoulders placeholder shows until you add one.'
+    media_library:
+      config:
+        max_file_size: 10000000
   - label: Headshot description (alt text)
     name: headshotAlt
     widget: string
@@ -164,6 +173,9 @@ collections:
     - label: Image
       name: image
       widget: image
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Description (alt text)
       name: alt
       widget: string
@@ -245,6 +257,9 @@ collections:
     name: symbol
     widget: image
     required: false
+    media_library:
+      config:
+        max_file_size: 10000000
   - label: Box colour on the School of Design page
     name: boxColour
     widget: color
@@ -255,6 +270,9 @@ collections:
     name: gradBannerImage
     widget: image
     required: false
+    media_library:
+      config:
+        max_file_size: 10000000
   - label: 'Graduates page: banner description (alt text)'
     name: gradBannerAlt
     widget: string
@@ -264,6 +282,9 @@ collections:
     name: bannerImage
     widget: image
     required: false
+    media_library:
+      config:
+        max_file_size: 10000000
   - label: 'About page: banner description (alt text)'
     name: bannerAlt
     widget: string
@@ -283,6 +304,9 @@ collections:
     name: image
     widget: image
     required: false
+    media_library:
+      config:
+        max_file_size: 10000000
   - label: 'About page: introduction image description (alt text)'
     name: imageAlt
     widget: string
@@ -329,6 +353,9 @@ collections:
     - label: Image (landscape works best)
       name: image
       widget: image
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Description (alt text)
       name: alt
       widget: string
@@ -390,6 +417,9 @@ collections:
     name: poster
     widget: image
     hint: Shown on the events grid and on this event's page.
+    media_library:
+      config:
+        max_file_size: 10000000
   - label: Poster description (alt text)
     name: posterAlt
     widget: string
@@ -453,9 +483,15 @@ collections:
     - label: 'Logo animation: desktop (SVG)'
       name: heroDesktop
       widget: image
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: 'Logo animation: phones (SVG)'
       name: heroMobile
       widget: image
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Logo animation description (alt text)
       name: heroAlt
       widget: string
@@ -478,6 +514,9 @@ collections:
       name: introImage
       widget: image
       required: false
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Introduction image description (alt text)
       name: introImageAlt
       widget: string
@@ -523,6 +562,9 @@ collections:
       name: quoteImage
       widget: image
       required: false
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Quote image description (alt text)
       name: quoteImageAlt
       widget: string
@@ -545,6 +587,9 @@ collections:
     - label: Banner image
       name: bannerImage
       widget: image
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Banner description (alt text)
       name: bannerAlt
       widget: string
@@ -565,6 +610,9 @@ collections:
       name: descImage
       widget: image
       required: false
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Description image description (alt text)
       name: descImageAlt
       widget: string
@@ -628,6 +676,9 @@ collections:
     - label: Banner image
       name: bannerImage
       widget: image
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Banner description (alt text)
       name: bannerAlt
       widget: string
@@ -855,6 +906,9 @@ collections:
     - label: Header logo
       name: navLogo
       widget: image
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Header logo description (alt text)
       name: navLogoAlt
       widget: string
@@ -863,6 +917,9 @@ collections:
     - label: Footer logo
       name: footerLogo
       widget: image
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Footer logo description (alt text)
       name: footerLogoAlt
       widget: string
@@ -876,6 +933,9 @@ collections:
       public_folder: favicon
       choose_url: false
       hint: The small icon in the browser tab and on phone home screens. Use a square PNG or SVG, at least 512 × 512 px, that still reads when tiny. To replace it, click the image and choose or upload another. Leave empty for no favicon.
+      media_library:
+        config:
+          max_file_size: 10000000
     - label: Footer copyright note
       name: footerNote
       widget: text
