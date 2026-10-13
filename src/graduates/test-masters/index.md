@@ -9,8 +9,11 @@ projectDescription: "Masters test Masters test Masters test Masters test Masters
   test Masters test Masters test Masters test Masters test Masters test Masters
   test Masters test Masters test Masters test Masters test Masters test Masters
   test Masters test "
+cover: screenshot-2026-05-12-at-7.34.28-pm.png
 coverAlt: alt text
+hero: screenshot-2026-05-12-at-7.34.28-pm.png
 heroAlt: alt text
+headshot: screenshot-2026-09-01-at-10.44.03-am.png
 headshotAlt: alt text
 quote: alt textalt textalt textalt textalt textalt textalt text
 links:
