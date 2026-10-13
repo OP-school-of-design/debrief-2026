@@ -17,39 +17,37 @@ The site is hosted via Siteground to maintain consistency with the address https
 | **Design → Colour palette** | Colour pickers for every colour on the site, plus four optional ones (carousel caption background/text, `dark-text`, `cream-text`) that stay unset unless you fill them in. |
 | **Design → Custom CSS** | A CSS code box loaded after everything else, for small style tweaks without touching code. Empty by default. |
 | **Design → Typography** | Heading font and body font (23 choices). From Google fonts. |
-| **Site settings** | Site name, description, logos, **favicon**, footer note, social links. |
+| **Site settings** | Site name, description, logos, favicon, footer note, social links. |
 
 **Carousel on/off:** Disciplines or Events → pick one → **Show the carousel on this page**. Off = hidden (the slides are kept). There's also an "advance automatically" option with a pause button; automatic advance is ignored for visitors who have "reduce motion" switched on.
 
-**Graduate categories (Disciplines):** Communication, Fashion and Product Design, the three Graduate Diplomas, Bachelor of Design (Honours) and Masters, in that order (the **Order** number). Each has its own graduates page at `/graduates/<key>/` with its own banner (**Graduates page: banner image**; a placeholder is used until one is added). The switches on each one:
+**Graduate categories (Disciplines):** Communication, Fashion and Product Design, the three Graduate Diplomas, Bachelor of Design (Honours) and Masters, in that order (see the **Order** number). Each has its own graduates page at `/graduates/<key>/` with its own banner (**Graduates page: banner image**; a placeholder is used until one is added). The switches on each one:
 * **Show in the All Graduates menu**: it's a graduate category (top menu, footer, its own page, and the graduate Discipline dropdown).
 * **Only show when it has published graduates**: on (the default) for the Graduate Diplomas, Honours and Masters, and marked "(only shown when it has published graduates)" in the Disciplines list. The menu item, footer link and page exist only while at least one *published* graduate is in that category, and disappear again on the next build if they're all removed or unpublished.
 * **Show on the School of Design page**: Communication, Fashion and Product (its coloured boxes and "About ..." menu). **About page live** switches on that discipline's About page; Communication's is live.
 
 Adding a new graduate category: add it in Disciplines, then add the same name and key to the graduate Discipline list in `src/admin/config.txt` (a fixed list, so the dropdown keeps your order).
 
-**Dates banners:** in the title, a new line is a line break on desktop only. In the details, a new line is a line break, and `//` is a line break on phones only (matching Maxis' markup).
+**SEO:** page titles, descriptions, canonical links and social-share tags are generated for every page. Set the **Site web address** in Site settings for canonical links. Anything extra (JSON-LD, og:image, verification tags, analytics) goes in `src/_includes/head-code.html`, edited in the codebase repo rather than the dashboard because it runs on every page. This keeps things secure. Anything loaded from another website also needs adding to the security policy in `src/.htaccess` (see docs/SECURITY.md).
 
-**SEO:** page titles, descriptions, canonical links and social-share tags are generated for every page. Set the **Site web address** in Site settings for canonical links. Anything extra (JSON-LD, og:image, verification tags, analytics) goes in `src/_includes/head-code.html`, edited in the repo rather than the dashboard because it runs on every page. Anything loaded from another website also needs adding to the security policy in `src/.htaccess` (see docs/SECURITY.md).
-
-**Fonts:** chosen fonts are built into the site and served from our own server (nothing is requested from Google). Both `latin` and `latin-ext` are included, so macrons (ā ē ī ō ū) display correctly in every font on the list.
+**Typefaces:** chosen fonts are built into the site and served from our own server (nothing is requested from Google). Both `latin` and `latin-ext` are included, so macrons (ā ē ī ō ū) display correctly in every font on the font list.
 
 ### Images
-Editors upload normal images (any size). The build makes WebP versions at **400, 800, 1200, 1600 and 2000 px wide** (never enlarged beyond the original; transparency is kept), writes `width`/`height` so there is no layout jump, and the browser downloads only the size it needs. The page markup stays exactly as Maxis wrote it (plain `<img>` tags). Keep originals **at least 2000 px wide** for full-width banners.
-Add a description (alt text) for every image in the dashboard, for people using screen readers.
+Editors upload normal images (any size). Our special build makes WebP versions at **400, 800, 1200, 1600 and 2000 px wide** (never enlarged beyond the original; transparency is kept), writes `width`/`height` so there is no layout jump, and the browser downloads only the size it needs. The page markup stays exactly as the original HTML/CSS: (plain `<img>` tags).  Originals are **at least 2000 px wide** for full-width banners.
+Remember to add a description (alt text) for every image in the dashboard, for people using screen readers – **important for accessibility**.
 
-The front-page logo animations are SVG files and are used as they are. Their embedded textures were converted from PNG to WebP (23 MB → 6 MB each), and each visitor downloads only the version for their screen size.
+The front-page logo animation **should be** an SVG file, but the MP4 is the placeholder until changed. Their embedded textures were converted from PNG to WebP (23 MB → 6 MB each), and each visitor downloads only the version for their screen size.
 
 ### Caching on SiteGround
-`src/.htaccess` (deployed next to `index.html`) tells browsers and SiteGround to check for a newer copy of every page on each visit, and every CSS/JS link carries a version stamp that changes on each build (`src/_data/build.js`). Together these mean a deploy should show up without purging caches. If pages still look stale after a deploy, SiteGround's **NGINX Direct Delivery** (Site Tools → Speed → Caching) may be ignoring `.htaccess` for static files. Turning it off routes those files through `.htaccess`, but it applies to the whole design.ac.nz site, so check with whoever manages that first.
+`src/.htaccess` (deployed next to `index.html`) tells browsers and SiteGround to check for a newer copy of every page on each visit, and every CSS/JS link carries a version stamp that changes on each build (`src/_data/build.js`). Together these mean a deploy should show up without purging caches. If pages still look stale after a deploy, SiteGround's **NGINX Direct Delivery** (Site Tools → Speed → Caching) may be ignoring `.htaccess` for static files. Turning it off routes those files through `.htaccess`, but it applies to the whole design.ac.nz site.
 
 ### Favicon
-Site settings → **Favicon**. Upload a square PNG or SVG (at least 512 × 512 px) that still reads at tab size. The build makes a 32 px tab icon, a 192 px icon and a 180 px phone home-screen icon from it (into `/favicon/`). A see-through icon is put on white for phones, because phones show transparent icons on black. Clear the field to have no favicon. Browsers hold on to favicons, so a new one can take a refresh or two to appear in the tab.
+Site settings → **Favicon**. Upload a square PNG or SVG (at least 512 × 512 px). The build makes a 32 px tab icon, a 192 px icon and a 180 px phone home-screen icon from it (into `/favicon/`). A see-through icon is put on white for phones, because phones show transparent icons on black. Clear the field to have no favicon. Browsers hold on to favicons, so a new one can take a refresh or two to appear in the tab.
 
 ### Image paths in the dashboard
 Site-wide files (logos, page banners, the favicon, the walkthrough video) are stored without a leading slash, e.g. `images/landscape_placeholder.jpeg`. That lets the dashboard show their thumbnails; the templates add the slash back (the `siteImg` filter). `src/admin/image-thumbnail-fix.js` works around a Decap bug that otherwise left those thumbnails blank.
 
-### Phone menu
+### Mobile menu
 When its sections are expanded, the phone/tablet menu can be taller than the screen; it scrolls on its own so everything (Events, Archive) can be reached, and the close button stays on top.
 
 ### File names
