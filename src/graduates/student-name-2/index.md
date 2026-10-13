@@ -1,8 +1,6 @@
 ---
 title: Student Test
-discipline: communication
 published: true
-order: 2
 blockOrder: project
 projectName: Project Name
 projectDescription: '"For Tūhura Otago Museum Shop, I developed a collection of
@@ -15,11 +13,13 @@ projectDescription: '"For Tūhura Otago Museum Shop, I developed a collection of
   refined and mature illustrative style for tourists, creating memorable
   souvenirs that celebrate New Zealand’s natural identity while encouraging
   visitors to learn about and take a piece of Aotearoa home."'
+order: 2
+discipline: communication
 cover: cover.jpg
 coverAlt: Student Project Name
 hero: hero.jpeg
 heroAlt: ""
-headshot: headshot.jpg
+headshot: screenshot-2026-09-18-at-3.08.20-pm.png
 headshotAlt: Student Name Profile Image
 quote: “A large student quote before the project? Could be short or long. one or
   3 lines of text possibly?”
