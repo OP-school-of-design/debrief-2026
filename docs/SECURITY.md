@@ -15,6 +15,14 @@ to finish setting up the GitHub organisation.
 | **AI crawlers and site copiers** | Refused (403) by user agent: OpenAI, Anthropic, Common Crawl, ByteDance, Meta's AI crawlers, Perplexity, Amazon, Apple's AI crawler, Diffbot, Cohere and others, plus HTTrack, Scrapy and script libraries. Google, Bing, DuckDuckGo and link previews (LinkedIn, Facebook, Instagram, Slack) still work, so graduates can be found and shared. Edit the list in `.htaccess`. |
 | **Hotlinking** | Images and videos only load inside pages on design.ac.nz or op.ac.nz (or search and social sites). Opening a file directly still works. |
 
+**SiteGround's NGINX Direct Delivery** (Site Tools > Speed > Caching) serves static files (images,
+video, CSS, JS, JSON) straight from NGINX without reading `.htaccess`. While it's on, the rules above
+apply to pages but **not** to those files: hotlinking isn't blocked, and crawlers can still fetch
+images. (SiteGround: "Hotlink protection will not work with NGINX Direct Delivery enabled".) Turning
+it off makes every rule apply, at a small speed cost that SiteGround's CDN mostly hides, but it's a
+setting for the whole design.ac.nz site. The deploy tool's file list doesn't rely on it: it has a
+secret, unguessable name (repository secret `FTP_STATE_NAME`).
+
 **Limits worth knowing.** Crawler blocking relies on bots naming themselves; badly behaved scrapers can
 pretend to be a browser. robots.txt only works at the domain root (design.ac.nz/robots.txt), which
 is outside this site's folder, so it's a request for whoever manages design.ac.nz. SiteGround's CDN

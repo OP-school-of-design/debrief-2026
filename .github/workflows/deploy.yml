@@ -8,6 +8,9 @@
 #   during install. The build doesn't need them.
 # - FTPS checks the server's certificate (security: strict), so the password can only be sent to the
 #   real server. See README "Deploying" if the first run reports a certificate name mismatch.
+# - The deploy tool keeps a list of every uploaded file on the server. SiteGround's NGINX Direct
+#   Delivery serves .json files without reading .htaccess, so the list is given a secret, unguessable
+#   name (repository secret FTP_STATE_NAME) instead of the well-known default.
 name: Build and deploy
 
 on:
@@ -61,5 +64,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           security: ${{ vars.FTP_SECURITY || 'strict' }}
+          state-name: ${{ secrets.FTP_STATE_NAME || '.ftp-deploy-sync-state.json' }}
           local-dir: ./_site/
           server-dir: ${{ vars.FTP_SERVER_DIR }}   # e.g. /public_html/debrief/2026/
