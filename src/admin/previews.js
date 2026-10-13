@@ -1,11 +1,17 @@
 // Dashboard previews (the right-hand pane while editing) for Graduates, Disciplines, Events, the
 // Pages (Front page, About the School of Design, All Graduates page, Events listing page, Archive
-// menu) and Site settings. Design (colours, fonts, CSS) keeps Decap's plain preview.
+// menu), Site settings, and Design (colour palette, typography). Custom CSS keeps Decap's plain preview.
 // Decap's built-in preview just lists every field in form order at full size. These show each part
 // labelled, in the order and grouping editors think in, with images at a sensible size and notes
 // on what shows where. They're previews for editors only: the real pages use the site's design.
 (function () {
   if (!window.CMS || !window.createClass || !window.h) return;
+
+  // "?v=..." from this script's own address (admin/index.html stamps it on every deploy).
+  var VERSION = (function () {
+    var me = document.currentScript && document.currentScript.src;
+    return me && me.indexOf("?") !== -1 ? me.slice(me.indexOf("?")) : "";
+  })();
 
   var STYLE = [
     "body{margin:0;background:#fff}",
@@ -65,6 +71,17 @@
     ".gp .foot h4{margin:0 0 8px;font-size:14px;color:#ff4200}",
     ".gp .foot ul{list-style:none;margin:0;padding:0;font-size:13px}.gp .foot li{margin:0 0 5px}",
     ".gp .foot p{font-size:12px;margin:12px 0 0}",
+    ".gp .swatches{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(max(130px,calc((100% - 42px) / 4)),1fr))}",
+    ".gp .sw{border:1px solid #e3e4e8;border-radius:6px;overflow:hidden;background:#fff}",
+    ".gp .sw .chip{height:84px;border-bottom:1px solid #e3e4e8}",
+    ".gp .sw .chip.unset{background:repeating-linear-gradient(45deg,#f4f5f7 0 8px,#e9eaee 8px 16px)}",
+    ".gp .sw p{margin:0;padding:0 10px}",
+    ".gp .sw .hex{font:600 15px/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding-top:8px;letter-spacing:.02em}",
+    ".gp .sw .nm{font-size:12px;color:#5d626f;padding-bottom:9px;padding-top:3px;line-height:1.35}",
+    ".gp .spec{border:1px solid #e3e4e8;border-radius:6px;padding:20px 22px;margin:0 0 4px}",
+    ".gp .spec .big{font-size:96px;line-height:1;margin:0 0 14px}",
+    ".gp .spec .line{font-size:30px;line-height:1.3;margin:0;word-break:break-all}",
+    ".gp .spec .sample{margin:16px 0 0;padding-top:14px;border-top:1px solid #eee}",
     ".gp .navbar{background:#fff;border:1px solid #e3e4e8;padding:10px 14px;display:flex;align-items:center;gap:22px;font-size:14px}"
   ].join("\n");
 
@@ -717,6 +734,76 @@
     },
   });
 
+  // ------------------------------------------------------------------ DESIGN
+
+  var ColoursPreview = createClass({
+    render: function () {
+      var entry = this.props.entry, fields = this.props.fields;
+      var list = fields ? fields.toArray() : [];
+      return h("div", { className: "gp" },
+        h("style", null, STYLE),
+        h("h1", null, "Colour palette"),
+        h("p", { className: "sub" }, list.length + " colours, in the order of the form."),
+        section("Colours",
+          h("div", { className: "swatches" }, list.map(function (f) {
+            var name = f.get("name"), value = String(get(entry, name) || "").trim();
+            return h("div", { key: name, className: "sw" },
+              h("div", { className: "chip" + (value ? "" : " unset"), style: value ? { background: value } : null }),
+              h("p", { className: "hex" }, value ? value.toUpperCase() : "Not set"),
+              h("p", { className: "nm" }, f.get("label") || name, value ? null : h("span", null, h("br"), "Keeps the students' design")));
+          })))
+      );
+    },
+  });
+
+  var SPECIMEN = [
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "abcdefghijklmnopqrstuvwxyz",
+    "0123456789",
+    "\u0100\u0101 \u0112\u0113 \u012a\u012b \u014c\u014d \u016a\u016b  & ? ! @ % ( ) \u201c \u201d",
+  ];
+
+  function fontLabel(fields, fieldName, id) {
+    var label = id;
+    var f = fieldByName(fields, fieldName);
+    if (f && f.get("options")) f.get("options").forEach(function (o) { if (o.get && o.get("value") === id) label = o.get("label"); });
+    return label;
+  }
+
+  function specimen(family, weight, sample) {
+    var style = { fontFamily: "'" + family + "', system-ui, sans-serif", fontWeight: weight };
+    return h("div", { className: "spec", style: style },
+      h("p", { className: "big" }, "Aa"),
+      SPECIMEN.map(function (t, i) { return h("p", { key: i, className: "line" }, t); }),
+      h("p", { className: "sample" }, sample));
+  }
+
+  var TypographyPreview = createClass({
+    render: function () {
+      var entry = this.props.entry, fields = this.props.fields;
+      var head = fontLabel(fields, "headingFont", get(entry, "headingFont") || "google-sans");
+      var body = fontLabel(fields, "bodyFont", get(entry, "bodyFont") || "google-sans");
+      return h("div", { className: "gp" },
+        h("style", null, STYLE),
+        h("h1", null, "Typography"),
+        h("p", { className: "sub" }, "Type specimens of the two chosen fonts."),
+        section("Heading font: " + head + " (bold, as used for headings)",
+          specimen(head, 700, h("span", { style: { fontSize: 34, lineHeight: 1.15, display: "block" } }, "School of Design Graduate Exhibition 2026"))),
+        section("Body font: " + body + " (regular, as used for text)",
+          specimen(body, 400, h("span", { style: { fontSize: 17, lineHeight: 1.55, display: "block", maxWidth: 620 } },
+            "DEBRIEF is the annual exhibition of final-year students from the School of Design at Otago Polytechnic, Ōtepoti Dunedin. Opening 5:30pm Thursday 19 November."))),
+        head === body ? h("p", { className: "empty", style: { marginTop: 10 } }, "Both use " + head + ".") : null
+      );
+    },
+  });
+
+  // The type specimens need every font the dashboard offers: admin/fonts/fonts.css (built by
+  // lib/fonts.js). Browsers download only the fonts actually shown.
+  // It carries the same version stamp as this script, so a changed font list is picked up at once.
+  CMS.registerPreviewStyle(new URL("fonts/fonts.css", document.baseURI).href + VERSION);
+
+  CMS.registerPreviewTemplate("colours", ColoursPreview);
+  CMS.registerPreviewTemplate("typography", TypographyPreview);
   CMS.registerPreviewTemplate("frontpage", FrontPagePreview);
   CMS.registerPreviewTemplate("school", SchoolPreview);
   CMS.registerPreviewTemplate("graduatespage", GraduatesPagePreview);

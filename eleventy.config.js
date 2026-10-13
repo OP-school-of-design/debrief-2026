@@ -1,7 +1,7 @@
 import path from "node:path";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import { BASE } from "./lib/base.js";
-import { readDesign, copyFontFiles } from "./lib/fonts.js";
+import { readDesign, copyFontFiles, copyPreviewFonts } from "./lib/fonts.js";
 import { writeFavicons } from "./lib/favicon.js";
 import fs from "node:fs";
 import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg, safeUrl, gradImg, byName, byCategory } from "./lib/helpers.js";
@@ -105,6 +105,8 @@ export default function (eleventyConfig) {
   // ---------- Self-hosted text fonts: copy only the fonts chosen in the dashboard ----------
   eleventyConfig.on("eleventy.after", ({ directories, dir }) => {
     copyFontFiles(readDesign(), directories?.output || dir.output);
+    // Every font, for the dashboard's type specimens only (admin/fonts/).
+    copyPreviewFonts(directories?.output || dir.output);
   });
   eleventyConfig.addWatchTarget("src/_data/typography.json");
 
