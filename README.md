@@ -1,14 +1,14 @@
 # DEBRIEF 2026 – Otago Polytechnic School of Design graduate showcase
 
 Maxis' hand-coded site, converted to [Eleventy](https://www.11ty.dev) with a [Decap CMS](https://decapcms.org) dashboard.
-No database and no server: content lives as small files in this repo, the site builds to plain HTML, and a dashboard at `/admin/` lets faculty staff edit it.
-The site will be hosted via Siteground to maintain consistency with the address https://design.ac.nz/debrief/2026
+No database and no server: content lives as small files in this repo, the site builds to plain HTML, and a dashboard at `/admin/` lets approved admin editors edit it.
+The site is hosted via Siteground to maintain consistency with the address https://design.ac.nz/debrief/2026
 
 ---
 
 ## What's in the dashboard
 
-| Section | What staff/admin can do |
+| Section | What admin/editors can do |
 |---|---|
 | **Graduates** | Add/edit graduates: discipline (dropdown of the graduate categories, in menu order), block order (**Project first** or **Profile first** — both show the same information, just in a different order), card image, hero image, headshot, gallery images, links, quote, bio. Untick **Published** to hide someone without deleting them. |
 | **Disciplines** | The graduate categories and the School of Design disciplines: name, where it appears (switches, see below), graduates-page banner, and for the School of Design side the symbol, box colour, About page, video and **carousel**. |
