@@ -1,5 +1,13 @@
-# Builds the site on every push to main. Deploying to SiteGround is OFF until you switch it on
-# (see README "Going live"). Until then this just proves the site builds.
+# Builds the site on every push to main and uploads it to SiteGround (FTPS).
+#
+# Security notes:
+# - Every action is pinned to an exact commit (the long code after @), so a hijacked tag can't swap in
+#   different code. Dependabot (.github/dependabot.yml) proposes updates; check them before merging.
+# - The workflow can only READ the repo (permissions below).
+# - npm install scripts are switched off (--ignore-scripts): a malicious package can't run code
+#   during install. The build doesn't need them.
+# - FTPS checks the server's certificate (security: strict), so the password can only be sent to the
+#   real server. See README "Deploying" if the first run reports a certificate name mismatch.
 name: Build and deploy
 
 on:
@@ -7,25 +15,36 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+# Never run two uploads at once; a newer push waits for the current one to finish.
+concurrency:
+  group: deploy-siteground
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
           cache: npm
 
-      # Re-use processed images between builds (makes most builds take seconds, not minutes)
-      - uses: actions/cache@v4
+      # Re-use the WebP images made by earlier builds, so only new or changed images are processed.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          path: .cache
-          key: eleventy-img-${{ hashFiles('src/**/*.jpg', 'src/**/*.jpeg', 'src/**/*.png') }}
-          restore-keys: eleventy-img-
+          path: _site/img
+          key: webp-${{ hashFiles('src/**/*.jpg', 'src/**/*.jpeg', 'src/**/*.png', 'src/**/*.webp', 'eleventy.config.js') }}
+          restore-keys: webp-
 
-      - run: npm ci
+      - run: npm ci --ignore-scripts
 
       - name: Build
         run: npm run build
@@ -35,11 +54,12 @@ jobs:
 
       - name: Deploy to SiteGround (FTPS)
         if: ${{ vars.DEPLOY_ENABLED == 'true' }}
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287 # v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
+          security: ${{ vars.FTP_SECURITY || 'strict' }}
           local-dir: ./_site/
           server-dir: ${{ vars.FTP_SERVER_DIR }}   # e.g. /public_html/debrief/2026/

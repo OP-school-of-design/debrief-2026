@@ -1,0 +1,26 @@
+# Dependabot: weekly pull requests when a package or GitHub Action has an update (security fixes
+# arrive as soon as they're published). Nothing changes until someone merges the pull request, and
+# merging it rebuilds and deploys the site, so check the Actions run afterwards.
+# Turn on alerts too: repo Settings > Advanced Security (or "Code security") > Dependabot alerts.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Pacific/Auckland
+    open-pull-requests-limit: 5
+    groups:
+      fonts:
+        patterns: ["@fontsource-variable/*"]
+      build-tools:
+        patterns: ["*"]
+        exclude-patterns: ["@fontsource-variable/*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Pacific/Auckland

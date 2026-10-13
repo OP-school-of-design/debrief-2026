@@ -145,6 +145,9 @@ collections:
     - label: Web address, or email address for Email
       name: url
       widget: string
+      pattern:
+      - ^(https?://\S+|mailto:\S+|[^\s@]+@[^\s@]+\.[^\s@]+)$
+      - A full web address starting with https://, or an email address
     - label: Label
       name: label
       widget: string
@@ -618,6 +621,9 @@ collections:
       - label: Web address
         name: url
         widget: string
+        pattern:
+        - ^https?://\S+$
+        - Must be a full web address starting with https://
 - name: design
   label: Design
   files:
@@ -787,19 +793,6 @@ collections:
       output_code_only: true
       allow_language_selection: false
       hint: 'Extra CSS loaded after everything else, so it overrides the students'' styles. Leave empty for no change. Check the site after saving: a mistake here can affect every page.'
-  - label: SEO & head code
-    name: seo
-    file: src/_data/seo.json
-    format: json
-    fields:
-    - label: Code added to the <head> of every page
-      name: headCode
-      widget: code
-      required: false
-      default_language: html
-      output_code_only: true
-      allow_language_selection: false
-      hint: For JSON-LD, og:image, verification tags or analytics. Page titles, descriptions and canonical links are generated automatically. Trusted admins only.
 - name: settings
   label: Site settings
   files:
@@ -879,3 +872,6 @@ collections:
       - label: Web address
         name: url
         widget: string
+        pattern:
+        - ^(https?://\S+|#)$
+        - 'Must be a full web address starting with https:// (or # for no link yet)'

@@ -1,11 +1,47 @@
-# Caching rules for this site's folder on SiteGround (deployed as .htaccess next to index.html).
-#
-# Pages, and the dashboard's settings file: browsers and SiteGround's caches must check for a newer
-# copy on every visit. If nothing changed the server replies "not modified", so this stays fast.
-# CSS and JavaScript: every page links to them with a version stamp (?v=...) that changes on each
-# deploy, so they can be kept for a long time without ever going stale.
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+#  Server rules for this site's folder on SiteGround (deployed as .htaccess next to index.html).
+#  They apply to /debrief/2026/ only, not the rest of design.ac.nz.
+#  The dashboard folder has its own, stricter rules in admin/.htaccess.
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+# No folder listings.
+Options -Indexes
+
+# ------------------------------------------------------------------ HIDDEN FILES
+# Files starting with a dot are never served, e.g. the deploy tool's .ftp-deploy-sync-state.json
+# (a list of every file on the site) and this file.
+<IfModule mod_authz_core.c>
+    <FilesMatch "^\.">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # -------------------------------------------------------------- AI CRAWLERS AND SITE COPIERS
+    # Refuse crawlers that collect content for AI training or AI answers, and tools that copy whole
+    # sites. Search engines (Google, Bing, DuckDuckGo) and link previews (LinkedIn, Facebook,
+    # Instagram, Slack...) are NOT affected, so graduates can still be found and shared.
+    # To allow one again, delete its name from the list.
+    RewriteCond %{HTTP_USER_AGENT} (GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-User|Claude-SearchBot|Claude-Web|anthropic-ai|CCBot|Bytespider|meta-externalagent|meta-externalfetcher|PerplexityBot|Perplexity-User|Amazonbot|Applebot-Extended|Diffbot|ImagesiftBot|Omgilibot|Omgili|cohere-ai|cohere-training-data-crawler|Timpibot|YouBot|AI2Bot|Ai2Bot-Dolma|DuckAssistBot|PetalBot|Scrapy|HTTrack|SiteSucker|WebCopier|WebZIP|Offline\ Explorer|MSIECrawler|python-requests|python-httpx|aiohttp|Go-http-client|node-fetch|axios) [NC]
+    RewriteRule .* - [F,L]
+
+    # -------------------------------------------------------------- HOTLINKING
+    # Images and videos only load inside pages on design.ac.nz / op.ac.nz (and search engines and
+    # social sites, for previews). Opening a file directly, or a request with no referrer, still
+    # works. Other websites embedding our images or video get "403 Forbidden".
+    RewriteCond %{HTTP_REFERER} !^$
+    RewriteCond %{HTTP_REFERER} !^https?://([^/]+\.)?(design|op)\.ac\.nz(/|$) [NC]
+    RewriteCond %{HTTP_REFERER} !^https?://([^/]+\.)?(google|bing|duckduckgo|yahoo|linkedin|facebook|instagram)\.[a-z.]+(/|$) [NC]
+    RewriteRule \.(webp|jpe?g|png|gif|svg|ico|mp4|webm|mov)$ - [F,NC,L]
+</IfModule>
 
 <IfModule mod_headers.c>
+    # -------------------------------------------------------------- CACHING
+    # Pages, and the dashboard's settings file: browsers and SiteGround's caches must check for a
+    # newer copy on every visit ("not modified" replies keep this fast). CSS and JavaScript links
+    # carry a version stamp (?v=...) that changes on every deploy, so they can be kept for a year.
     <FilesMatch "\.(html|txt)$">
         Header set Cache-Control "no-cache"
     </FilesMatch>
@@ -13,4 +49,22 @@
     <FilesMatch "\.(css|js)$">
         Header set Cache-Control "public, max-age=31536000"
     </FilesMatch>
+
+    # -------------------------------------------------------------- SECURITY HEADERS
+    # Content-Security-Policy: the browser only runs scripts, loads styles, fonts, images and video
+    # from this site, and only embeds YouTube/Vimeo videos. Code injected into a page (XSS) can't
+    # run or load anything from elsewhere. If you add an outside service (e.g. analytics in
+    # src/_includes/head-code.html), add its address to the matching part below.
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://player.vimeo.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+
+    # Don't let other sites show these pages inside a frame (clickjacking).
+    Header always set X-Frame-Options "SAMEORIGIN"
+    # Browsers must not guess file types (stops files being run as something they're not).
+    Header always set X-Content-Type-Options "nosniff"
+    # Other sites see only "design.ac.nz" when a visitor follows a link, not the full page address.
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    # This site never uses the camera, microphone, location, payments etc.
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    # Keep other sites' windows separate from ours.
+    Header always set Cross-Origin-Opener-Policy "same-origin"
 </IfModule>

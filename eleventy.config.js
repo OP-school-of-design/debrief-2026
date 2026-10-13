@@ -4,7 +4,7 @@ import { BASE } from "./lib/base.js";
 import { readDesign, copyFontFiles } from "./lib/fonts.js";
 import { writeFavicons } from "./lib/favicon.js";
 import fs from "node:fs";
-import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg } from "./lib/helpers.js";
+import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg, safeUrl } from "./lib/helpers.js";
 
 export default function (eleventyConfig) {
   // ---------- Images ----------
@@ -40,6 +40,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("bannerDetails", bannerDetails);
   eleventyConfig.addFilter("naturalSizes", naturalSizes);
   eleventyConfig.addFilter("siteImg", siteImg);
+  eleventyConfig.addFilter("safeUrl", safeUrl);
+
+  // Text typed into the dashboard (graduate bios, event descriptions, page text) can't contain raw
+  // HTML such as <script>: it's shown as plain text. Markdown formatting (bold, links...) still works,
+  // and markdown links to "javascript:" addresses are already refused by the markdown library.
+  eleventyConfig.amendLibrary("md", (mdLib) => mdLib.set({ html: false }));
   eleventyConfig.addFilter("trimSlash", (s) => String(s || "").replace(/\/+$/, ""));
 
   // ---------- Collections ----------
@@ -86,6 +92,8 @@ export default function (eleventyConfig) {
     "src/admin/config.txt": "admin/config.txt",
     "src/admin/index.html": "admin/index.html",
     "src/admin/image-thumbnail-fix.js": "admin/image-thumbnail-fix.js",
+    "src/admin/decap-3.16.3": "admin/decap-3.16.3",
+    "src/admin/.htaccess": "admin/.htaccess",
     // Font Awesome Free (icons CC BY 4.0, fonts SIL OFL), the same version the students linked to
     "node_modules/@fortawesome/fontawesome-free/css/all.min.css": "fontawesome/css/all.min.css",
     "node_modules/@fortawesome/fontawesome-free/webfonts": "fontawesome/webfonts",
@@ -103,6 +111,7 @@ export default function (eleventyConfig) {
     await writeFavicons(site, directories?.output || dir.output);
   });
   eleventyConfig.addWatchTarget("src/favicon/");
+  eleventyConfig.addWatchTarget("src/_includes/head-code.html");
 
   eleventyConfig.setServerOptions({ showVersion: false });
 

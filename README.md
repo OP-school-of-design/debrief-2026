@@ -46,7 +46,6 @@ While `npm start` is running, images are processed on request, so it starts fast
 | **Design → Colour palette** | Colour pickers for every colour on the site, plus four optional ones (carousel caption background/text, `dark-text`, `cream-text`) that stay unset unless you fill them in. |
 | **Design → Custom CSS** | A CSS code box loaded after everything else, for small style tweaks without touching code. Empty by default. |
 | **Design → Typography** | Heading font and body font (23 choices). From Google fonts. |
-| **Design → SEO & head code** | A code window whose contents go in the `<head>` of every page. To help with SEO and accessibility. |
 | **Site settings** | Site name, description, logos, **favicon**, footer note, social links. |
 
 **Carousel on/off:** Disciplines or Events → pick one → **Show the carousel on this page**. Off = hidden (the slides are kept). There's also an "advance automatically" option with a pause button; automatic advance is ignored for visitors who have "reduce motion" switched on.
@@ -60,7 +59,7 @@ Adding a new graduate category: add it in Disciplines, then add the same name an
 
 **Dates banners:** in the title, a new line is a line break on desktop only. In the details, a new line is a line break, and `//` is a line break on phones only (matching Maxis' markup).
 
-**SEO:** page titles, descriptions, canonical links and social-share tags are generated for every page. Set the **Site web address** in Site settings for canonical links, and use the code window for anything extra (JSON-LD, og:image, verification tags, analytics). Anything pasted there is added to every page exactly as written, so it's for trusted admins only.
+**SEO:** page titles, descriptions, canonical links and social-share tags are generated for every page. Set the **Site web address** in Site settings for canonical links. Anything extra (JSON-LD, og:image, verification tags, analytics) goes in `src/_includes/head-code.html`, edited in the repo rather than the dashboard because it runs on every page. Anything loaded from another website also needs adding to the security policy in `src/.htaccess` (see docs/SECURITY.md).
 
 **Fonts:** chosen fonts are built into the site and served from our own server (nothing is requested from Google). Both `latin` and `latin-ext` are included, so macrons (ā ē ī ō ū) display correctly in every font on the list.
 
@@ -112,6 +111,10 @@ src/
   fonts/                         the cut-down Material Symbols font
   js/                            main.js (menus), carousel.js, lightbox.js
   admin/config.txt               the dashboard definition (.txt because SiteGround blocks .yml)
+  admin/decap-3.16.3/            the dashboard's own code (Decap CMS), served from this site
+  admin/.htaccess                the dashboard's security rules
+  .htaccess                      caching, security headers, crawler and hotlink rules (docs/SECURITY.md)
+  _includes/head-code.html       extra <head> code for every page (edit here, not in the dashboard)
   admin/image-thumbnail-fix.js   makes site-wide image thumbnails show in the dashboard
 lib/                             font, favicon + helper code
 ```
@@ -129,9 +132,12 @@ lib/                             font, favicon + helper code
 3. **Dashboard login (OAuth):** Decap's GitHub login needs a small OAuth helper when you're *not* on Netlify. A free Cloudflare Worker (`sveltia-cms-auth`) does the job; add `base_url: https://YOUR-WORKER.workers.dev` under `backend` in `src/admin/config.txt`. Faculty staff then need GitHub accounts with write access to the repo.
 4. **Approval workflow:** add `publish_mode: editorial_workflow` at the top level of `src/admin/config.txt`. Staff save as **Draft**, move to **In review**, and an admin moves it to **Ready** to publish. It needs the GitHub login above (not available locally).
 5. **Site web address:** set it in the dashboard (Site settings) to `https://design.ac.nz/debrief/2026` for canonical links.
-6. **Deploy to SiteGround:** in SiteGround Site Tools create an FTP account limited to the target folder. In GitHub → Settings → Secrets add `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`; add variables `FTP_SERVER_DIR` (`/` when the FTP account is limited to the site folder, as ours is) and `DEPLOY_ENABLED` = `true`. The workflow (`.github/workflows/deploy.yml`) then builds and uploads on every push to `main`. It's set to FTPS; the deploy step is written to the action's documentation but hasn't been run against your server, so watch the first run.
+6. **Deploy to SiteGround:** in SiteGround Site Tools create an FTP account limited to the target folder. In GitHub → Settings → Secrets add `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`; add variables `FTP_SERVER_DIR` (`/` when the FTP account is limited to the site folder, as ours is) and `DEPLOY_ENABLED` = `true`. The workflow (`.github/workflows/deploy.yml`) then builds and uploads on every push to `main`. It uses FTPS and checks the server's certificate (`security: strict`). If a run fails with a certificate or hostname mismatch, set `FTP_SERVER` to the server name the error shows (the one on SiteGround's certificate); as a last resort the variable `FTP_SECURITY` = `loose` switches the check off. See docs/SECURITY.md.
 
 ---
+
+## Security
+See [docs/SECURITY.md](docs/SECURITY.md): what protects the site, the dashboard and the deploy, and how to set up the GitHub organisation.
 
 ## What was changed from the Maxis' site
 See [docs/CHANGES-FROM-STUDENT-SITE.md](docs/CHANGES-FROM-STUDENT-SITE.md).

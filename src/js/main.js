@@ -1,5 +1,5 @@
 /* The students' own page scripts, written once here instead of repeated inline on every page.
-   toggleMenu() and toggleDropdown() stay global because the header buttons call them via onclick. */
+   toggleMenu() and toggleDropdown() are the students' functions, attached to the header buttons below. */
 
 /* MOBILE MENU */
 function toggleMenu() {
@@ -27,6 +27,18 @@ function toggleDropdown(button) {
         }
     }
 }
+
+/* The header buttons call these (wired up here rather than with onclick="..." in the HTML, so the
+   site's security policy can block all inline script). */
+var menuButton = document.querySelector("[data-menu-toggle]");
+if (menuButton) {
+    menuButton.addEventListener("click", toggleMenu);
+}
+document.querySelectorAll("[data-dropdown-toggle]").forEach(function (el) {
+    el.addEventListener("click", function () {
+        toggleDropdown(el);
+    });
+});
 
 /* Menu headings without a page of their own (e.g. Archive): Enter or Space opens the list. */
 document.querySelectorAll('.dropbtn[role="button"]').forEach(function (label) {

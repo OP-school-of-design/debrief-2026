@@ -18,7 +18,7 @@ hasLightbox: true
                     {%- if l.type == "email" %}
                     <li><i class="{{ 'email' | faClass }}"></i> {{ l.label or l.url }}</li>
                     {%- else %}
-                    <li><a href="{{ l.url }}" target="_blank"><i class="{{ l.type | faClass }}"></i> {{ l.label or labels[l.type] or l.url }}</a></li>
+                    <li><a href="{{ l.url | safeUrl }}" target="_blank" rel="noopener noreferrer"><i class="{{ l.type | faClass }}"></i> {{ l.label or labels[l.type] or l.url }}</a></li>
                     {%- endif %}
                     {%- endfor %}
                 </ul>

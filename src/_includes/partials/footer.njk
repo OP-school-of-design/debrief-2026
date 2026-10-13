@@ -49,7 +49,7 @@
                     </button>
                     <ul class="footer__menu__list">
                         {%- for s in site.socials %}
-                        <li><a href="{{ s.url }}" target="_blank"><i class="{{ s.icon | faClass }}"></i> {{ s.label }}</a></li>
+                        <li><a href="{{ s.url | safeUrl }}" target="_blank" rel="noopener noreferrer"><i class="{{ s.icon | faClass }}"></i> {{ s.label }}</a></li>
                         {%- endfor %}
                     </ul>
                 </article>
