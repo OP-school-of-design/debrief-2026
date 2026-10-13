@@ -4,8 +4,8 @@
         <a href="{{ g.url | url }}" class="no-link-look">
         <article class="student-card">
                 <img class="student-card__image"
-                    src="{{ g | gradImg(g.data.cover, 'card') }}"
-                    alt="{{ g.data.coverAlt }}" sizes="(min-width: 1171px) 25vw, (min-width: 601px) 45vw, 95vw">
+                    src="{{ g | gradImg(g.data.cover or g.data.hero, 'card') }}"
+                    alt="{{ (g.data.coverAlt if g.data.cover else g.data.heroAlt) }}" sizes="(min-width: 1171px) 25vw, (min-width: 601px) 45vw, 95vw">
 
             <div class="student-card__info">
                 <img class="student-card__profile" src="{{ g | gradImg(g.data.headshot, 'headshot') }}" alt="{{ g.data.headshotAlt }}" eleventy:widths="400" sizes="100px">

@@ -20,6 +20,7 @@ backend:
   base_url: https://sveltia-cms-auth.design-bbf.workers.dev
 publish_mode: editorial_workflow
 local_backend: true
+show_preview_links: false
 media_folder: src/images
 public_folder: images
 slug:
@@ -94,7 +95,7 @@ collections:
     name: cover
     widget: image
     required: false
-    hint: 'Optional until supplied: the graduate grids show a plain grey placeholder card until you add one.'
+    hint: 'Optional: without one, the graduate grids use the hero image, cropped to a square (or a plain grey placeholder if there is no hero either). Add a card image to choose the crop yourself.'
     media_library:
       config:
         max_file_size: 10000000
