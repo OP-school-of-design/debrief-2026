@@ -110,7 +110,10 @@ src/
   css/design.css.njk             GENERATED from colours + typography (don't edit design.css)
   fonts/                         the cut-down Material Symbols font
   js/                            main.js (menus), carousel.js, lightbox.js
-  admin/config.txt               the dashboard definition (.txt because SiteGround blocks .yml)
+  admin/config.txt               the dashboard definition (YAML). Built into admin/index.html, so the
+                                 dashboard opens without fetching it (see src/_data/cmsconfig.js)
+  admin/start.js                 starts the dashboard with those built-in settings; clearer loading messages
+  admin/previews.js              the labelled preview panes (right-hand side while editing)
   admin/decap-3.16.3/            the dashboard's own code (Decap CMS), served from this site
   admin/.htaccess                the dashboard's security rules
   .htaccess                      caching, security headers, crawler and hotlink rules (docs/SECURITY.md)

@@ -5,15 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>DEBRIEF 2026 dashboard</title>
-  <link href="config.txt" type="text/yaml" rel="cms-config-url">
+  {%- if site.favicon %}
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon/icon-32.png' | url }}?v={{ build.version }}">
+  {%- endif %}
 </head>
 <body>
+  <!-- The dashboard's settings, from src/admin/config.txt (built in by src/_data/cmsconfig.js).
+       Plain data: browsers never run it. -->
+  <script type="application/json" id="cms-config">{{ cmsconfig | jsonScript | safe }}</script>
+  <!-- Starts the dashboard with the settings above. Must load before Decap. -->
+  <script src="start.js?v={{ build.version }}"></script>
   <!-- Decap CMS 3.16.3, served from this site (see decap-3.16.3/VERSION.txt), not from a public CDN. -->
   <script src="decap-3.16.3/decap-cms.js"></script>
   <!-- Makes image thumbnails appear once their picture has loaded (works around a Decap bug).
        The ?v= stamp changes on every deploy, so browsers always load the current version. -->
   <script src="image-thumbnail-fix.js?v={{ build.version }}"></script>
-  <!-- Labelled preview panes for Graduates, Disciplines and Events. -->
+  <!-- Labelled preview panes for every part of the dashboard. -->
   <script src="previews.js?v={{ build.version }}"></script>
 </body>
 </html>

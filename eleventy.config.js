@@ -37,6 +37,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("where", where);
   eleventyConfig.addFilter("faClass", faClass);
   eleventyConfig.addFilter("bannerTitle", bannerTitle);
+  // Data for a <script type="application/json"> block: "<" is escaped so nothing in it can close the tag.
+  eleventyConfig.addFilter("jsonScript", (v) =>
+    JSON.stringify(v).replace(/</g, "\\u003c").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029"));
   eleventyConfig.addFilter("bannerDetails", bannerDetails);
   eleventyConfig.addFilter("naturalSizes", naturalSizes);
   eleventyConfig.addFilter("siteImg", siteImg);
@@ -92,7 +95,7 @@ export default function (eleventyConfig) {
     "src/videos": "videos",
     "src/.htaccess": ".htaccess",
     "src/images/**/*.svg": "images",
-    "src/admin/config.txt": "admin/config.txt",
+    "src/admin/start.js": "admin/start.js",
     "src/admin/image-thumbnail-fix.js": "admin/image-thumbnail-fix.js",
     "src/admin/previews.js": "admin/previews.js",
     "src/admin/decap-3.16.3": "admin/decap-3.16.3",
@@ -109,6 +112,7 @@ export default function (eleventyConfig) {
     copyPreviewFonts(directories?.output || dir.output);
   });
   eleventyConfig.addWatchTarget("src/_data/typography.json");
+  eleventyConfig.addWatchTarget("src/admin/config.txt");
 
   // ---------- Favicon: tab and home-screen icons made from Site settings → Favicon ----------
   eleventyConfig.on("eleventy.after", async ({ directories, dir }) => {
