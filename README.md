@@ -4,35 +4,6 @@ Maxis' hand-coded site, converted to [Eleventy](https://www.11ty.dev) with a [De
 No database and no server: content lives as small files in this repo, the site builds to plain HTML, and a dashboard at `/admin/` lets faculty staff edit it.
 The site will be hosted via Siteground to maintain consistency with the address https://design.ac.nz/debrief/2026
 
-Kia ora! Start with **Quick start**, then have a poke around the dashboard.
-
----
-
-## Quick start (local testing)
-
-You need [Node.js 22 or newer](https://nodejs.org).
-
-```bash
-npm install          # once
-npm run dev          # runs the site AND the dashboard server together
-```
-
-* Site: <http://localhost:8080>
-* Dashboard: <http://localhost:8080/admin/> (no login when running locally: it edits the files on your computer directly)
-
-Prefer two terminals? `npm start` (site) and `npm run cms` (dashboard server).
-
-The **first** build processes every image (WebP at several widths) and can take a few minutes. Results are cached in `.cache/`, so later builds are quick.
-While `npm start` is running, images are processed on request, so it starts fast.
-
-| Command | What it does |
-|---|---|
-| `npm start` | Dev server with live reload |
-| `npm run build` | Full build into `_site/` (this is what gets deployed, i.e. the files in the folder '_site' are all html/css/js ) |
-| `npm run cms` | Local dashboard server (Decap) |
-| `npm run check` | Lists any file names with capitals or spaces |
-| `npm run clean` | Deletes `_site/` and the image cache, a reset before attempting an new build (not necessary every time, just in case of build problems) |
-
 ---
 
 ## What's in the dashboard
@@ -81,11 +52,8 @@ Site-wide files (logos, page banners, the favicon, the walkthrough video) are st
 ### Phone menu
 When its sections are expanded, the phone/tablet menu can be taller than the screen; it scrolls on its own so everything (Events, Archive) can be reached, and the close button stays on top.
 
-### Top menu spacing
-The "All Graduates and Postgraduates" label is longer than Maxis' "All Graduates". Labels never wrap, and between 1171px and 1365px wide (just above the hamburger menu) the gaps and side padding are tightened so the menu still fits (`css/additions.css`). Wider than that, the spacing is exactly Maxis'.
-
 ### File names
-Use **lowercase-with-hyphens** (`aroha-portrait.jpg`, not `Aroha Portrait.JPG`). Windows and Mac ignore capitals; the live server doesn't, and a mismatch means a broken image. `npm run build` warns about any offenders.
+Use **lowercase-with-hyphens for all filenames** (`aroha-portrait.jpg`, not `Aroha Portrait.JPG`). Windows and Mac ignore capitals; the live server doesn't, and a mismatch means a broken image. `npm run build` warns about any offenders.
 
 ---
 
@@ -121,25 +89,52 @@ lib/                             font, favicon + helper code
 
 **Adding a discipline:** Disciplines → New. Give it a *web address key* (lowercase, e.g. `textiles`); it appears in the menus, footer and School of Design page straight away, and its own pages once **Pages live** is on. (The School of Design grid colours come from Maxis' CSS, which colours the first four boxes.)
 **Adding a new colour to the palette:** add a `widget: "color"` field in `src/admin/config.txt` (Design → Colour palette) and a matching default in `src/_data/colours.json`; then use `var(--your-name)` in the CSS.
-**Adding a font:** `npm install @fontsource-variable/<name>`, add a line to `FONTS` in `lib/fonts.js`, and add the same value to the two font lists in `src/admin/config.txt`.
+**Adding tyepfaces:** `npm install @fontsource-variable/<name>`, add a line to `FONTS` in `lib/fonts.js`, and add the same value to the two font lists in `src/admin/config.txt`.
 
 ---
 
-## Going live (later;)
+## Server Settings
 
-1. **Repo:** done: `OP-school-of-design/debrief-2026` (already set as `backend.repo` in `src/admin/config.txt`).
+1. **Repo:** `OP-school-of-design/debrief-2026`
 2. **Site address:** the GitHub repository variable `SITE_BASE` is `/debrief/2026/`. When building locally for upload, use `SITE_BASE=debrief/2026 npm run build` (PowerShell: `$env:SITE_BASE="debrief/2026"; npm run build`).
 3. **Dashboard login (OAuth):** Decap's GitHub login needs a small OAuth helper when you're *not* on Netlify. A free Cloudflare Worker (`sveltia-cms-auth`) does the job; add `base_url: https://YOUR-WORKER.workers.dev` under `backend` in `src/admin/config.txt`. Faculty staff then need GitHub accounts with write access to the repo.
 4. **Approval workflow:** add `publish_mode: editorial_workflow` at the top level of `src/admin/config.txt`. Staff save as **Draft**, move to **In review**, and an admin moves it to **Ready** to publish. It needs the GitHub login above (not available locally).
-5. **Site web address:** set it in the dashboard (Site settings) to `https://design.ac.nz/debrief/2026` for canonical links.
-6. **Deploy to SiteGround:** in SiteGround Site Tools create an FTP account limited to the target folder. In GitHub → Settings → Secrets add `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`; add variables `FTP_SERVER_DIR` (`/` when the FTP account is limited to the site folder, as ours is) and `DEPLOY_ENABLED` = `true`. The workflow (`.github/workflows/deploy.yml`) then builds and uploads on every push to `main`. It uses FTPS and checks the server's certificate (`security: strict`). If a run fails with a certificate or hostname mismatch, set `FTP_SERVER` to the server name the error shows (the one on SiteGround's certificate); as a last resort the variable `FTP_SECURITY` = `loose` switches the check off. See docs/SECURITY.md.
+5. **Site web address:** if it changes, set it in the dashboard (Site settings) to `https://design.ac.nz/debrief/2026` for canonical links.
+6. **Deploy to SiteGround:** in SiteGround Site Tools create an FTP account limited to the target folder. In GitHub → Settings → Secrets add `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`; added variables `FTP_SERVER_DIR` (`/` when the FTP account is limited to the site folder, as ours is) and `DEPLOY_ENABLED` = `true`. The workflow (`.github/workflows/deploy.yml`) then builds and uploads on every push to `main`. It uses FTPS and checks the server's certificate (`security: strict`). If a run fails with a certificate or hostname mismatch, set `FTP_SERVER` to the server name the error shows (the one on SiteGround's certificate); as a last resort the variable `FTP_SECURITY` = `loose` switches the check off. See docs/SECURITY.md.
+
+---
+
+## Local testing
+
+You need [Node.js 22 or newer](https://nodejs.org).
+
+```bash
+npm install          # once
+npm run dev          # runs the site AND the dashboard server together
+```
+
+* Site: <http://localhost:8080>
+* Dashboard: <http://localhost:8080/admin/> (no login when running locally: it edits the files on your computer directly)
+
+Prefer two terminals? `npm start` (site) and `npm run cms` (dashboard server).
+
+The **first** build processes every image (WebP at several widths) and can take a few minutes. Results are cached in `.cache/`, so later builds are quick.
+While `npm start` is running, images are processed on request, so it starts fast.
+
+| Command | What it does |
+|---|---|
+| `npm start` | Dev server with live reload |
+| `npm run build` | Full build into `_site/` (this is what gets deployed, i.e. the files in the folder '_site' are all html/css/js ) |
+| `npm run cms` | Local dashboard server (Decap) |
+| `npm run check` | Lists any file names with capitals or spaces |
+| `npm run clean` | Deletes `_site/` and the image cache, a reset before attempting an new build (not necessary every time, just in case of build problems) |
 
 ---
 
 ## Security
 See [docs/SECURITY.md](docs/SECURITY.md): what protects the site, the dashboard and the deploy, and how to set up the GitHub organisation.
 
-## What was changed from the Maxis' site
+## See what was changed from the Maxis' site
 See [docs/CHANGES-FROM-STUDENT-SITE.md](docs/CHANGES-FROM-STUDENT-SITE.md).
 
 ## Licences
