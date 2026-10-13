@@ -31,12 +31,12 @@
    spacing. Labels never wrap onto two lines, and between 1171px and 1365px (just above the
    hamburger menu) the gaps and side padding are tightened so everything still fits.
    Above 1365px the spacing is exactly Maxis'. */
-.topnav > a,
-.topnav .dropbtn {
-    white-space: nowrap;
-}
-
 @media screen and (min-width: 1171px) {
+    .topnav > a,
+    .topnav .dropbtn {
+        white-space: nowrap;
+    }
+
     /* Long category names (e.g. Graduate Diploma in Design (Communication)) stay on one line. */
     .dropdown-content a {
         white-space: nowrap;
@@ -63,6 +63,30 @@
         overflow-y: auto;
         overscroll-behavior: contain;
         -webkit-overflow-scrolling: touch;
+        /* The menu is never wider than the screen, on any phone or with larger text: long labels
+           wrap onto a second line instead of pushing the menu past the right edge. */
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .topnav.responsive > a,
+    .topnav.responsive .dropdown-title .dropbtn,
+    .topnav.responsive .dropdown-content a {
+        min-width: 0;
+        overflow-wrap: break-word;
+    }
+
+    .topnav.responsive .dropdown-title .dropbtn {
+        flex: 0 1 auto;
+    }
+
+    .topnav.responsive .dropdown-toggle {
+        flex: 0 0 auto;
+    }
+
+    /* An open section shows all its links (the Archive list is taller than Maxis' 500px limit,
+       which cut off the last year). */
+    .topnav.responsive .dropdown.open .dropdown-content {
+        max-height: 3000px;
     }
 
     /* The close button stays put while the menu scrolls; a white circle behind it (same colour
@@ -79,5 +103,37 @@
 @media screen and (min-width: 1171px) {
     .dropdown:focus-within .dropdown-content {
         display: block;
+    }
+}
+
+/* Graduate pages on small phones (e.g. 320px wide): Maxis' two-column profile block (headshot
+   beside the name) is wider than the screen there, which cut off the bio, quote and contact links.
+   The columns may now shrink, and the headshot with them. Where the block already fits (most
+   phones), nothing changes. Very long names or email addresses wrap instead of running off. */
+@media screen and (max-width: 765px) {
+    .student-info,
+    .student-info-sn {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .student-profile,
+    .student-profile-sn {
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .student-written-info h2,
+    .student-written-info h3,
+    .student-written-info-sn h2,
+    .student-written-info-sn h3,
+    .student-quote,
+    .student-quote-sn {
+        overflow-wrap: break-word;
+    }
+
+    .student-contacts li,
+    .student-contacts-sn li {
+        overflow-wrap: anywhere;
     }
 }

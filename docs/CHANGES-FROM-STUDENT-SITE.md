@@ -46,6 +46,7 @@ Changed at the school's request (October 2026):
 - The menu label is now "All Graduates and Postgraduates", and that page has a plain heading instead of a banner (as on the 2025 site). Menu labels don't wrap, with tighter spacing between 1171px and 1365px (`css/additions.css`).
 - Fashion and Product now have graduates pages (previously their menu links led nowhere).
 - Security (October 2026, see docs/SECURITY.md): the header buttons' `onclick` attributes became `data-` attributes wired up in `js/main.js` (same behaviour, needed for the security policy); links opening in a new tab got `rel="noopener noreferrer"`. Pages look identical.
+- Phones (October 2026): the menu never runs past the right edge (long labels wrap), an open menu section shows all its links (Maxis' 500px limit cut off the last Archive year), and on phones narrower than about 370px the graduate profile block (headshot beside the name) shrinks to fit instead of being cut off. Checked at 14 widths from 320px to 1170px and with text enlarged up to 150%; 390px and wider are unchanged.
 - Desktop dropdowns are as wide as their longest item (no wrapping); the phone menu scrolls when it is taller than the screen.
 
 Added: a favicon (Maxis' site had none), set in Site settings. It only appears in the browser tab and on phone home screens, so the pages themselves are unchanged.
