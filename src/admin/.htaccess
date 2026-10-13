@@ -7,10 +7,11 @@
 <IfModule mod_headers.c>
     # Scripts: only the dashboard's own files (admin/decap-3.16.3/); 'unsafe-eval' is needed because
     # Decap checks its settings with a library that builds code at runtime, but code injected into
-    # the page still can't run. Connections: only GitHub (its API, and its status page for outage notices).
+    # the page still can't run. Connections: only GitHub (its API, and its status page for outage notices),
+    # plus blob:/data: (the dashboard reading its own copies of an entry and uploaded images while saving).
     # Login happens in a pop-up window on the Cloudflare login Worker, which hands the login back only
     # to pages on design.ac.nz.
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://avatars.githubusercontent.com; font-src 'self' data:; media-src 'self' data: blob:; connect-src 'self' https://api.github.com https://www.githubstatus.com; frame-src 'self' blob:; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://avatars.githubusercontent.com; font-src 'self' data:; media-src 'self' data: blob:; connect-src 'self' blob: data: https://api.github.com https://www.githubstatus.com; frame-src 'self' blob:; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'"
 
     # Never shown inside a frame on any site, and never listed by search engines.
     Header always set X-Frame-Options "DENY"

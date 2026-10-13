@@ -22,7 +22,7 @@ eleventyComputed:
 
         = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-{%- set grads = collections.graduates %}
+{%- set grads = collections.graduates | byCategory(graduatespage.categoryOrder, collections.disciplines) %}
 {% include "partials/student-grid.njk" %}
 
 </main>

@@ -1,7 +1,8 @@
 // Dashboard fix for a Decap CMS bug: an image field asks for its thumbnail only once. Site-wide
 // images (logos, page banners, favicon) are still loading at that moment, so their thumbnails
 // stayed blank. This wrapper keeps checking until each picture has loaded, then redraws the
-// thumbnail. It changes nothing else about the image field.
+// thumbnail. It changes nothing else about the image field (choosing, uploading, saving and
+// validation all go through Decap's own image control).
 (function () {
   if (!window.CMS || !window.createClass || !window.h) return;
   var original = CMS.getWidget("image");
@@ -17,6 +18,9 @@
   }
 
   var FixedImageControl = createClass({
+    // Decap asks a field's control whether to redraw. Always say yes and let the real image
+    // control decide; otherwise a newly chosen image is never stored in the entry.
+    shouldComponentUpdate: function () { return true; },
     componentDidMount: function () { this.check(); },
     componentDidUpdate: function (prev) { if (prev.value !== this.props.value) this.check(); },
     componentWillUnmount: function () { clearTimeout(this.timer); },

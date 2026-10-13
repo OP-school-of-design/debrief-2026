@@ -11,7 +11,7 @@ hasLightbox: true
 
 {%- set studentInfo %}
             <article class="student-contact-info{{ sn }}">
-                <img class="student-profile{{ sn }}" src="{{ page | entryImg(headshot) }}" alt="{{ headshotAlt }}" eleventy:widths="400,800" sizes="300px">
+                <img class="student-profile{{ sn }}" src="{{ page | gradImg(headshot, 'headshot') }}" alt="{{ headshotAlt }}" eleventy:widths="400,800" sizes="300px">
                 {%- if links and links.length %}
                 <ul class="student-contacts{{ sn }}">
                     {%- for l in links %}
@@ -48,16 +48,18 @@ hasLightbox: true
 
 {%- set heroImage %}
         <article class="portfolio-hero-image{{ sn }}">
-            <img src="{{ page | entryImg(hero) }}" alt="{{ heroAlt }}" sizes="(min-width: 1171px) 80vw, 100vw">
+            <img src="{{ page | gradImg(hero, 'hero') }}" alt="{{ heroAlt }}" sizes="(min-width: 1171px) 80vw, 100vw">
         </article>
 {%- endset %}
 
 {%- set gallerySection %}
+{%- if gallery and gallery.length %}
         <article class="grid--masonry{{ sn }}">
             {%- for g in gallery %}
             <img src="{{ page | entryImg(g.image) }}" alt="{{ g.alt }}" sizes="(min-width: 1171px) 40vw, (min-width: 601px) 45vw, 100vw">
             {%- endfor %}
         </article>
+{%- endif %}
 {%- endset %}
 
 <main>

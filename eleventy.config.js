@@ -4,7 +4,7 @@ import { BASE } from "./lib/base.js";
 import { readDesign, copyFontFiles } from "./lib/fonts.js";
 import { writeFavicons } from "./lib/favicon.js";
 import fs from "node:fs";
-import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg, safeUrl } from "./lib/helpers.js";
+import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg, safeUrl, gradImg, byName, byCategory } from "./lib/helpers.js";
 
 export default function (eleventyConfig) {
   // ---------- Images ----------
@@ -41,6 +41,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("naturalSizes", naturalSizes);
   eleventyConfig.addFilter("siteImg", siteImg);
   eleventyConfig.addFilter("safeUrl", safeUrl);
+  eleventyConfig.addFilter("gradImg", gradImg);
+  eleventyConfig.addFilter("byCategory", byCategory);
 
   // Text typed into the dashboard (graduate bios, event descriptions, page text) can't contain raw
   // HTML such as <script>: it's shown as plain text. Markdown formatting (bold, links...) still works,
@@ -50,8 +52,9 @@ export default function (eleventyConfig) {
 
   // ---------- Collections ----------
   const byOrder = (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999) || a.data.title.localeCompare(b.data.title);
+  // Published graduates, in alphabetical order of name (on every graduates grid).
   eleventyConfig.addCollection("graduates", (api) =>
-    api.getFilteredByTag("graduate").filter((g) => g.data.published !== false).sort(byOrder));
+    api.getFilteredByTag("graduate").filter((g) => g.data.published !== false).sort(byName));
   // Every discipline / graduate category (used to look up a graduate's discipline name).
   eleventyConfig.addCollection("disciplines", (api) => api.getFilteredByTag("discipline").sort(byOrder));
   // Graduate categories shown in the "All Graduates" menu and footer, each with its own graduates page.

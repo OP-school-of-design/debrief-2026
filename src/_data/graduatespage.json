@@ -1,3 +1,13 @@
 {
-  "title": "All Graduates and Postgraduates"
+  "title": "All Graduates and Postgraduates",
+  "categoryOrder": [
+    "communication",
+    "fashion",
+    "product",
+    "graddip-communication",
+    "graddip-fashion",
+    "graddip-product",
+    "honours",
+    "masters"
+  ]
 }

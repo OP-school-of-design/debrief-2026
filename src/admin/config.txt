@@ -40,9 +40,10 @@ collections:
   slug: '{{title}}'
   summary: '{{title}} ({{discipline}})'
   sortable_fields:
-  - title
+  - field: title
+    label: Name
+    default_sort: true
   - discipline
-  - order
   fields:
   - label: Full name
     name: title
@@ -73,12 +74,6 @@ collections:
     widget: boolean
     default: true
     hint: Untick to hide this graduate from the site without deleting them.
-  - label: Order in the grid
-    name: order
-    widget: number
-    required: false
-    value_type: int
-    default: 1
   - label: Page layout
     name: blockOrder
     widget: select
@@ -98,6 +93,8 @@ collections:
   - label: Card image (square; shown on the graduate grids)
     name: cover
     widget: image
+    required: false
+    hint: 'Optional until supplied: a placeholder shows until you add one.'
   - label: Card image description (alt text)
     name: coverAlt
     widget: string
@@ -106,6 +103,8 @@ collections:
   - label: Hero image (landscape; shown large on the page)
     name: hero
     widget: image
+    required: false
+    hint: 'Optional until supplied: a placeholder shows until you add one.'
   - label: Hero image description (alt text)
     name: heroAlt
     widget: string
@@ -114,6 +113,8 @@ collections:
   - label: Headshot (from the photographer; shown as a circle)
     name: headshot
     widget: image
+    required: false
+    hint: 'Optional until supplied: a grey head-and-shoulders placeholder shows until you add one.'
   - label: Headshot description (alt text)
     name: headshotAlt
     widget: string
@@ -157,6 +158,8 @@ collections:
     name: gallery
     widget: list
     summary: '{{image}}'
+    required: false
+    hint: Add as many as you like. Can be left empty while you wait for images.
     fields:
     - label: Image
       name: image
@@ -584,7 +587,36 @@ collections:
       name: title
       widget: string
       hint: 'Each category''s banner is set in Disciplines > (pick one) > Graduates page: banner image.'
-  - label: Events page (banner)
+    - label: Category order
+      label_singular: category
+      name: categoryOrder
+      widget: list
+      required: false
+      allow_add: true
+      collapsed: false
+      field:
+        label: Category
+        name: category
+        widget: select
+        options:
+        - label: Communication Design
+          value: communication
+        - label: Fashion Design
+          value: fashion
+        - label: Product Design
+          value: product
+        - label: Graduate Diploma in Design (Communication)
+          value: graddip-communication
+        - label: Graduate Diploma in Design (Fashion)
+          value: graddip-fashion
+        - label: Graduate Diploma in Design (Product)
+          value: graddip-product
+        - label: Bachelor of Design (Honours)
+          value: honours
+        - label: Masters
+          value: masters
+      hint: Drag the categories into the order you want. Graduates appear category by category, in alphabetical order of name within each. Categories left off the list come last.
+  - label: Events listing page (/events/)
     name: eventspage
     file: src/_data/eventspage.json
     format: json
@@ -592,6 +624,7 @@ collections:
     - label: Title
       name: title
       widget: string
+      hint: The heading on the banner at the top of the page that lists all events. Each event's own page is edited in Events.
     - label: Banner image
       name: bannerImage
       widget: image
