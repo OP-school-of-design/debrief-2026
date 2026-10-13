@@ -94,6 +94,7 @@ export default function (eleventyConfig) {
     "src/images/**/*.svg": "images",
     "src/admin/config.txt": "admin/config.txt",
     "src/admin/image-thumbnail-fix.js": "admin/image-thumbnail-fix.js",
+    "src/admin/previews.js": "admin/previews.js",
     "src/admin/decap-3.16.3": "admin/decap-3.16.3",
     "src/admin/.htaccess": "admin/.htaccess",
     // Font Awesome Free (icons CC BY 4.0, fonts SIL OFL), the same version the students linked to
