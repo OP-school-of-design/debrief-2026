@@ -66,7 +66,12 @@
                 <!-- Archive -->
                 <div class="dropdown">
                     <div class="dropdown-title">
+                        {%- if archive.pageUrl %}
                         <a href="{{ archive.pageUrl | url }}" class="dropbtn">Archive</a>
+                        {%- else %}
+                        <!-- No Archive page: the heading only opens the list of previous years -->
+                        <a class="dropbtn" role="button" tabindex="0" aria-haspopup="true" onclick="toggleDropdown(this)">Archive</a>
+                        {%- endif %}
                         <button type="button" class="dropdown-toggle" onclick="toggleDropdown(this)" aria-label="Toggle Archive submenu">
                             <span class="material-symbols-outlined">expand_more</span>
                         </button>

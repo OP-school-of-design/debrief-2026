@@ -606,7 +606,7 @@ collections:
       name: pageUrl
       widget: string
       required: false
-      hint: There is no Archive page yet, as in the students' design.
+      hint: 'Leave empty: there is no Archive page, so the heading just opens the list of previous years. Only fill this in if an Archive page is made later.'
     - label: Previous years
       name: links
       widget: list

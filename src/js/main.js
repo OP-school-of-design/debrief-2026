@@ -28,6 +28,16 @@ function toggleDropdown(button) {
     }
 }
 
+/* Menu headings without a page of their own (e.g. Archive): Enter or Space opens the list. */
+document.querySelectorAll('.dropbtn[role="button"]').forEach(function (label) {
+    label.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggleDropdown(label);
+        }
+    });
+});
+
 /* FOOTER DROPDOWNS */
 document.querySelectorAll(".footer__dropdown").forEach(function (dropdown) {
     dropdown.addEventListener("click", function () {
