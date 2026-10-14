@@ -96,6 +96,7 @@
 
 :root {
     --black-text: #050505;
+    --white-text: #ffffff;
     --orange-text: #FF4200;
     --main-background: #ffffff;
     --header-background: #ffffff;
@@ -683,7 +684,7 @@ header h1 {
 }
 
 .debrief-dates-title {
-    color: var(--black-text);
+    color: var(--white-text);
     font-weight: 800;
     text-align: left;
     margin: 0;
