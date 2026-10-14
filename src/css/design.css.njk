@@ -18,3 +18,8 @@ eleventyExcludeFromCollections: true
     --font-heading: {{ fontface.headingStack | safe }};
     --font-body: {{ fontface.bodyStack | safe }};
 }
+{%- if fontface.custom %}
+
+/* Custom typefaces made by students (Design > Typography > Custom typefaces) */
+{{ fontface.custom | safe }}
+{%- endif %}

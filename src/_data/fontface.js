@@ -1,5 +1,5 @@
 // Computed from Design > Typography in the dashboard (src/_data/typography.json).
-import { readDesign, fontFaceCss, fontPreloads, fontStack } from "../../lib/fonts.js";
+import { readDesign, fontFaceCss, fontPreloads, fontStack, customFontCss } from "../../lib/fonts.js";
 import { BASE } from "../../lib/base.js";
 
 export default function () {
@@ -10,5 +10,7 @@ export default function () {
     preloads: fontPreloads(design, BASE),
     headingStack: fontStack(t.headingFont || "google-sans"),
     bodyStack: fontStack(t.bodyFont || "google-sans"),
+    // Typefaces made by students (Design > Typography > Custom typefaces).
+    custom: customFontCss(t, BASE),
   };
 }

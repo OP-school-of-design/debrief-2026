@@ -778,21 +778,63 @@
       h("p", { className: "sample" }, sample));
   }
 
+  var CLASS_NAME = /^-?[_a-zA-Z][_a-zA-Z0-9-]*$/;
+
+  function customFontSection(item, i, getAsset, listField) {
+    var subFields = listField && listField.get("fields");
+    var name = String(item.get("name") || "").trim() || "(no name yet)";
+    var designer = item.get("designer");
+    var w2 = item.get("woff2"), w1 = item.get("woff");
+    var url2 = src(getAsset, w2, fieldByName(subFields, "woff2"));
+    var url1 = src(getAsset, w1, fieldByName(subFields, "woff"));
+    var size = Number(item.get("sizeAdjust"));
+    var family = "debrief-custom-" + i;
+    var srcs = [];
+    if (url2) srcs.push('url("' + url2 + '") format("woff2")');
+    if (url1) srcs.push('url("' + url1 + '") format("woff")');
+    var face = srcs.length
+      ? "@font-face{font-family:'" + family + "';src:" + srcs.join(",") + ";font-weight:100 900;font-display:block;" +
+        (size >= 50 && size <= 200 && size !== 100 ? "size-adjust:" + size + "%;" : "") + "}"
+      : "";
+    var raw = String(item.get("classes") || "").split(",").map(function (c) { return c.trim().replace(/^\./, ""); }).filter(Boolean);
+    var good = raw.filter(function (c) { return CLASS_NAME.test(c); });
+    var bad = raw.filter(function (c) { return !CLASS_NAME.test(c); });
+
+    return section("Custom typeface: " + name + (designer ? ", designed by " + designer : ""),
+      h("div", null,
+        face ? h("style", null, face) : null,
+        srcs.length
+          ? specimen(family, 700, h("span", { style: { fontSize: 28, lineHeight: 1.3, display: "block", color: "#ff4200" } },
+              "\u201cA large student quote, shown in this typeface.\u201d"))
+          : h("p", { className: "warn" }, "No WOFF2 or WOFF file uploaded yet, so the site can't use this typeface."),
+        srcs.length ? h("p", { className: "empty", style: { marginTop: 6 } }, "Any letter the typeface doesn't include (e.g. macrons) shows in a standard font instead.") : null,
+        good.length
+          ? h("p", { style: { margin: "10px 0 0" } }, "Used for: ", good.map(function (c, k) { return h("span", { key: k, className: "tag" }, "." + c); }))
+          : h("p", { className: "empty", style: { marginTop: 10 } }, "Not applied to any classes. To use it in Custom CSS: font-family: \u201c" + name + "\u201d;"),
+        bad.length ? h("p", { className: "warn" }, "Not valid class names, ignored: " + bad.join(", ")) : null,
+        size && size !== 100 ? h("p", { className: "empty", style: { marginTop: 4 } }, "Shown at " + size + "% of its designed size.") : null));
+  }
+
   var TypographyPreview = createClass({
+    mixins: [Redraw],
+
     render: function () {
-      var entry = this.props.entry, fields = this.props.fields;
+      var entry = this.props.entry, fields = this.props.fields, getAsset = this.props.getAsset;
       var head = fontLabel(fields, "headingFont", get(entry, "headingFont") || "google-sans");
       var body = fontLabel(fields, "bodyFont", get(entry, "bodyFont") || "google-sans");
+      var custom = listOf(entry, "customFonts");
+      var listField = fieldByName(fields, "customFonts");
       return h("div", { className: "gp" },
         h("style", null, STYLE),
         h("h1", null, "Typography"),
-        h("p", { className: "sub" }, "Type specimens of the two chosen fonts."),
+        h("p", { className: "sub" }, "Type specimens of the chosen fonts" + (custom.length ? " and the students' own typefaces." : ".")),
         section("Heading font: " + head + " (bold, as used for headings)",
           specimen(head, 700, h("span", { style: { fontSize: 34, lineHeight: 1.15, display: "block" } }, "School of Design Graduate Exhibition 2026"))),
         section("Body font: " + body + " (regular, as used for text)",
           specimen(body, 400, h("span", { style: { fontSize: 17, lineHeight: 1.55, display: "block", maxWidth: 620 } },
-            "DEBRIEF is the annual exhibition of final-year students from the School of Design at Otago Polytechnic, Ōtepoti Dunedin. Opening 5:30pm Thursday 19 November."))),
-        head === body ? h("p", { className: "empty", style: { marginTop: 10 } }, "Both use " + head + ".") : null
+            "DEBRIEF is the annual exhibition of final-year students from the School of Design at Otago Polytechnic, \u014ctepoti Dunedin. Opening 5:30pm Thursday 19 November."))),
+        head === body ? h("p", { className: "empty", style: { marginTop: 10 } }, "Both use " + head + ".") : null,
+        custom.map(function (item, i) { return item && item.get ? h("div", { key: i }, customFontSection(item, i, getAsset, listField)) : null; })
       );
     },
   });

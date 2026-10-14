@@ -865,6 +865,65 @@ collections:
       name: bodyFont
       widget: select
       options: *id009
+    - label: Custom typefaces (made by students)
+      name: customFonts
+      widget: list
+      required: false
+      collapsed: true
+      summary: '{{fields.name}}'
+      label_singular: typeface
+      hint: Typefaces designed by students, uploaded as web fonts (WOFF2, plus WOFF if you have it). Each one can be applied to CSS classes below, or used in Custom CSS by its name.
+      fields:
+      - label: Typeface name
+        name: name
+        widget: string
+        pattern:
+        - ^[A-Za-z0-9][A-Za-z0-9 _-]{0,40}$
+        - Letters, numbers, spaces, - and _ only (up to 40 characters)
+        hint: The name used in CSS, e.g. AbbyHand. Must be different from the other fonts.
+      - label: Designed by
+        name: designer
+        widget: string
+        required: false
+        hint: The student who made it (shown in the dashboard preview).
+      - label: WOFF2 file
+        name: woff2
+        widget: file
+        media_folder: /src/fonts/custom
+        public_folder: fonts/custom
+        choose_url: false
+        media_library:
+          config:
+            max_file_size: 2000000
+        hint: The .woff2 file (smallest, used by all current browsers).
+      - label: WOFF file
+        name: woff
+        widget: file
+        required: false
+        media_folder: /src/fonts/custom
+        public_folder: fonts/custom
+        choose_url: false
+        media_library:
+          config:
+            max_file_size: 2000000
+        hint: 'Optional: the .woff file, only used by very old browsers.'
+      - label: Use for these CSS classes
+        name: classes
+        widget: string
+        required: false
+        pattern:
+        - ^\s*(-?[_a-zA-Z][_a-zA-Z0-9-]*)?(\s*,\s*-?[_a-zA-Z][_a-zA-Z0-9-]*)*\s*$
+        - Class names separated by commas, without dots, e.g. student-quote-sn, student-quote
+        hint: Separate with commas, no dots, e.g. student-quote-sn, student-quote. Graduate quotes are student-quote-sn on the 'profile' layout and student-quote on the 'project' layout. Leave empty to only load the font and use it in Custom CSS.
+      - label: Size adjustment (%)
+        name: sizeAdjust
+        widget: number
+        required: false
+        value_type: int
+        min: 50
+        max: 200
+        default: 100
+        hint: Hand-made fonts often look smaller or larger than other fonts at the same size. 100 = as designed; 120 makes it 20% bigger wherever it's used.
   - label: Custom CSS
     name: customcss
     file: src/_data/customcss.json
