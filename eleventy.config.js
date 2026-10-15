@@ -4,7 +4,7 @@ import { BASE } from "./lib/base.js";
 import { readDesign, copyFontFiles, copyPreviewFonts } from "./lib/fonts.js";
 import { writeFavicons } from "./lib/favicon.js";
 import fs from "node:fs";
-import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg, safeUrl, gradImg, byName, byCategory } from "./lib/helpers.js";
+import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg, safeUrl, gradImg, byName, byCategory, responsiveCss } from "./lib/helpers.js";
 
 export default function (eleventyConfig) {
   // ---------- Images ----------
@@ -46,6 +46,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("safeUrl", safeUrl);
   eleventyConfig.addFilter("gradImg", gradImg);
   eleventyConfig.addFilter("byCategory", byCategory);
+  eleventyConfig.addFilter("responsiveCss", responsiveCss);
 
   // Text typed into the dashboard (graduate bios, event descriptions, page text) can't contain raw
   // HTML such as <script>: it's shown as plain text. Markdown formatting (bold, links...) still works,
@@ -96,6 +97,7 @@ export default function (eleventyConfig) {
     "src/.htaccess": ".htaccess",
     "src/images/**/*.svg": "images",
     "src/admin/start.js": "admin/start.js",
+    "src/admin/multi-upload.js": "admin/multi-upload.js",
     "src/admin/image-thumbnail-fix.js": "admin/image-thumbnail-fix.js",
     "src/admin/previews.js": "admin/previews.js",
     "src/admin/decap-3.16.3": "admin/decap-3.16.3",

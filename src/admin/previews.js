@@ -839,6 +839,48 @@
     },
   });
 
+  // Same rules as lib/helpers.js (BREAKPOINTS, bracesBalanced).
+  var BREAKPOINTS = [
+    { key: "xs", label: "Extra small devices (phones, 600px and down)", media: "only screen and (max-width: 600px)" },
+    { key: "sm", label: "Small devices (portrait tablets and large phones, 600px and up)", media: "only screen and (min-width: 600px)" },
+    { key: "md", label: "Medium devices (landscape tablets, 768px and up)", media: "only screen and (min-width: 768px)" },
+    { key: "lg", label: "Large devices (laptops/desktops, 992px and up)", media: "only screen and (min-width: 992px)" },
+    { key: "xl", label: "Extra large devices (large laptops and desktops, 1200px and up)", media: "only screen and (min-width: 1200px)" },
+  ];
+
+  function bracesBalanced(css) {
+    var t = String(css || "").replace(/\/\*[\s\S]*?\*\//g, "").replace(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/g, "");
+    var depth = 0;
+    for (var i = 0; i < t.length; i++) {
+      if (t[i] === "{") depth++;
+      else if (t[i] === "}" && --depth < 0) return false;
+    }
+    return depth === 0 && t.indexOf("/*") === -1;
+  }
+
+  var ResponsivePreview = createClass({
+    render: function () {
+      var entry = this.props.entry;
+      var used = 0;
+      var parts = BREAKPOINTS.map(function (bp) {
+        var css = String(get(entry, bp.key) || "").trim();
+        if (!css) return section(bp.label, empty("Empty: nothing added for this screen size."));
+        var ok = bracesBalanced(css);
+        if (ok) used++;
+        return section(bp.label,
+          h("div", null,
+            h("pre", { style: { margin: 0, padding: "12px 14px", background: ok ? "#f6f7f9" : "#fff4ee", border: "1px solid " + (ok ? "#e3e4e8" : "#f2b8a0"), borderRadius: 6, fontSize: 13, lineHeight: 1.5, whiteSpace: "pre-wrap", overflowWrap: "anywhere" } },
+              "@media " + bp.media + " {\n" + css.replace(/^/gm, "    ") + "\n}"),
+            ok ? null : h("p", { className: "warn" }, "Left out of the site until fixed: a { or } is missing (or a /* comment isn't closed).")));
+      });
+      return h("div", { className: "gp" },
+        h("style", null, STYLE),
+        h("h1", null, "Responsive CSS"),
+        h("p", { className: "sub" }, used ? "As it will be added to the site, after Custom CSS, smallest screens first." : "Nothing added yet. Each box is wrapped in its screen-size rule automatically."),
+        parts);
+    },
+  });
+
   // The type specimens need every font the dashboard offers: admin/fonts/fonts.css (built by
   // lib/fonts.js). Browsers download only the fonts actually shown.
   // It carries the same version stamp as this script, so a changed font list is picked up at once.
@@ -846,6 +888,7 @@
 
   CMS.registerPreviewTemplate("colours", ColoursPreview);
   CMS.registerPreviewTemplate("typography", TypographyPreview);
+  CMS.registerPreviewTemplate("responsivecss", ResponsivePreview);
   CMS.registerPreviewTemplate("frontpage", FrontPagePreview);
   CMS.registerPreviewTemplate("school", SchoolPreview);
   CMS.registerPreviewTemplate("graduatespage", GraduatesPagePreview);

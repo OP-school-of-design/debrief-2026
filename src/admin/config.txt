@@ -937,6 +937,51 @@ collections:
       output_code_only: true
       allow_language_selection: false
       hint: 'Extra CSS loaded after everything else, so it overrides the students'' styles. Leave empty for no change. Check the site after saving: a mistake here can affect every page.'
+  - label: Responsive CSS (screen sizes)
+    name: responsivecss
+    file: src/_data/responsivecss.json
+    format: json
+    fields:
+    - label: Extra small devices (phones, 600px and down)
+      name: xs
+      widget: code
+      required: false
+      default_language: css
+      output_code_only: true
+      allow_language_selection: false
+      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (max-width: 600px) { ... } for you. The students'' own phone styles also use 600px.'
+    - label: Small devices (portrait tablets and large phones, 600px and up)
+      name: sm
+      widget: code
+      required: false
+      default_language: css
+      output_code_only: true
+      allow_language_selection: false
+      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (min-width: 600px) { ... } for you. '
+    - label: Medium devices (landscape tablets, 768px and up)
+      name: md
+      widget: code
+      required: false
+      default_language: css
+      output_code_only: true
+      allow_language_selection: false
+      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (min-width: 768px) { ... } for you. '
+    - label: Large devices (laptops/desktops, 992px and up)
+      name: lg
+      widget: code
+      required: false
+      default_language: css
+      output_code_only: true
+      allow_language_selection: false
+      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (min-width: 992px) { ... } for you. '
+    - label: Extra large devices (large laptops and desktops, 1200px and up)
+      name: xl
+      widget: code
+      required: false
+      default_language: css
+      output_code_only: true
+      allow_language_selection: false
+      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (min-width: 1200px) { ... } for you. The students'' own tablet styles switch at 1170px.'
 - name: settings
   label: Site settings
   files:

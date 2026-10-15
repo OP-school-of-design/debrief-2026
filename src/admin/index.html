@@ -20,6 +20,8 @@
   <!-- Makes image thumbnails appear once their picture has loaded (works around a Decap bug).
        The ?v= stamp changes on every deploy, so browsers always load the current version. -->
   <script src="image-thumbnail-fix.js?v={{ build.version }}"></script>
+  <!-- Lets the image dialog's Upload button take several files at once. -->
+  <script src="multi-upload.js?v={{ build.version }}"></script>
   <!-- Labelled preview panes for every part of the dashboard. -->
   <script src="previews.js?v={{ build.version }}"></script>
 </body>

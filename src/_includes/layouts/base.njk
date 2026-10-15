@@ -25,8 +25,8 @@
     <link rel="stylesheet" href="{{ '/fontawesome/css/all.min.css' | url }}?v={{ build.version }}">
     <link rel="stylesheet" href="{{ '/css/carousel.css' | url }}?v={{ build.version }}">
     <link rel="stylesheet" href="{{ '/css/additions.css' | url }}?v={{ build.version }}">
-    {%- if customcss and customcss.css and (customcss.css | trim) %}
-    <!-- Custom CSS from the dashboard (Design > Custom CSS), loaded last -->
+    {%- if (customcss and customcss.css and (customcss.css | trim)) or (responsivecss | responsiveCss) %}
+    <!-- Custom and Responsive CSS from the dashboard (Design), loaded last -->
     <link rel="stylesheet" href="{{ '/css/custom.css' | url }}?v={{ build.version }}">
     {%- endif %}
 
