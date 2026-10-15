@@ -34,13 +34,13 @@
     }
   ],
   "name": "DEBRIEF 2026",
-  "footerNote": "All images are in the public domain.\nCopyright Maxis Angel © 2026.",
+  "footerNote": "All images are in the public domain.\nCopyright © DEBRIEF 2026",
   "navLogo": "images/debrieflogo_nav.png",
   "lang": "en-nz",
   "tagline": "School of Design Graduate Exhibition",
   "url": "https://design.ac.nz/debrief/2026",
-  "websiteCredit": "Maxis Angel",
+  "favicon": "favicon/debrief-favicon.png",
+  "websiteCredit": "Maxis Angel & Martin Kean",
   "navLogoAlt": "DEBRIEF logo",
-  "description": "DEBRIEF is the annual exhibition of final-year students from the School of Design at Otago Polytechnic. It showcases the creative talents and innovative...",
-  "favicon": "favicon/debrief-favicon.png"
+  "description": "DEBRIEF is the annual exhibition of final-year students from the School of Design at Otago Polytechnic. It showcases the creative talents and innovative..."
 }
