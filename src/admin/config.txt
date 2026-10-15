@@ -923,7 +923,7 @@ collections:
         min: 50
         max: 200
         default: 100
-        hint: Note: Hand-made fonts often look smaller or larger than other fonts at the same size. 100 = as designed; 120 makes it 20% bigger wherever it's used.
+        hint: 'Note: Hand-made fonts often look smaller or larger than other fonts at the same size. 100 = as designed; 120 makes it 20% bigger wherever it''s used.'
   - label: Custom CSS
     name: customcss
     file: src/_data/customcss.json
