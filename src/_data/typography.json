@@ -1,4 +1,14 @@
 {
   "headingFont": "google-sans",
-  "bodyFont": "google-sans"
+  "bodyFont": "google-sans",
+  "customFonts": [
+    {
+      "sizeAdjust": 100,
+      "woff2": "fonts/custom/abbyhand_bold_2-webfont.woff2",
+      "woff": "fonts/custom/abbyhand_bold_2-webfont.woff",
+      "name": "AbbyHand",
+      "designer": "Abby",
+      "classes": "student-quote-sn"
+    }
+  ]
 }
