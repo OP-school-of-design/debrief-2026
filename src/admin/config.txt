@@ -786,25 +786,25 @@ collections:
       widget: color
       required: false
       allowInput: true
-      hint: Optional. Leave blank to keep the students' design (their stylesheet uses this colour but never sets it).
+      hint: Optional.
     - label: Carousel caption text
       name: description-text-colour
       widget: color
       required: false
       allowInput: true
-      hint: Optional. Leave blank to keep the students' design (their stylesheet uses this colour but never sets it).
+      hint: Optional.
     - label: Small headings, .single-item__h3 (not used on any page yet)
       name: dark-text
       widget: color
       required: false
       allowInput: true
-      hint: Optional. Leave blank to keep the students' design (their stylesheet uses this colour but never sets it).
+      hint: Optional.
     - label: External links, .external-link (not used on any page yet)
       name: cream-text
       widget: color
       required: false
       allowInput: true
-      hint: Optional. Leave blank to keep the students' design (their stylesheet uses this colour but never sets it).
+      hint: Optional.
   - label: Typography
     name: typography
     file: src/_data/typography.json
@@ -865,14 +865,14 @@ collections:
       name: bodyFont
       widget: select
       options: *id009
-    - label: Custom typefaces (made by students)
+    - label: Custom typefaces
       name: customFonts
       widget: list
       required: false
       collapsed: true
       summary: '{{fields.name}}'
       label_singular: typeface
-      hint: Typefaces designed by students, uploaded as web fonts (WOFF2, plus WOFF if you have it). Each one can be applied to CSS classes below, or used in Custom CSS by its name.
+      hint: Typefaces uploaded as web fonts (WOFF2, plus WOFF if you have it). Each one can be applied to CSS classes below, or used in Custom CSS by its name.
       fields:
       - label: Typeface name
         name: name
@@ -885,7 +885,7 @@ collections:
         name: designer
         widget: string
         required: false
-        hint: The student who made it (shown in the dashboard preview).
+        hint: The designer who made it (shown in the dashboard preview).
       - label: WOFF2 file
         name: woff2
         widget: file
@@ -949,7 +949,7 @@ collections:
       default_language: css
       output_code_only: true
       allow_language_selection: false
-      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (max-width: 600px) { ... } for you. The students'' own phone styles also use 600px.'
+      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (max-width: 600px) { ... } for you.'
     - label: Small devices (portrait tablets and large phones, 600px and up)
       name: sm
       widget: code
@@ -981,7 +981,7 @@ collections:
       default_language: css
       output_code_only: true
       allow_language_selection: false
-      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (min-width: 1200px) { ... } for you. The students'' own tablet styles switch at 1170px.'
+      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (min-width: 1200px) { ... } for you.'
 - name: settings
   label: Site settings
   files:
