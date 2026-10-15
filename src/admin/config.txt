@@ -923,7 +923,7 @@ collections:
         min: 50
         max: 200
         default: 100
-        hint: Hand-made fonts often look smaller or larger than other fonts at the same size. 100 = as designed; 120 makes it 20% bigger wherever it's used.
+        hint: Note: Hand-made fonts often look smaller or larger than other fonts at the same size. 100 = as designed; 120 makes it 20% bigger wherever it's used.
   - label: Custom CSS
     name: customcss
     file: src/_data/customcss.json
@@ -936,7 +936,7 @@ collections:
       default_language: css
       output_code_only: true
       allow_language_selection: false
-      hint: 'Extra CSS loaded after everything else, so it overrides the students'' styles. Leave empty for no change. Check the site after saving: a mistake here can affect every page.'
+      hint: 'Extra CSS loaded after everything else, so it overrides the default styles. Check the website after saving.'
   - label: Responsive CSS (screen sizes)
     name: responsivecss
     file: src/_data/responsivecss.json
@@ -949,7 +949,7 @@ collections:
       default_language: css
       output_code_only: true
       allow_language_selection: false
-      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (max-width: 600px) { ... } for you.'
+      hint: 'Write the CSS rules for @media only screen and (max-width: 600px) { ... }.'
     - label: Small devices (portrait tablets and large phones, 600px and up)
       name: sm
       widget: code
@@ -957,7 +957,7 @@ collections:
       default_language: css
       output_code_only: true
       allow_language_selection: false
-      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (min-width: 600px) { ... } for you. '
+      hint: 'Write the CSS rules for @media only screen and (min-width: 600px) { ... }. '
     - label: Medium devices (landscape tablets, 768px and up)
       name: md
       widget: code
@@ -965,7 +965,7 @@ collections:
       default_language: css
       output_code_only: true
       allow_language_selection: false
-      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (min-width: 768px) { ... } for you. '
+      hint: 'Write the CSS rules for @media only screen and (min-width: 768px) { ... }. '
     - label: Large devices (laptops/desktops, 992px and up)
       name: lg
       widget: code
@@ -973,7 +973,7 @@ collections:
       default_language: css
       output_code_only: true
       allow_language_selection: false
-      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (min-width: 992px) { ... } for you. '
+      hint: 'Write the CSS rules for @media only screen and (min-width: 992px) { ... }. '
     - label: Extra large devices (large laptops and desktops, 1200px and up)
       name: xl
       widget: code
@@ -981,7 +981,7 @@ collections:
       default_language: css
       output_code_only: true
       allow_language_selection: false
-      hint: 'Write the CSS rules only: they''re placed inside @media only screen and (min-width: 1200px) { ... } for you.'
+      hint: 'Write the CSS rules for @media only screen and (min-width: 1200px) { ... }.'
 - name: settings
   label: Site settings
   files:
