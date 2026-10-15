@@ -8,7 +8,7 @@
       "woff": "fonts/custom/abbyhand_bold_2-webfont.woff",
       "name": "AbbyHand",
       "designer": "Abby",
-      "classes": "student-quote-sn"
+      "classes": "student-quote-sn, student-quote"
     }
   ]
 }
