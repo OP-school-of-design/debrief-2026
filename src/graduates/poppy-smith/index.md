@@ -2,7 +2,7 @@
 title: Poppy Smith
 discipline: honours
 published: true
-blockOrder: project
+blockOrder: profile
 projectName: The Natural World
 projectDescription: This photography project explores the relationship between
   humans and the natural world, focusing on the beauty, complexity, and
