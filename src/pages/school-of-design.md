@@ -2,7 +2,7 @@
 title: About the School of Design
 heading: About the School of Design
 metaDescription: ""
-bannerImage: images/illustrativebanner-02.png
+bannerImage: images/illustrativebanner-2.png
 bannerAlt: ""
 disciplinesHeading: Explore the Disciplines
 descHeading: The School of Design
