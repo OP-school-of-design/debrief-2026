@@ -1,12 +1,12 @@
 ---
-title: "Graduate Diploma in Design (Communication)"
+title: Graduate Diploma in Design
 shortName: ""
-disciplineKey: "graddip-communication"
+disciplineKey: graddip-communication
 order: 4
-pagesPublished: false
 inGraduatesMenu: true
 hideWhenEmpty: true
 onSchoolPage: false
+pagesPublished: false
 gradBannerImage: ""
 gradBannerAlt: ""
 showCarousel: false
