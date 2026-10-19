@@ -20,8 +20,8 @@ hero: poppysmith_project_hero_9.webp
 heroAlt: The Natural World, Hero Image
 headshot: poppysmith_headshot.webp
 headshotAlt: Poppy Smith, Headshot
-quote: “I’ve learned that good design is not about having all the answers, but
-  about knowing which questions are worth asking.”
+quote: "\"I'VE LEARNED THAT GOOD DESIGN IS NOT ABOUT HAVING ALL THE ANSWERS, BUT
+  ABOUT KNOWING WHICH QUESTIONS ARE WORTH ASKING.\""
 gallery:
   - alt: The Natural World, Project Image
     image: poppysmith_project_2.webp
