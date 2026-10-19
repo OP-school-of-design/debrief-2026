@@ -5,10 +5,14 @@ metaDescription: ""
 bannerImage: images/comms_bree11.webp
 bannerAlt: ""
 disciplinesHeading: Explore the Disciplines
-descHeading: The School of Design?
+descHeading: The School of Design
 descImage: images/square_placeholder.jpg
 descImageAlt: DEBRIEF exhibition image
 layout: layouts/school-of-design.njk
 permalink: /school-of-design/
 ---
-Otago Polytechnic's School of Design blurb here for a few sentences, mention discipline types, postgraduate option too, internships, projects, variety, the wide range of equipment and experiences that can be had in an optimistic and fun way! Otago Polytechnic's School of Design blurb here for a few sentences, mention discipline types, postgraduate option too, internships, projects, variety, the wide range of equipment and experiences that can be had in an optimistic and fun way! Exhibition in H Block.
+At the School of Design, you get to immerse yourself in an innovative and supportive environment, engage in real-world projects, find your niche as a designer and become work-ready. \
+\
+Creative people design the solutions that make our lives better. They also create aesthetically appealing things that make our environment stimulating and thought-provoking. Study one of our acclaimed design programmes and become an industry-ready, creative designer with great prospects for a successful career! \
+\
+At the School of Design, we are proud that more than 85 per cent of our graduates find jobs in the field of design. Offering personalised learning, first-rate facilities and the expertise of award-winning staff, you will learn in a stimulating environment and benefit from our extensive industry networks.
