@@ -1,6 +1,6 @@
 ---
 title: Communication Design
-shortName: Communications
+shortName: Communication Design
 disciplineKey: communication
 order: 1
 inGraduatesMenu: true
@@ -8,9 +8,9 @@ hideWhenEmpty: false
 onSchoolPage: true
 pagesPublished: true
 symbol: symbol.png
-gradBannerImage: banner.jpeg
+gradBannerImage: illustrativebanner_1920x1080-08.png
 gradBannerAlt: ""
-bannerImage: banner.jpeg
+bannerImage: illustrativebanner_1920x1080-08.png
 bannerAlt: ""
 introHeading: Communications
 intro: >-
@@ -21,7 +21,7 @@ intro: >-
   \
 
   You learn how to present ideas and stories creatively and effectively to become highly sought after by employers. You ill find yourself immersed in an innovative and supportive environment that allows you to engage in real-world projects, develop our own design identity, and work in a design teams.
-image: about.jpg
+image: ""
 imageAlt: DEBRIEF exhibition image
 videoTitle: Design your Future | Communication Design
 videoUrl: https://www.youtube.com/embed/jjCxZdGHib4?si=5gXqy49PHF1BfMPu
