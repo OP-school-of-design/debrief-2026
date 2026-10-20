@@ -8,6 +8,7 @@ hideWhenEmpty: false
 onSchoolPage: true
 pagesPublished: false
 symbol: symbol.png
+bannerImage: illustrativebanner_1920x1080-07.png
 intro: >-
   Fashion Design is the art of applying design, aesthetics and construction
   techniques to clothing and accessories. Develop your design identity and
