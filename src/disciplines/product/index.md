@@ -1,11 +1,22 @@
 ---
-title: "Product Design"
-shortName: "Product"
-disciplineKey: "product"
+title: Product Design
+shortName: Product Design
+disciplineKey: product
 order: 3
-pagesPublished: false
-onSchoolPage: true
-hideWhenEmpty: false
 inGraduatesMenu: true
-symbol: "symbol.png"
+hideWhenEmpty: false
+onSchoolPage: true
+pagesPublished: true
+symbol: symbol.png
+gradBannerImage: illustrativebanner_1920x1080-06.png
+bannerImage: illustrativebanner_1920x1080-06.png
+intro: >-
+  Product Design is everywhere. It’s exciting, creative and ever-changing. Every
+  product you use has been designed, from your toothbrush to your
+  tablet. Study Product Design at Otago Polytechnic and you’ll learn how
+  to design objects and systems to improve the way we live.\
+
+  \
+
+  In a rapidly expanding global media environment, a Product Design qualification will open doors. Learn how to present ideas and stories creatively and effectively, a skill highly sought after by employers. Our Product Design graduates work around the world creating incredible products in a variety of industries.
 ---
