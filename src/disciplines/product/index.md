@@ -22,10 +22,10 @@ intro: >-
   In a rapidly expanding global media environment, a Product Design qualification will open doors. Learn how to present ideas and stories creatively and effectively, a skill highly sought after by employers. Our Product Design graduates work around the world creating incredible products in a variety of industries.
 carouselAutoplay: true
 carousel:
-  - image: col_photo_ben-15.webp
-    alt: Product Design Image
-  - image: col_photo_product-19.webp
-    alt: Product Design Image
-  - image: col_photo_product-20.webp
-    alt: Product Design Image
+  - image: col_product_landscape-01.webp
+    alt: Product Image
+  - alt: Product Image
+    image: col_product_landscape-02.webp
+  - alt: Product Image
+    image: col_product_landscape-10.webp
 ---
