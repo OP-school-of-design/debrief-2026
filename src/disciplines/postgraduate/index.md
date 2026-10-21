@@ -1,7 +1,7 @@
 ---
 title: Postgraduate
 disciplineKey: postgraduate
-order: 3
+order: 4
 inGraduatesMenu: true
 hideWhenEmpty: true
 onSchoolPage: true
