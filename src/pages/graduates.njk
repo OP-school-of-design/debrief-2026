@@ -6,15 +6,25 @@ eleventyComputed:
 ---
         <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-            PAGE HEADING (no banner on this page; each category's own page has one)
+            PAGE BANNER (Pages > All Graduates page > Banner image).
+            With no banner image chosen, a plain heading instead.
 
         = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
 <main>
 
+    {%- if graduatespage.bannerImage %}
+    <section class="image-block-title">
+        <img src="{{ graduatespage.bannerImage | siteImg }}" alt="{{ graduatespage.bannerAlt }}" sizes="100vw" loading="eager">
+            <h1>
+                {{ graduatespage.title }}
+            </h1>
+    </section>
+    {%- else %}
     <section class="page-heading-plain">
         <h1>{{ graduatespage.title }}</h1>
     </section>
+    {%- endif %}
 
         <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 

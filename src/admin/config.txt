@@ -636,6 +636,19 @@ collections:
       name: title
       widget: string
       hint: 'Each category''s banner is set in Disciplines > (pick one) > Graduates page: banner image.'
+    - label: Banner image
+      name: bannerImage
+      widget: image
+      required: false
+      media_library:
+        config:
+          max_file_size: 10000000
+      hint: Shown across the top of the page with the title over it, as on the About the School of Design page. Leave empty for a plain heading with no banner.
+    - label: Banner description (alt text)
+      name: bannerAlt
+      widget: string
+      required: false
+      hint: Describe the image for people using screen readers.
     - label: Category order
       label_singular: category
       name: categoryOrder

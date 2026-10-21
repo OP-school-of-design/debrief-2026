@@ -561,6 +561,7 @@
   });
 
   var GraduatesPagePreview = createClass({
+    mixins: [Redraw],
     getInitialState: function () { return {}; },
     componentDidMount: function () {
       loadInto(this, "disciplines", "disciplines");
@@ -611,7 +612,10 @@
       return h("div", { className: "gp" },
         h("style", null, STYLE),
         h("h1", null, title),
-        h("p", { className: "sub" }, "The page heading and the top menu label. This page has no banner."),
+        h("p", { className: "sub" }, "The page heading and the top menu label."),
+        get(entry, "bannerImage")
+          ? bannerSection("Banner", src(this.props.getAsset, get(entry, "bannerImage"), fieldByName(this.props.fields, "bannerImage")), title, get(entry, "bannerAlt"), get(entry, "bannerImage"))
+          : section("Banner", empty("No banner image: the page shows a plain heading.")),
         body);
     },
   });
