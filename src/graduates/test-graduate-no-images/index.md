@@ -1,6 +1,6 @@
 ---
 title: TEST GRADUATE NO IMAGES
-discipline: graddip-fashion
+discipline: fashion
 published: true
 blockOrder: project
 projectName: TEST GRADUATE NO IMAGES
