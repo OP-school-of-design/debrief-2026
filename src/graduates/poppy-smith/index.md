@@ -1,6 +1,6 @@
 ---
 title: Poppy Smith
-discipline: honours
+discipline: product
 published: true
 blockOrder: profile
 projectName: The Natural World
