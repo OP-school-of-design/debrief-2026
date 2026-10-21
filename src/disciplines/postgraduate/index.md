@@ -1,11 +1,12 @@
 ---
 title: Postgraduate
+shortName: Postgraduate
 disciplineKey: postgraduate
 order: 4
 inGraduatesMenu: true
-hideWhenEmpty: true
+hideWhenEmpty: false
 onSchoolPage: true
-pagesPublished: false
+pagesPublished: true
 showCarousel: true
 carouselAutoplay: false
 carouselInterval: 5
