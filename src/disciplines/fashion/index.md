@@ -8,6 +8,7 @@ hideWhenEmpty: false
 onSchoolPage: true
 pagesPublished: true
 symbol: symbol.png
+gradBannerImage: illustrativebanner_1920x1080-07.png
 bannerImage: illustrativebanner_1920x1080-07.png
 introHeading: Thinking of studying Fashion?
 intro: >-
@@ -21,4 +22,18 @@ intro: >-
 
 
   You will be immersed in an innovative and supportive environment which allows you to engage in live projects, develop your individual voice as a designer, and learn how to work in a design team. The experience you’ll gain will give you the skills to seamlessly transition from study to employment or promotion. Our programmes have a strong focus on sustainability, giving you a skillset for an increasingly planet-conscious industry.
+image: col_comms_landscape-03.webp
+imageAlt: ""
+showCarousel: true
+carousel:
+  - image: col_comms_landscape-06.webp
+    alt: Monet Jamieson working on her Collection
+  - image: col_comms_landscape-04.webp
+    alt: Amber Stevenson work on 'Growing Up' Collection
+  - image: col_comms_landscape-02.webp
+    alt: Amber Stevenson work on 'Growing Up' Collection
+  - image: col_comms_landscape-05.webp
+    alt: Amber Stevenson work on 'Growing Up' Collection
+  - image: col_comms_landscape-01.webp
+    alt: Amber Stevenson work on 'Growing Up' Collection
 ---
