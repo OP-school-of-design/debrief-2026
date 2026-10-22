@@ -29,18 +29,25 @@ showCarousel: true
 carouselAutoplay: false
 carouselInterval: 5
 carousel:
+  - image: col_games_landscape-03.webp
+    alt: Games Image
+    caption: Joshua Bodeker working on his game!
   - image: col_comms_landscape-11.webp
     alt: Bree Mehrtens work for Tuku Iho
   - image: col_comms_landscape-13.webp
     alt: Bryn Trainor work for MORR
   - image: col_comms_landscape-10.webp
     alt: Bree Mehrtens work for Tuku Iho
+  - image: col_games_landscape-06.webp
+    alt: Games Image
+    caption: Kaushal Morey working on his game
   - image: col_comms_landscape-07.webp
     alt: Bree Mehrtens work for Tuku Iho
   - image: col_comms_landscape-14.webp
     alt: Bryn Trainor work for MORR
-  - image: col_comms_landscape-12.webp
-    alt: Bryn Trainor work for MORR
+  - image: col_games_landscape-01.webp
+    alt: Games Image
+    caption: Josh Bodeker working on his game
 moreText: ""
 metaDescription: ""
 ---
