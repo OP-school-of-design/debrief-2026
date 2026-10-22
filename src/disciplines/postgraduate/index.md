@@ -1,6 +1,6 @@
 ---
-title: Postgraduate
-shortName: Postgraduate
+title: Postgraduate Design
+shortName: Postgraduate Design
 disciplineKey: postgraduate
 order: 4
 inGraduatesMenu: true
