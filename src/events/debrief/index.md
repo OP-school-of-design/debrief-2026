@@ -20,7 +20,7 @@ bannerDetails: |-
   Opening 5:30pm Thurs 19 Nov
   Open daily 10am - 4pm // Fri 20 - Mon 23 Nov
   Otago Polytechnic, The Hub
-showCarousel: true
+showCarousel: false
 carouselAutoplay: false
 carouselInterval: 5
 carousel:
