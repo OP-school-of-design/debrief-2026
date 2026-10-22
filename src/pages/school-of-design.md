@@ -6,7 +6,7 @@ bannerImage: images/illustrativebanner_1920x1080-10.png
 bannerAlt: Illustrative Banner
 disciplinesHeading: Explore the Disciplines
 descHeading: The School of Design
-descImage: images/square_placeholder.jpg
+descImage: images/pink_risoimage.webp
 descImageAlt: DEBRIEF exhibition image
 layout: layouts/school-of-design.njk
 permalink: /school-of-design/
