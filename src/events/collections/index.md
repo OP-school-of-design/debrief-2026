@@ -3,8 +3,8 @@ title: COLLECTIONS
 subtitle: Fashion Graduates Runway Show
 gridDates: |-
   Friday 20th November 
-  Doors open 7pm
-  Show starts 8pm
+  Doors open at 7pm for an 8pm show start
+  Otago Polytechnic, The Hub
 navLabel: "COLLECTIONS: Fashion Show"
 footerLabel: "COLLECTIONS: Fashion Show"
 order: 2
