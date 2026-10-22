@@ -8,7 +8,7 @@ gridDates: |-
 navLabel: "COLLECTIONS: Fashion Show"
 footerLabel: "COLLECTIONS: Fashion Show"
 order: 2
-poster: poster.png
+poster: collections_poster2026.png
 posterAlt: COLLECTIONS Poster
 heading: COLLECTIONS 2026
 detailDatesLine: |-
@@ -21,7 +21,7 @@ bannerDetails: |-
   Doors Open 7pm Fri 20 Nov 
   Show Starts 8pm
   Otago Polytechnic, The Hub
-showCarousel: true
+showCarousel: false
 carouselAutoplay: false
 carouselInterval: 5
 carousel:
