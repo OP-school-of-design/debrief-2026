@@ -1,13 +1,14 @@
 {
   "title": "All Graduates",
   "categoryOrder": [
-    "communication",
-    "fashion",
     "product",
+    "fashion",
+    "communication",
     "graddip-communication",
     "graddip-fashion",
     "graddip-product",
     "honours",
     "masters"
-  ]
+  ],
+  "bannerImage": "images/illustrativebanner_1920x1080-10.png"
 }
