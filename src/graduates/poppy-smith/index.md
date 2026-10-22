@@ -22,6 +22,13 @@ headshot: poppysmith_headshot.webp
 headshotAlt: Poppy Smith, Headshot
 quote: "\"I'VE LEARNED THAT GOOD DESIGN IS NOT ABOUT HAVING ALL THE ANSWERS, BUT
   ABOUT KNOWING WHICH QUESTIONS ARE WORTH ASKING.\""
+links:
+  - type: website
+    url: https://www.op.ac.nz/
+  - type: email
+    url: poppysmith@hello.com
+  - type: instagram
+    url: https://www.instagram.com/otagopolycommunication?utm_source=ig_web_button_share_sheet&xtok=ZDNlZDc0MzIxNw==
 gallery:
   - alt: The Natural World, Project Image
     image: poppysmith_project_2.webp
