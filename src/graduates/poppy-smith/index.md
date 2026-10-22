@@ -29,6 +29,7 @@ links:
     url: poppysmith@hello.com
   - type: instagram
     url: https://www.instagram.com/otagopolycommunication?utm_source=ig_web_button_share_sheet&xtok=ZDNlZDc0MzIxNw==
+    label: PoppySmith112
 gallery:
   - alt: The Natural World, Project Image
     image: poppysmith_project_2.webp
