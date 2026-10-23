@@ -12,7 +12,7 @@ gradBannerImage: illustrativebanner_1920x1080-08.png
 gradBannerAlt: ""
 bannerImage: illustrativebanner_1920x1080-08.png
 bannerAlt: ""
-introHeading: Communications
+introHeading: Thinking about studying Communications?
 intro: >-
   Within Communication Design, you use your creativity and vision to convey
   original and exciting ideas. As a Designer, you learn to express information
