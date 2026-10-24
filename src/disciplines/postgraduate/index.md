@@ -11,7 +11,7 @@ symbol: rectangle.png
 boxColour: "#9c3e97"
 gradBannerImage: illustrativebanner_1920x1080-09.png
 bannerImage: illustrativebanner_1920x1080-09.png
-introHeading: Thinking about Postgraduate design?
+introHeading: Thinking about studying Postgraduate Design?
 intro: >-
   Our postgraduate programmes provide opportunities to learn and embed research
   methods that extend your design practice. We leverage extensive professional
