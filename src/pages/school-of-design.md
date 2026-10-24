@@ -4,7 +4,7 @@ heading: About the School of Design
 metaDescription: ""
 bannerImage: images/illustrativebanner_1920x1080-10.png
 bannerAlt: Illustrative Banner
-disciplinesHeading: Explore the Disciplines
+disciplinesHeading: Explore
 descHeading: The School of Design
 descImage: images/pink_risoimage.webp
 descImageAlt: DEBRIEF exhibition image
