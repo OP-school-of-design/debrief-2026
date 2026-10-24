@@ -10,7 +10,7 @@ pagesPublished: true
 symbol: symbol.png
 gradBannerImage: illustrativebanner_1920x1080-07.png
 bannerImage: illustrativebanner_1920x1080-07.png
-introHeading: Thinking of studying Fashion?
+introHeading: Thinking about studying Fashion?
 intro: >-
   Fashion Design is the art of applying design, aesthetics and construction
   techniques to clothing and accessories. Develop your design identity and
