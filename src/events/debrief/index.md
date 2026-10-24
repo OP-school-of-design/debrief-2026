@@ -7,7 +7,7 @@ gridDates: |-
 navLabel: "DEBRIEF: Student Exhibition"
 footerLabel: "DEBRIEF: Graduate Exhibition"
 order: 1
-poster: poster.png
+poster: debriefposter.png
 posterAlt: DEBRIEF Poster
 heading: DEBRIEF 2026
 detailDatesLine: |-
