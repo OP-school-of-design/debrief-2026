@@ -10,7 +10,7 @@ pagesPublished: true
 symbol: symbol.png
 gradBannerImage: illustrativebanner_1920x1080-06.png
 bannerImage: illustrativebanner_1920x1080-06.png
-introHeading: Thinking of Studying Product design?
+introHeading: Thinking of Studying Product?
 intro: >-
   Product Design is everywhere. It’s exciting, creative and ever-changing. Every
   product you use has been designed, from your toothbrush to your
