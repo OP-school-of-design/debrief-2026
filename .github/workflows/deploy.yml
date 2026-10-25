@@ -29,7 +29,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # The first build after a bulk import processes every new image and uploads thousands of files,
+    # so allow up to 2 hours. Later builds reuse the cached images and take a few minutes.
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:

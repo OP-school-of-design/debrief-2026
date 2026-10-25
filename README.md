@@ -124,6 +124,8 @@ lib/                             font, favicon + helper code
 
 **Adding a discipline:** Disciplines → New. Give it a *web address key* (lowercase, e.g. `textiles`); it appears in the menus, footer and School of Design page straight away, and its own pages once **Pages live** is on. (The School of Design grid colours come from Maxis' CSS, which colours the first four boxes.)
 **Adding a new colour to the palette:** add a `widget: "color"` field in `src/admin/config.txt` (Design → Colour palette) and a matching default in `src/_data/colours.json`; then use `var(--your-name)` in the CSS.
+**Bulk import of graduates** from the Microsoft Form: see `docs/IMPORTING-GRADUATES.md` (`npm run import`).
+
 **Uploading several images at once:** in any image's "Choose an image" dialog, click Upload and select several files (Shift- or Cmd/Ctrl-click). They upload one after another; the first one picked ends up at the top, selected. They all stay in the dialog for that graduate's other image fields (`src/admin/multi-upload.js`).
 
 **Responsive CSS:** Design > Responsive CSS has one box per screen size. Type only the rules; the build wraps each box in its `@media` block and adds it after Custom CSS, smallest screens first. A box with a missing `{` or `}` is left out (the preview says so) so it can't break the rest.

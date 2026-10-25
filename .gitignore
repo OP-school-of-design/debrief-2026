@@ -4,3 +4,6 @@ _site/
 .DS_Store
 *.log
 *.zip
+
+# Graduate import report (names and notes; not for the public repo)
+import-report.md
