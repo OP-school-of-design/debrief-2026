@@ -5,7 +5,8 @@
 #
 #  base_url = the Cloudflare Worker that handles "Login with GitHub" (sveltia-cms-auth).
 #  publish_mode: editorial_workflow = edits are saved as Drafts, moved to In review, and only
-#  go live when someone moves them to Ready and publishes.
+#  go live when someone moves them to Ready and publishes. For the launch period it can be
+#  switched off in the dashboard: Site settings > Dashboard > How Save works.
 #
 #  local_backend is only used on localhost with "npm run cms"; the live site ignores it.
 #  Graduates, disciplines and events keep their images in their own folder (media_folder: "").
@@ -1086,3 +1087,18 @@ collections:
         pattern:
         - ^(https?://\S+|#)$
         - 'Must be a full web address starting with https:// (or # for no link yet)'
+  - label: Dashboard
+    name: dashboard
+    file: src/_data/dashboard.json
+    format: json
+    fields:
+    - label: How Save works
+      name: publishMode
+      widget: select
+      default: workflow
+      options:
+      - label: 'Approval steps: Save, In review, Ready, Publish (normal)'
+        value: workflow
+      - label: 'Publish straight away: Save makes changes live (launch period)'
+        value: direct
+      hint: 'After this change is published and the site has rebuilt (a few minutes), reload the dashboard. Before choosing Publish straight away, publish or discard everything in Workflow (GitHub > Actions > Publish all drafts publishes it all): drafts left there are hidden while it is switched on.'

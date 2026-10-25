@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 // Bulk import of graduates from the Microsoft Forms graduate form.
 //
-//   npm run import -- --excel <results.xlsx> --files <uploads folder> [--check] [--replace] [--publish]
+//   npm run import -- --excel <results.xlsx> --files <uploads folder> [--check] [--replace] [--unpublished]
 //
 //   --excel    the form's results (Forms > Responses > Open results in Excel, then download a copy)
 //   --files    the form's uploads folder: download "Apps > Microsoft Forms > <form name>" from the Team's
 //              files and double-click the .zip to unpack it (or point at the OneDrive-synced folder)
 //   --check    report only: nothing is written
 //   --replace  update graduates this script imported before and nobody has edited since
-//   --publish  import pages as Published (default: Unpublished, for staff to check and tick)
+//   --unpublished  import pages as Unpublished (default: Published, ready to review on the site)
 //
 // For each response it creates src/graduates/<name>/index.md plus the images, in exactly the shape the
 // dashboard makes, and writes import-report.md listing anything staff need to look at.
@@ -70,7 +70,7 @@ const opt = (n) => {
 const home = (p) => (p.startsWith("~") ? path.join(os.homedir(), p.slice(1)) : p);
 const EXCEL = home(opt("excel"));
 const FILES = home(opt("files"));
-const CHECK = flag("check"), REPLACE = flag("replace"), PUBLISH = flag("publish");
+const CHECK = flag("check"), REPLACE = flag("replace"), PUBLISH = !flag("unpublished");
 const ROOT = process.cwd();
 const GRAD_DIR = path.join(ROOT, "src/graduates");
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -79,7 +79,7 @@ function fail(msg) {
   console.error("\n\u2716 " + msg + "\n");
   process.exit(1);
 }
-if (!EXCEL || !FILES) fail('Usage: npm run import -- --excel "<results.xlsx>" --files "<uploads folder>" [--check] [--replace] [--publish]');
+if (!EXCEL || !FILES) fail('Usage: npm run import -- --excel "<results.xlsx>" --files "<uploads folder>" [--check] [--replace] [--unpublished]');
 if (!fs.existsSync(path.join(ROOT, "src/admin/config.txt"))) fail("Run this from the debrief-2026 folder (the one with package.json).");
 if (!fs.existsSync(EXCEL)) fail("Can't find the Excel file: " + EXCEL);
 if (!fs.existsSync(FILES)) fail("Can't find the uploads folder: " + FILES);
@@ -423,7 +423,7 @@ const lines = [
   "",
   `${responses.length} graduate${responses.length === 1 ? "" : "s"} in the form` + (replaced ? ` (${replaced} earlier submission${replaced === 1 ? "" : "s"} replaced by a newer one)` : "") + ".",
   `${CHECK ? "Would add" : "Added"}: ${created} \u00b7 ${CHECK ? "Would update" : "Updated"}: ${updated} \u00b7 Skipped or not imported: ${skipped} \u00b7 Need a look: ${attention}`,
-  CHECK ? "This was a check: nothing was written." : `Pages were imported as ${PUBLISH ? "Published" : "Unpublished: tick Published in the dashboard once each is checked"}.`,
+  CHECK ? "This was a check: nothing was written." : `Pages were imported as ${PUBLISH ? "Published: review them on the site, and untick Published in the dashboard to hide one while it's fixed" : "Unpublished: tick Published in the dashboard once each is checked"}.`,
   "",
 ];
 if (missingColumns.length) lines.push("Questions not found in the Excel file (left blank): " + missingColumns.join(", ") + ".", "");

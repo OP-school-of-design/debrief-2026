@@ -1,7 +1,8 @@
 # Importing graduates from the form
 
 Students fill in the Microsoft Form; the import turns every response into a graduate page in one go.
-Pages arrive **Unpublished**: staff check each in the dashboard and tick **Published**.
+Pages arrive **Published**, so staff can review them on the site before launch. To hide one while it's
+being fixed, untick **Published** in the dashboard.
 
 ## One-time setup on the in-house Mac
 
@@ -49,8 +50,9 @@ they're never pushed to GitHub: they hold students' names, OP email addresses an
    ```
    The first build after a big import takes longer (every new image is processed and uploaded); watch it
    under the repo's **Actions** tab.
-7. **Check and publish** in the dashboard: open each graduate (the preview shows the whole page), fix
-   anything the report flagged, tick **Published**, then Save > Ready > Publish as usual.
+7. **Review on the site.** Fix anything the report flagged, and anything else you spot, in the dashboard.
+   To hide a page while it's being fixed, untick **Published**. During the launch period, switch the
+   dashboard to publish straight away (see "Launch period" below) so fixes go live with one Save.
 
 ## Students who resubmit, and running it again
 
@@ -74,12 +76,29 @@ they're never pushed to GitHub: they hold students' names, OP email addresses an
 | Gallery images (+ descriptions) | `gallery-01.jpg`... in the order uploaded, paired with the description lines in order. A leading "01", "1." etc. is removed. |
 | Public email, Website, Instagram, LinkedIn, Behance, Other links | Contact links. `https://` is added where missing; an Instagram or Behance handle becomes a full address; YouTube and Facebook links are recognised. |
 
-Every page gets the **Profile first** layout and is **Unpublished**. Images are turned the right way up,
+Every page gets the **Profile first** layout and is **Published**. Images are turned the right way up,
 shrunk to at most 2500 px, saved as JPG (PNG when transparent) and stripped of hidden camera and GPS data.
 
 If a question is renamed in the form, add the new title to `COLUMNS` at the top of
 `scripts/import-graduates.mjs`. The import works out which file belongs to which answer from the links in
 the Excel file, so the upload folders' names ("Question", "Question 1"...) don't matter.
 
-Options: `--check` (report only) · `--replace` (refresh earlier imports) · `--publish` (import as Published,
-e.g. for a rehearsal on a test copy).
+Options: `--check` (report only) · `--replace` (refresh earlier imports) · `--unpublished` (import as
+Unpublished instead).
+
+## Launch period: publishing straight away, and "Publish all drafts"
+
+Normally every dashboard edit goes through Workflow (Save, In review, Ready, Publish). Around launch that's
+slow, so there are two tools:
+
+- **Publish all drafts** (GitHub): repo > **Actions** > **Publish all drafts** > **Run workflow**. It
+  publishes every draft waiting in the dashboard's Workflow in one go (or only those at Ready, if you
+  choose), then rebuilds the site. Anything it can't publish (e.g. two drafts changing the same file) is
+  listed in the run's summary and left in Workflow.
+- **Publish straight away** (dashboard): **Site settings > Dashboard > How Save works**. Choose
+  “Publish straight away” and Save (this one change still goes through Workflow; publish it). After the site
+  rebuilds (a few minutes), reload the dashboard: Save now makes changes live immediately and the
+  Workflow page is gone. Switch back to “Approval steps” after launch.
+
+  Before switching to “Publish straight away”, run **Publish all drafts** (or discard the drafts): drafts
+  still waiting in Workflow are hidden from the dashboard while it's switched off.

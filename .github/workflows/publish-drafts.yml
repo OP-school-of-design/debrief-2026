@@ -1,0 +1,75 @@
+# "Publish all drafts": publishes every draft waiting in the dashboard's Workflow in one go, then
+# rebuilds the site. Run it from the repo's Actions tab > Publish all drafts > Run workflow.
+#
+# Each dashboard draft is a pull request from a branch starting with "cms/", labelled with its Workflow
+# column (decap-cms/draft, decap-cms/pending_review, decap-cms/pending_publish). This merges them the
+# same way the dashboard's Publish button does, and deletes the branch. A draft that can't be merged
+# (e.g. two drafts changed the same file) is left in Workflow and listed in the run's summary.
+#
+# Only people with write access to the repo can run it.
+name: Publish all drafts
+
+on:
+  workflow_dispatch:
+    inputs:
+      which:
+        description: "Which drafts to publish"
+        type: choice
+        default: "All drafts"
+        options:
+          - "All drafts"
+          - "Only drafts at Ready"
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write # to start the site rebuild afterwards
+
+concurrency:
+  group: publish-drafts
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      WHICH: ${{ inputs.which }}
+    steps:
+      - name: Publish the drafts
+        id: merge
+        run: |
+          set -u
+          if [ "$WHICH" = "Only drafts at Ready" ]; then label="decap-cms/pending_publish"; else label=""; fi
+          # Open dashboard drafts: number, title and labels, oldest first.
+          prs=$(gh pr list --base main --state open --limit 500 --json number,headRefName,title,labels \
+            --jq 'sort_by(.number) | .[] | select(.headRefName | startswith("cms/")) | "\(.number)\t\(.title)\t\([.labels[].name] | join(","))"' \
+            | awk -F'\t' -v l="$label" 'l == "" || index($3, l) { print $1 "\t" $2 }')
+          published=0; failed=0
+          printf '## Publish all drafts (%s)\n\n' "$WHICH" >> "$GITHUB_STEP_SUMMARY"
+          if [ -z "$prs" ]; then
+            echo "Nothing waiting in Workflow." >> "$GITHUB_STEP_SUMMARY"
+            echo "published=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          while IFS=$'\t' read -r number title; do
+            [ -z "$number" ] && continue
+            if gh pr merge "$number" --merge --delete-branch --subject "$title (published with Publish all drafts)" >/dev/null 2>err.txt; then
+              echo "- Published: $title" >> "$GITHUB_STEP_SUMMARY"
+              published=$((published + 1))
+            else
+              echo "- **Not published:** $title ($(head -c 200 err.txt | tr '\n' ' ')). Still in Workflow: publish it in the dashboard." >> "$GITHUB_STEP_SUMMARY"
+              failed=$((failed + 1))
+            fi
+            sleep 2
+          done <<< "$prs"
+          printf '\n%s published, %s left in Workflow.\n' "$published" "$failed" >> "$GITHUB_STEP_SUMMARY"
+          echo "published=$published" >> "$GITHUB_OUTPUT"
+
+      # Merges made by this workflow don't start other workflows by themselves, so start the site
+      # rebuild (Build and deploy) explicitly.
+      - name: Rebuild the site
+        if: ${{ steps.merge.outputs.published != '0' }}
+        run: gh workflow run deploy.yml --ref main
