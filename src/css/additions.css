@@ -137,3 +137,17 @@
         overflow-wrap: anywhere;
     }
 }
+
+/* The header logo links to the home page. Maxis' menu styles hide every menu link on phones (until the
+   menu opens) and right-align them when it's open; the logo link keeps the logo exactly as before. */
+.topnav .navlogo-link,
+.topnav.responsive .navlogo-link {
+    display: block;
+    text-align: left;
+    text-decoration: none;
+}
+
+.topnav .navlogo-link:focus-visible {
+    outline: 2px solid var(--black-text, #000);
+    outline-offset: 4px;
+}

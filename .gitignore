@@ -7,3 +7,9 @@ _site/
 
 # Graduate import report (names and notes; not for the public repo)
 import-report.md
+
+# Form exports and downloaded uploads (students' names, emails and images): keep them out of the repo.
+# Put them in Downloads and point the import there.
+*.xlsx
+*.xls
+*.csv

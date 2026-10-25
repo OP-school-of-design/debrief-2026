@@ -18,9 +18,16 @@ import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
 import crypto from "node:crypto";
-import { unzipSync, strFromU8 } from "fflate";
-import yaml from "js-yaml";
-import sharp from "sharp";
+// Build tools from package.json. If they're missing (e.g. after a git pull that added one), say how to fix it.
+let unzipSync, strFromU8, yaml, sharp;
+try {
+  ({ unzipSync, strFromU8 } = await import("fflate"));
+  yaml = (await import("js-yaml")).default;
+  sharp = (await import("sharp")).default;
+} catch (e) {
+  console.error("\n\u2716 The import's tools aren't installed yet. In this folder, run:\n\n    npm ci\n\nthen run the import again.\n(" + e.message.split("\n")[0] + ")\n");
+  process.exit(1);
+}
 
 // ---------------------------------------------------------------- QUESTION TITLES
 // The form's question titles, as they appear across the top of the Excel file. If a question is renamed

@@ -8,9 +8,12 @@
         <header>
             <nav class="topnav" id="myTopnav">
 
-                <!-- Logo -->
+                <!-- Logo: links to the home page. The address comes from the site's base (SITE_BASE), so it is
+                     /debrief/2026/ now and becomes / automatically when the site moves to the domain root. -->
                 <div>
-                    <img src="{{ site.navLogo | siteImg }}" alt="{{ site.navLogoAlt }}" class="navlogo" loading="eager" eleventy:widths="400,800" sizes="225px">
+                    <a href="{{ '/' | url }}" class="navlogo-link" aria-label="{{ site.name }} home page">
+                        <img src="{{ site.navLogo | siteImg }}" alt="{{ site.navLogoAlt }}" class="navlogo" loading="eager" eleventy:widths="400,800" sizes="225px">
+                    </a>
                 </div>
 
                 <a href="{{ '/' | url }}">Home</a>

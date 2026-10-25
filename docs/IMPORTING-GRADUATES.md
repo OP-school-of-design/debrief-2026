@@ -18,6 +18,9 @@ Pages arrive **Unpublished**: staff check each in the dashboard and tick **Publi
 
 ## Each import
 
+Keep the downloaded Excel file and images **outside** the debrief-2026 folder (e.g. in Downloads), so
+they're never pushed to GitHub: they hold students' names, OP email addresses and unpublished work.
+
 1. **Download the answers:** in the form, **Responses** > **Open results in Excel**, then in Excel
    **File > Save a copy** (or Download) to the Downloads folder.
 2. **Download the images:** in the Team, open **General > Files**, click **Documents** in the path, open
@@ -28,8 +31,10 @@ Pages arrive **Unpublished**: staff check each in the dashboard and tick **Publi
    ```
    cd ~/debrief-2026
    git pull
+   npm ci
    npm run import -- --excel ~/Downloads/<results>.xlsx --files ~/Downloads/<unpacked folder> --check
    ```
+   `npm ci` installs the import's tools; it only takes a moment when nothing has changed.
    Tip: type the start of the command, then drag the file or folder from Finder into Terminal to fill in
    its path.
 4. **Read `import-report.md`** (in the debrief-2026 folder). It lists, for each student, anything to look
