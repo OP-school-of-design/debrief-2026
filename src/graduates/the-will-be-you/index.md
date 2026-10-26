@@ -15,7 +15,7 @@ projectDescription: >-
   Join us to celebrate our creative journeys and discover the explorative design processes behind our major projects. From initial ideas to finished outcomes, this exhibition embraces optimism, joy and the excitement of stepping into the next chapter of our design careers.
 cover: retina-macbook-workspace-mockup.png
 hero: m011t0832-b-16pro-mockup-12sep24_pinky.png
-headshot: maxisangel_headshot.jpg
+headshot: maxisangel_headshot.png
 quote: '"THIS IS MY QUOTE. ABOUT SOMETHING COOL!!"'
 links:
   - type: website
