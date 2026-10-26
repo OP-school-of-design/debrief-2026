@@ -30,5 +30,16 @@ links:
   - type: linkedin
     url: https://www.linkedin.com/in/maxis-angel-2961103bb/
     label: Maxis LinkedIn
+gallery:
+  - image: m011t0832-b-16pro-mockup-12sep24_pinky.png
+  - image: instagram-story-1.png
+  - image: laptop-tablet-phone-mockup-template.png
+  - image: retina-macbook-workspace-mockup.png
+  - image: m011t0831-a-16pro-mockup-11sep24.png
+  - image: laptop-tablet-phone-mockup-template.png
+  - image: iphone-x-in-hand-mockup.png
+  - image: 202.png
+  - image: free-close-view-iphone-mockup.png
+  - image: free-iphone-16-pro-in-hand-mockup.png
 ---
 I’m a creative and curious designer passionate about exploring ideas, solving problems, and creating meaningful experiences. With interests in graphic, web, and experiential design, I enjoy bringing concepts to life through thoughtful visuals and engaging interactions. I value collaboration, accessibility, and continuous learning, aiming to create designs that inspire, connect with people, and make everyday experiences more enjoyable.
