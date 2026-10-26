@@ -34,6 +34,8 @@ try {
 // in the form, add the new title to its list here. (Matching ignores capitals and extra spaces.)
 const COLUMNS = {
   submitted: ["Completion time"],
+  modified: ["Last modified time"], // when "edit after submitting" is on
+
   account: ["Email"], // the student's OP sign-in (Forms adds this column itself)
   name: ["Full name"],
   programme: ["Programme"],
@@ -73,7 +75,7 @@ const FILES = home(opt("files"));
 const CHECK = flag("check"), REPLACE = flag("replace"), PUBLISH = !flag("unpublished");
 const ROOT = process.cwd();
 const GRAD_DIR = path.join(ROOT, "src/graduates");
-const TODAY = new Date().toISOString().slice(0, 10);
+const TODAY = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD, local date
 
 function fail(msg) {
   console.error("\n\u2716 " + msg + "\n");
@@ -95,17 +97,25 @@ const xmlText = (s) =>
     .replace(/&amp;/g, "&")
     .replace(/_x([0-9A-F]{4})_/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
 
+// Microsoft Forms produces two kinds of .xlsx: one saved by Excel, and the direct download, whose XML tags
+// carry an "x:" prefix (<x:row>, <x:c>...) and whose file paths may be absolute. Both are handled.
 function readXlsx(file) {
   const z = unzipSync(fs.readFileSync(file));
-  const get = (p) => (z[p] ? strFromU8(z[p]) : "");
-  const shared = [...get("xl/sharedStrings.xml").matchAll(/<si>([\s\S]*?)<\/si>/g)].map((m) =>
+  const get = (p) => (z[p] ? strFromU8(z[p]).replace(/^\uFEFF/, "").replace(/<(\/?)[A-Za-z_][\w.-]*:(?=[A-Za-z_])/g, "<$1") : "");
+  const resolve = (target) => (target.startsWith("/") ? target.slice(1) : "xl/" + target.replace(/^\.\//, ""));
+  const rels = [...get("xl/_rels/workbook.xml.rels").matchAll(/<Relationship\b[^>]*>/g)].map((m) => m[0]);
+  const relTarget = (test) => {
+    const r = rels.find(test);
+    return r ? resolve(r.match(/Target="([^"]+)"/)[1]) : "";
+  };
+  const sstPath = relTarget((r) => /\/sharedStrings"/.test(r)) || "xl/sharedStrings.xml";
+  const shared = [...get(sstPath).matchAll(/<si>([\s\S]*?)<\/si>/g)].map((m) =>
     [...m[1].matchAll(/<t(?:\s[^>]*)?>([\s\S]*?)<\/t>/g)].map((t) => xmlText(t[1])).join("")
   );
   // First sheet, found through the workbook's relationships.
-  const firstId = (get("xl/workbook.xml").match(/<sheet\b[^>]*r:id="([^"]+)"/) || [])[1];
-  const rel = [...get("xl/_rels/workbook.xml.rels").matchAll(/<Relationship\b[^>]*>/g)].map((m) => m[0]).find((r) => r.includes(`Id="${firstId}"`));
-  const target = rel ? rel.match(/Target="([^"]+)"/)[1].replace(/^\/?(xl\/)?/, "") : "worksheets/sheet1.xml";
-  const sheet = get("xl/" + target);
+  const firstId = (get("xl/workbook.xml").match(/<sheet\b[^>]*\br:id="([^"]+)"/) || [])[1];
+  const sheetPath = relTarget((r) => r.includes(`Id="${firstId}"`)) || "xl/worksheets/sheet1.xml";
+  const sheet = get(sheetPath);
   const col = (ref) => [...ref.replace(/\d+/g, "")].reduce((n, ch) => n * 26 + ch.charCodeAt(0) - 64, 0) - 1;
   const rows = [];
   for (const r of sheet.matchAll(/<row\b[^>]*>([\s\S]*?)<\/row>/g)) {
@@ -147,7 +157,8 @@ let responses = rows.slice(1).filter((r) => r.some((v) => String(v ?? "").trim()
 const latest = new Map();
 responses.forEach((r, i) => {
   const who = norm(cell(r, "account")) || "row" + i;
-  const when = parseFloat(cell(r, "submitted")) || Date.parse(cell(r, "submitted")) || i;
+  const stamp = cell(r, "modified") || cell(r, "submitted");
+  const when = (/^\d+(\.\d+)?$/.test(stamp) ? parseFloat(stamp) * 86400000 : Date.parse(stamp)) || i;
   const prev = latest.get(who);
   if (!prev || when >= prev.when) latest.set(who, { r, when });
 });
