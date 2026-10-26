@@ -1,5 +1,5 @@
 ---
-title: Poppy Smith
+title: I am Here
 discipline: product
 published: true
 blockOrder: profile
@@ -18,7 +18,7 @@ cover: poppysmith_project_square_4.webp
 coverAlt: The Natural World, Project Image
 hero: poppysmith_project_hero_9.webp
 heroAlt: The Natural World, Hero Image
-headshot: poppysmith_headshot.webp
+headshot: maxisangel_headshot.png
 headshotAlt: Poppy Smith, Headshot
 quote: "\"I'VE LEARNED THAT GOOD DESIGN IS NOT ABOUT HAVING ALL THE ANSWERS, BUT
   ABOUT KNOWING WHICH QUESTIONS ARE WORTH ASKING.\""
