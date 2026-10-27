@@ -16,8 +16,9 @@
     <link rel="preload" href="{{ href }}" as="font" type="font/woff2" crossorigin>
     {%- endfor %}
 
+    <!-- base stylesheet -->
     <link rel="stylesheet" href="{{ '/css/base.css' | url }}?v={{ build.version }}">
-    <!-- The main stylesheet -->
+    <!-- Maxis' original stylesheet -->
     <link rel="stylesheet" href="{{ '/css/stylesheet.css' | url }}?v={{ build.version }}">
     <!-- Colours and fonts from the dashboard (Design); defaults equal the students' values -->
     <link rel="stylesheet" href="{{ '/css/design.css' | url }}?v={{ build.version }}">
@@ -26,7 +27,7 @@
     <link rel="stylesheet" href="{{ '/css/carousel.css' | url }}?v={{ build.version }}">
     <link rel="stylesheet" href="{{ '/css/additions.css' | url }}?v={{ build.version }}">
     {%- if (customcss and customcss.css and (customcss.css | trim)) or (responsivecss | responsiveCss) %}
-    <!-- Custom and Responsive CSS from the dashboard (Design), loaded last -->
+    <!-- Custom and Responsive CSS from the dashboard (Design), loaded last. ADD YOUR CUSTOM CSS IN HERE. -->
     <link rel="stylesheet" href="{{ '/css/custom.css' | url }}?v={{ build.version }}">
     {%- endif %}
 
