@@ -81,3 +81,38 @@ document.querySelectorAll(".discipline-toggle").forEach(function (toggle) {
   else if (img.complete) done();
   else img.addEventListener("load", done);
 })();
+
+// Headings and quotes: a word that's too long for its line is shrunk to fit instead of being split
+// (see css/additions.css). Runs on load, once the fonts are ready, and when the window changes size.
+(function () {
+  var SELECTOR = "h1, h2, h3, .student-quote, .student-quote-sn";
+  function fit() {
+    var els = document.querySelectorAll(SELECTOR);
+    for (var i = 0; i < els.length; i++) {
+      els[i].style.fontSize = "";
+      els[i].classList.remove("fit-break");
+    }
+    for (var j = 0; j < els.length; j++) {
+      var el = els[j];
+      if (!el.clientWidth) continue;
+      var base = parseFloat(getComputedStyle(el).fontSize);
+      for (var n = 0; n < 4 && el.scrollWidth > el.clientWidth + 1; n++) {
+        var now = parseFloat(el.style.fontSize) || base;
+        el.style.fontSize = Math.max(base * 0.5, Math.floor(now * (el.clientWidth / el.scrollWidth) * 100) / 100 - 0.25) + "px";
+      }
+      // Still too wide at half size (an extremely long word): as a last resort let it break
+      // rather than run off the screen.
+      if (el.scrollWidth > el.clientWidth + 1) el.classList.add("fit-break");
+    }
+  }
+  var queued = false;
+  function soon() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; fit(); });
+  }
+  fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(soon);
+  window.addEventListener("load", soon);
+  window.addEventListener("resize", soon);
+})();

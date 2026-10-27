@@ -19,12 +19,15 @@ Options -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # -------------------------------------------------------------- AI CRAWLERS AND SITE COPIERS
-    # Refuse crawlers that collect content for AI training or AI answers, and tools that copy whole
-    # sites. Search engines (Google, Bing, DuckDuckGo) and link previews (LinkedIn, Facebook,
-    # Instagram, Slack...) are NOT affected, so graduates can still be found and shared.
-    # To allow one again, delete its name from the list.
-    RewriteCond %{HTTP_USER_AGENT} (GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-User|Claude-SearchBot|Claude-Web|anthropic-ai|CCBot|Bytespider|meta-externalagent|meta-externalfetcher|PerplexityBot|Perplexity-User|Amazonbot|Applebot-Extended|Diffbot|ImagesiftBot|Omgilibot|Omgili|cohere-ai|cohere-training-data-crawler|Timpibot|YouBot|AI2Bot|Ai2Bot-Dolma|DuckAssistBot|PetalBot|Scrapy|HTTrack|SiteSucker|WebCopier|WebZIP|Offline\ Explorer|MSIECrawler|python-requests|python-httpx|aiohttp|Go-http-client|node-fetch|axios) [NC]
+    # -------------------------------------------------------------- AI TRAINING CRAWLERS AND SITE COPIERS
+    # Refuse crawlers that collect content to TRAIN AI models, and tools that copy whole sites.
+    # Allowed: search engines (Google, Bing, DuckDuckGo...), link previews (Teams, LinkedIn,
+    # Facebook, Instagram, WhatsApp, Slack...), and AI search and assistants that fetch a page to
+    # answer a question and link back to it without keeping it for training (ChatGPT search and
+    # ChatGPT-User, Claude-SearchBot and Claude-User, Perplexity, DuckAssist, You.com, Meta AI's
+    # meta-externalfetcher, Petal Search), so graduates can still be found and shared.
+    # To refuse or allow one, add or delete its name in the list.
+    RewriteCond %{HTTP_USER_AGENT} (GPTBot|ClaudeBot|Claude-Web|anthropic-ai|CCBot|Bytespider|meta-externalagent|Amazonbot|Applebot-Extended|Diffbot|ImagesiftBot|Omgili|cohere-ai|cohere-training-data-crawler|Timpibot|AI2Bot|Ai2Bot-Dolma|Scrapy|HTTrack|SiteSucker|WebCopier|WebZIP|Offline\ Explorer|MSIECrawler|python-requests|python-httpx|aiohttp|Go-http-client|node-fetch|axios) [NC]
     RewriteRule .* - [F,L]
 
     # -------------------------------------------------------------- HOTLINKING

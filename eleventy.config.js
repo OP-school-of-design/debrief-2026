@@ -5,7 +5,7 @@ import { readDesign, copyFontFiles, copyPreviewFonts } from "./lib/fonts.js";
 import { writeFavicons } from "./lib/favicon.js";
 import fs from "node:fs";
 import { shareImage, writeShareImages, fileHash, animStill } from "./lib/share.js";
-import { summarise, nameParts, ldGraph, ldBreadcrumbs, ldWebsite, ldGraduate, ldEvent } from "./lib/seo.js";
+import { summarise, nameParts, ldGraph, ldBreadcrumbs, ldWebsite, ldGraduate, ldEvent, verificationCode } from "./lib/seo.js";
 import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg, safeUrl, gradImg, byName, responsiveCss } from "./lib/helpers.js";
 
 export default function (eleventyConfig) {
@@ -23,8 +23,13 @@ export default function (eleventyConfig) {
     urlPath: BASE + "img/",
     failOnError: true,
     defaultAttributes: { loading: "lazy", decoding: "async", sizes: "100vw" },
+    // Named after the graduate (or discipline/event) as well as the file, e.g.
+    // maxis-angel-gallery-01-<id>-800w.webp, which helps them turn up in image searches.
     filenameFormat: (id, src, width, format) => {
-      const name = path.basename(src, path.extname(src)).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+      const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      let name = slug(path.basename(src, path.extname(src)));
+      const entry = String(src).replace(/\\/g, "/").match(/(?:^|\/)(?:graduates|disciplines|events)\/([^/]+)\/[^/]+$/);
+      if (entry && !name.startsWith(slug(entry[1]))) name = `${slug(entry[1])}-${name}`;
       return `${name}-${id}-${width}w.${format}`;
     },
     sharpWebpOptions: { quality: 85 },
@@ -59,6 +64,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("ldWebsite", ldWebsite);
   eleventyConfig.addFilter("ldGraduate", ldGraduate);
   eleventyConfig.addFilter("ldEvent", ldEvent);
+  eleventyConfig.addFilter("verificationCode", verificationCode);
   // Pages listed in sitemap.xml: real pages (addresses ending in /), not the dashboard.
   eleventyConfig.addFilter("sitemapPage", (url) => url.endsWith("/") && !url.startsWith("/admin/"));
 

@@ -4,10 +4,24 @@ eleventyExcludeFromCollections: true
 ---
 {#- Search engines only read robots.txt at the top of a domain, so this one takes effect once the
     site is at the domain root (https://design.ac.nz/). Until then, add the Sitemap line below to
-    design.ac.nz/robots.txt, or submit the sitemap in Google Search Console. AI crawlers are refused
-    by .htaccess, not here. -#}
+    design.ac.nz/robots.txt, or submit the sitemap in Google Search Console. AI TRAINING crawlers
+    are also refused by .htaccess; Google-Extended and Applebot-Extended can only be refused here
+    (they stop Google's and Apple's AI models training on the site, without affecting search). -#}
 User-agent: *
 Disallow: {{ "/admin/" | url }}
 Allow: /
+
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: CCBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
+User-agent: Bytespider
+User-agent: Amazonbot
+User-agent: cohere-training-data-crawler
+User-agent: Diffbot
+User-agent: Timpibot
+Disallow: /
 
 Sitemap: {{ site.url | trimSlash }}/sitemap.xml

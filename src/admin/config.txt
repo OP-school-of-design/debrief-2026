@@ -1044,6 +1044,16 @@ collections:
     - label: Default meta description
       name: description
       widget: text
+    - label: Google Search Console verification code
+      name: googleVerification
+      widget: string
+      required: false
+      hint: 'Optional. In Search Console, add a URL-prefix property for the site address above, choose "HTML tag", and paste the tag (or just the code inside content="..."). Not needed if design.ac.nz is already verified another way.'
+    - label: Bing Webmaster Tools verification code
+      name: bingVerification
+      widget: string
+      required: false
+      hint: 'Optional. Bing''s "HTML Meta Tag" option: paste the tag (or just the code inside content="..."). Or import the site from Google Search Console instead.'
     - label: Header logo
       name: navLogo
       widget: image

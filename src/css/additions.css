@@ -123,15 +123,6 @@
         aspect-ratio: 1 / 1;
     }
 
-    .student-written-info h2,
-    .student-written-info h3,
-    .student-written-info-sn h2,
-    .student-written-info-sn h3,
-    .student-quote,
-    .student-quote-sn {
-        overflow-wrap: break-word;
-    }
-
     .student-contacts li,
     .student-contacts-sn li {
         overflow-wrap: anywhere;
@@ -266,4 +257,20 @@
 }
 .logo-animation.has-still.is-loaded {
     background: none;
+}
+
+/* Headings and quotes never break in the middle of a word: lines only break between words. A word
+   too long for its line on a narrow screen (a long name, "Communication" beside the headshot) is
+   instead shrunk just enough to fit, by js/main.js. min-width: 0 lets a heading inside a grid or
+   flex layout stay within its column so the script can see it doesn't fit. */
+h1, h2, h3,
+.student-quote,
+.student-quote-sn {
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: manual;
+    min-width: 0;
+}
+.fit-break {
+    overflow-wrap: anywhere;
 }
