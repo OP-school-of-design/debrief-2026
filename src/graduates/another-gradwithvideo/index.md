@@ -1,22 +1,29 @@
 ---
 title: Another Gradwithvideo
 discipline: graddip-communication
-published: true
 blockOrder: profile
 projectName: Final Project
-projectDescription: >-
-  Something describing what you see. Something describing what you see. Something describing what
+projectDescription: Something describing what you see. Something describing what
   you see. Something describing what you see. Something describing what you see.
+  Something describing what you see.
+imported: form 2026-10-27 fp:0837be7a4a8c
+published: true
 cover: card.jpg
 coverAlt: Naha Prefectural Museum Okinawa by Paul Tulett
 hero: hero.jpg
 heroAlt: Something describing what you see. Something describing what you see.
-headshot: headshot.jpg
+videoUrl: https://youtu.be/uBjH3dNVe1c?si=4AtOwrWxZDqTHRcl
+videoCaption: Eastern Gate is a brutalist music video filmed across Belgrade,
+  Serbia. Shot during winter in New Belgrade and beyond, the film features
+  iconic Yugoslav modernist architecture including the Eastern City Gate, Genex
+  Tower, blocks of Novi Beograd, the Avala Tower and monumental concrete
+  structures across the city.
+videoFirst: true
+headshot: barista_order_msn.jpg
 headshotAlt: Me
-quote: >-
-  “Here is a paragraph of quote text. Here is a paragraph of quote text. Here is a paragraph of
-  quote text. Here is a paragraph of quote text. Here is a paragraph of quote text. Here is a
-  paragraph of quote text.”
+quote: “Here is a paragraph of quote text. Here is a paragraph of quote text.
+  Here is a paragraph of quote text. Here is a paragraph of quote text. Here is
+  a paragraph of quote text. Here is a paragraph of quote text.”
 links:
   - type: email
     url: example@example.com
@@ -50,6 +57,5 @@ gallery:
     alt: Brutalist architecture
   - image: gallery-10.jpg
     alt: Brutalist architecture
-imported: form 2026-10-27 fp:0837be7a4a8c
 ---
 Something describing what you see. Something describing what you see. Something describing what you see. Something describing what you see. Something describing what you see.
