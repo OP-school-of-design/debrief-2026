@@ -7,16 +7,30 @@ permalink: /
         <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
           LOOPING ANIMATION
-          Desktop and mobile versions; lazy-loading means each visitor only downloads the one shown.
+          Desktop and mobile versions in one <picture>: each visitor downloads only the one that fits
+          their screen, straight away (it's the first thing on the page). A tiny still of the first
+          frame shows while it loads. Visitors who ask their device for reduced motion get a full
+          still instead of the animation. The stills are in images/stills/, named after the SVG they
+          belong to, so a newly uploaded animation simply has none until they're made.
 
         = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+{%- set dSvg = f.heroDesktop | siteImg %}
+{%- set mSvg = (f.heroMobile or f.heroDesktop) | siteImg %}
+{%- set dStill = dSvg | animStill %}
+{%- set mStill = mSvg | animStill %}
 
-        <section class="logo-animation logo-animation--desktop">
-            <img src="{{ f.heroDesktop | siteImg | url }}" alt="{{ f.heroAlt }}" loading="lazy" eleventy:ignore>
-        </section>
-
-        <section class="logo-animation logo-animation--mobile">
-            <img src="{{ f.heroMobile | siteImg | url }}" alt="{{ f.heroAlt }}" loading="lazy" eleventy:ignore>
+        <section class="logo-animation{% if dStill %} has-still{% endif %}"
+            {%- if dStill %} style="--still: url('{{ dStill.small | url }}');{% if mStill %} --still-m: url('{{ mStill.small | url }}');{% endif %}"{% endif %}>
+            <picture>
+                {%- if mStill %}
+                <source media="(prefers-reduced-motion: reduce) and (max-width: 676px)" srcset="{{ mStill.full | url }}">
+                {%- endif %}
+                {%- if dStill %}
+                <source media="(prefers-reduced-motion: reduce)" srcset="{{ dStill.full | url }}">
+                {%- endif %}
+                <source media="(max-width: 676px)" srcset="{{ mSvg | url }}?v={{ mSvg | fileHash }}">
+                <img src="{{ dSvg | url }}?v={{ dSvg | fileHash }}" alt="{{ f.heroAlt }}" fetchpriority="high" decoding="async" eleventy:ignore>
+            </picture>
         </section>
 
 

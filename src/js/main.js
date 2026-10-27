@@ -68,3 +68,16 @@ document.querySelectorAll(".discipline-toggle").forEach(function (toggle) {
         }
     });
 });
+
+// Front page logo animation: remove the placeholder still once the animation has loaded.
+(function () {
+  var section = document.querySelector(".logo-animation.has-still");
+  if (!section) return;
+  var img = section.querySelector("img");
+  var done = function () { section.classList.add("is-loaded"); };
+  if (!img) return;
+  // decode() waits until the animation can be shown; if it can't load, the still stays.
+  if (img.decode) img.decode().then(done, function () {});
+  else if (img.complete) done();
+  else img.addEventListener("load", done);
+})();

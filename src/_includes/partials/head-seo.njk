@@ -1,24 +1,143 @@
-{#- Basic SEO for every page. Per-page title/description come from each entry's "SEO title" and
-    "Meta description" fields in the dashboard; anything else goes in Design > SEO & head code. -#}
+{#- Search engines and share previews, for every page.
+
+    Title and description: each entry's "SEO title" / "Meta description" fields in the dashboard.
+    When a description is left empty, one is written from the page (a graduate's name, discipline
+    and project; an event's subtitle and dates; a discipline's introduction), then the site's
+    default description.
+
+    Share image (link previews in messages, email and social media, and some search results):
+    graduates: their card image on the share frame (or their hero image); events: their poster;
+    other pages: their banner; anything else: Site settings > Share image. See lib/share.js.
+
+    Structured data (JSON-LD) for search engines: see lib/seo.js. -#}
 {%- set isHome = (page.url == "/") -%}
+{%- set siteUrl = site.url | trimSlash -%}
+{%- set pageUrl = siteUrl ~ page.url -%}
+{%- set isGrad = tags and ("graduate" in tags) -%}
+{%- set isEvent = tags and ("event" in tags) -%}
+{%- set isDiscPage = (discipline and discipline.data) -%}
+{%- set isAbout = isDiscPage and page.url.indexOf("/about/") == 0 -%}
+{%- set isCategory = isDiscPage and page.url.indexOf("/graduates/") == 0 -%}
+{%- if isGrad %}{% set gradDisc = collections.disciplines | where("data.disciplineKey", discipline) | first %}{% endif -%}
+
+{#- ---------- Title and description ---------- -#}
 {%- if isHome -%}
   {%- set pageTitle = frontpage.seoTitle or (site.name ~ " - " ~ site.tagline) -%}
   {%- set pageDesc = frontpage.metaDescription or site.description -%}
 {%- else -%}
   {%- set pageTitle = (seoTitle or title) ~ " | " ~ site.name -%}
-  {%- set pageDesc = metaDescription or site.description -%}
-{%- endif %}
+  {%- set autoDesc = "" -%}
+  {%- if isGrad -%}
+    {%- set autoDesc = title ~ ", " ~ (gradDisc.data.title if gradDisc else "Design") ~ " graduate at " ~ site.name ~ ", Otago Polytechnic School of Design." -%}
+    {%- if projectName %}{% set autoDesc = autoDesc ~ " " ~ projectName ~ ((": " ~ projectDescription) if projectDescription else ".") %}{% endif -%}
+  {%- elif isEvent -%}
+    {%- set autoDesc = ((subtitle ~ ". ") if subtitle else "") ~ ((gridDates or detailDatesLine or "") | replace("\n", " · ")) -%}
+  {%- elif isAbout -%}
+    {%- set autoDesc = discipline.data.intro -%}
+  {%- elif isCategory -%}
+    {%- set autoDesc = discipline.data.title ~ " graduates at " ~ site.name ~ ", the " ~ site.tagline ~ " at Otago Polytechnic." -%}
+  {%- endif -%}
+  {%- set pageDesc = metaDescription or (autoDesc | summarise) or site.description -%}
+{%- endif -%}
+
+{#- ---------- Share image ---------- -#}
+{%- set frameImg = (site.shareFrame or "images/share-frame.jpg") | siteImg -%}
+{%- set shareSrc = "" -%}{%- set shareMode = "cover" -%}{%- set shareAlt = "" -%}
+{%- if isGrad -%}
+  {%- if cover -%}{%- set shareSrc = page | entryImg(cover) -%}{%- set shareMode = "frame" -%}{%- set shareAlt = coverAlt -%}
+  {%- elif hero -%}{%- set shareSrc = page | entryImg(hero) -%}{%- set shareAlt = heroAlt -%}{%- endif -%}
+{%- elif isEvent and poster -%}
+  {%- set shareSrc = page | entryImg(poster) -%}{%- set shareMode = "poster" -%}{%- set shareAlt = posterAlt -%}
+{%- elif isAbout and (discipline.data.bannerImage or discipline.data.image) -%}
+  {%- set shareSrc = discipline | entryImg(discipline.data.bannerImage or discipline.data.image) -%}
+  {%- set shareAlt = discipline.data.bannerAlt if discipline.data.bannerImage else discipline.data.imageAlt -%}
+{%- elif isCategory and discipline.data.gradBannerImage -%}
+  {%- set shareSrc = discipline | entryImg(discipline.data.gradBannerImage) -%}{%- set shareAlt = discipline.data.gradBannerAlt -%}
+{%- elif page.url == "/graduates/" and graduatespage.bannerImage -%}
+  {%- set shareSrc = graduatespage.bannerImage | siteImg -%}{%- set shareAlt = graduatespage.bannerAlt -%}
+{%- elif page.url == "/events/" and eventspage.bannerImage -%}
+  {%- set shareSrc = eventspage.bannerImage | siteImg -%}{%- set shareAlt = eventspage.bannerAlt -%}
+{%- elif not isHome and bannerImage -%}
+  {%- set shareSrc = bannerImage | siteImg -%}{%- set shareAlt = bannerAlt -%}
+{%- endif -%}
+{%- set share = (shareSrc | shareImage(shareMode, frameImg)) if shareSrc else null -%}
+{%- if not share -%}
+  {%- set share = (site.shareImage or "images/share-default.jpg") | siteImg | shareImage("cover") -%}
+  {%- set shareAlt = site.name ~ " logo" -%}
+{%- endif -%}
+{%- set shareUrl = (siteUrl ~ share.path) if (share and siteUrl) else "" -%}
+{%- set shareAlt = shareAlt or title or site.name %}
     <title>{{ pageTitle }}</title>
     <meta name="description" content="{{ pageDesc }}">
-    {%- if site.url %}
-    <link rel="canonical" href="{{ site.url | trimSlash }}{{ page.url }}">
-    <meta property="og:url" content="{{ site.url | trimSlash }}{{ page.url }}">
+    <meta name="robots" content="max-image-preview:large">
+    {%- if siteUrl %}
+    <link rel="canonical" href="{{ pageUrl }}">
+    <meta property="og:url" content="{{ pageUrl }}">
     {%- endif %}
     <meta property="og:locale" content="en_NZ">
-    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ site.name }}">
     <meta property="og:title" content="{{ pageTitle }}">
     <meta property="og:description" content="{{ pageDesc }}">
-    <meta property="og:site_name" content="{{ site.name }}">
+    {%- if isGrad %}
+    {%- set np = { title: title, sortName: sortName } | nameParts %}
+    <meta property="og:type" content="profile">
+    {%- if np.first %}
+    <meta property="profile:first_name" content="{{ np.first }}">
+    {%- endif %}
+    <meta property="profile:last_name" content="{{ np.last }}">
+    {%- else %}
+    <meta property="og:type" content="website">
+    {%- endif %}
+    {%- if shareUrl %}
+    <meta property="og:image" content="{{ shareUrl }}">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="{{ share.width }}">
+    <meta property="og:image:height" content="{{ share.height }}">
+    <meta property="og:image:alt" content="{{ shareAlt }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ shareUrl }}">
+    <meta name="twitter:image:alt" content="{{ shareAlt }}">
+    {%- else %}
     <meta name="twitter:card" content="summary">
+    {%- endif %}
     <meta name="twitter:title" content="{{ pageTitle }}">
     <meta name="twitter:description" content="{{ pageDesc }}">
+
+{#- ---------- Structured data ---------- -#}
+{%- if siteUrl -%}
+{%- set home = { name: site.name, url: siteUrl ~ "/" } -%}
+{%- set ld = [] -%}
+{%- if isHome -%}
+  {%- set ld = ld.concat([{ name: site.name, url: siteUrl ~ "/", description: pageDesc } | ldWebsite]) -%}
+  {%- for e in collections.events -%}
+    {%- if e.data.startDate -%}
+      {%- set eShare = (e | entryImg(e.data.poster)) | shareImage("poster", frameImg) if e.data.poster else share -%}
+      {%- set ld = ld.concat([{ url: siteUrl ~ e.url, name: e.data.title, description: (e.data.metaDescription or e.data.subtitle), image: (siteUrl ~ eShare.path) if eShare else "", startDate: e.data.startDate, endDate: e.data.endDate, venueName: e.data.venueName, venueAddress: e.data.venueAddress } | ldEvent]) -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- elif isGrad -%}
+  {%- set sq = (page | entryImg(cover)) | shareImage("square") if cover else null -%}
+  {%- set heroUrl = (siteUrl ~ ((page | entryImg(hero)) | shareImage("cover")).path) if hero else "" -%}
+  {%- set ld = ld.concat({
+      url: pageUrl, pageTitle: pageTitle, name: title, description: pageDesc, website: siteUrl ~ "/",
+      image: shareUrl, images: [ (siteUrl ~ sq.path) if sq else "", shareUrl, heroUrl ],
+      discipline: gradDisc.data.title if gradDisc else "", links: links,
+      projectName: projectName, projectDescription: projectDescription, projectImage: heroUrl
+    } | ldGraduate) -%}
+  {%- set catPage = collections.gradCategories | where("data.disciplineKey", discipline) | first -%}
+  {%- set ld = ld.concat([[home, { name: graduatespage.title, url: siteUrl ~ "/graduates/" }, { name: catPage.data.title, url: siteUrl ~ "/graduates/" ~ discipline ~ "/" } if catPage else null, { name: title, url: pageUrl }] | ldBreadcrumbs]) -%}
+{%- elif isEvent -%}
+  {%- set ld = ld.concat([{ url: pageUrl, name: title, description: pageDesc, image: shareUrl, startDate: startDate, endDate: endDate, venueName: venueName, venueAddress: venueAddress } | ldEvent]) -%}
+  {%- set ld = ld.concat([[home, { name: eventspage.title or "Events", url: siteUrl ~ "/events/" }, { name: title, url: pageUrl }] | ldBreadcrumbs]) -%}
+{%- elif isCategory -%}
+  {%- set ld = ld.concat([[home, { name: graduatespage.title, url: siteUrl ~ "/graduates/" }, { name: discipline.data.title, url: pageUrl }] | ldBreadcrumbs]) -%}
+{%- elif isAbout -%}
+  {%- set ld = ld.concat([[home, { name: "About the School of Design", url: siteUrl ~ "/school-of-design/" }, { name: title, url: pageUrl }] | ldBreadcrumbs]) -%}
+{%- else -%}
+  {%- set ld = ld.concat([[home, { name: title, url: pageUrl }] | ldBreadcrumbs]) -%}
+{%- endif -%}
+{%- set graph = ld | ldGraph -%}
+{%- if graph %}
+    <script type="application/ld+json">{{ graph | jsonScript | safe }}</script>
+{%- endif -%}
+{%- endif %}

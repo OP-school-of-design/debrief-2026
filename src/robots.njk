@@ -1,0 +1,13 @@
+---
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+---
+{#- Search engines only read robots.txt at the top of a domain, so this one takes effect once the
+    site is at the domain root (https://design.ac.nz/). Until then, add the Sitemap line below to
+    design.ac.nz/robots.txt, or submit the sitemap in Google Search Console. AI crawlers are refused
+    by .htaccess, not here. -#}
+User-agent: *
+Disallow: {{ "/admin/" | url }}
+Allow: /
+
+Sitemap: {{ site.url | trimSlash }}/sitemap.xml

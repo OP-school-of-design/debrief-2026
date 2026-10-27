@@ -31,10 +31,18 @@ Options -Indexes
     # Images and videos only load inside pages on design.ac.nz / op.ac.nz (and search engines and
     # social sites, for previews). Opening a file directly, or a request with no referrer, still
     # works. Other websites embedding our images or video get "403 Forbidden".
+    # Share images (img/og/) are made to be shown on other sites and apps, so they're exempt.
+    RewriteCond %{REQUEST_URI} !/img/og/
     RewriteCond %{HTTP_REFERER} !^$
     RewriteCond %{HTTP_REFERER} !^https?://([^/]+\.)?(design|op)\.ac\.nz(/|$) [NC]
     RewriteCond %{HTTP_REFERER} !^https?://([^/]+\.)?(google|bing|duckduckgo|yahoo|linkedin|facebook|instagram)\.[a-z.]+(/|$) [NC]
     RewriteRule \.(webp|jpe?g|png|gif|svg|ico|mp4|webm|mov)$ - [F,NC,L]
+</IfModule>
+
+# ------------------------------------------------------------------ COMPRESSION
+# Text files, including the SVG front page animation, are sent compressed (about a quarter smaller).
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/xml image/svg+xml
 </IfModule>
 
 <IfModule mod_headers.c>
@@ -49,6 +57,20 @@ Options -Indexes
     <FilesMatch "\.(css|js)$">
         Header set Cache-Control "public, max-age=31536000"
     </FilesMatch>
+
+    # Images, video and fonts: kept for a day, then checked again ("not modified" replies are tiny),
+    # so a replaced image shows within a day.
+    <FilesMatch "\.(webp|avif|jpe?g|png|gif|svg|ico|mp4|webm|mov|woff2?|ttf|otf)$">
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+
+    # Files whose address changes whenever their content does, kept for a year: the resized images
+    # and share images in img/ and the animation stills (named after their content), and anything
+    # linked with a ?v=... stamp (the front page animation, CSS, JavaScript). Return visits then
+    # show the front page animation straight away, without downloading it again.
+    <If "%{REQUEST_URI} =~ m#/(img|images/stills)/# || %{QUERY_STRING} =~ /(^|&)v=/">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
 
     # -------------------------------------------------------------- SECURITY HEADERS
     # Content-Security-Policy: the browser only runs scripts, loads styles, fonts, images and video

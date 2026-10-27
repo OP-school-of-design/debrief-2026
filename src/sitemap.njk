@@ -1,0 +1,15 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+{#- Every public page, for search engines. Submit https://<site address>/sitemap.xml in Google
+    Search Console (and Bing Webmaster Tools) so new graduates are found quickly. Unpublished
+    graduates have no page, so they're never listed. -#}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for p in collections.all %}
+{%- if p.url and (p.url | string) | sitemapPage %}
+  <url><loc>{{ site.url | trimSlash }}{{ p.url }}</loc></url>
+{%- endif %}
+{%- endfor %}
+</urlset>

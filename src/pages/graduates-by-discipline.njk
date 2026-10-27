@@ -4,6 +4,7 @@ pagination:
   data: collections.gradCategories
   size: 1
   alias: discipline
+  addAllPagesToCollections: true # every page in sitemap.xml
 permalink: "/graduates/{{ discipline.data.disciplineKey }}/"
 eleventyComputed:
   title: "{{ discipline.data.title }}"

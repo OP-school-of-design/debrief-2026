@@ -4,6 +4,8 @@ import { BASE } from "./lib/base.js";
 import { readDesign, copyFontFiles, copyPreviewFonts } from "./lib/fonts.js";
 import { writeFavicons } from "./lib/favicon.js";
 import fs from "node:fs";
+import { shareImage, writeShareImages, fileHash, animStill } from "./lib/share.js";
+import { summarise, nameParts, ldGraph, ldBreadcrumbs, ldWebsite, ldGraduate, ldEvent } from "./lib/seo.js";
 import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg, safeUrl, gradImg, byName, responsiveCss } from "./lib/helpers.js";
 
 export default function (eleventyConfig) {
@@ -46,6 +48,19 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("safeUrl", safeUrl);
   eleventyConfig.addFilter("gradImg", gradImg);
   eleventyConfig.addFilter("responsiveCss", responsiveCss);
+  // Share images, search-engine descriptions and structured data (partials/head-seo.njk).
+  eleventyConfig.addFilter("shareImage", shareImage);
+  eleventyConfig.addFilter("fileHash", fileHash);
+  eleventyConfig.addFilter("animStill", animStill);
+  eleventyConfig.addFilter("summarise", summarise);
+  eleventyConfig.addFilter("nameParts", nameParts);
+  eleventyConfig.addFilter("ldGraph", ldGraph);
+  eleventyConfig.addFilter("ldBreadcrumbs", ldBreadcrumbs);
+  eleventyConfig.addFilter("ldWebsite", ldWebsite);
+  eleventyConfig.addFilter("ldGraduate", ldGraduate);
+  eleventyConfig.addFilter("ldEvent", ldEvent);
+  // Pages listed in sitemap.xml: real pages (addresses ending in /), not the dashboard.
+  eleventyConfig.addFilter("sitemapPage", (url) => url.endsWith("/") && !url.startsWith("/admin/"));
 
   // Text typed into the dashboard (graduate bios, event descriptions, page text) can't contain raw
   // HTML such as <script>: it's shown as plain text. Markdown formatting (bold, links...) still works,
@@ -95,6 +110,8 @@ export default function (eleventyConfig) {
     "src/videos": "videos",
     "src/.htaccess": ".htaccess",
     "src/images/**/*.svg": "images",
+    // Stills of the front page animation (pages/index.njk)
+    "src/images/stills": "images/stills",
     "src/admin/start.js": "admin/start.js",
     "src/admin/multi-upload.js": "admin/multi-upload.js",
     "src/admin/image-thumbnail-fix.js": "admin/image-thumbnail-fix.js",
@@ -121,6 +138,11 @@ export default function (eleventyConfig) {
     await writeFavicons(site, directories?.output || dir.output);
   });
   eleventyConfig.addWatchTarget("src/favicon/");
+
+  // ---------- Share images (link previews): made after each build, see lib/share.js ----------
+  eleventyConfig.on("eleventy.after", async ({ directories, dir }) => {
+    await writeShareImages(directories?.output || dir.output);
+  });
   eleventyConfig.addWatchTarget("src/_includes/head-code.html");
 
   eleventyConfig.setServerOptions({ showVersion: false });

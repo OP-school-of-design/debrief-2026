@@ -463,6 +463,31 @@ collections:
     widget: text
     required: false
     hint: Press Enter for a new line.
+  - label: 'Search listing: start date and time'
+    name: startDate
+    widget: datetime
+    required: false
+    format: YYYY-MM-DDTHH:mm:ssZ
+    date_format: D MMMM YYYY
+    time_format: h:mm a
+    hint: 'Optional, not shown on the page. With a start date and a venue, Google and other search engines can list this event with its dates and place. Enter New Zealand time.'
+  - label: 'Search listing: end date and time'
+    name: endDate
+    widget: datetime
+    required: false
+    format: YYYY-MM-DDTHH:mm:ssZ
+    date_format: D MMMM YYYY
+    time_format: h:mm a
+  - label: 'Search listing: venue name'
+    name: venueName
+    widget: string
+    required: false
+    hint: e.g. Otago Polytechnic, The Hub
+  - label: 'Search listing: venue address'
+    name: venueAddress
+    widget: string
+    required: false
+    hint: e.g. Forth Street (Dunedin, Otago, New Zealand is added for you)
   - label: Description
     name: body
     widget: markdown
@@ -1049,6 +1074,22 @@ collections:
       public_folder: favicon
       choose_url: false
       hint: The small icon in the browser tab and on phone home screens. Use a square PNG or SVG, at least 512 × 512 px, that still reads when tiny. To replace it, click the image and choose or upload another. Leave empty for no favicon.
+      media_library:
+        config:
+          max_file_size: 10000000
+    - label: Share image (front page, and any page without a picture of its own)
+      name: shareImage
+      widget: image
+      required: false
+      hint: 'The picture shown when a link to the site is shared (messages, email, social media) and in some search results. Use a landscape image at least 1200 px wide; it''s cropped from the centre to 1200 × 630. Graduates use their card image (or hero image), events their poster, and other pages their banner. Leave empty to use the DEBRIEF logo (the first frame of the front page animation).'
+      media_library:
+        config:
+          max_file_size: 10000000
+    - label: Share image frame (behind graduates' card images)
+      name: shareFrame
+      widget: image
+      required: false
+      hint: 'When a graduate''s page is shared, their square card image is shown in the middle of this image, so wide previews show the whole card with this around it. Landscape, at least 1200 × 630 px, with a calm middle. Leave empty to use the DEBRIEF yellow with the four shapes (images/share-frame.jpg).'
       media_library:
         config:
           max_file_size: 10000000
