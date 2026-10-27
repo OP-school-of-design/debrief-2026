@@ -602,29 +602,36 @@
           if (g.published === false) return;
           counts[g.discipline] = (counts[g.discipline] || 0) + 1;
         });
-        // Same order as the site (lib/helpers.js byCategory): this list first, then any others by Order.
-        var order = listOf(entry, "categoryOrder").map(function (c) { return c && c.get ? c.get("category") : c; }).filter(Boolean);
-        discs.slice().sort(byOrder).forEach(function (d) { if (order.indexOf(d.disciplineKey) === -1) order.push(d.disciplineKey); });
+        // Same order as the site (lib/helpers.js byName): everyone in one list, by last name.
+        var PREFIXES = ["te", "van", "von", "de", "da", "di", "du", "del", "della", "der", "den", "ter", "ten", "la", "le", "st", "st.", "dos", "das", "bin", "binti", "al", "el"];
+        var lastName = function (g) {
+          if (g.sortName && String(g.sortName).trim()) return String(g.sortName).trim();
+          var w = String(g.title || "").trim().split(/\s+/).filter(Boolean);
+          if (w.length < 2) return w[0] || "";
+          var i = w.length - 1;
+          while (i > 1 && PREFIXES.indexOf(w[i - 1].toLowerCase()) !== -1) i--;
+          return w.slice(i).join(" ");
+        };
+        var cmp = function (x, y) { return x.localeCompare(y, "en-NZ", { sensitivity: "base" }); };
+        var grads = st.graduates.map(dataOf).filter(function (g) { return g.published !== false; })
+          .sort(function (a, b) { return cmp(lastName(a), lastName(b)) || cmp(String(a.title || ""), String(b.title || "")); });
         var menu = discs.filter(function (d) { return d.inGraduatesMenu !== false && (!d.hideWhenEmpty || counts[d.disciplineKey] > 0); }).sort(byOrder);
 
         body = h("div", null,
-          section("Graduate grid, in this order",
+          section("Graduate grid: everyone, in alphabetical order of last name",
             h("div", null,
-              h("ol", { className: "cats" }, order.map(function (k) {
-                var d = byKey[k], n = counts[k] || 0;
-                var note = !d ? "No discipline with this key."
-                  : n ? n + " published graduate" + (n === 1 ? "" : "s") + ", in alphabetical order"
-                  : "No published graduates yet" + (d.hideWhenEmpty && d.inGraduatesMenu !== false ? ": also hidden from the menus" : "");
-                return h("li", { key: k, className: n ? "" : "no" }, d ? d.title : k, h("small", null, note));
-              })),
-              h("p", { className: "empty", style: { marginTop: 4 } }, "Counts include published graduates only. Drafts that haven't been published don't appear on the site yet."))),
+              grads.length ? h("ol", { className: "cats" }, grads.map(function (g, i) {
+                var d = byKey[g.discipline];
+                return h("li", { key: i }, g.title || "(no name)", h("small", null, "Listed under \u201c" + lastName(g) + "\u201d" + (d ? " \u00b7 " + d.title : "")));
+              })) : h("p", { className: "empty" }, "No published graduates yet."),
+              h("p", { className: "empty", style: { marginTop: 4 } }, "Published graduates only. Drafts that haven't been published don't appear on the site yet. To change where someone is listed, fill in their Last name (for alphabetical order) in Graduates."))),
 
           section("All Graduates menu and footer",
             h("div", null,
               h("div", { className: "dd" },
                 h("div", { className: "hd" }, title + " ▾"),
                 menu.map(function (d, i) { return h("span", { key: i, className: "i" }, d.title); })),
-              h("p", { className: "empty", style: { marginTop: 8 } }, "The menus list categories by each discipline's Order number (Disciplines), not by the order above."))));
+              h("p", { className: "empty", style: { marginTop: 8 } }, "The menus list categories by each discipline's Order number (Disciplines)."))));
       }
 
       return h("div", { className: "gp" },

@@ -32,7 +32,8 @@ eleventyComputed:
 
         = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-{%- set grads = collections.graduates | byCategory(graduatespage.categoryOrder, collections.disciplines) %}
+{#- Everyone in one list, in alphabetical order of last name (collections.graduates is already in that order). #}
+{%- set grads = collections.graduates %}
 {% include "partials/student-grid.njk" %}
 
 </main>

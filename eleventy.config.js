@@ -4,7 +4,7 @@ import { BASE } from "./lib/base.js";
 import { readDesign, copyFontFiles, copyPreviewFonts } from "./lib/fonts.js";
 import { writeFavicons } from "./lib/favicon.js";
 import fs from "node:fs";
-import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg, safeUrl, gradImg, byName, byCategory, responsiveCss } from "./lib/helpers.js";
+import { entryImg, mdFilter, pclass, nl2br, embedUrl, where, faClass, bannerTitle, bannerDetails, naturalSizes, siteImg, safeUrl, gradImg, byName, responsiveCss } from "./lib/helpers.js";
 
 export default function (eleventyConfig) {
   // ---------- Images ----------
@@ -45,7 +45,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("siteImg", siteImg);
   eleventyConfig.addFilter("safeUrl", safeUrl);
   eleventyConfig.addFilter("gradImg", gradImg);
-  eleventyConfig.addFilter("byCategory", byCategory);
   eleventyConfig.addFilter("responsiveCss", responsiveCss);
 
   // Text typed into the dashboard (graduate bios, event descriptions, page text) can't contain raw

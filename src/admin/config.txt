@@ -676,37 +676,6 @@ collections:
       widget: string
       required: false
       hint: Describe the image for people using screen readers.
-    - label: Category order
-      label_singular: category
-      name: categoryOrder
-      widget: list
-      required: false
-      allow_add: true
-      collapsed: false
-      field:
-        label: Category
-        name: category
-        widget: select
-        options:
-        - label: Communication Design
-          value: communication
-        - label: Fashion Design
-          value: fashion
-        - label: Product Design
-          value: product
-        - label: Graduate Diploma in Design (Communication)
-          value: graddip-communication
-        - label: Graduate Diploma in Design (Fashion)
-          value: graddip-fashion
-        - label: Graduate Diploma in Design (Product)
-          value: graddip-product
-        - label: Postgraduate Design
-          value: postgraduate
-        - label: Bachelor of Design (Honours)
-          value: honours
-        - label: Masters
-          value: masters
-      hint: Drag the categories into the order you want. Graduates appear category by category, in alphabetical order of last name within each. Categories left off the list come last.
   - label: Events listing page (/events/)
     name: eventspage
     file: src/_data/eventspage.json
