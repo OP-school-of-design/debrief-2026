@@ -72,12 +72,13 @@ they're never pushed to GitHub: they hold students' names, OP email addresses an
 | About you | About the graduate (each line becomes a paragraph) |
 | Quote | Quote (curly quotation marks added if the student didn't type any) |
 | Project name, Project description | Project |
-| Hero image, Card image, Headshot (+ descriptions) | `hero.jpg`, `card.jpg`, `headshot.jpg` and their alt text. No headshot description: "Portrait of <name>". |
-| Gallery images (+ descriptions) | `gallery-01.jpg`... in the order uploaded, paired with the description lines in order. A leading "01", "1." etc. is removed. |
+| Hero image, Card image, Headshot (+ descriptions) | `hero.jpg`, `card.jpg`, `headshot.jpg` and their alt text (the hero's description is also shown as its caption). No headshot description: "Portrait of <name>". |
+| Gallery images (+ descriptions) | `gallery-01.jpg`... in the order uploaded, paired with the description lines in order (each description is also shown as the image's caption). A leading "01", "1." etc. is removed. |
+| Video, Video caption | A YouTube or Vimeo link shown under the hero image, with its caption. Anything else is left out and reported. Staff can put the video above the hero image in the dashboard ("Show the video above the hero image"). |
 | Public email, Website, Instagram, LinkedIn, Behance, Other links | Contact links. `https://` is added where missing; an Instagram or Behance handle becomes a full address; YouTube and Facebook links are recognised. |
 
 Every page gets the **Profile first** layout and is **Published**. Images are turned the right way up,
-shrunk to at most 2500 px, saved as JPG (PNG when transparent) and stripped of hidden camera and GPS data.
+shrunk to at most 2500 px, saved as JPG (PNG when transparent; other formats such as WebP, GIF or TIFF are converted) and stripped of hidden camera and GPS data.
 
 If a question is renamed in the form, add the new title to `COLUMNS` at the top of
 `scripts/import-graduates.mjs`. The import works out which file belongs to which answer from the links in

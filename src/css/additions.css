@@ -151,3 +151,99 @@
     outline: 2px solid var(--black-text, #000);
     outline-offset: 4px;
 }
+
+/* Graduate quotes are always shown in capitals, however they were typed. */
+.student-quote,
+.student-quote-sn {
+    text-transform: uppercase;
+}
+
+/* Image captions on graduate pages (hero image and gallery). Images without a caption keep the
+   students' layout exactly; a captioned gallery image is wrapped in a <figure> that takes over the
+   image's spacing, so the caption sits just under its image. */
+.image-caption {
+    font-family: var(--font-body, "Google Sans", sans-serif);
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: var(--body-text, #1d1d1b);
+    margin: 0.75rem 0 0;
+    overflow-wrap: break-word;
+}
+
+.grid--masonry .gallery-figure,
+.grid--masonry-sn .gallery-figure {
+    margin: 0 0 4rem;
+    break-inside: avoid;
+}
+
+.grid--masonry .gallery-figure img,
+.grid--masonry-sn .gallery-figure img {
+    margin-bottom: 0;
+}
+
+/* Lightbox: the caption under the enlarged image. */
+.lightbox-figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox.has-caption .lightbox-image {
+    max-height: calc(90vh - 4rem);
+}
+
+.lightbox-caption {
+    color: #fff;
+    font-family: var(--font-body, "Google Sans", sans-serif);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    text-align: center;
+    max-width: min(90vw, 50rem);
+    margin-top: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+    .lightbox.has-caption .lightbox-image {
+        max-height: calc(85vh - 4rem);
+    }
+}
+
+/* Graduate video (YouTube/Vimeo), under the hero image or, with "video first", above it. It uses the
+   site's standard video embed (.youtube-video) and the same spacing as the hero image. */
+.portfolio-video {
+    order: 2; /* same place in the project-first layout as the hero image */
+    padding: 0 0 4rem;
+}
+
+.portfolio-video.video-first {
+    padding: 4rem 0 0;
+}
+
+.portfolio-video-sn {
+    padding: 4rem 0 0;
+}
+
+.portfolio-video-sn.video-first {
+    padding: 0 0 4rem;
+}
+
+@media screen and (max-width: 600px) {
+    .portfolio-video {
+        order: 1; /* phones show the hero image first in this layout; the video stays beside it */
+    }
+
+    .portfolio-video.video-first {
+        padding: 0;
+        margin-top: 4rem;
+    }
+
+    .portfolio-video-sn {
+        padding-top: 4rem;
+    }
+
+    .portfolio-video-sn.video-first {
+        padding: 0;
+        margin-top: 4rem;
+    }
+}

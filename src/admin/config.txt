@@ -66,6 +66,8 @@ collections:
       value: graddip-fashion
     - label: Graduate Diploma in Design (Product)
       value: graddip-product
+    - label: Postgraduate Design
+      value: postgraduate
     - label: Bachelor of Design (Honours)
       value: honours
     - label: Masters
@@ -113,11 +115,30 @@ collections:
     media_library:
       config:
         max_file_size: 10000000
-  - label: Hero image description (alt text)
+  - label: Hero image description (alt text and caption)
     name: heroAlt
     widget: string
     required: false
-    hint: Describe the image for people using screen readers.
+    hint: Shown under the image as its caption, and read out for people using screen readers.
+  - label: Video (YouTube or Vimeo address)
+    name: videoUrl
+    widget: string
+    required: false
+    pattern:
+    - ^https?://\S+$
+    - Must be a full web address starting with https://
+    hint: A YouTube or Vimeo link. Shown under the hero image (or above it, with the switch below).
+  - label: Video caption
+    name: videoCaption
+    widget: string
+    required: false
+    hint: Shown under the video. Also used as the video's title for screen readers.
+  - label: Show the video above the hero image
+    name: videoFirst
+    widget: boolean
+    required: false
+    default: false
+    hint: Off = the video comes under the hero image (normal). On = the video comes first.
   - label: Headshot (from the photographer; shown as a circle)
     name: headshot
     widget: image
@@ -178,11 +199,11 @@ collections:
       media_library:
         config:
           max_file_size: 10000000
-    - label: Description (alt text)
+    - label: Description (alt text and caption)
       name: alt
       widget: string
       required: false
-      hint: Describe the image for people using screen readers.
+      hint: Shown under the image as its caption (also in the enlarged view), and read out for people using screen readers.
   - label: About the graduate
     name: body
     widget: markdown
@@ -674,6 +695,8 @@ collections:
           value: graddip-fashion
         - label: Graduate Diploma in Design (Product)
           value: graddip-product
+        - label: Postgraduate Design
+          value: postgraduate
         - label: Bachelor of Design (Honours)
           value: honours
         - label: Masters

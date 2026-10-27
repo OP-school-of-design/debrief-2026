@@ -50,15 +50,46 @@ hasLightbox: true
 {%- if hero %}
         <article class="portfolio-hero-image{{ sn }}">
             <img src="{{ page | entryImg(hero) }}" alt="{{ heroAlt }}" sizes="(min-width: 1171px) 80vw, 100vw">
+            {#- The image description doubles as its caption. Screen readers already read it as the
+                image's alt text, so the visible caption is hidden from them (aria-hidden). #}
+            {%- if heroAlt %}
+            <p class="image-caption" aria-hidden="true">{{ heroAlt }}</p>
+            {%- endif %}
         </article>
 {%- endif %}
+{%- endset %}
+
+{#- Optional YouTube/Vimeo video with a caption. It sits under the hero image, or above it when
+    "Show the video above the hero image" is ticked in the dashboard. -#}
+{%- set videoBlock %}
+{%- if videoUrl | embed %}
+        <article class="portfolio-video{{ sn }}{% if videoFirst %} video-first{% endif %}">
+{%- set videoSrc = videoUrl %}
+{%- set videoName = videoCaption or (title ~ ": video") %}
+{% include "partials/video.njk" %}
+            {%- if videoCaption %}
+            <p class="image-caption">{{ videoCaption }}</p>
+            {%- endif %}
+        </article>
+{%- endif %}
+{%- endset %}
+
+{%- set heroAndVideo %}
+{%- if videoFirst %}{{ videoBlock | safe }}{{ heroImage | safe }}{% else %}{{ heroImage | safe }}{{ videoBlock | safe }}{% endif %}
 {%- endset %}
 
 {%- set gallerySection %}
 {%- if gallery and gallery.length %}
         <article class="grid--masonry{{ sn }}">
             {%- for g in gallery %}
+            {%- if g.alt %}
+            <figure class="gallery-figure">
+                <img src="{{ page | entryImg(g.image) }}" alt="{{ g.alt }}" sizes="(min-width: 1171px) 40vw, (min-width: 601px) 45vw, 100vw">
+                <figcaption class="image-caption" aria-hidden="true">{{ g.alt }}</figcaption>
+            </figure>
+            {%- else %}
             <img src="{{ page | entryImg(g.image) }}" alt="{{ g.alt }}" sizes="(min-width: 1171px) 40vw, (min-width: 601px) 45vw, 100vw">
+            {%- endif %}
             {%- endfor %}
         </article>
 {%- endif %}
@@ -72,8 +103,8 @@ hasLightbox: true
 {{ studentInfo | safe }}
         </section>
 
-        <!-- HERO IMAGE -->
-{{ heroImage | safe }}
+        <!-- HERO IMAGE (and video) -->
+{{ heroAndVideo | safe }}
 
         <!-- PROJECT INFO DESCRIPTION -->
 {{ projectInfo | safe }}
@@ -86,7 +117,7 @@ hasLightbox: true
         <!-- PROJECT INFO, HERO IMAGE, MASONRY LAYOUT -->
 <section class="project-content">
 {{ projectInfo | safe }}
-{{ heroImage | safe }}
+{{ heroAndVideo | safe }}
 {{ gallerySection | safe }}
 </section>
 
@@ -105,7 +136,10 @@ hasLightbox: true
         <button class="lightbox-arrow lightbox-prev" aria-label="Previous image">
             &#10094;
         </button>
-        <img class="lightbox-image" id="lightbox-image" src="" alt="" eleventy:ignore>
+        <figure class="lightbox-figure">
+            <img class="lightbox-image" id="lightbox-image" src="" alt="" eleventy:ignore>
+            <figcaption class="lightbox-caption" id="lightbox-caption" aria-hidden="true" hidden></figcaption>
+        </figure>
         <button class="lightbox-arrow lightbox-next" aria-label="Next image">
             &#10095;
         </button>

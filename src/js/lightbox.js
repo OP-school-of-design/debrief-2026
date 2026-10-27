@@ -1,10 +1,12 @@
-/* LIGHTBOX - the students' own code, with two fixes:
+/* LIGHTBOX - the students' own code, with two fixes and one addition:
    1. It now finds gallery images in both layouts (.grid--masonry and .grid--masonry-sn);
       the original only looked for .grid--masonry, so it never opened on profile-first pages.
-   2. It opens the largest optimised size of each image, not the small one shown in the grid. */
+   2. It opens the largest optimised size of each image, not the small one shown in the grid.
+   Added: an image's caption (if it has one) is shown under it in the lightbox. */
 const galleryImages = document.querySelectorAll('.grid--masonry img, .grid--masonry-sn img');
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightbox-image');
+const lightboxCaption = document.getElementById('lightbox-caption');
 const closeButton = document.querySelector('.lightbox-close');
 const previousButton = document.querySelector('.lightbox-prev');
 const nextButton = document.querySelector('.lightbox-next');
@@ -38,6 +40,13 @@ galleryImages.forEach((image, index) => {
 function showImage() {
     lightboxImage.src = largestSource(galleryImages[currentImage]);
     lightboxImage.alt = galleryImages[currentImage].alt;
+    const figure = galleryImages[currentImage].closest('figure');
+    const caption = figure && figure.querySelector('figcaption');
+    if (lightboxCaption) {
+        lightboxCaption.textContent = caption ? caption.textContent.trim() : '';
+        lightboxCaption.hidden = !lightboxCaption.textContent;
+        lightbox.classList.toggle('has-caption', !lightboxCaption.hidden);
+    }
 }
 
 /* NEXT IMAGE */
@@ -68,7 +77,7 @@ function closeLightbox() {
 
 /* CLICK OUTSIDE IMAGE TO CLOSE */
 lightbox.addEventListener('click', (event) => {
-    if (event.target === lightbox) {
+    if (event.target === lightbox || event.target.classList.contains('lightbox-figure')) {
         closeLightbox();
     }
 });

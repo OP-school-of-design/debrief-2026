@@ -29,6 +29,7 @@
     ".gp .hero{width:100%;max-height:420px;object-fit:cover;display:block;background:#efefef}",
     ".gp .empty{color:#8a8f99;font-style:italic;font-size:14px;margin:0}",
     ".gp .quote{color:#ff4200;font-weight:700;font-size:20px;margin:0}",
+    ".gp .quote.caps{text-transform:uppercase}",
     ".gp .masonry{columns:3 180px;column-gap:12px}",
     ".gp .masonry img{width:100%;display:block;margin:0 0 12px;break-inside:avoid;background:#efefef}",
     ".gp ul.links{list-style:none;padding:0;margin:0}",
@@ -286,19 +287,36 @@
             h("p", { style: { fontWeight: 700, margin: "0 0 6px" } }, get(entry, "projectName") || "(no project name)"),
             get(entry, "projectDescription") ? h("p", { style: { margin: 0, lineHeight: 1.5 } }, get(entry, "projectDescription")) : empty("(no project description)"))),
 
-        section("Hero image",
-          heroSrc ? h("img", { className: "hero", src: heroSrc, alt: "" }) : empty("No hero image: the page will not show one.")),
+        (function () {
+          var heroSec = section("Hero image",
+            heroSrc
+              ? h("figure", null, h("img", { className: "hero", src: heroSrc, alt: "" }),
+                  get(entry, "heroAlt") ? h("figcaption", { style: { maxWidth: "none", fontSize: 14 } }, get(entry, "heroAlt")) : null)
+              : empty("No hero image: the page will not show one."));
+          var videoUrl = get(entry, "videoUrl");
+          if (!videoUrl) return heroSec;
+          var first = entry.getIn(["data", "videoFirst"]) === true;
+          var videoSec = section("Video (" + (first ? "above" : "under") + " the hero image)",
+            h("div", null,
+              h("p", { style: { margin: "0 0 4px", wordBreak: "break-all" } }, videoUrl),
+              get(entry, "videoCaption") ? h("p", { style: { margin: 0, fontSize: 14, color: "#5d626f" } }, get(entry, "videoCaption")) : empty("No caption.")));
+          return h("div", null, first ? [h("div", { key: "v" }, videoSec), h("div", { key: "h" }, heroSec)] : [h("div", { key: "h" }, heroSec), h("div", { key: "v" }, videoSec)]);
+        })(),
 
         section("About the graduate", h("div", { className: "body" }, widget(this.props, "body"))),
 
-        get(entry, "quote") ? section("Quote", h("p", { className: "quote" }, get(entry, "quote"))) : null,
+        get(entry, "quote") ? section("Quote (always shown in capitals)", h("p", { className: "quote caps" }, get(entry, "quote"))) : null,
 
         section("Gallery images (masonry grid)",
           gallery.length
             ? h("div", { className: "masonry" }, gallery.map(function (item, i) {
                 var p = item && item.get ? item.get("image") : "";
                 var s = src(getAsset, p, galleryField);
-                return s ? h("img", { key: i, src: s, alt: "" }) : null;
+                var cap = item && item.get ? item.get("alt") : ""; // the description is also the caption
+                if (!s) return null;
+                return cap
+                  ? h("figure", { key: i, style: { breakInside: "avoid", margin: "0 0 12px" } }, h("img", { src: s, alt: "", style: { marginBottom: 4 } }), h("figcaption", { style: { maxWidth: "none" } }, cap))
+                  : h("img", { key: i, src: s, alt: "" });
               }))
             : empty("No gallery images yet.")),
 

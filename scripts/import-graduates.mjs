@@ -18,6 +18,7 @@ import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
 import crypto from "node:crypto";
+import { embedUrl } from "../lib/helpers.js";
 // Build tools from package.json. If they're missing (e.g. after a git pull that added one), say how to fix it.
 let unzipSync, strFromU8, yaml, sharp;
 try {
@@ -44,13 +45,15 @@ const COLUMNS = {
   projectName: ["Project name"],
   projectDescription: ["Project description"],
   hero: ["Hero image"],
-  heroAlt: ["Hero image description"],
+  heroAlt: ["Hero image description and caption", "Hero image description", "Hero image caption"],
   card: ["Card image"],
-  cardAlt: ["Card image description"],
+  cardAlt: ["Card image description", "Card image description and caption", "Card image caption"],
   headshot: ["Headshot"],
-  headshotAlt: ["Headshot description"],
+  headshotAlt: ["Headshot caption", "Headshot description", "Headshot description and caption"],
   gallery: ["Gallery images"],
-  galleryAlt: ["Gallery image descriptions"],
+  galleryAlt: ["Gallery image captions and descriptions", "Gallery image descriptions", "Gallery image captions"],
+  video: ["Video", "Video (optional)", "Video link"],
+  videoCaption: ["Video caption", "Video caption (optional)"],
   email: ["Public email", "Email1", "Email address", "Contact email"],
   website: ["Website"],
   instagram: ["Instagram"],
@@ -364,6 +367,16 @@ for (const r of responses) {
     if (key === "card" && Math.abs(saved.w / saved.h - 1) > 0.1) notes.push(`\u26a0 Card image isn't square (${saved.w}\u00d7${saved.h}); the grid crops it to a square.`);
   }
 
+  // Video: a YouTube or Vimeo link, shown under the hero image
+  const videoRaw = cell(r, "video");
+  if (videoRaw) {
+    const url = webAddress(videoRaw, "other");
+    if (url && embedUrl(url)) { // the same check the site uses to embed it
+      data.videoUrl = url;
+      if (cell(r, "videoCaption")) data.videoCaption = cell(r, "videoCaption");
+    } else notes.push(`\u26a0 Video \u201c${videoRaw}\u201d isn't a YouTube or Vimeo link. Left out.`);
+  } else if (cell(r, "videoCaption")) notes.push("\u26a0 A video caption but no video link. Caption left out.");
+
   // Quote
   const quote = withQuotes(cell(r, "quote"));
   if (quote) data.quote = quote;
@@ -393,11 +406,12 @@ for (const r of responses) {
   const galleryFiles = filesFor(cell(r, "gallery"));
   // "01 Close-up..." -> "Close-up...": a leading number is removed only when it's that line's position,
   // so a description that starts with a number ("3 chairs in a row") is kept as written.
-  const galleryAlts = cell(r, "galleryAlt").split("\n").map((l) => l.trim()).filter(Boolean)
+  const numberedLines = (text) => text.split("\n").map((l) => l.trim()).filter(Boolean)
     .map((l, i) => {
       const m = l.match(/^\(?(\d{1,2})[).:\-\s]\s*(.*)$/);
       return m && +m[1] === i + 1 && m[2] ? m[2].trim() : l;
     });
+  const galleryAlts = numberedLines(cell(r, "galleryAlt"));
   const gallery = [];
   for (let i = 0; i < galleryFiles.length; i++) {
     const g = galleryFiles[i];
