@@ -6,7 +6,7 @@
     default description.
 
     Share image (link previews in messages, email and social media, and some search results):
-    graduates: their card image on the share frame (or their hero image); events: their poster;
+    graduates: their card image (or their hero image); events: their poster;
     other pages: their banner; anything else: Site settings > Share image. See lib/share.js.
 
     Structured data (JSON-LD) for search engines: see lib/seo.js. -#}
@@ -41,13 +41,12 @@
 {%- endif -%}
 
 {#- ---------- Share image ---------- -#}
-{%- set frameImg = (site.shareFrame or "images/share-frame.jpg") | siteImg -%}
 {%- set shareSrc = "" -%}{%- set shareMode = "cover" -%}{%- set shareAlt = "" -%}
 {%- if isGrad -%}
-  {%- if cover -%}{%- set shareSrc = page | entryImg(cover) -%}{%- set shareMode = "frame" -%}{%- set shareAlt = coverAlt -%}
+  {%- if cover -%}{%- set shareSrc = page | entryImg(cover) -%}{%- set shareMode = "square" -%}{%- set shareAlt = coverAlt -%}
   {%- elif hero -%}{%- set shareSrc = page | entryImg(hero) -%}{%- set shareAlt = heroAlt -%}{%- endif -%}
 {%- elif isEvent and poster -%}
-  {%- set shareSrc = page | entryImg(poster) -%}{%- set shareMode = "poster" -%}{%- set shareAlt = posterAlt -%}
+  {%- set shareSrc = page | entryImg(poster) -%}{%- set shareMode = "fit" -%}{%- set shareAlt = posterAlt -%}
 {%- elif isAbout and (discipline.data.bannerImage or discipline.data.image) -%}
   {%- set shareSrc = discipline | entryImg(discipline.data.bannerImage or discipline.data.image) -%}
   {%- set shareAlt = discipline.data.bannerAlt if discipline.data.bannerImage else discipline.data.imageAlt -%}
@@ -60,7 +59,7 @@
 {%- elif not isHome and bannerImage -%}
   {%- set shareSrc = bannerImage | siteImg -%}{%- set shareAlt = bannerAlt -%}
 {%- endif -%}
-{%- set share = (shareSrc | shareImage(shareMode, frameImg)) if shareSrc else null -%}
+{%- set share = (shareSrc | shareImage(shareMode)) if shareSrc else null -%}
 {%- if not share -%}
   {%- set share = (site.shareImage or "images/share-default.jpg") | siteImg | shareImage("cover") -%}
   {%- set shareAlt = site.name ~ " logo" -%}
@@ -111,16 +110,15 @@
   {%- set ld = ld.concat([{ name: site.name, url: siteUrl ~ "/", description: pageDesc } | ldWebsite]) -%}
   {%- for e in collections.events -%}
     {%- if e.data.startDate -%}
-      {%- set eShare = (e | entryImg(e.data.poster)) | shareImage("poster", frameImg) if e.data.poster else share -%}
+      {%- set eShare = (e | entryImg(e.data.poster)) | shareImage("fit") if e.data.poster else share -%}
       {%- set ld = ld.concat([{ url: siteUrl ~ e.url, name: e.data.title, description: (e.data.metaDescription or e.data.subtitle), image: (siteUrl ~ eShare.path) if eShare else "", startDate: e.data.startDate, endDate: e.data.endDate, venueName: e.data.venueName, venueAddress: e.data.venueAddress } | ldEvent]) -%}
     {%- endif -%}
   {%- endfor -%}
 {%- elif isGrad -%}
-  {%- set sq = (page | entryImg(cover)) | shareImage("square") if cover else null -%}
   {%- set heroUrl = (siteUrl ~ ((page | entryImg(hero)) | shareImage("cover")).path) if hero else "" -%}
   {%- set ld = ld.concat({
       url: pageUrl, pageTitle: pageTitle, name: title, description: pageDesc, website: siteUrl ~ "/",
-      image: shareUrl, images: [ (siteUrl ~ sq.path) if sq else "", shareUrl, heroUrl ],
+      image: shareUrl, images: [ shareUrl, heroUrl ],
       discipline: gradDisc.data.title if gradDisc else "", links: links,
       projectName: projectName, projectDescription: projectDescription, projectImage: heroUrl
     } | ldGraduate) -%}

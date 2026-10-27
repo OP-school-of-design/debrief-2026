@@ -1081,15 +1081,7 @@ collections:
       name: shareImage
       widget: image
       required: false
-      hint: 'The picture shown when a link to the site is shared (messages, email, social media) and in some search results. Use a landscape image at least 1200 px wide; it''s cropped from the centre to 1200 × 630. Graduates use their card image (or hero image), events their poster, and other pages their banner. Leave empty to use the DEBRIEF logo (the first frame of the front page animation).'
-      media_library:
-        config:
-          max_file_size: 10000000
-    - label: Share image frame (behind graduates' card images)
-      name: shareFrame
-      widget: image
-      required: false
-      hint: 'When a graduate''s page is shared, their square card image is shown in the middle of this image, so wide previews show the whole card with this around it. Landscape, at least 1200 × 630 px, with a calm middle. Leave empty to use the DEBRIEF yellow with the four shapes (images/share-frame.jpg).'
+      hint: 'The picture shown when a link to the site is shared (messages, email, social media) and in some search results. Use a landscape image at least 1200 px wide; it''s cropped from the centre to 1200 × 630. Graduates use their own card image (or hero image), events their poster, and other pages their banner, each on its own. Leave empty to use the DEBRIEF logo (the first frame of the front page animation).'
       media_library:
         config:
           max_file_size: 10000000
