@@ -1,10 +1,11 @@
 ---
-title: Taryn Ormsby
 discipline: communication
-published: true
+published: false
 blockOrder: profile
 projectName: Taryn's Project
 projectDescription: "Test description here:"
+imported: form 2026-10-28 fp:c30b034a51a2
+title: Taryn Ormsby
 cover: card.jpg
 coverAlt: This is a description
 hero: hero.jpg
@@ -26,6 +27,5 @@ gallery:
     alt: 2025 Debrief Posters
   - image: gallery-03.jpg
     alt: Debrief banner image
-imported: form 2026-10-28 fp:c30b034a51a2
 ---
 Test about me
