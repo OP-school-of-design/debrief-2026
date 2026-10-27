@@ -50,6 +50,11 @@ collections:
   - label: Full name
     name: title
     widget: string
+  - label: Last name (for alphabetical order)
+    name: sortName
+    widget: string
+    required: false
+    hint: 'Graduates are listed by last name. Leave empty to use the last word of the full name, with any prefix such as Te, van or de (Aria Te Rangi is listed under Te Rangi). Fill it in only when that is wrong, e.g. when the family name comes first or a name has two last names.'
   - label: Discipline
     name: discipline
     widget: select
@@ -701,7 +706,7 @@ collections:
           value: honours
         - label: Masters
           value: masters
-      hint: Drag the categories into the order you want. Graduates appear category by category, in alphabetical order of name within each. Categories left off the list come last.
+      hint: Drag the categories into the order you want. Graduates appear category by category, in alphabetical order of last name within each. Categories left off the list come last.
   - label: Events listing page (/events/)
     name: eventspage
     file: src/_data/eventspage.json
