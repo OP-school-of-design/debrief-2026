@@ -142,11 +142,13 @@ function readXlsx(file) {
 const rows = readXlsx(EXCEL);
 if (rows.length < 2) fail("The Excel file has no responses.");
 const norm = (s) => String(s || "").trim().replace(/\s+/g, " ").toLowerCase();
-const headers = rows[0].map(norm);
+// Question titles match whatever the case, spacing or an "(optional)" on the end.
+const titleNorm = (s) => norm(s).replace(/\s*\(optional\)/g, "").trim();
+const headers = rows[0].map(titleNorm);
 const colIndex = {};
 const missingColumns = [];
 for (const [key, titles] of Object.entries(COLUMNS)) {
-  const i = titles.map(norm).map((t) => headers.indexOf(t)).find((x) => x !== -1);
+  const i = titles.map(titleNorm).map((t) => headers.indexOf(t)).find((x) => x !== -1);
   if (i === undefined) missingColumns.push(`${key} (${titles[0]})`);
   else colIndex[key] = i;
 }
@@ -155,11 +157,17 @@ if (missingRequired.length) fail("These questions aren't in the Excel file: " + 
 
 const cell = (row, key) => (colIndex[key] === undefined ? "" : String(row[colIndex[key]] ?? "").replace(/\r\n?/g, "\n").trim());
 
-// Resubmissions: keep each student's latest response.
+// Resubmissions: keep each student's latest response. A response counts as a resubmission when it's
+// from the same sign-in AND for the same name, so a staff member submitting for several students
+// doesn't lose all but the last one.
 let responses = rows.slice(1).filter((r) => r.some((v) => String(v ?? "").trim()));
 const latest = new Map();
+const namesPerAccount = new Map();
 responses.forEach((r, i) => {
-  const who = norm(cell(r, "account")) || "row" + i;
+  const account = norm(cell(r, "account"));
+  const person = norm(cell(r, "name")).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+  const who = account ? account + "|" + person : "row" + i;
+  if (account) namesPerAccount.set(account, (namesPerAccount.get(account) || new Set()).add(cell(r, "name") || "(no name)"));
   const stamp = cell(r, "modified") || cell(r, "submitted");
   const when = (/^\d+(\.\d+)?$/.test(stamp) ? parseFloat(stamp) * 86400000 : Date.parse(stamp)) || i;
   const prev = latest.get(who);
@@ -411,7 +419,21 @@ for (const r of responses) {
       const m = l.match(/^\(?(\d{1,2})[).:\-\s]\s*(.*)$/);
       return m && +m[1] === i + 1 && m[2] ? m[2].trim() : l;
     });
-  const galleryAlts = numberedLines(cell(r, "galleryAlt"));
+  // When every line is numbered (and the numbers fit the images), pair by number instead, so a
+  // skipped line ("1...", "3...") doesn't shift every later description onto the wrong image.
+  const byNumber = (text, count) => {
+    const ls = text.split("\n").map((l) => l.trim()).filter(Boolean);
+    const ms = ls.map((l) => l.match(/^\(?(\d{1,2})[).:\-\s]\s*(.*)$/));
+    if (!ls.length || ms.some((m) => !m || !m[2].trim())) return null;
+    const nums = ms.map((m) => +m[1]);
+    if (new Set(nums).size !== nums.length || nums.some((n) => n < 1 || n > Math.max(count, ls.length))) return null;
+    if (nums.every((n, i) => n === i + 1)) return null; // plain 1, 2, 3...: same as in order
+    const out = [];
+    ms.forEach((m, i) => { out[nums[i] - 1] = m[2].trim(); });
+    return out;
+  };
+  const numbered = byNumber(cell(r, "galleryAlt"), galleryFiles.length);
+  const galleryAlts = numbered || numberedLines(cell(r, "galleryAlt"));
   const gallery = [];
   for (let i = 0; i < galleryFiles.length; i++) {
     const g = galleryFiles[i];
@@ -424,7 +446,13 @@ for (const r of responses) {
     gallery.push(item);
   }
   if (gallery.length) data.gallery = gallery;
-  if (galleryFiles.length && galleryAlts.length !== galleryFiles.length)
+  if (numbered) {
+    const gaps = galleryFiles.map((_, i) => i + 1).filter((n) => !galleryAlts[n - 1]);
+    const extra = galleryAlts.map((a, i) => (a && i >= galleryFiles.length ? i + 1 : 0)).filter(Boolean);
+    notes.push(`\u26a0 Gallery descriptions are numbered, so they were paired by number.` +
+      (gaps.length ? ` No description for image${gaps.length === 1 ? "" : "s"} ${gaps.join(", ")}.` : "") +
+      (extra.length ? ` Description${extra.length === 1 ? "" : "s"} ${extra.join(", ")} ha${extra.length === 1 ? "s" : "ve"} no image.` : ""));
+  } else if (galleryFiles.length && galleryAlts.length !== galleryFiles.length)
     notes.push(`\u26a0 ${galleryFiles.length} gallery image${galleryFiles.length === 1 ? "" : "s"} but ${galleryAlts.length} description line${galleryAlts.length === 1 ? "" : "s"}: check they're paired correctly.`);
   if (!galleryFiles.length) notes.push("\u26a0 No gallery images.");
 
@@ -452,6 +480,8 @@ const lines = [
   "",
 ];
 if (missingColumns.length) lines.push("Questions not found in the Excel file (left blank): " + missingColumns.join(", ") + ".", "");
+for (const [account, names] of namesPerAccount)
+  if (names.size > 1) lines.push(`${account} sent responses for ${names.size} different names (${[...names].join(", ")}): each is imported as its own graduate. If one student changed how they wrote their name, keep the newest page and delete the other.`, "");
 const order = { "Not imported": 0, Skipped: 1, Added: 2, Updated: 2, "Would add": 2, "Would update": 2 };
 for (const e of report.sort((a, b) => order[a.status] - order[b.status] || a.who.localeCompare(b.who))) {
   lines.push(`## ${e.who}: ${e.status}${e.slug ? ` (src/graduates/${e.slug})` : ""}`);

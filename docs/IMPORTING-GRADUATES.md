@@ -56,7 +56,8 @@ they're never pushed to GitHub: they hold students' names, OP email addresses an
 
 ## Students who resubmit, and running it again
 
-- If a student submits twice, the import uses their **latest** response.
+- If a student submits twice, the import uses their **latest** response. (A resubmission is a response from
+  the same sign-in for the same name, so staff can submit for several students from their own account.)
 - Running the import again skips graduates it already added. To refresh them from the form (e.g. after
   late changes), add `--replace`: it updates only graduates the import made and nobody has changed in the
   dashboard since (each imported page carries a fingerprint of its content in its `imported` field), so
@@ -73,7 +74,7 @@ they're never pushed to GitHub: they hold students' names, OP email addresses an
 | Quote | Quote (curly quotation marks added if the student didn't type any) |
 | Project name, Project description | Project |
 | Hero image, Card image, Headshot (+ descriptions) | `hero.jpg`, `card.jpg`, `headshot.jpg` and their alt text (the hero's description is also shown as its caption). No headshot description: "Portrait of <name>". |
-| Gallery images (+ descriptions) | `gallery-01.jpg`... in the order uploaded, paired with the description lines in order (each description is also shown as the image's caption). A leading "01", "1." etc. is removed. |
+| Gallery images (+ descriptions) | `gallery-01.jpg`... in the order uploaded, paired with the description lines in order (each description is also shown as the image's caption). A leading "01", "1." etc. is removed. If every line is numbered, lines are paired by number, so a skipped number leaves that image without a description instead of shifting the rest. |
 | Video, Video caption | A YouTube or Vimeo link shown under the hero image, with its caption. Anything else is left out and reported. Staff can put the video above the hero image in the dashboard ("Show the video above the hero image"). |
 | Public email, Website, Instagram, LinkedIn, Behance, Other links | Contact links. `https://` is added where missing; an Instagram or Behance handle becomes a full address; YouTube and Facebook links are recognised. |
 
