@@ -18,6 +18,9 @@ permalink: /
 {%- set dStill = dSvg | animStill %}
 {%- set mStill = mSvg | animStill %}
 
+        {#- On phones the animation and the dates banner share the first screen under the header
+            (css/additions.css: .home-first-screen); on larger screens this wrapper does nothing. #}
+        <div class="home-first-screen">
         <section class="logo-animation{% if dStill %} has-still{% endif %}"
             {%- if dStill %} style="--still: url('{{ dStill.small | url }}');{% if mStill %} --still-m: url('{{ mStill.small | url }}');{% endif %}"{% endif %}>
             <picture>
@@ -36,6 +39,7 @@ permalink: /
 {%- set bannerTitleText = f.datesTitle %}
 {%- set bannerDetailsText = f.datesDetails %}
 {% include "partials/dates-banner.njk" %}
+        </div>
 
     <main>
 

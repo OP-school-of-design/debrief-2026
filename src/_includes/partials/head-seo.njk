@@ -25,13 +25,7 @@
   {%- set pageTitle = frontpage.seoTitle or (site.name ~ " - " ~ site.tagline) -%}
   {%- set pageDesc = frontpage.metaDescription or site.description -%}
 {%- else -%}
-  {%- if isGrad and not seoTitle and gradDisc -%}
-    {#- e.g. "Aria Te Rangi – Communication Design | DEBRIEF 2026", for searches like
-        "communication design graduate" as well as the name -#}
-    {%- set pageTitle = title ~ " – " ~ gradDisc.data.title ~ " | " ~ site.name -%}
-  {%- else -%}
-    {%- set pageTitle = (seoTitle or title) ~ " | " ~ site.name -%}
-  {%- endif -%}
+  {%- set pageTitle = (seoTitle or title) ~ " | " ~ site.name -%}
   {%- set autoDesc = "" -%}
   {%- if isGrad -%}
     {%- set autoDesc = title ~ ", " ~ (gradDisc.data.title if gradDisc else "Design") ~ " graduate at " ~ site.name ~ ", Otago Polytechnic School of Design." -%}

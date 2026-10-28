@@ -88,9 +88,13 @@ document.querySelectorAll(".discipline-toggle").forEach(function (toggle) {
   var SELECTOR = "h1, h2, h3, .student-quote, .student-quote-sn";
   function fit() {
     var els = document.querySelectorAll(SELECTOR);
-    for (var i = 0; i < els.length; i++) {
-      els[i].style.fontSize = "";
-      els[i].classList.remove("fit-break");
+    var own = [];
+    // The dates banner's title is sized by its own script below.
+    for (var i = 0; i < els.length; i++) if (!(els[i].closest && els[i].closest(".debrief-dates"))) own.push(els[i]);
+    els = own;
+    for (var k = 0; k < els.length; k++) {
+      els[k].style.fontSize = "";
+      els[k].classList.remove("fit-break");
     }
     for (var j = 0; j < els.length; j++) {
       var el = els[j];
@@ -103,6 +107,50 @@ document.querySelectorAll(".discipline-toggle").forEach(function (toggle) {
       // Still too wide at half size (an extremely long word): as a last resort let it break
       // rather than run off the screen.
       if (el.scrollWidth > el.clientWidth + 1) el.classList.add("fit-break");
+    }
+  }
+  var queued = false;
+  function soon() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; fit(); });
+  }
+  fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(soon);
+  window.addEventListener("load", soon);
+  window.addEventListener("resize", soon);
+})();
+
+// Dates banner on phones: each line kept whole, and the title lines and the detail lines each sized
+// so their longest line fills the banner's width (see css/additions.css). Larger screens keep the
+// original sizes. Runs with the heading fit above: on load, when fonts are ready, and on resize.
+(function () {
+  var PHONE = "(max-width: 707px)";
+  var SIZES = { title: [16, 34], details: [12, 21] }; // min and max in px
+  function fitBlock(el, range) {
+    var lines = el.querySelectorAll(".dl");
+    if (!lines.length) return;
+    var avail = el.clientWidth;
+    var size = parseFloat(getComputedStyle(el).fontSize);
+    var widest = 0;
+    for (var i = 0; i < lines.length; i++) widest = Math.max(widest, lines[i].scrollWidth);
+    if (!widest || !avail) return;
+    size = Math.floor(size * (avail / widest) * 0.98 * 100) / 100;
+    el.style.fontSize = Math.max(range[0], Math.min(range[1], size)) + "px";
+    // A line still too wide at the smallest size may wrap rather than run off the screen.
+    for (var j = 0; j < lines.length; j++) lines[j].style.whiteSpace = lines[j].scrollWidth > el.clientWidth + 1 ? "normal" : "";
+  }
+  function fit() {
+    var banners = document.querySelectorAll(".debrief-dates");
+    var phone = window.matchMedia && window.matchMedia(PHONE).matches;
+    for (var i = 0; i < banners.length; i++) {
+      var b = banners[i], title = b.querySelector(".debrief-dates-title"), details = b.querySelector("p");
+      if (title) title.style.fontSize = "";
+      if (details) details.style.fontSize = "";
+      if (!phone) { b.classList.remove("is-fitted"); continue; }
+      b.classList.add("is-fitted");
+      if (title) fitBlock(title, SIZES.title);
+      if (details) fitBlock(details, SIZES.details);
     }
   }
   var queued = false;
