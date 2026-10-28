@@ -282,7 +282,10 @@ h1, h2, h3,
    the animation fills the rest (it's cropped from the centre, so the logo stays in view).
    The banner's text sits in a neat block, one line per line typed in the dashboard, and its size
    shrinks smoothly with the screen width (clamp): from the original 1.5rem title / 1rem details
-   down to 14 px / 12 px at 240 px wide. Larger screens keep the original design.
+   down to 14 px / 12 px at 240 px wide. The space above and below the text is the same, and
+   grows with the screen (clamp). The first screen's height is the phone's actual visible height
+   (measured by js/main.js, with 100svh until then), so the banner's bottom space is never cut
+   off by the browser's toolbars. Larger screens keep the original design.
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 @media screen and (max-width: 707px) {
     .home-first-screen {
@@ -291,6 +294,7 @@ h1, h2, h3,
         margin-top: 85px;
         height: calc(100vh - 85px);
         height: calc(100svh - 85px);
+        height: calc(var(--first-screen-h, 100svh) - 85px);
     }
     .home-first-screen .logo-animation {
         margin-top: 0;
@@ -300,11 +304,17 @@ h1, h2, h3,
     }
     .home-first-screen .debrief-dates {
         flex: none;
+        /* Phones whose browser draws under the system navigation bar report its height here. */
+        padding-bottom: calc(var(--dates-space) + env(safe-area-inset-bottom, 0px));
     }
 
+    /* The same space above and below the text: 16 px at 240 px wide, growing to 30 px at 707 px. */
     .debrief-dates {
-        padding: 1.5rem 2rem;
+        --dates-space: 1.25rem;
+        --dates-space: clamp(1rem, 0.25rem + 3.75vw, 2rem);
+        padding: var(--dates-space) 2rem;
         gap: 1rem;
+        gap: clamp(0.5rem, 0.1rem + 2vw, 1rem);
     }
     .debrief-dates-title {
         font-size: 1.25rem; /* for browsers without clamp() */
@@ -330,7 +340,7 @@ h1, h2, h3,
 }
 @media screen and (max-width: 600px) {
     .debrief-dates {
-        padding: 1.25rem 1rem;
-        gap: 0.75rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }

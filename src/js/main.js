@@ -116,3 +116,20 @@ document.querySelectorAll(".discipline-toggle").forEach(function (toggle) {
   window.addEventListener("load", soon);
   window.addEventListener("resize", soon);
 })();
+
+// Front page on phones: the first screen (animation + dates banner) is exactly the visible height,
+// measured here because some phone browsers' 100svh is a little taller than what's on screen.
+// It's only re-measured when the width changes (turning the phone), not when the address bar
+// slides away while scrolling, so nothing jumps.
+(function () {
+  if (!document.querySelector(".home-first-screen")) return;
+  var width = 0;
+  function measure() {
+    if (window.innerWidth === width) return;
+    width = window.innerWidth;
+    document.documentElement.style.setProperty("--first-screen-h", window.innerHeight + "px");
+  }
+  measure();
+  window.addEventListener("resize", measure);
+  window.addEventListener("orientationchange", function () { width = 0; setTimeout(measure, 250); });
+})();
