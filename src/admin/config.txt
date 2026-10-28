@@ -497,12 +497,12 @@ collections:
     name: bannerTitle
     widget: text
     required: false
-    hint: Leave blank to hide the coloured banner. Press Enter for a line break. On phones each line is sized to fill the banner's width.
+    hint: Leave blank to hide the coloured banner. Press Enter for a line break.
   - label: 'Dates banner: details'
     name: bannerDetails
     widget: text
     required: false
-    hint: Press Enter for a new line. Type // for a line break on phones only (to split a long line). On phones the lines are sized so the longest fills the banner's width.
+    hint: Press Enter for a new line. Type // for a line break on phones only (to split a long line).
   - *id004
   - *id005
   - *id006
@@ -552,11 +552,11 @@ collections:
     - label: 'Dates banner: title'
       name: datesTitle
       widget: text
-      hint: Press Enter for a line break. On phones each line is sized to fill the banner's width.
+      hint: Press Enter for a line break.
     - label: 'Dates banner: details'
       name: datesDetails
       widget: text
-      hint: Press Enter for a new line. Type // for a line break on phones only (to split a long line). On phones the lines are sized so the longest fills the banner's width.
+      hint: Press Enter for a new line. Type // for a line break on phones only (to split a long line).
     - label: Introduction heading
       name: introHeading
       widget: string

@@ -280,9 +280,9 @@ h1, h2, h3,
    The header, the logo animation and the whole dates banner fit on the first screen without
    scrolling, on any phone down to 240 px wide: the banner takes the height its text needs and
    the animation fills the rest (it's cropped from the centre, so the logo stays in view).
-   The banner's text sits in a neat block: each line stays whole and js/main.js sizes the title
-   lines and the detail lines so their longest line fills the width (between the min and max
-   sizes below). Larger screens keep the original design.
+   The banner's text sits in a neat block, one line per line typed in the dashboard, and its size
+   shrinks smoothly with the screen width (clamp): from the original 1.5rem title / 1rem details
+   down to 14 px / 12 px at 240 px wide. Larger screens keep the original design.
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
 @media screen and (max-width: 707px) {
     .home-first-screen {
@@ -307,23 +307,24 @@ h1, h2, h3,
         gap: 1rem;
     }
     .debrief-dates-title {
+        font-size: 1.25rem; /* for browsers without clamp() */
+        font-size: clamp(0.875rem, 0.40625rem + 3.125vw, 1.5rem);
         line-height: 1.15;
-        align-self: stretch; /* full width, so the script knows the space available */
     }
     .debrief-dates p {
+        font-size: 0.875rem;
+        font-size: clamp(0.75rem, 0.5rem + 1.667vw, 1rem);
         line-height: 1.4;
-        align-self: stretch;
     }
     /* Phones: "//" in the details starts a new line, as the dashboard hint says. */
     .debrief-dates .mobile-break {
         display: inline;
     }
-    /* Once sized by the script, every line is its own whole line. */
-    .debrief-dates.is-fitted .dl {
-        display: table; /* its own line, only as wide as its text, so it can be measured */
-        white-space: nowrap;
+    /* Every line is its own line (a very long one still wraps rather than run off the screen). */
+    .debrief-dates .dl {
+        display: block;
     }
-    .debrief-dates.is-fitted br {
+    .debrief-dates br {
         display: none;
     }
 }
