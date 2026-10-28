@@ -56,12 +56,30 @@ they're never pushed to GitHub: they hold students' names, OP email addresses an
 
 ## Students who resubmit, and running it again
 
-- If a student submits twice, the import uses their **latest** response. (A resubmission is a response from
-  the same sign-in for the same name, so staff can submit for several students from their own account.)
-- Running the import again skips graduates it already added. To refresh them from the form (e.g. after
-  late changes), add `--replace`: it updates only graduates the import made and nobody has changed in the
-  dashboard since (each imported page carries a fingerprint of its content in its `imported` field), so
-  staff edits, including ticking Published, are never overwritten.
+Students can correct their answers in two ways:
+
+- **Editing in Forms** (the form allows saving and editing): after submitting they click **Save my
+  response to edit**, then later go to forms.office.com › Filled forms › the form › **Edit response**.
+  The Excel file then has their edited answers. (Forms can't replace an uploaded file this way.)
+- **Submitting again** (needs **One response per person** switched off in the form's settings): they only
+  fill in what they're changing, e.g. a corrected bio or one replacement image, and leave the rest
+  blank. For this, every question except Full name and Programme must be optional in the form; the
+  import report still flags anyone missing an answer or an image.
+
+The import **combines** each student's submissions, oldest to newest by their time stamp ("Last
+modified time" when edited in Forms, otherwise "Completion time"): each question takes the newest
+answer that isn't blank. An image and its description go together, so a new upload brings its own
+description (a blank one is flagged in the report), while a new description on its own updates the
+earlier image's description. A blank answer never removes anything; to take something away, edit the
+page in the dashboard. Submissions belong to the same student when they come from the same OP sign-in
+and the names are the same or nearly so (a corrected spelling still counts), so staff can submit for
+several students from their own account. The report says which submissions were combined, what the
+newest one changed, and when a name was corrected (delete any page made under the old name).
+
+- Running the import again skips graduates it already added. To bring in corrections, add `--replace`:
+  it updates only graduates the import made and nobody has changed in the dashboard since (each
+  imported page carries a fingerprint of its content in its `imported` field), so staff edits,
+  including ticking Published, are never overwritten.
 - A graduate whose folder already exists from the dashboard is never touched.
 
 ## What it does with the answers

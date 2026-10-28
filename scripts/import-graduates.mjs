@@ -10,8 +10,9 @@
 //   --replace  update graduates this script imported before and nobody has edited since
 //   --unpublished  import pages as Unpublished (default: Published, ready to review on the site)
 //
-// For each response it creates src/graduates/<name>/index.md plus the images, in exactly the shape the
-// dashboard makes, and writes import-report.md listing anything staff need to look at.
+// For each student it creates src/graduates/<name>/index.md plus the images, in exactly the shape the
+// dashboard makes, and writes import-report.md listing anything staff need to look at. A student's
+// resubmissions are combined: each question takes their newest answer that isn't blank (see RESUBMISSIONS).
 // Images are turned the right way up, shrunk to at most 2500 px, stripped of hidden data (camera, GPS)
 // and saved as hero.jpg, card.jpg, headshot.jpg, gallery-01.jpg... (PNG when they have transparency).
 import fs from "node:fs";
@@ -157,24 +158,98 @@ if (missingRequired.length) fail("These questions aren't in the Excel file: " + 
 
 const cell = (row, key) => (colIndex[key] === undefined ? "" : String(row[colIndex[key]] ?? "").replace(/\r\n?/g, "\n").trim());
 
-// Resubmissions: keep each student's latest response. A response counts as a resubmission when it's
-// from the same sign-in AND for the same name, so a staff member submitting for several students
-// doesn't lose all but the last one.
-let responses = rows.slice(1).filter((r) => r.some((v) => String(v ?? "").trim()));
-const latest = new Map();
-const namesPerAccount = new Map();
-responses.forEach((r, i) => {
-  const account = norm(cell(r, "account"));
-  const person = norm(cell(r, "name")).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
-  const who = account ? account + "|" + person : "row" + i;
-  if (account) namesPerAccount.set(account, (namesPerAccount.get(account) || new Set()).add(cell(r, "name") || "(no name)"));
+// Folder name from a graduate's name.
+const slugify = (s) =>
+  s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "graduate";
+
+// ---------------------------------------------------------------- RESUBMISSIONS
+// A student can submit again just to correct something: their answers are COMBINED, oldest to newest,
+// and each question takes the newest answer that isn't blank. So a resubmission with only a corrected
+// bio, or one new hero image, keeps everything else from their earlier response. (A blank answer never
+// removes anything; to take something away, edit the page in the dashboard.)
+// An image and its description go together: a new upload brings its own description with it (even a
+// blank one); a new description on its own updates the earlier image's description.
+// Responses belong to the same student when they come from the same OP sign-in and the names are the
+// same or nearly the same (so a corrected spelling still counts); one staff member submitting for
+// several students keeps them apart. The order comes from each response's time stamp ("Last modified
+// time" when the student edited it in Forms, otherwise "Completion time"), then its row.
+const PAIRS = [["hero", "heroAlt"], ["card", "cardAlt"], ["headshot", "headshotAlt"], ["gallery", "galleryAlt"], ["video", "videoCaption"]];
+const PAIRED = new Set(PAIRS.flat());
+const plainName = (s) => norm(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+function editDistance(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++)
+    for (let j = 1; j <= b.length; j++)
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+function sameName(a, b) {
+  if (!a || !b || a === b) return true; // a blank name joins the others from that sign-in
+  if (editDistance(a, b) <= Math.max(2, Math.round(Math.min(a.length, b.length) * 0.15))) return true;
+  const wa = a.split(" "), wb = b.split(" ");
+  const [short, long] = wa.length <= wb.length ? [wa, wb] : [wb, wa];
+  return short.length >= 2 && short.every((w) => long.includes(w)); // a middle name added or dropped
+}
+function stampOf(r, i) {
   const stamp = cell(r, "modified") || cell(r, "submitted");
-  const when = (/^\d+(\.\d+)?$/.test(stamp) ? parseFloat(stamp) * 86400000 : Date.parse(stamp)) || i;
-  const prev = latest.get(who);
-  if (!prev || when >= prev.when) latest.set(who, { r, when });
+  const t = /^\d+(\.\d+)?$/.test(stamp) ? (parseFloat(stamp) - 25569) * 86400000 : Date.parse(stamp);
+  return { t: isNaN(t) ? -Infinity : t, i, label: isNaN(t) ? "" : new Date(t).toISOString().slice(0, 16).replace("T", " ") };
+}
+
+const allRows = rows.slice(1).filter((r) => r.some((v) => String(v ?? "").trim()));
+const groups = []; // { account, items: [{ r, when, name }] }
+allRows.forEach((r, i) => {
+  const account = norm(cell(r, "account"));
+  const name = plainName(cell(r, "name"));
+  const item = { r, when: stampOf(r, i), name };
+  const g = account && groups.find((x) => x.account === account && x.items.some((it) => sameName(it.name, name)));
+  if (g) g.items.push(item);
+  else groups.push({ account, items: [item] });
 });
-const replaced = responses.length - latest.size;
-responses = [...latest.values()].map((x) => x.r);
+
+const combineNotes = new Map(); // combined row -> notes for the report
+let responses = groups.map((g) => {
+  const items = g.items.sort((a, b) => a.when.t - b.when.t || a.when.i - b.when.i);
+  if (items.length === 1) return items[0].r;
+  const merged = [...items[0].r];
+  const fromLatest = new Set();
+  // Sets an answer; the newest submission's real changes are listed in the report.
+  let last = false;
+  const set = (key, value) => {
+    if (colIndex[key] === undefined) return;
+    if (last && value !== cell(merged, key) && !["submitted", "modified", "account"].includes(key)) fromLatest.add(COLUMNS[key][0]);
+    merged[colIndex[key]] = value;
+  };
+  items.slice(1).forEach((it, n) => {
+    last = n === items.length - 2;
+    for (const key of Object.keys(colIndex)) {
+      if (PAIRED.has(key)) continue;
+      const v = cell(it.r, key);
+      if (v) set(key, v);
+    }
+    for (const [file, desc] of PAIRS) {
+      const f = cell(it.r, file), d = cell(it.r, desc);
+      if (f) { set(file, f); set(desc, d); }
+      else if (d) set(desc, d);
+    }
+  });
+  const names = [...new Set(items.map((it) => cell(it.r, "name")).filter(Boolean))];
+  const newest = items[items.length - 1].when.label;
+  const notes = [`Combined ${items.length} submissions (newest ${newest || "last in the file"}); the newest changed: ${[...fromLatest].join(", ") || "nothing new"}.`];
+  if (names.length > 1) {
+    const oldSlugs = names.slice(0, -1).map(slugify).filter((s) => s !== slugify(names[names.length - 1]));
+    notes.push(`\u26a0 Name changed (${names.join(" \u2192 ")}).` + (oldSlugs.length ? ` If a page was imported under the old name (src/graduates/${oldSlugs.join(", ")}), delete it in the dashboard.` : ""));
+  }
+  combineNotes.set(merged, notes);
+  return merged;
+});
+const replaced = allRows.length - responses.length;
+const namesPerAccount = new Map();
+for (const r of responses) {
+  const account = norm(cell(r, "account"));
+  if (account) namesPerAccount.set(account, (namesPerAccount.get(account) || new Set()).add(cell(r, "name") || "(no name)"));
+}
 
 // ---------------------------------------------------------------- DISCIPLINES
 // Programme answer -> discipline key, from the dashboard's Discipline list and the Disciplines' titles.
@@ -221,8 +296,6 @@ function filesFor(value) {
 }
 
 // ---------------------------------------------------------------- HELPERS
-const slugify = (s) =>
-  s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "graduate";
 
 // Plain text from the form -> Markdown paragraphs. A line starting with a Markdown symbol is escaped, so
 // "#hashtag" or "1. " at the start of a line stays as typed.
@@ -306,7 +379,7 @@ const slugsThisRun = new Set();
 let created = 0, updated = 0, skipped = 0, attention = 0;
 
 for (const r of responses) {
-  const notes = [];
+  const notes = [...(combineNotes.get(r) || [])];
   const name = cell(r, "name");
   const who = name || cell(r, "account") || "(no name)";
   const missing = REQUIRED.filter((k) => !cell(r, k)).map((k) => COLUMNS[k][0]);
@@ -474,7 +547,7 @@ for (const r of responses) {
 const lines = [
   `# Graduate import ${CHECK ? "check" : "report"}, ${TODAY}`,
   "",
-  `${responses.length} graduate${responses.length === 1 ? "" : "s"} in the form` + (replaced ? ` (${replaced} earlier submission${replaced === 1 ? "" : "s"} replaced by a newer one)` : "") + ".",
+  `${responses.length} graduate${responses.length === 1 ? "" : "s"} in the form` + (replaced ? ` (${replaced} resubmission${replaced === 1 ? "" : "s"} combined with earlier ones)` : "") + ".",
   `${CHECK ? "Would add" : "Added"}: ${created} \u00b7 ${CHECK ? "Would update" : "Updated"}: ${updated} \u00b7 Skipped or not imported: ${skipped} \u00b7 Need a look: ${attention}`,
   CHECK ? "This was a check: nothing was written." : `Pages were imported as ${PUBLISH ? "Published: review them on the site, and untick Published in the dashboard to hide one while it's fixed" : "Unpublished: tick Published in the dashboard once each is checked"}.`,
   "",
