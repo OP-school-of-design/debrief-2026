@@ -23,7 +23,7 @@ videoUrl: https://youtu.be/txH5yUIOmrk
 videoCaption: Animated DEBRIEF Logo
 headshot: maxisangel_headshot.jpg
 headshotAlt: Maxis Angel Headshot
-quote: '"This is a lovely quote about something cool!"'
+quote: '"No punctuation.... This is a lovely quote about something cool!"'
 links:
   - type: email
     url: maxisdesign.contact@gmail.com
