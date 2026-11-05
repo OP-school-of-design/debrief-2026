@@ -1,6 +1,6 @@
 ---
 discipline: communication
-published: false
+published: true
 blockOrder: profile
 projectName: Taryn's Project
 projectDescription: "Test description here:"
