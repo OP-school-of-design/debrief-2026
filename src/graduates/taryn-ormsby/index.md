@@ -8,7 +8,7 @@ imported: form 2026-10-28 fp:c30b034a51a2
 title: Taryn Ormsby
 cover: card.jpg
 coverAlt: This is a description
-hero: hero.jpg
+hero: 3000pixels.jpg
 heroAlt: This is a description of my image
 headshot: headshot.jpg
 headshotAlt: This is Taryn Ormsby
