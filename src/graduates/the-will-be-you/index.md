@@ -15,6 +15,8 @@ projectDescription: >-
   Join us to celebrate our creative journeys and discover the explorative design processes behind our major projects. From initial ideas to finished outcomes, this exhibition embraces optimism, joy and the excitement of stepping into the next chapter of our design careers.
 cover: maxisangel_web_s.jpg
 hero: maxisangel_web_l.jpg
+videoUrl: https://www.youtube.com/watch?v=RtgB46u2zQs
+videoFirst: true
 headshot: maxisangel_headshot.png
 quote: '"THIS IS MY QUOTE. ABOUT SOMETHING COOL!!"'
 links:
