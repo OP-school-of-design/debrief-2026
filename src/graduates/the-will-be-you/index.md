@@ -1,5 +1,5 @@
 ---
-title: The Will Be You
+title: This Will Be You
 discipline: communication
 published: true
 blockOrder: profile
@@ -14,9 +14,9 @@ projectDescription: >-
 
   Join us to celebrate our creative journeys and discover the explorative design processes behind our major projects. From initial ideas to finished outcomes, this exhibition embraces optimism, joy and the excitement of stepping into the next chapter of our design careers.
 cover: maxisangel_web_s.jpg
-hero: maxisangel_web_l.jpg
-videoUrl: https://www.youtube.com/watch?v=RtgB46u2zQs
-videoFirst: true
+hero: ""
+videoUrl: https://youtu.be/_pZITI9-VHI
+videoFirst: false
 headshot: maxisangel_headshot.png
 quote: '"THIS IS MY QUOTE. ABOUT SOMETHING COOL!!"'
 links:
@@ -33,6 +33,7 @@ links:
     url: https://www.linkedin.com/in/maxis-angel-2961103bb/
     label: Maxis LinkedIn
 gallery:
+  - image: maxisangel_web_s.jpg
   - image: maxisangel_1.jpg
   - image: maxisangel_2.jpg
   - image: maxisangel_3.jpg
@@ -41,5 +42,6 @@ gallery:
   - image: maxisangel_6.jpg
   - image: maxisangel_7.jpg
   - image: maxisangel_8.jpg
+  - image: maxisangel_web_l.jpg
 ---
 I’m a creative and curious designer passionate about exploring ideas, solving problems, and creating meaningful experiences. With interests in graphic, web, and experiential design, I enjoy bringing concepts to life through thoughtful visuals and engaging interactions. I value collaboration, accessibility, and continuous learning, aiming to create designs that inspire, connect with people, and make everyday experiences more enjoyable.
