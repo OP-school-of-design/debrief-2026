@@ -33,7 +33,6 @@ links:
     url: https://www.linkedin.com/in/maxis-angel-2961103bb/
     label: Maxis LinkedIn
 gallery:
-  - image: maxisangel_web_s.jpg
   - image: maxisangel_1.jpg
   - image: maxisangel_2.jpg
   - image: maxisangel_3.jpg
@@ -42,6 +41,7 @@ gallery:
   - image: maxisangel_6.jpg
   - image: maxisangel_7.jpg
   - image: maxisangel_8.jpg
-  - image: maxisangel_web_l.jpg
+  - image: maxisangel_9.jpg
+  - image: maxisangel_10.jpg
 ---
 I’m a creative and curious designer passionate about exploring ideas, solving problems, and creating meaningful experiences. With interests in graphic, web, and experiential design, I enjoy bringing concepts to life through thoughtful visuals and engaging interactions. I value collaboration, accessibility, and continuous learning, aiming to create designs that inspire, connect with people, and make everyday experiences more enjoyable.
