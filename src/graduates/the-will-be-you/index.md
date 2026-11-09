@@ -1,47 +1,38 @@
 ---
-title: This Will Be You
-discipline: communication
+title: Abbey Burgess
+sortName: Burgess
+discipline: postgraduate
 published: true
 blockOrder: profile
-projectName: DEBRIEF Exhibition
-projectDescription: >-
-  From Fashion, Product, Communication and our postgraduate programmes, DEBRIEF
-  2026 celebrates bold ideas, fresh perspectives and the future of design.
-
-
-  Explore a diverse range of creative outcomes, including fashion garments and accessories, product design, outdoor equipment, publications, graphic design, game design, photography, web design, animation, film and more.
-
-
-  Join us to celebrate our creative journeys and discover the explorative design processes behind our major projects. From initial ideas to finished outcomes, this exhibition embraces optimism, joy and the excitement of stepping into the next chapter of our design careers.
-cover: maxisangel_web_s.jpg
-hero: ""
-videoUrl: https://youtu.be/_pZITI9-VHI
+projectName: Behind the Seams
+projectDescription: "My Honours project, Behind the Seams, explores the
+  technical and production side of the fashion industry and how designers can
+  better prepare their work for manufacturing. I’ve been developing a
+  four-garment collection to put these skills into practice, including pattern
+  making, grading, sampling, costing, and creating technical documents.
+  Alongside the collection, I’m putting together a practical guide to help
+  emerging designers understand the steps involved in taking a garment from
+  design through to production. The project has given me the opportunity to
+  develop my technical skills and explore the area of the industry I’d like to
+  pursue. "
+cover: abbeyburgess_heroshot1.png
+hero: abbeyburgess_heroshot1.jpg
+videoUrl: ""
 videoFirst: false
-headshot: maxisangel_headshot.png
-quote: '"THIS IS MY QUOTE. ABOUT SOMETHING COOL!!"'
+headshot: abbeyburgess_headshot.jpg
+quote: '"No point stressing over things you can’t control."'
 links:
-  - type: website
-    url: https://design.ac.nz/debrief/2026/
-    label: Maxis Portfolio Website
   - type: instagram
-    url: https://www.instagram.com/otagopolydesign/?hl=en
+    url: https://www.instagram.com/__abbeyburgess/
     label: Instagram
   - type: email
-    url: GEDDSA1@student.op.ac.nz
+    url: burgessabbey100@gmail.com
     label: ""
-  - type: linkedin
-    url: https://www.linkedin.com/in/maxis-angel-2961103bb/
-    label: Maxis LinkedIn
 gallery:
-  - image: maxisangel_1.jpg
-  - image: maxisangel_2.jpg
-  - image: maxisangel_3.jpg
-  - image: maxisangel_4.jpg
-  - image: maxisangel_5.jpg
-  - image: maxisangel_6.jpg
-  - image: maxisangel_7.jpg
-  - image: maxisangel_8.jpg
-  - image: maxisangel_9.jpg
-  - image: maxisangel_10.jpg
+  - image: abbeyburgess_heroshot2.jpg
+  - image: abbeyburgess_heroshot3.jpg
+  - image: abbeyburgess_heroshot4.jpg
+  - image: abbeyburgess_heroshot5.jpg
+  - image: abbeyburgess_heroshot6.jpg
 ---
-I’m a creative and curious designer passionate about exploring ideas, solving problems, and creating meaningful experiences. With interests in graphic, web, and experiential design, I enjoy bringing concepts to life through thoughtful visuals and engaging interactions. I value collaboration, accessibility, and continuous learning, aiming to create designs that inspire, connect with people, and make everyday experiences more enjoyable.
+Over the past four years of studying fashion, I’ve had the opportunity to study abroad in Denmark for six months and complete an internship with JPalm in Wellington. I’ve especially enjoyed exploring the technical and production side of the fashion industry. After finishing my studies, I’m planning to move to Sydney and see where life takes me next.
