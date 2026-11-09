@@ -13,9 +13,9 @@ projectDescription: "I’m Alannah-Mae, England-born but now living in Aotearoa
   people around me. "
 imported: form 2026-10-27 fp:0837be7a4a8c
 cover: alannah-mae.jpg
-coverAlt: Naha Prefectural Museum Okinawa by Paul Tulett
+coverAlt: ""
 hero: alannahmedeiros_10.jpg
-heroAlt: Something describing what you see. Something describing what you see.
+heroAlt: ""
 videoUrl: ""
 videoCaption: ""
 videoFirst: false
