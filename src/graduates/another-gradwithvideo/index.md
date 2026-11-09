@@ -1,36 +1,34 @@
 ---
-title: Another Gradwithvideo
-discipline: graddip-communication
-blockOrder: profile
-projectName: Final Project
-projectDescription: Something describing what you see. Something describing what
-  you see. Something describing what you see. Something describing what you see.
-  Something describing what you see.
-imported: form 2026-10-27 fp:0837be7a4a8c
+title: Alannah-Mae Medeiros
+sortName: Medeiros
+discipline: communication
 published: true
-cover: card.jpg
+blockOrder: profile
+projectName: Sonder
+projectDescription: "I’m Alannah-Mae, England-born but now living in Aotearoa
+  and studying Game Design. I adore the challenge of bringing heavy emotional
+  themes and messaging into my work through visual storytelling. Expression
+  through creativity has always had an important role in my life, and I find my
+  passion lies in being true to oneself and bringing that confidence to the
+  people around me. "
+imported: form 2026-10-27 fp:0837be7a4a8c
+cover: alannah-mae.jpg
 coverAlt: Naha Prefectural Museum Okinawa by Paul Tulett
-hero: hero.jpg
+hero: alannahmedeiros_10.jpg
 heroAlt: Something describing what you see. Something describing what you see.
-videoUrl: https://youtu.be/uBjH3dNVe1c?si=4AtOwrWxZDqTHRcl
-videoCaption: Eastern Gate is a brutalist music video filmed across Belgrade,
-  Serbia. Shot during winter in New Belgrade and beyond, the film features
-  iconic Yugoslav modernist architecture including the Eastern City Gate, Genex
-  Tower, blocks of Novi Beograd, the Avala Tower and monumental concrete
-  structures across the city.
-videoFirst: true
-headshot: barista_order_msn.jpg
-headshotAlt: Me
-quote: “Here is a paragraph of quote text. Here is a paragraph of quote text.
-  Here is a paragraph of quote text. Here is a paragraph of quote text. Here is
-  a paragraph of quote text. Here is a paragraph of quote text.”
+videoUrl: ""
+videoCaption: ""
+videoFirst: false
+headshot: alannahmaemedeiros_headshot.jpg
+headshotAlt: ""
+quote: "“My computer can’t handle the rendering!” "
 links:
   - type: email
-    url: example@example.com
+    url: alannahmedeiros@gmail.com
   - type: website
-    url: https://example.com
+    url: http://www.loftyard.artstation.com
   - type: instagram
-    url: https://www.instagram.com/examplename
+    url: https://www.instagram.com/loftyard.artisan/
   - type: linkedin
     url: https://www.linkedin.com/examplename
   - type: behance
@@ -38,24 +36,14 @@ links:
   - type: facebook
     url: https://www.facebook.com/examplename
 gallery:
-  - image: gallery-01.jpg
-    alt: Something describing what you see.
-  - image: gallery-02.jpg
-  - image: gallery-03.jpg
-    alt: Brutalist architecture
-  - image: gallery-04.jpg
-    alt: Brutalist architecture
-  - image: gallery-05.jpg
-    alt: Brutalist architecture
-  - image: gallery-06.jpg
-    alt: Brutalist architecture
-  - image: gallery-07.jpg
-    alt: Brutalist architecture
-  - image: gallery-08.jpg
-    alt: Brutalist architecture
-  - image: gallery-09.jpg
-    alt: Brutalist architecture
-  - image: gallery-10.jpg
-    alt: Brutalist architecture
+  - image: alannahmedeiros_1.jpg
+  - image: alannahmedeiros_2.jpg
+  - image: alannahmedeiros_3.jpg
+  - image: alannahmedeiros_4.jpg
+  - image: alannahmedeiros_5.jpg
+  - image: alannahmedeiros_6.jpg
+  - image: alannahmedeiros_7.jpg
+  - image: alannahmedeiros_8.jpg
+  - image: alannahmedeiros_9.jpg
 ---
-Something describing what you see. Something describing what you see. Something describing what you see. Something describing what you see. Something describing what you see.
+Hey there! I am an emerging Communication designer interested in storytelling, photography, branding, and graphic design. I enjoy exploring new ideas, experimenting with different creative approaches, and finding ways to connect people through my work. Inspired by thoughtful, minimalist design, I love creating visual experiences that communicate ideas in an engaging and meaningful way.
