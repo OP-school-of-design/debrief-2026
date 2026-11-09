@@ -1,51 +1,32 @@
 ---
-title: I am Here
-discipline: product
+title: Alice Davidson
+sortName: Davidson
+discipline: communication
 published: true
 blockOrder: profile
-projectName: The Natural World
-projectDescription: This photography project explores the relationship between
-  humans and the natural world, focusing on the beauty, complexity, and
-  fragility of our surrounding environment. Through observation and
-  experimentation, I aim to capture the often-overlooked details, textures,
-  patterns, and contrasts found in nature. As a postgraduate design student, I
-  am interested in how photography can communicate ideas beyond the visual,
-  encouraging viewers to reflect on their own connection with the environment.
-  By exploring light, composition, and perspective, this project seeks to
-  challenge familiar ways of seeing nature and create a deeper appreciation for
-  the world we inhabit.
-cover: poppysmith_project_square_4.webp
-coverAlt: The Natural World, Project Image
-hero: poppysmith_project_hero_9.webp
-heroAlt: The Natural World, Hero Image
-headshot: maxisangel_headshot.png
-headshotAlt: Poppy Smith, Headshot
-quote: "\"I'VE LEARNED THAT GOOD DESIGN IS NOT ABOUT HAVING ALL THE ANSWERS, BUT
-  ABOUT KNOWING WHICH QUESTIONS ARE WORTH ASKING.\""
+projectName: LOOK UP
+projectDescription: "LOOK UP is a creative campaign designed to encourage people
+  to slow down, look up, and appreciate the architecture that makes Ōtepoti
+  Dunedin unique. The project explores how graphic design and visual
+  storytelling can bring attention to Dunedin’s heritage buildings, particularly
+  among younger generations. Through photography, illustration, social media
+  content, and an engaging visual identity, I wanted to make heritage feel more
+  accessible, interesting, and relevant to everyday life. The campaign
+  encourages people to notice the details, discover the stories behind
+  buildings, and see familiar places differently. Overall, LOOK UP is about
+  changing perspectives and creating a stronger connection between people and
+  places. "
+cover: ""
+coverAlt: ""
+hero: ""
+heroAlt: ""
+headshot: alice-davidson_heroshot.jpg
+headshotAlt: ""
+quote: "\"It's not always about creating something new, but helping people see
+  something differently.\""
 links:
-  - type: website
-    url: https://www.op.ac.nz/
   - type: email
-    url: poppysmith@hello.com
-  - type: instagram
-    url: https://www.instagram.com/otagopolycommunication?utm_source=ig_web_button_share_sheet&xtok=ZDNlZDc0MzIxNw==
-    label: PoppySmith112
-gallery:
-  - alt: The Natural World, Project Image
-    image: poppysmith_project_2.webp
-  - alt: The Natural World, Project Image
-    image: poppysmith_project_3.webp
-  - image: poppysmith_project_square_4.webp
-    alt: The Natural World, Project Image
-  - alt: The Natural World, Project Image
-    image: poppysmith_project_landscape_5.webp
-  - alt: The Natural World, Project Image
-    image: poppysmith_project_landscape_6.webp
-  - image: poppysmith_project_landscape_7.webp
-    alt: The Natural World, Project Image
-  - image: poppysmith_project_landscape_8.webp
-    alt: The Natural World, Project Image
-  - image: poppysmith_projectphoto1.webp
-    alt: The Natural World, Project Image
+    url: alicekdavidson04@gmail.com
+gallery: []
 ---
-I am a postgraduate design student driven by curiosity, creativity, and a desire to see the world from different perspectives. Through design and photography, I explore the relationship between people, nature, and everyday experiences. I value experimentation, thoughtful observation, and continuous learning, believing that meaningful design goes beyond aesthetics to communicate ideas, evoke emotions, and inspire new ways of thinking.
+Hey there! I am an emerging Communication designer interested in storytelling, photography, branding, and graphic design. I enjoy exploring new ideas, experimenting with different creative approaches, and finding ways to connect people through my work. Inspired by thoughtful, minimalist design, I love creating visual experiences that communicate ideas in an engaging and meaningful way.
