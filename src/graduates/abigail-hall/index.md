@@ -1,7 +1,7 @@
 ---
 title: "Abigail Hall "
 sortName: "Hall "
-discipline: graddip-communication
+discipline: communication
 published: true
 blockOrder: profile
 projectName: Graduate Exhibition Branding
