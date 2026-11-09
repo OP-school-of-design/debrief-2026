@@ -28,6 +28,8 @@ links:
   - type: email
     url: burgessabbey100@gmail.com
     label: ""
+  - type: linkedin
+    url: https://www.linkedin.com/in/abbey-burgess-978981307/
 gallery:
   - image: abbeyburgess_heroshot2.jpg
   - image: abbeyburgess_heroshot3.jpg
