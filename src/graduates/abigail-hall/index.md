@@ -3,7 +3,7 @@ title: "Abigail Hall "
 sortName: "Hall "
 discipline: graddip-communication
 published: true
-blockOrder: project
+blockOrder: profile
 projectName: Graduate Exhibition Branding
 projectDescription: "Going into my final project I wanted to use my full skill
   set, and the Debrief exhibition turned out to be ideal. Throughout the event’s
