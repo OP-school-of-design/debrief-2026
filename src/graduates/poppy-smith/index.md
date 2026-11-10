@@ -1,6 +1,6 @@
 ---
 title: Alice Davidson
-sortName: Davidson
+sortName: ""
 discipline: communication
 published: true
 blockOrder: profile
