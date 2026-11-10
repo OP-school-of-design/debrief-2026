@@ -9,10 +9,13 @@ projectDescription: >-
   Witness the quiet disappearance of a taoka species.
 
 
+
   My journey began as a conservation volunteer at my local beach. As I noticed hoiho (yellow-eyed penguin) numbers dwindling, I became more aware of the threats they face and realised I was witnessing on a small scale the demise of the wider population.  
 
 
+
   I was drawn to learn more about the struggle to help hoiho and to support the work of conservationists, scientists, iwi, and other stakeholders by sharing this story through my photographic practice.  
+
 
 
   Before the Silence documents the birds’ presence and absence over the last two summers, and the deep sadness I experienced witnessing their journey towards functional extinction. 
