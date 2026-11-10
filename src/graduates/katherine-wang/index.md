@@ -28,7 +28,6 @@ links:
 gallery:
   - image: katherinewang_1.jpg
   - image: katherinewang_2.jpg
-  - image: katherinewang_3.jpg
   - image: katherinewang_4.jpg
   - image: katherinewang_5.jpg
   - image: katherinewang_6.jpg
