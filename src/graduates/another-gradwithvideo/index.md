@@ -1,6 +1,6 @@
 ---
 title: Alannah-Mae Medeiros
-sortName: Medeiros
+sortName: ""
 discipline: communication
 published: true
 blockOrder: profile
