@@ -1,6 +1,6 @@
 ---
 title: "Abigail Hall "
-sortName: "Hall "
+sortName: ""
 discipline: communication
 published: true
 blockOrder: profile
