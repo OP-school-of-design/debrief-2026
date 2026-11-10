@@ -25,8 +25,6 @@ links:
     url: https://www.linkedin.com/in/chaise-benson-a27396a1
   - type: email
     url: risingchaosstudios@gmail.com
-  - type: other
-    url: https://www.tiktok.com/@risingchaosstudios_?lang=en
   - type: instagram
     url: https://www.instagram.com/risingchaosstudios/
 gallery:
