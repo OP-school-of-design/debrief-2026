@@ -1,6 +1,6 @@
 ---
 title: Abbey Burgess
-sortName: Burgess
+sortName: ""
 discipline: postgraduate
 published: true
 blockOrder: profile
