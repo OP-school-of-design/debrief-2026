@@ -26,7 +26,6 @@ links:
   - type: email
     url: ashleighgeorginakeen2015@gmail.com
 gallery:
-  - image: ash-peacock-cardart_chicken-export.jpg
   - image: ash-peacock-cardart_donut-export.jpg
   - image: ash-peacock-cardart_dragon-export.jpg
   - image: ash-peacock-cardart_magicianhat-export.jpg
