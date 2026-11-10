@@ -23,5 +23,9 @@ links:
     url: https://www.linkedin.com/in/denise-narciso/
   - type: email
     url: Sara.Narciso@op.ac.nz
+  - type: website
+    url: https://www.saradenisenarciso.com/
+  - type: instagram
+    url: https://www.instagram.com/denisenarcisonz/
 ---
 About me... Kia ora! Mabuhay! I'm Denise Narciso, a Filipina illustrator, graphic designer and educator based in Aotearoa New Zealand.  I am a Principal Lecturer in Communication Design at Otago Polytechnic. My Master of Design project explores how lived experiences and cultural connections shape the way we create and understand the world.
