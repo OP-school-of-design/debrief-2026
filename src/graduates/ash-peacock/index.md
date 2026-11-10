@@ -30,11 +30,11 @@ gallery:
   - image: ash-peacock-cardart_dragon-export.jpg
   - image: ash-peacock-cardart_magicianhat-export.jpg
   - image: ash-peacock-cardart_meteor-export.jpg
+  - image: ash-peacock-vfx_hit_doughnut.jpg
   - image: ash-peacock-cardart_rubberducky-export.jpg
+  - image: ash-peacock-vfx_hit_chicken_1.jpg
   - image: ash-peacock-cardart_trapdoor-export.jpg
   - image: ash-peacock-minicards-export.jpg
-  - image: ash-peacock-vfx_hit_chicken_1.jpg
-  - image: ash-peacock-vfx_hit_doughnut.jpg
   - image: ash-peacock-vfx_hit_dragon_1.jpg
   - image: ash-peacock-vfx_hit_dragon_3.jpg
 ---
