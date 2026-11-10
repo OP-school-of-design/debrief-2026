@@ -15,8 +15,9 @@ projectDescription: >-
 
   Blending heritage with modern short-form storytelling, the work reached audiences across Instagram, Facebook and TikTok, with one reel attracting over 68,000 views. It celebrates the players, volunteers and supporters who give Otago rugby its enduring identity. Visitors are invited to see Otago Rugby from the sideline. 
 cover: charlottehumphries_1.jpg
-hero: charlottehumphries_1.jpg
-videoFirst: false
+hero: ""
+videoUrl: https://vimeo.com/1243995378?share=copy&fl=sv&fe=ci
+videoFirst: true
 headshot: charlottehumphries_headshot.jpg
 quote: '"Available for unpaid labour in all weather conditions."'
 links:
