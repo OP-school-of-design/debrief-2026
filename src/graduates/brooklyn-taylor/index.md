@@ -32,7 +32,6 @@ gallery:
   - image: brooklyntaylor_2.jpg
   - image: brooklyntaylor_3.jpg
   - image: brooklyntaylor_4.jpg
-  - image: brooklyntaylor_5.jpg
   - image: brooklyntaylor_6.jpg
   - image: brooklyntaylor_7.jpg
   - image: brooklyntaylor_8.jpg
