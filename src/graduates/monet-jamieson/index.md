@@ -1,5 +1,5 @@
 ---
-title: "Monet Jamieson "
+title: Monét Jamieson
 discipline: fashion
 published: true
 blockOrder: profile
