@@ -14,7 +14,8 @@ projectDescription: "Cut the Shame was created as a gamified learning tool that
   position of power. When playing through minigames you must pay attention to
   your client’s cues and check in with them constantly. "
 cover: shaylakara-web-s.png
-hero: shaylakara-1.png
+hero: ""
+videoUrl: https://www.youtube.com/watch?v=F4612GDCVnM
 videoFirst: false
 headshot: shaylakara_headshot.jpg
 quote: '"I don’t know what we’re talking about and I haven’t for a while." - NSP '
@@ -26,6 +27,7 @@ links:
   - type: email
     url: shaylakara@gmail.com
 gallery:
+  - image: shaylakara-1.png
   - image: shaylakara-2.jpg
   - image: shaylakara-3.jpg
   - image: shaylakara-4.jpg
