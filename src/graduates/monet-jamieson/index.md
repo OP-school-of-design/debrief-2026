@@ -14,6 +14,7 @@ projectDescription: "This collection comes from a place of anger towards the
   Sustainability was also important, using existing fabrics from Juliette Hogan
   and finding ways to reduce waste throughout the design process.   "
 cover: monetjamieson_sweb.jpg
+hero: monetjamieson_lweb.jpg
 videoFirst: false
 headshot: monetjamieson_headshot.jpg
 quote: "“The dress must not hang on the body but follow its lines. When a woman
