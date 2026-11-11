@@ -2,7 +2,7 @@
 title: Alice Davidson
 sortName: ""
 discipline: communication
-published: true
+published: false
 blockOrder: profile
 projectName: LOOK UP
 projectDescription: "LOOK UP is a creative campaign designed to encourage people
