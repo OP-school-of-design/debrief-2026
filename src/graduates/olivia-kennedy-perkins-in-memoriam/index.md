@@ -20,6 +20,7 @@ projectDescription: >-
 
 
   https://charliesfoundation.org.au/fundraising/livs-donation-page/donations-for-liv 
+cover: olivia-kp.jpg
 videoFirst: false
 headshot: olivia-kp.jpg
 links:
