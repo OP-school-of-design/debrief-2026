@@ -16,7 +16,7 @@ projectDescription: "Prom Night Never Ended is my graduate costume collection
   to demonstrate how costumes can communicate character development and tell
   stories without the need for dialogue. "
 cover: brackeneaves-sweb.jpg
-hero: brackeneaves-1.jpg
+hero: brackeneaves-lweb.jpg
 videoFirst: false
 headshot: bracken-eaves_headshot.jpg
 quote: '"Trust the process. Unless it involves a coverseamer."'
@@ -28,6 +28,7 @@ links:
   - type: linkedin
     url: https://www.linkedin.com/in/bracken-eaves-61b09a367/
 gallery:
+  - image: brackeneaves-1.jpg
   - image: brackeneaves-2.jpg
   - image: brackeneaves-3-.jpg
   - image: brackeneaves-4.jpg
