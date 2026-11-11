@@ -18,6 +18,7 @@ projectDescription: "As an intern for Dunedin City Council, I developed a home
   marketing strategy document. "
 cover: brooklyntaylor_web_s.jpg
 hero: brooklyntaylor_1.jpg
+videoUrl: https://youtu.be/TGVzufYbqoE
 videoFirst: false
 headshot: brooklyntaylor_headshot.jpg
 quote: '"Legend has it, I’m still asking questions."'
