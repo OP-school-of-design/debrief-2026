@@ -17,7 +17,8 @@ projectDescription: >-
 
   Welcome to the Lattisphere; the internet and social media beamed straight into your brain. Buy the ticket, take the ride. Step right up and gaze into the abyss. The eScapeRoom is the world’s premier virtual experience. Everyone wants to game the system - can you? 
 cover: andrewcooper_web_s.png
-hero: andrewcooper_7.jpg
+hero: ""
+videoUrl: https://www.youtube.com/watch?v=teR7vT65k_Y
 videoFirst: false
 headshot: andrewcooper_colourheadshot.jpg
 quote: '"Why design? Because we can create a better future for everyone."'
@@ -33,6 +34,7 @@ gallery:
   - image: andrewcooper_4.jpg
   - image: andrewcooper_5.jpg
   - image: andrewcooper_6.jpg
+  - image: andrewcooper_7.jpg
   - image: andrewcooper_8.jpg
   - image: andrewcooper_9.jpg
   - image: andrewcooper_10.jpg
