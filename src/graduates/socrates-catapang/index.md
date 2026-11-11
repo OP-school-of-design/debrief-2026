@@ -28,5 +28,9 @@ links:
     url: https://www.instagram.com/sssocratesss/
   - type: email
     url: socatapang@gmail.com
+gallery:
+  - image: socratescatapang_01.jpg
+  - image: socratescatapang_02.jpg
+  - image: socratescatapang_03.jpg
 ---
 My practice explores identity and transformation through conceptual fashion and experimental tailoring. Combining traditional tailoring techniques with unconventional silhouettes, leather and material contrasts, I use clothing as a medium to challenge conventions and explore the complexities of human experience.
