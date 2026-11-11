@@ -26,5 +26,14 @@ links:
     url: https://www.instagram.com/mezzaninefullstop/
   - type: linkedin
     url: https://www.linkedin.com/in/polly-figgins-37a5b33bb/
+gallery:
+  - image: pollyfiggins_heroshot1.jpg
+  - image: pollyfiggins_heroshot3.jpg
+  - image: pollyfiggins_heroshot4.jpg
+  - image: pollyfiggins_heroshot5.jpg
+  - image: pollyfiggins_heroshot6.jpg
+  - image: pollyfiggins_heroshot7.jpg
+  - image: pollyfiggins_heroshot8.jpg
+  - image: pollyfiggins_heroshot9.jpg
 ---
 I am a designer with magpie tendencies - I collect things with a vision and end up with something completely different, and this is my design process.  Upcycling is also a focus in my practice, which is something I got to greatly expand on when I undertook an internship at iconic New Zealand label NOM*d earlier this year.
