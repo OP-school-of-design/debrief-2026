@@ -26,7 +26,6 @@ links:
     url: maxisdesign.contact@gmail.com
 gallery:
   - image: maxisangel_5.jpg
-  - image: maxisangel_5.jpg
   - image: maxisangel_4.jpg
   - image: maxisangel_8.jpg
   - image: maxisangel_9.jpg
