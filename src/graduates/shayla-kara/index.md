@@ -16,6 +16,7 @@ projectDescription: "Cut the Shame was created as a gamified learning tool that
 cover: shaylakara-web-s.png
 hero: shaylakara-1.png
 videoFirst: false
+headshot: shaylakara_headshot.jpg
 quote: '"I don’t know what we’re talking about and I haven’t for a while." - NSP '
 links:
   - type: linkedin
