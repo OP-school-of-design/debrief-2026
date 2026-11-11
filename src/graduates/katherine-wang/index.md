@@ -13,7 +13,7 @@ projectDescription: >-
 
   Through my time at NZFW I developed insight into production processes, event planning, industry practices, garment preparation and most of all, a deeper appreciation for the labour and passion that fuels art, fashion and all the things we love. 
 cover: katherinewang_web_s.jpg
-hero: katherinewang_3.jpg
+hero: ""
 videoUrl: https://youtu.be/vYvZBc0PSx0
 videoFirst: true
 headshot: katherine_wang_headshot.jpg
@@ -26,6 +26,7 @@ links:
   - type: email
     url: katherinejxwang@gmail.com
 gallery:
+  - image: katherinewang_3.jpg
   - image: katherinewang_1.jpg
   - image: katherinewang_2.jpg
   - image: katherinewang_4.jpg
