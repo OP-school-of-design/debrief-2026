@@ -15,7 +15,7 @@ projectDescription: >-
 
   I drew on the methodologies of adaptive fashion, light and colour theory, along with research on low vision as my guiding framework, and designed a fully reversible size 6-18 collection using Gerber patternmaking software, projectors, and a laser cutter. The goal was to focus on strengthening and developing commercial industry skills. 
 cover: elizabethgrounds-square-web.jpg
-hero: elizabethgrounds-heroshots-1.jpg
+hero: elizabethgrounds-landscapeweb.jpg
 videoFirst: false
 headshot: elizabeth-grounds-headshot.jpg
 quote: "“Aesthetics without substance or practical function is bad design” "
