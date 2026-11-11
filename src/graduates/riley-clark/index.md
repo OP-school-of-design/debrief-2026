@@ -1,7 +1,7 @@
 ---
 title: Riley McIntosh
 discipline: communication
-published: true
+published: false
 blockOrder: profile
 projectName: If a Tree Falls
 projectDescription: "Communication is an important part of any revolutionary
