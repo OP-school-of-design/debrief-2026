@@ -13,7 +13,8 @@ projectDescription: "Creativity has always been a big part of my life, from
   find me spending time with animals! "
 cover: emily-mason_s.jpeg
 hero: emily-mason_8.jpg
-videoFirst: false
+videoUrl: https://www.youtube.com/watch?v=vLuSs4tIrag&t=18s
+videoFirst: true
 headshot: emily-mason-headshot.jpg
 quote: “Fashion is in the details, and the details tell the story.”
 links:
