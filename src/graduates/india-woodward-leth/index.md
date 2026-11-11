@@ -14,7 +14,7 @@ projectDescription: "What We Inherit is a celebration of childhood from the
   choices allow these garments to be unpicked easily for ‘Design for
   Disassembly,’ so they can be reworked into new clothing. What We Inherit
   connects us to our planet, our family and our history. "
-cover: heroshot_ind_4000x4000.jpg
+cover: indiawoodwardleth-web-s.jpg
 hero: indiawoodwardleth_heroshot5.jpg
 videoFirst: false
 headshot: india_woodward-leth_headshot.jpg
