@@ -36,5 +36,6 @@ gallery:
   - image: dnarciso_6.jpg
   - image: dnarciso_7.jpg
   - image: dnarciso_8.jpg
+  - image: dnarciso_9.jpg
 ---
 Kia ora! Mabuhay! I'm Denise Narciso, a Filipina illustrator, graphic designer and educator based in Aotearoa New Zealand.  I am a Principal Lecturer in Communication Design at Otago Polytechnic. My Master of Design project explores how lived experiences and cultural connections shape the way we create and understand the world.
