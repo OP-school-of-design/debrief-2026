@@ -14,7 +14,8 @@ projectDescription: "For the last twelve months of my degree I have been
   valuable learning experience, and a big step in my journey as a professional
   creative. "
 cover: jensensmith_heroshot_1.jpg
-hero: jensensmith_heroshot_9.jpg
+hero: ""
+videoUrl: https://www.youtube.com/watch?v=cMCh9fpqskc
 videoFirst: false
 headshot: jensensmith_headshot.jpg
 quote: '"Do or do not, there is no try." - Master Yoda'
@@ -32,5 +33,6 @@ gallery:
   - image: jensensmith_heroshot_8.jpg
   - image: jensensmith_heroshot_2.jpg
   - image: jensensmith_heroshot_10.jpg
+  - image: jensensmith_heroshot_9.jpg
 ---
 Nothing makes me happier than working with a team on an ambitious project and making cool stuff. The connections made through a bit of hard yakka are why I enjoy what I do. If you ever want to catch up or grab a coffee, I will be sure to make the time.
