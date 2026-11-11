@@ -16,6 +16,8 @@ projectDescription: >-
 
 
   Extending beyond the exhibition, it also brought the community together through informal gatherings featuring karaoke, games and shared storytelling, fostering connection and cultural expression. 
+cover: denise_square_tile.jpg
+hero: dnarciso_1hero.jpg
 videoFirst: false
 headshot: denisenarciso_headshot.jpg
 links:
@@ -27,5 +29,13 @@ links:
     url: https://www.saradenisenarciso.com/
   - type: instagram
     url: https://www.instagram.com/denisenarcisonz/
+gallery:
+  - image: dnarciso_2.jpg
+  - image: dnarciso_3.jpg
+  - image: dnarciso_4.jpg
+  - image: dnarciso_5.jpg
+  - image: dnarciso_6.jpg
+  - image: dnarciso_7.jpg
+  - image: dnarciso_8.jpg
 ---
 About me... Kia ora! Mabuhay! I'm Denise Narciso, a Filipina illustrator, graphic designer and educator based in Aotearoa New Zealand.  I am a Principal Lecturer in Communication Design at Otago Polytechnic. My Master of Design project explores how lived experiences and cultural connections shape the way we create and understand the world.
