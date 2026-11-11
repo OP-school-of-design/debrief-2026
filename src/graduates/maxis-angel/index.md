@@ -13,7 +13,7 @@ projectDescription: "I was excited to work on an event-based project as I love
   awareness of the event and sparks excitement among potential visitors. This
   involved developing and designing content across multiple platforms, including
   the website, social media, email marketing, advertising banners and more. "
-cover: maxisangel_7.jpg
+cover: m011t0832-b-16pro-mockup-12sep24_pink.jpg
 hero: maxisangel_3.jpg
 videoFirst: false
 headshot: maxisangel_headshot.jpg
