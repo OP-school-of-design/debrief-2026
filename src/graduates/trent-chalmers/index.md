@@ -17,6 +17,7 @@ projectDescription: "Looking back on my 12 weeks interning in the Marketing
 cover: trentchalmers_web_s.jpg
 hero: trentchalmers_web_l.jpg
 videoFirst: false
+headshot: trentchalmers_headshot.jpg
 quote: '"Everybody has a different journey, make the most of yours."'
 links:
   - type: linkedin
