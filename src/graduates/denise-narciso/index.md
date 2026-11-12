@@ -5,16 +5,17 @@ discipline: postgraduate
 published: true
 blockOrder: profile
 projectName: Sa Pagitan (In Between)
-projectDescription: "Sa Pagitan (In Between) is a practice-led design research
-  project exploring migration, identity and belonging through the experiences of
-  Filipino New Zealand creatives (Kiwinoys). Bringing together personal
-  storytelling and kwentuhan (story sharing) with eight Kiwinoy creatives, the
-  project culminated in Mga Kuwento sa Pagitan (Stories In Between), an
-  immersive, multidisciplinary exhibition featuring vibrant, large-scale
-  illustrations, moving image, sound, visual storytelling and a publication.
-  Extending beyond the exhibition, it also brought the community together
-  through informal gatherings featuring karaoke, games and shared storytelling,
-  fostering connection and cultural expression. "
+projectDescription: >-
+  Sa Pagitan (In Between) is a practice-led design research project exploring
+  migration, identity and belonging through the experiences of Filipino New
+  Zealand creatives (Kiwinoys). Bringing together personal storytelling and
+  kwentuhan (story sharing) with eight Kiwinoy creatives, the project culminated
+  in Mga Kuwento sa Pagitan (Stories In Between), an immersive,
+  multidisciplinary exhibition featuring vibrant, large-scale illustrations,
+  moving image, sound, visual storytelling and a publication. 
+
+
+  Extending beyond the exhibition, it also brought the community together through informal gatherings featuring karaoke, games and shared storytelling, fostering connection and cultural expression. 
 cover: denise_square_tile.jpg
 hero: dnarciso_1hero.jpg
 videoFirst: false
