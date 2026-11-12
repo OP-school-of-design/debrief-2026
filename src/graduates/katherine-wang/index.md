@@ -7,11 +7,11 @@ projectName: New Zealand Fashion Week Internship
 projectDescription: >-
   I undertook an internship at New Zealand Fashion Week with Dan Ahwa. NZFW is
   the largest annual event within Aotearoa’s fashion industry with an audience
-  of over 20,000 attendees. 
+  of over 20,000 attendees.
 
-  I was involved in the preparation and execution of NZFW and CSFF shows, as well as assisting on set for shoots and publications including Fashion Quarterly, Breast Cancer Cure NZ, and Viva. Furthermore, I filmed behind-the-scenes content to be used for their respective channels. 
+  I was involved in the preparation and execution of NZFW and CSFF shows, as well as assisting on set for shoots and publications including Fashion Quarterly, Breast Cancer Cure NZ, and Viva. Furthermore, I filmed behind-the-scenes content to be used for their respective channels.
 
-  Through my time at NZFW I developed insight into production processes, event planning, industry practices, garment preparation and most of all, a deeper appreciation for the labour and passion that fuels art, fashion and all the things we love. 
+  Through my time at NZFW I developed insight into production processes, event planning, industry practices, garment preparation and most of all, a deeper appreciation for the labour and passion that fuels art, fashion and all the things we love.
 cover: katherinewang_web_s.jpg
 hero: ""
 videoUrl: https://youtu.be/vYvZBc0PSx0
