@@ -12,7 +12,7 @@ gradBannerImage: illustrativebanner_1920x1080-08.png
 gradBannerAlt: ""
 bannerImage: illustrativebanner_1920x1080-08.png
 bannerAlt: ""
-introHeading: Thinking about studying Communications?
+introHeading: Thinking about studying Communications Design?
 intro: >-
   Within Communication Design, you use your creativity and vision to convey
   original and exciting ideas. As a Designer, you learn to express information
@@ -20,7 +20,7 @@ intro: >-
 
   \
 
-  You learn how to present ideas and stories creatively and effectively to become highly sought after by employers. You ill find yourself immersed in an innovative and supportive environment that allows you to engage in real-world projects, develop our own design identity, and work in a design teams.
+  You learn how to present ideas and stories creatively and effectively to become highly sought after by employers. You will find yourself immersed in an innovative and supportive environment that allows you to engage in real-world projects, develop our own design identity, and work within design teams.
 image: col_comms_landscape-09.webp
 imageAlt: DEBRIEF exhibition image
 videoTitle: ""
