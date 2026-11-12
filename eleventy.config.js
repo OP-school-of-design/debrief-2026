@@ -21,7 +21,10 @@ export default function (eleventyConfig) {
     widths: [400, 800, 1200, 1600, 2000],
     outputDir: "./_site/img/",
     urlPath: BASE + "img/",
-    failOnError: true,
+    // Don't stop the whole build over one image that can't be processed (e.g. a site settings image
+    // deleted from the media library): it's listed in the build log, and the page keeps its link.
+    // Content images that are missing are left out before this (lib/missing-images.js).
+    failOnError: false,
     defaultAttributes: { loading: "lazy", decoding: "async", sizes: "100vw" },
     // Named after the graduate (or discipline/event) as well as the file, e.g.
     // maxis-angel-gallery-01-<id>-800w.webp, which helps them turn up in image searches.
