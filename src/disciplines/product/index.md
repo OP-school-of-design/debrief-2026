@@ -10,12 +10,12 @@ pagesPublished: true
 symbol: symbol.png
 gradBannerImage: illustrativebanner_1920x1080-06.png
 bannerImage: illustrativebanner_1920x1080-06.png
-introHeading: Thinking about studying Product?
+introHeading: Thinking about studying Product Design?
 intro: >-
   Product Design is everywhere. It’s exciting, creative and ever-changing. Every
   product you use has been designed, from your toothbrush to your
   tablet. Study Product Design at Otago Polytechnic and you’ll learn how
-  to design objects and systems to improve the way we live.\
+  to design objects and systems to improve the ways we live.\
 
   \
 
