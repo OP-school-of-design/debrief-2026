@@ -25,7 +25,7 @@ links:
   - type: instagram
     url: https://www.instagram.com/estelleflorencedesign/
   - type: email
-    url: stellegellatly@gmail.com
+    url: estellegellatly@gmail.com
 gallery:
   - image: estellegellatly-1.jpg
   - image: estellegellatly-2.jpg
