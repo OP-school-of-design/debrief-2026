@@ -15,7 +15,7 @@ projectDescription: "This collection comes from a place of anger towards the
   and finding ways to reduce waste throughout the design process.   "
 cover: monetjamieson_sweb.jpg
 hero: monetjamieson_lweb.jpg
-videoFirst: false
+videoFirst: true
 headshot: monetjamieson_headshot.jpg
 quote: "“The dress must not hang on the body but follow its lines. When a woman
   smiles, the dress must smile with her.” - Madeleine Vionnet "
