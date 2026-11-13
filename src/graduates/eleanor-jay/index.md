@@ -17,7 +17,7 @@ projectDescription: "This collection shows the internal realities of being
   look beyond appearances and consider the internal experiences that aren’t
   always visible. "
 cover: eleanorjay_squear.jpg
-hero: eleanorjay_heroshot1.jpg
+hero: eleanorjay_landingshot.jpg
 videoFirst: false
 headshot: eleanorjay_headshot.jpg
 links:
