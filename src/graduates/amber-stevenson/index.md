@@ -15,7 +15,7 @@ projectDescription: >-
 
   I took each of the three main life stages and turned them into individual photographic narratives with appropriate garments and locations. Exploring fashion communication has allowed me to develop my creative interests and gain a clearer understanding of my future career aspirations. 
 cover: amberstevenson_sweb.jpg
-hero: amberstevenson_heroshot1.jpg
+hero: amberstevenson_lweb.jpg
 videoFirst: false
 headshot: amberstevenson_headshot.jpg
 quote: "“Don’t let fear stop you from trying something new.” "
