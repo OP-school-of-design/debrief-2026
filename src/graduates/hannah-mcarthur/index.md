@@ -17,7 +17,7 @@ projectDescription: >-
 
   I drew inspirations from each character using their personalities, stories and recognisable features to influence the silhouettes, colours and details throughout the collection. My aim was to challenge perceptions of what is considered normal and encourage a greater understanding of disabilities and disorders that are not always visible. 
 cover: hannahmcarthur_squareweb.jpg
-hero: hannahmcarthur_heroshot1.jpg
+hero: hannahmcarthur_landscapeweb.jpg
 videoFirst: false
 headshot: hannah-mcarthur_headshot.jpg
 quote: “You just have to do what suits you, and it doesn't matter if you don't
