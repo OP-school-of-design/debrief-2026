@@ -14,7 +14,7 @@ projectDescription: "Inspired by my six-month exchange studying fashion in
   decorative fashion with my love of dogs, creating expressive, high-quality
   dogwear inspired by Milanese design. "
 cover: emily-mason_s.jpeg
-hero: emily-mason_8.jpg
+hero: ""
 videoUrl: https://www.youtube.com/watch?v=vLuSs4tIrag&t=18s
 videoFirst: true
 headshot: emily-mason-headshot.jpg
@@ -32,6 +32,7 @@ gallery:
   - image: emily-mason_5.jpg
   - image: emily-mason_6.jpg
   - image: emily-mason_7.jpg
+  - image: emily-mason_8.jpg
   - image: emily-mason_9.jpg
   - image: emily-mason_10.jpg
 ---
