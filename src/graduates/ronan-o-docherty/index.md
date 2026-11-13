@@ -2,7 +2,7 @@
 title: "Ronan O’Docherty "
 discipline: communication
 published: true
-blockOrder: project
+blockOrder: profile
 projectName: Military Industrial God Complex
 projectDescription: "“Military Industrial God Complex” is a culmination of my
   passion for worldbuilding, character design, low-polygon modelling and
