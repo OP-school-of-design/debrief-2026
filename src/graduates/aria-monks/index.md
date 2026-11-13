@@ -5,12 +5,15 @@ discipline: fashion
 published: true
 blockOrder: profile
 projectName: Nature’s Cycle of Life
-projectDescription: "Crafting uniquely beautiful, sustainable designs that bring
-  others joy is integral to my design identity. I was lucky enough to get an
-  internship with Karen McDonnell the founder of Luma. Learning from her was
-  incredibly insightful, especially since my long term goal is to start my own
-  sustainable eveningwear brand. I enjoy exploring a combination of drape,
-  zero-waste patterning, textile manipulations and bead embroidery. "
+projectDescription: "Death is a scary concept for many, and we all find
+  different ways of dealing with our feelings around it. I always found comfort
+  in thinking of death as a way of giving future generations the chance to
+  experience the wonders of life. “Nature’s cycle of life” explores themes of
+  life, death and rebirth in the natural world. Using delicate beadwork,
+  textiles and sculptural vines, this collection tells the story of the life and
+  death cycle in a forest. Three-dimensional shapes show a forest growing and
+  coming to life, while lichen, cyanotype prints and holes in the fabric
+  represent the decay it grew from. "
 cover: ariamonks_sweb.jpg
 hero: ariamonks_lweb.jpg
 videoFirst: false
