@@ -5,12 +5,14 @@ discipline: communication
 published: true
 blockOrder: profile
 projectName: Sonder
-projectDescription: "I’m Alannah-Mae, England-born but now living in Aotearoa
-  and studying Game Design. I adore the challenge of bringing heavy emotional
-  themes and messaging into my work through visual storytelling. Expression
-  through creativity has always had an important role in my life, and I find my
-  passion lies in being true to oneself and bringing that confidence to the
-  people around me. "
+projectDescription: >-
+  Sonder is a small, self-contained game focused on bringing both the precious
+  and ugly sides of nostalgia to a gaming experience. Follow the story and
+  relive the memories of someone you never see, unable to do anything but act as
+  a witness to their whole life, which has now all but disappeared.  
+
+
+  Sonder explores the inevitable ending we all must face; destruction and erasure. In a modern world that lacks empathy, it is imperative that we learn to extend it to ourselves and one another, and realise that others aren’t just extras in the background - we each have lives as complex as one another.  
 imported: form 2026-10-27 fp:0837be7a4a8c
 cover: alannah-mae.jpg
 coverAlt: ""
@@ -46,4 +48,4 @@ gallery:
   - image: alannahmedeiros_8.jpg
   - image: alannahmedeiros_9.jpg
 ---
-Hey there! I am an emerging Communication designer interested in storytelling, photography, branding, and graphic design. I enjoy exploring new ideas, experimenting with different creative approaches, and finding ways to connect people through my work. Inspired by thoughtful, minimalist design, I love creating visual experiences that communicate ideas in an engaging and meaningful way.
+I’m Alannah-Mae, England-born but now living in Aotearoa and studying Game Design. I adore the challenge of bringing heavy emotional themes and messaging into my work through visual storytelling. Expression through creativity has always had an important role in my life, and I find my passion lies in being true to oneself and bringing that confidence to the people around me.
