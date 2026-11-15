@@ -26,6 +26,7 @@ links:
   - type: linkedin
     url: https://www.linkedin.com/in/eleanor-jay-70b36a31b/
 gallery:
+  - image: eleanorjay_heroshot1.jpg
   - image: eleanorjay_heroshot2.jpg
   - image: eleanorjay_heroshot3.jpg
   - image: eleanorjay_heroshot4.jpg
