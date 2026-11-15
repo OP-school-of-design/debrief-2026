@@ -17,7 +17,7 @@ projectDescription: "The Otago Polytechnic Living Campus project focused on
   environmental awareness, and community connection. "
 cover: niko-danielson_heroshot2.jpg
 videoFirst: false
-headshot: niko-danielson_heroshot1.jpg
+headshot: nikodanielsen_headshot.jpg.jpg
 quote: '"Work hard to prove yourself, not anybody else."'
 links:
   - type: email
