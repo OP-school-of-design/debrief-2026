@@ -28,14 +28,14 @@ links:
   - type: instagram
     url: https://www.instagram.com/the_pistol_star989/
 gallery:
-  - image: flynnellison_2.jpg
+  - image: flynnellison_2_newer.png
   - image: flynnellison_3.jpg
-  - image: flynnellison_4.jpg
-  - image: flynnellison_5.jpg
+  - image: flynnellison_4_newer.png
+  - image: flynnellison_5_newer.png
   - image: flynnellison_6.jpg
   - image: flynnellison_7.jpg
-  - image: flynnellison_8.jpg
+  - image: flynnellison_8_newer.png
   - image: flynnellison_9.jpg
-  - image: flynnellison_10.jpg
+  - image: flynnellison_10_newer.png
 ---
 I’m Flynn, a worldbuilder and game designer specialising in 3D modelling and environment design. My objective is to learn new skills and techniques to help me bring my original concepts to life. Since I was a kid, I’ve been heavily influenced by a range of sci-fi media via my mum, which shows heavily in my work and worldbuilding.
