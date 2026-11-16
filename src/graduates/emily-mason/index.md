@@ -21,9 +21,9 @@ headshot: emily-mason-headshot.jpg
 quote: “Fashion is in the details, and the details tell the story.”
 links:
   - type: email
-    url: craftqueen007@gmail.com
+    url: me.emilymason@gmail.com
   - type: instagram
-    url: https://www.instagram.com/emilymas.n/
+    url: https://www.instagram.com/me.emilymason/
 gallery:
   - image: emily-mason_1.jpg
   - image: emily-mason_2.jpg
