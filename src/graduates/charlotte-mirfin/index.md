@@ -16,7 +16,7 @@ projectDescription: "This collection integrates clothes and accessories to
   status quo of what beauty and perfection really mean and is untraditional in
   its ways of thinking and rebelling against these conventions. "
 cover: charlottemirfin_sweb.jpg
-hero: charlottemirfin_heroshot1.jpg
+hero: charlottemirfin_lweb.jpg
 videoFirst: false
 headshot: charlotte-mirfin_headshot.jpg
 quote: '"Be a boss, own it, and wear it with confidence!"'
@@ -28,6 +28,7 @@ links:
   - type: instagram
     url: https://www.instagram.com/charli_mirfin/
 gallery:
+  - image: charlottemirfin_heroshot1.jpg
   - image: charlottemirfin_heroshot2.jpg
   - image: charlottemirfin_heroshot3.jpg
   - image: charlottemirfin_heroshot4.jpg
