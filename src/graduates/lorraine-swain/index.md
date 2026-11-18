@@ -15,7 +15,8 @@ projectDescription: "My major project is motion branding for the Cumulus design
   that tells a story of sustainability, celebrates design and reflects
   Manaakitanga and Kaitiakitanga. "
 cover: lorraineswain_web_s.jpg
-hero: lorraineswain_web_l.jpg
+hero: ""
+videoUrl: https://www.youtube.com/watch?v=FQQN4O_cSvk
 videoFirst: false
 headshot: lorraine_swain_headshot.jpg
 quote: “The Horizon Moves Only For Those Who Chase It.”
